@@ -1,0 +1,29 @@
+# OS / Editor
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Data (choose what to track)
+data
+
+# Outputs
+output/**
+analysis/_site/
+analysis/.quarto/
+analysis/.cache/
+paper/*.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Quarto
+.quarto/

@@ -1,0 +1,27 @@
+---
+title: "Project Report"
+author: "Your Name"
+date: today
+format:
+  html: default
+  pdf: default
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## Overview
+Brief context, hypotheses.
+
+## Data
+Describe sources and preprocessing.
+
+## Methods
+Models, estimands, exclusions.
+
+## Results
+Key tables/figures.
+
+## Discussion
+Limitations, next steps.

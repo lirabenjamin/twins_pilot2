@@ -1,0 +1,9 @@
+project:
+  type: default
+format:
+  html:
+    toc: true
+    number-sections: true
+  pdf:
+    toc: true
+bibliography: references.bib
