@@ -98,7 +98,7 @@ warmth_long <- dat %>%
 
 Democrats' and Republicans' actual green values and their perceptions of ingroup and outgroup attitudes.
 
-```{r preliminaries, fig.width=10, fig.height=6}
+```{r preliminaries, fig.width=6, fig.height=4}
 # Prepare data for faceted plot
 prelim_data <- dat %>%
   select(learner_party, participant_party, green_own, green_ingroup, green_outgroup_pre, green_outgroup_post) %>%
@@ -199,6 +199,50 @@ modelsummary(
 The primary analyses above test whether Democrats and Republicans show different patterns of belief updating. The key test is the `time × learner_party` interaction in the mixed-effects models. A significant interaction would indicate asymmetric updating across groups.
 
 ```{r}
+library(emmeans)
+library(broom)
+
+# Get simple effects
+accuracy_contrasts <- emmeans(accuracy_model, ~ time | learner_party) %>%
+  contrast("pairwise") %>%
+  tidy()
+
+warmth_contrasts <- emmeans(warmth_model, ~ time | learner_party) %>%
+  contrast("pairwise") %>%
+  tidy()
+
+# Format for modelsummary
+format_emmeans <- function(contrasts) {
+  contrasts %>%
+    mutate(
+      stars = case_when(
+        p.value < 0.001 ~ "***",
+        p.value < 0.01 ~ "**",
+        p.value < 0.05 ~ "*",
+        TRUE ~ ""
+      ),
+      formatted = sprintf("%.3f%s", estimate, stars),
+      se_formatted = sprintf("(%.3f)", std.error)
+    )
+}
+
+acc_formatted <- format_emmeans(accuracy_contrasts)
+warmth_formatted <- format_emmeans(warmth_contrasts)
+
+# Create the table with add_rows
+modelsummary(
+  list("Accuracy" = accuracy_model, "Warmth" = warmth_model),
+  stars = TRUE,
+  gof_map = c("nobs", "r.squared"),
+  add_rows = tibble(
+    term = c("Time effect (Democrat)", "", "Time effect (Republican)", ""),
+    `Accuracy` = c(acc_formatted$formatted[1], acc_formatted$se_formatted[1],
+                   acc_formatted$formatted[2], acc_formatted$se_formatted[2]),
+    `Warmth` = c(warmth_formatted$formatted[1], warmth_formatted$se_formatted[1],
+                 warmth_formatted$formatted[2], warmth_formatted$se_formatted[2])
+  ),
+  notes = "Note: Accuracy is absolute error (lower = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
+)
 # Display models side by side
 modelsummary(
   list(
