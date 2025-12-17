@@ -4,16 +4,22 @@
 Help implement analysis and writing in a reproducible way.
 
 ## Repo Map
-- analysis/report.qmd is the main analysis + narrative
-- src/ contains reusable code
-- output/ contains generated artifacts (ok to overwrite)
-- data/raw is immutable
-- lit/ contains papers you might find useful
+- **analysis/report.qmd** - Main analysis + narrative
+- **src/** - Reusable code (R and Python scripts)
+- **data/**
+  - **raw/** - Immutable raw data (never modify)
+  - **processed/** - Cleaned and processed datasets
+- **output/**
+  - **figures/** - Generated plots and images
+  - **tables/** - Generated tables
+  - **models/** - Saved model outputs
+- **lit/** - Papers and references
 
 ## Rules
 - Never modify data/raw.
+- Processed data goes in data/processed/.
+- Figures and tables go in output/figures/ and output/tables/.
 - Prefer adding new scripts in src/ over one-off notebook code.
-- When generating figures/tables, write to output/ and reference from analysis/.
 - Document assumptions in analysis/report.qmd.
 - Claude can talk to me by editing docs/notes_for_ben.md
 

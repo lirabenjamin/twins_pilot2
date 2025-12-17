@@ -21,8 +21,7 @@ library(gt)
 library(ggplot2)
 
 # Load cleaned data
-dat <- read_parquet("../output/cleaned_data.parquet")
-# dat <- read_parquet("output/cleaned_data.parquet")
+dat <- read_parquet("../data/processed/cleaned_data.parquet")
 
 # Define consistent color scheme: Democrats = blue, Republicans = red
 party_colors <- c("Democrat" = "#0015BC", "Republican" = "#E81B23")
@@ -275,7 +274,7 @@ dat_for_reg %>%
   ggplot(aes(x = empathy, y = info, color = learner_party)) +
   geom_jitter(alpha = 0.6, size = 2.5, width = 0.1, height = 0.1) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
-  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+  stat_cor(aes(label = paste((..r.label..), ..p.label.., sep = "~`,`~")),
            method = "pearson", show.legend = FALSE, size = 3.5) +
   scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(
@@ -289,12 +288,141 @@ dat_for_reg %>%
 
 ### Q5. Does engagement ("dose") matter for belief updating?
 
-**DATA NEEDED**: The pre-registration specified examining engagement operationalized as the number of words typed by participants during the chat. This variable is not currently available in the dataset.
+The pre-registration specified examining whether engagement with the chatbot—operationalized as the number of words typed by participants during the chat—is associated with post-interaction outcomes. We test whether greater engagement predicts more belief updating and warmth change.
 
-**Planned analysis**: When word count data becomes available:
+```{r engagement-descriptives}
+# Descriptive statistics for engagement
+engagement_summary <- dat %>%
+  summarise(
+    mean_turns = mean(user_turn_count, na.rm = TRUE),
+    sd_turns = sd(user_turn_count, na.rm = TRUE),
+    mean_words = mean(user_word_count, na.rm = TRUE),
+    sd_words = sd(user_word_count, na.rm = TRUE)
+  )
+
+# Create change scores and log-transformed word count
+# No +1 needed for log transform since min word count = 47
+dat <- dat %>%
+  mutate(
+    accuracy_change = accuracy_post - accuracy_pre,  # Negative = improvement
+    warmth_change = warmth_outgroup_post - warmth_outgroup_pre,
+    log_word_count = log(user_word_count)
+  )
+
+cat("Engagement metrics:\n")
+cat(sprintf("  Turn count: M = %.2f, SD = %.2f\n",
+            engagement_summary$mean_turns, engagement_summary$sd_turns))
+cat(sprintf("  Word count: M = %.2f, SD = %.2f\n",
+            engagement_summary$mean_words, engagement_summary$sd_turns))
 ```
-accuracy_post ~ accuracy_pre + word_count
-warmth_post ~ warmth_pre + word_count
+
+#### Does engagement predict belief accuracy improvement?
+
+```{r engagement-accuracy}
+# Model: Engagement predicting accuracy change
+m_accuracy_turns <- lm(accuracy_change ~ user_turn_count + accuracy_pre + learner_party,
+                       data = dat)
+m_accuracy_log_words <- lm(accuracy_change ~ log_word_count + accuracy_pre + learner_party,
+                           data = dat)
+
+modelsummary(
+  list(
+    "Turn Count" = m_accuracy_turns,
+    "Log(Word Count)" = m_accuracy_log_words
+  ),
+  stars = TRUE,
+  gof_map = c("nobs", "r.squared", "adj.r.squared"),
+  coef_rename = c(
+    "user_turn_count" = "Turn Count",
+    "log_word_count" = "Log(Word Count)",
+    "accuracy_pre" = "Baseline Accuracy",
+    "learner_partyR→D" = "Learner: R→D"
+  )
+)
+```
+
+Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with accuracy change (*b* = `r sprintf("%.4f", coef(m_accuracy_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect was `r if(coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_accuracy_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"])`).
+
+#### Does engagement predict warmth change?
+
+```{r engagement-warmth}
+# Model: Engagement predicting warmth change
+m_warmth_turns <- lm(warmth_change ~ user_turn_count + warmth_outgroup_pre + learner_party,
+                     data = dat)
+m_warmth_log_words <- lm(warmth_change ~ log_word_count + warmth_outgroup_pre + learner_party,
+                         data = dat)
+
+modelsummary(
+  list(
+    "Turn Count" = m_warmth_turns,
+    "Log(Word Count)" = m_warmth_log_words
+  ),
+  stars = TRUE,
+  gof_map = c("nobs", "r.squared", "adj.r.squared"),
+  coef_rename = c(
+    "user_turn_count" = "Turn Count",
+    "log_word_count" = "Log(Word Count)",
+    "warmth_outgroup_pre" = "Baseline Warmth",
+    "learner_partyR→D" = "Learner: R→D"
+  )
+)
+```
+
+Greater engagement—measured by turn count—was `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
+
+```{r engagement-plots, fig.width=10, fig.height=8}
+# Plots with turn count
+p1 <- ggplot(dat, aes(x = user_turn_count, y = accuracy_change, color = learner_party)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  scale_color_manual(values = learner_party_colors) +
+  labs(
+    x = "Turn Count",
+    y = "Accuracy Change\n(Negative = Improvement)",
+    color = "Learner Party",
+    title = "Turn Count and Accuracy Change"
+  ) +
+  theme_minimal()
+
+p2 <- ggplot(dat, aes(x = user_turn_count, y = warmth_change, color = learner_party)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  scale_color_manual(values = learner_party_colors) +
+  labs(
+    x = "Turn Count",
+    y = "Warmth Change\n(Positive = Increase)",
+    color = "Learner Party",
+    title = "Turn Count and Warmth Change"
+  ) +
+  theme_minimal()
+
+# Plots with log word count
+p3 <- ggplot(dat, aes(x = log_word_count, y = accuracy_change, color = learner_party)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  scale_color_manual(values = learner_party_colors) +
+  labs(
+    x = "Log(Word Count)",
+    y = "Accuracy Change\n(Negative = Improvement)",
+    color = "Learner Party",
+    title = "Log(Word Count) and Accuracy Change"
+  ) +
+  theme_minimal()
+
+p4 <- ggplot(dat, aes(x = log_word_count, y = warmth_change, color = learner_party)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  scale_color_manual(values = learner_party_colors) +
+  labs(
+    x = "Log(Word Count)",
+    y = "Warmth Change\n(Positive = Increase)",
+    color = "Learner Party",
+    title = "Log(Word Count) and Warmth Change"
+  ) +
+  theme_minimal()
+
+library(patchwork)
+(p1 + p2) / (p3 + p4) + plot_layout(guides = "collect")
 ```
 
 ### Q6. Does interacting with the chatbot improve applied judgment?
@@ -355,7 +483,7 @@ modelsummary(
 
 #### Correlation: Does confidence change track accuracy improvement?
 
-```{r confidence-calibration}
+```{r confidence-calibration, fig.width=8, fig.height=6}
 # Compute change scores
 calibration_dat <- dat_for_reg %>%
   mutate(
@@ -363,27 +491,27 @@ calibration_dat <- dat_for_reg %>%
     accuracy_change = accuracy_post - accuracy_pre  # Negative = improvement
   )
 
-# Correlation
-conf_acc_cor <- cor.test(calibration_dat$confidence_change,
-                         calibration_dat$accuracy_change,
-                         use = "complete.obs")
-
-# Create summary table
-tibble(
-  Measure = c("Correlation", "95% CI Lower", "95% CI Upper", "p-value", "N"),
-  Value = c(conf_acc_cor$estimate, conf_acc_cor$conf.int[1], conf_acc_cor$conf.int[2],
-            conf_acc_cor$p.value,
-            sum(complete.cases(calibration_dat[c("confidence_change", "accuracy_change")])))
-) %>%
-  gt() %>%
-  fmt_number(columns = Value, rows = 1:3, decimals = 3) %>%
-  fmt_number(columns = Value, rows = 4, decimals = 4) %>%
-  fmt_number(columns = Value, rows = 5, decimals = 0) %>%
-  tab_header(title = "Confidence-Accuracy Calibration",
-             subtitle = "Correlation between confidence change and accuracy change") %>%
-  tab_footnote(
-    footnote = "Negative correlation would indicate that increased confidence is associated with improved accuracy (reduced error).",
-    locations = cells_body(columns = Measure, rows = 1)
+# Create scatter plot with correlation statistics
+library(ggpubr)
+ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = learner_party)) +
+  geom_point(alpha = 0.6, size = 2.5) +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
+  stat_cor(aes(label = paste((..r.label..), ..p.label.., sep = "~`,`~")),
+           method = "pearson", show.legend = FALSE, size = 3.5) +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
+  labs(
+    x = "Confidence Change (Post - Pre)",
+    y = "Accuracy Change (Post - Pre)\nNegative = Improvement",
+    title = "Confidence-Accuracy Calibration",
+    subtitle = "Does confidence change track with accuracy improvement?",
+    caption = "Note: Negative correlation would indicate increased confidence associated with improved accuracy"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    plot.caption = element_text(hjust = 0, size = 9, color = "gray40"),
+    legend.position = "bottom"
   )
 ```
 

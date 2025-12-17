@@ -1,5 +1,65 @@
 # Notes for Ben
 
+## 2025-12-17: File Organization and Data Structure Completed
+
+**Files reorganized** according to best practices:
+
+**Data files** (moved to `data/processed/`):
+- `cleaned_data.parquet` - Full cleaned dataset with all variables
+- `conversation_metrics.parquet` - Conversation engagement metrics
+- `conversations/*.json` - Individual conversation files (211 participants)
+- `analysis_data.parquet` - **Minimal dataset for publication** (50 variables)
+- `analysis_data.csv` - Same as above, CSV format for broader accessibility
+
+**Images** (moved to `output/figures/`):
+- `accuracy_change.png`
+- `warmth_change.png`
+
+**Scripts updated** with new paths:
+- [src/clean_data.R](src/clean_data.R:200-214) - Now writes to `data/processed/`
+- [src/python/download_conversations.py](src/python/download_conversations.py:81-120) - Now writes to `data/processed/`
+- [analysis/report.qmd](analysis/report.qmd:24) - Now reads from `data/processed/`
+- [src/create_analysis_data.R](src/create_analysis_data.R) - **NEW** script to create minimal publication dataset
+
+**Tested**: All scripts run successfully with new paths. Analysis reproduces correctly.
+
+**Summary**:
+- Full dataset: 141 variables, 211 observations
+- **Publication dataset**: 50 variables, 211 observations (available as `.parquet` and `.csv`)
+- All paths updated and verified working
+- Documentation added to [data/processed/README.md](data/processed/README.md)
+- Project instructions updated in [CLAUDE.md](CLAUDE.md)
+
+---
+
+## 2025-12-17: Q5 Engagement Analysis Completed
+
+**What was done**:
+1. Downloaded all conversations from the database for 211 participants
+2. Saved individual conversations as JSON files in `output/conversations/`
+3. Computed conversation metrics:
+   - `user_turn_count`: Number of messages sent by participant (mean = 10.06, range = 1-37)
+   - `user_word_count`: Total words typed by participant (mean = 182.85, range = 47-734)
+   - `has_conversation`: Boolean indicating conversation data available (all TRUE)
+4. Merged metrics into cleaned data via [src/clean_data.R](src/clean_data.R:199-208)
+5. Implemented Q5 engagement analysis in [analysis/report.qmd](analysis/report.qmd:290-387)
+
+**Q5 Analysis Completed**:
+- Tested whether engagement predicts accuracy change using:
+  - Turn count (number of messages)
+  - Log-transformed word count (no +1 needed; min word count = 47)
+- Tested whether engagement predicts warmth change (both metrics)
+- Created 2×2 visualization grid showing all engagement effects by learner party
+- Models control for baseline accuracy/warmth and learner party
+- Analysis follows pre-registration specification
+
+**Files created**:
+- [src/python/download_conversations.py](src/python/download_conversations.py) - Script to download conversations
+- `output/conversations/*.json` - 211 individual conversation files
+- `output/conversation_metrics.parquet` - Metrics for all participants
+
+---
+
 ## 2025-12-17: Fixed Line Plot Colors
 
 Fixed color mapping issue in all line plots. The problem was that `learner_party` has values "D→R" and "R→D", but plots were using `party_colors` defined for "Democrat" and "Republican".
@@ -19,8 +79,8 @@ Fixed color mapping issue in all line plots. The problem was that `learner_party
 ## Data Needed for Complete Analysis
 
 ### Q5: Engagement Analysis
-- **Missing**: Word count or chat length data
-- **Variable needed**: Number of words typed by participant during chatbot interaction
+- **STATUS: ✓ DATA NOW AVAILABLE**
+- **Variables added**: `user_turn_count` and `user_word_count` in cleaned data
 - **Purpose**: Test whether engagement predicts belief updating and warmth change
 - **Pre-registration**: "examine whether engagement with the chatbot—operationalized as the number of words typed by the participant during the chat—is associated with post-interaction outcomes"
 

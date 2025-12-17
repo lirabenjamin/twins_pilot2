@@ -7,7 +7,7 @@ library(tidyr)
 
 # Load raw data
 dat <- read_parquet("data/raw/qualtrics.parquet")
-
+tail(dat) %>% pull(ResponseId)
 # Clean data
 clean_dat <- dat %>%
   # Determine participant's party based on political orientation
@@ -196,11 +196,22 @@ clean_dat <- clean_dat %>%
     accuracy_post = abs(green_outgroup_post - actual_green)
   )
 
+# Merge conversation metrics if available
+conversation_metrics_file <- "data/processed/conversation_metrics.parquet"
+if (file.exists(conversation_metrics_file)) {
+  conversation_metrics <- read_parquet(conversation_metrics_file)
+  clean_dat <- clean_dat %>%
+    left_join(conversation_metrics, by = "ResponseId")
+  cat("Conversation metrics merged successfully\n")
+} else {
+  cat("No conversation metrics found. Run src/python/download_conversations.py first.\n")
+}
+
 # Write cleaned data
-write_parquet(clean_dat, "output/cleaned_data.parquet")
+write_parquet(clean_dat, "data/processed/cleaned_data.parquet")
 
 # Return summary
-cat("Cleaned data saved to output/cleaned_data.parquet\n")
+cat("Cleaned data saved to data/processed/cleaned_data.parquet\n")
 cat("Sample size:", nrow(clean_dat), "\n")
 cat("By learner party:\n")
 print(table(clean_dat$learner_party))
