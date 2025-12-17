@@ -750,15 +750,231 @@ dat %>%
   )
 ```
 
+## Appendix: Extreme Cases Analysis
+
+To understand what characterizes successful versus unsuccessful learning, we examined participants who showed the most and least improvement in accuracy about their political outgroup.
+
+```{r extreme-cases-analysis}
+# Calculate accuracy improvement (negative = improvement)
+extreme_cases <- dat %>%
+  mutate(accuracy_improvement = accuracy_pre - accuracy_post) %>%
+  group_by(learner_party) %>%
+  arrange(desc(accuracy_improvement)) %>%
+  slice(c(1, n())) %>%
+  ungroup() %>%
+  mutate(
+    case_type = rep(c("Most Improved", "Least Improved"), 2)
+  ) %>%
+  select(ResponseId, learner_party, case_type,
+         accuracy_pre, accuracy_post, accuracy_improvement,
+         user_word_count, user_turn_count, Q23)
+
+# Display summary table
+extreme_cases %>%
+  select(learner_party, case_type, accuracy_improvement, user_word_count, user_turn_count) %>%
+  gt() %>%
+  cols_label(
+    learner_party = "Group",
+    case_type = "Case",
+    accuracy_improvement = "Accuracy Improvement",
+    user_word_count = "Word Count",
+    user_turn_count = "Turn Count"
+  ) %>%
+  fmt_number(columns = accuracy_improvement, decimals = 3) %>%
+  fmt_number(columns = c(user_word_count, user_turn_count), decimals = 0) %>%
+  tab_header(
+    title = "Extreme Cases: Most vs. Least Improved",
+    subtitle = "Accuracy improvement by learner party"
+  ) %>%
+  tab_footnote(
+    footnote = "Positive values indicate improvement (reduced error)",
+    locations = cells_column_labels(columns = accuracy_improvement)
+  )
+```
+
+### Marketing Messages from Extreme Cases
+
+Participants wrote marketing slogans for energy-saving appliances targeted at their political outgroup. The messages reveal stark differences between successful and unsuccessful learners.
+
+**Democrats Learning About Republicans (D→R)**
+
+*Most Improved* (accuracy improvement = 2.843):
+> "Energy-saving Appliances, Helps Make America Great!"
+
+This message uses patriotic language that bridges partisan values. The participant engaged deeply on economic issues and found genuine common ground.
+
+*Least Improved* (accuracy worsened by 1.333):
+> "made for independence 'lower your costs, stay in control'."
+
+This message shows confused framing about independence and control. The participant's conversation remained surface-level and distracted.
+
+**Republicans Learning About Democrats (R→D)**
+
+*Most Improved* (accuracy improvement = 3.000):
+> "energy saving appliances . save energy and our planet"
+
+This message authentically reflects Democratic environmental values with simple, accessible language. The participant's conversation explored multiple policy areas comprehensively.
+
+*Least Improved* (accuracy worsened by 2.167):
+> "Come spend 50% more on less practical appliances since that's what you claim to do and support the business. But I know you won't because just like every Republican said its not financially plausible and your actions only prove the Republicans point."
+
+This openly hostile message reinforces stereotypes rather than bridging divides. The participant challenged the chatbot's authenticity throughout and remained adversarial.
+
+### Patterns in Successful vs. Unsuccessful Learning
+
+```{r extreme-cases-engagement}
+# Compare engagement between successful and unsuccessful learners
+engagement_comparison <- extreme_cases %>%
+  mutate(
+    success = ifelse(accuracy_improvement > 0, "Improved", "Worsened")
+  ) %>%
+  group_by(success) %>%
+  summarise(
+    mean_word_count = mean(user_word_count, na.rm = TRUE),
+    mean_turn_count = mean(user_turn_count, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+engagement_comparison %>%
+  gt() %>%
+  cols_label(
+    success = "Outcome",
+    mean_word_count = "Mean Word Count",
+    mean_turn_count = "Mean Turn Count"
+  ) %>%
+  fmt_number(columns = c(mean_word_count, mean_turn_count), decimals = 1) %>%
+  tab_header(
+    title = "Engagement by Learning Outcome",
+    subtitle = "Comparing extreme cases"
+  )
+```
+
+The qualitative analysis of conversations (full transcripts available in data/processed/conversations/) reveals distinct patterns:
+
+**Successful learners**:
+
+- Approached conversations with genuine curiosity
+- Explored substantive policy topics in depth
+- Found common ground on shared concerns
+- Asked respectful, probing questions
+- Created simple, bridge-building marketing messages
+
+**Unsuccessful learners**:
+
+- Remained skeptical or hostile throughout
+- Brought external "evidence" to confirm preconceptions
+- Challenged the chatbot's authenticity
+- Stayed in adversarial mode
+- Created divisive or sarcastic marketing messages
+
+These patterns suggest that genuine engagement is crucial for learning across partisan lines. Participants who used the conversation to confirm existing biases actually became less accurate, while those who approached it with openness showed dramatic improvements.
+
+### Full Conversation Transcripts
+
+The following sections present the complete conversations for each extreme case, illustrating the qualitative differences between successful and unsuccessful learning.
+
+#### D→R Most Improved: R_3smKFSFIo8Nlgir
+
+**Accuracy improvement**: 2.843 (from 2.921 to 0.079)
+**Marketing message**: "Energy-saving Appliances, Helps Make America Great!"
+
+```{r conversation-dr-most, results='asis'}
+library(jsonlite)
+convo <- fromJSON("../data/processed/conversations/R_3smKFSFIo8Nlgir.json")
+
+cat("\n")
+for (i in 1:nrow(convo)) {
+  msg <- convo[i, ]
+  role_display <- ifelse(msg$role == "user", "**PARTICIPANT**", "**CHATBOT**")
+  cat(sprintf("%s\n\n", role_display))
+  cat(sprintf("%s\n\n", msg$content))
+  if (i < nrow(convo)) cat("---\n\n")
+}
+```
+
+**Analysis**: This conversation shows deep engagement on economic issues. The participant found genuine common ground on concerns about taxes, regulations, and job stability. The chatbot explored practical implications of reduced government intervention, and the participant asked probing questions about implementation. This substantive exchange led to dramatically improved accuracy and a patriotic marketing message that bridges partisan values.
+
+#### D→R Least Improved: R_7roKHi99S0lQCJq
+
+**Accuracy change**: -1.333 (worsened from 1.088 to 2.421)
+**Marketing message**: "made for independence 'lower your costs, stay in control'."
+
+```{r conversation-dr-least, results='asis'}
+convo <- fromJSON("../data/processed/conversations/R_7roKHi99S0lQCJq.json")
+
+cat("\n")
+for (i in 1:nrow(convo)) {
+  msg <- convo[i, ]
+  role_display <- ifelse(msg$role == "user", "**PARTICIPANT**", "**CHATBOT**")
+  cat(sprintf("%s\n\n", role_display))
+  cat(sprintf("%s\n\n", msg$content))
+  if (i < nrow(convo)) cat("---\n\n")
+}
+```
+
+**Analysis**: This participant appeared distracted (mentioning grading quizzes) and the conversation remained superficial. While practical topics were discussed (appliances, thermostats), the exchange never went deep enough to challenge preconceptions. The participant's attention was divided, and they didn't engage with substantive policy questions. The marketing message reflects this confused engagement.
+
+#### R→D Most Improved: R_7rne5ptEvs5r7Il
+
+**Accuracy improvement**: 3.000 (from 3.251 to 0.251)
+**Marketing message**: "energy saving appliances . save energy and our planet"
+
+```{r conversation-rd-most, results='asis'}
+convo <- fromJSON("../data/processed/conversations/R_7rne5ptEvs5r7Il.json")
+
+cat("\n")
+for (i in 1:nrow(convo)) {
+  msg <- convo[i, ]
+  role_display <- ifelse(msg$role == "user", "**PARTICIPANT**", "**CHATBOT**")
+  cat(sprintf("%s\n\n", role_display))
+  cat(sprintf("%s\n\n", msg$content))
+  if (i < nrow(convo)) cat("---\n\n")
+}
+```
+
+**Analysis**: This wide-ranging conversation explored Democratic values comprehensively—environment, healthcare, social justice, immigration. The participant asked about core beliefs and policy positions, maintaining a respectful tone even when disagreeing. The chatbot provided detailed explanations of Democratic perspectives. This genuine exploration led to dramatic accuracy improvement and an authentic environmental message.
+
+#### R→D Least Improved: R_39bB9XiMhyFaHnj
+
+**Accuracy change**: -2.167 (worsened from 0.751 to 2.918)
+**Marketing message**: "Come spend 50% more on less practical appliances since that's what you claim to do and support the business. But I know you won't because just like every Republican said its not financially plausible and your actions only prove the Republicans point."
+
+```{r conversation-rd-least, results='asis'}
+convo <- fromJSON("../data/processed/conversations/R_39bB9XiMhyFaHnj.json")
+
+cat("\n")
+for (i in 1:nrow(convo)) {
+  msg <- convo[i, ]
+  role_display <- ifelse(msg$role == "user", "**PARTICIPANT**", "**CHATBOT**")
+  cat(sprintf("%s\n\n", role_display))
+  cat(sprintf("%s\n\n", msg$content))
+  if (i < nrow(convo)) cat("---\n\n")
+}
+```
+
+**Analysis**: This conversation was hostile from the start. The participant challenged the chatbot's authenticity, cited external "evidence" (a BBC study) to prove Democrats are hypocrites, and remained adversarial throughout. Rather than exploring Democratic perspectives, the participant used the conversation to confirm negative stereotypes. The chatbot tried to acknowledge concerns and find common ground, but the participant rejected these attempts. This confirmation bias approach led to worsened accuracy and an openly hostile marketing message.
+
+---
+
 ### Data Availability
 
 Raw data: [data/raw/qualtrics.parquet](../data/raw/qualtrics.parquet)
 
-Cleaned data: [output/cleaned_data.parquet](../output/cleaned_data.parquet)
+Cleaned data: [data/processed/cleaned_data.parquet](../data/processed/cleaned_data.parquet)
+
+Analysis data (minimal, for publication): [data/processed/analysis_data.parquet](../data/processed/analysis_data.parquet)
+
+Conversations: [data/processed/conversations/](../data/processed/conversations/)
 
 ### Code Availability
 
-Data cleaning script: [src/clean_data.R](../src/clean_data.R)
+Data cleaning: [src/r/clean_data.R](../src/r/clean_data.R)
+
+Analysis dataset creation: [src/r/create_analysis_data.R](../src/r/create_analysis_data.R)
+
+Conversation download: [src/python/download_conversations.py](../src/python/download_conversations.py)
+
+Extreme cases analysis: [src/r/analyze_extreme_cases.R](../src/r/analyze_extreme_cases.R)
 
 ### Pre-Registration
 

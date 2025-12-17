@@ -1,5 +1,26 @@
 # Notes for Ben
 
+## 2025-12-17: Extreme Cases Appendix Added
+
+**What was done**:
+- Created [src/r/analyze_extreme_cases.R](src/r/analyze_extreme_cases.R) to identify and analyze extreme cases
+- Added comprehensive **Appendix: Extreme Cases Analysis** to [analysis/report.qmd](analysis/report.qmd:753-872)
+- Generated [output/extreme_cases_summary.md](output/extreme_cases_summary.md) with detailed findings
+
+**Appendix includes**:
+1. Summary table comparing most vs. least improved participants by learner party
+2. Full marketing messages from extreme cases with interpretation
+3. Engagement comparison table (word count, turn count)
+4. Qualitative patterns distinguishing successful vs. unsuccessful learners
+5. **Complete conversation transcripts** for all 4 extreme cases with detailed analysis
+
+**Key insights**:
+- Most improved: Genuine curiosity + deep engagement + finding common ground → bridge-building messages
+- Least improved (worsened): Hostility + confirmation bias + surface engagement → divisive messages
+- Full conversation transcripts available in data/processed/conversations/ for deeper analysis
+
+---
+
 ## 2025-12-17: File Organization and Data Structure Completed
 
 **Files reorganized** according to best practices:
