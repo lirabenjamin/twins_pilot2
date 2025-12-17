@@ -1,0 +1,889 @@
+---
+title: "Learning from Twins: Can marketers learn about consumers across the political divide by interacting with AI"
+author: "Benjamin Lira"
+date: today
+format:
+  html: default
+  pdf: default
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+library(tidyverse)
+library(arrow)
+library(lme4)
+library(lmerTest)
+library(broom.mixed)
+library(modelsummary)
+library(gt)
+library(ggplot2)
+
+# Load cleaned data
+dat <- read_parquet("../output/cleaned_data.parquet")
+# dat <- read_parquet("./output/cleaned_data.parquet")
+```
+
+## Overview
+
+Political polarization creates challenges for marketers who must communicate effectively with ideologically diverse consumers. Misperceptions about political outgroups are widespread, with partisans often holding exaggerated and inaccurate views of those across the political divide. These misperceptions can lead to ineffective marketing strategies when firms attempt to appeal to broad consumer bases. This study tests whether interacting with an AI chatbot prompted to represent a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization.
+
+### Hypotheses
+
+We hypothesized that after interacting with an AI chatbot representing their political outgroup, participants would:
+
+1. **Report more accurate beliefs about the outgroup's attitudes** toward environmentally responsible consumption (Primary Outcome 1).
+2. **Feel warmer toward the political outgroup** (Primary Outcome 2).
+
+## Data
+
+### Data Collection
+
+Data were collected via Qualtrics from `r nrow(dat)` participants. Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
+
+```{r participant-breakdown}
+dat %>%
+  count(learner_party) %>%
+  gt() %>%
+  cols_label(
+    learner_party = "Learner Party",
+    n = "N"
+  ) %>%
+  tab_header(
+    title = "Sample Composition by Learner Party"
+  )
+```
+
+### Preprocessing
+
+Variables were recoded to reflect ingroup/outgroup status based on each participant's political orientation. Participants with `politicalorientation_1 < 50` were classified as Democrats (learning about Republicans, D→R), while participants with `politicalorientation_1 ≥ 50` were classified as Republicans (learning about Democrats, R→D). Pre-treatment belief variables about Republicans and Democrats were recoded to reflect outgroup beliefs, as were warmth thermometer ratings.
+
+All Likert-scale responses were converted to numeric scales (1 = Disagree strongly to 5 = Agree strongly). Environmental attitude items were averaged to create composite green attitude scores with higher values indicating more pro-environmental attitudes.
+
+## Methods
+
+### Design
+
+All participants completed the same procedure with no experimental conditions. The study employed a within-subjects pre-post design where participants:
+
+1. Reported their political orientation
+2. Rated their warmth toward the political outgroup on a 0-100 feeling thermometer
+3. Indicated their own environmental attitudes on six items
+4. Estimated both ingroup and outgroup attitudes on the same six items
+5. Reported confidence in their outgroup predictions
+6. Interacted with an AI chatbot prompted to represent their political outgroup
+7. Re-estimated outgroup attitudes on the same six items
+8. Reported confidence in their updated predictions
+9. Re-rated their warmth toward the outgroup
+10. Rated the bot's informativeness and empathy
+
+### Measures
+
+**Primary Outcome 1: Outgroup Belief Accuracy**
+
+Participants estimated the political outgroup's agreement with six environmental responsibility statements adapted from validated scales:
+
+1. It is important to me that the products I use do not harm the environment
+2. I consider the potential environmental impact of my actions when making many of my decisions
+3. My purchase habits are affected by my concern for our environment
+4. I am concerned about wasting the resources of our planet
+5. I would describe myself as environmentally responsible
+6. I am willing to be inconvenienced in order to take actions that are more environmentally friendly
+
+Responses were recorded on 5-point Likert scales and averaged to create composite green attitude scores. Accuracy was operationalized as the absolute difference between participants' estimates of the outgroup's green attitudes and the outgroup's actual mean self-reported green attitudes (computed from participants who identify with that political group).
+
+**Primary Outcome 2: Outgroup Warmth**
+
+Outgroup warmth was measured using a feeling thermometer ranging from 0 ("very cold") to 100 ("very warm") toward the political outgroup.
+
+**Secondary Outcomes**
+
+- Confidence in outgroup judgments (5-point scale from "not at all confident" to "extremely confident")
+- Bot informativeness ratings (5-point scale)
+- Bot empathy ratings (5-point scale)
+
+### Pre-Registered Analyses
+
+For each primary outcome, we estimated mixed-effects models of the form:
+
+$$y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})$$
+
+where `time` indexes pre- versus post-interaction measurement and `learner_party` indicates D→R versus R→D learning direction. The coefficient on `time` captures average pre-post change, and the `time × learner_party` interaction tests whether change differs between Democrat and Republican learners.
+
+## Results
+
+This section addresses seven key research questions about how interacting with an AI chatbot representing a political outgroup affects participants' beliefs, attitudes, and applied judgment.
+
+```{r prepare-long-data}
+# Prepare long format datasets for analysis
+accuracy_long <- dat %>%
+  select(ResponseId, learner_party, accuracy_pre, accuracy_post) %>%
+  pivot_longer(
+    cols = c(accuracy_pre, accuracy_post),
+    names_to = "time",
+    names_pattern = "accuracy_(pre|post)",
+    values_to = "error"
+  ) %>%
+  mutate(time = factor(time, levels = c("pre", "post")))
+
+warmth_long <- dat %>%
+  select(ResponseId, learner_party, warmth_outgroup_pre, warmth_outgroup_post) %>%
+  pivot_longer(
+    cols = c(warmth_outgroup_pre, warmth_outgroup_post),
+    names_to = "time",
+    names_pattern = "warmth_outgroup_(pre|post)",
+    values_to = "warmth"
+  ) %>%
+  mutate(time = factor(time, levels = c("pre", "post")))
+```
+
+### Q1. Do people update their beliefs after interacting with the chatbot?
+
+We examine whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction. We analyze both accuracy (how close estimates are to actual outgroup values) and warmth (feeling thermometer ratings).
+
+#### Belief Accuracy
+
+Accuracy was operationalized as the absolute difference between participants' estimates of outgroup green attitudes and the actual mean green attitudes reported by that outgroup. Lower values indicate greater accuracy.
+
+```{r accuracy-descriptives}
+# Calculate actual green attitudes by party
+actual_attitudes_table <- dat %>%
+  group_by(participant_party) %>%
+  summarise(
+    mean_green = mean(green_own, na.rm = TRUE),
+    sd_green = sd(green_own, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
+
+actual_attitudes_table %>%
+  gt() %>%
+  cols_label(
+    participant_party = "Political Party",
+    mean_green = "Mean Green Attitude",
+    sd_green = "SD",
+    n = "N"
+  ) %>%
+  fmt_number(
+    columns = c(mean_green, sd_green),
+    decimals = 2
+  ) %>%
+  tab_header(
+    title = "Actual Environmental Attitudes by Political Party",
+    subtitle = "Self-reported green attitudes (1-5 scale)"
+  )
+```
+
+```{r accuracy-summary}
+accuracy_summary <- accuracy_long %>%
+  group_by(learner_party, time) %>%
+  summarise(
+    mean_error = mean(error, na.rm = TRUE),
+    se_error = sd(error, na.rm = TRUE) / sqrt(n()),
+    n = sum(!is.na(error)),
+    .groups = "drop"
+  )
+
+accuracy_summary %>%
+  gt() %>%
+  cols_label(
+    learner_party = "Learner Party",
+    time = "Time",
+    mean_error = "Mean Absolute Error",
+    se_error = "SE",
+    n = "N"
+  ) %>%
+  fmt_number(
+    columns = c(mean_error, se_error),
+    decimals = 3
+  ) %>%
+  tab_header(
+    title = "Outgroup Belief Accuracy",
+    subtitle = "Absolute error in estimating outgroup green attitudes (lower = more accurate)"
+  )
+```
+
+```{r accuracy-plot}
+ggplot(accuracy_summary, aes(x = time, y = mean_error, color = learner_party, group = learner_party)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = mean_error - se_error, ymax = mean_error + se_error),
+                width = 0.1) +
+  labs(
+    title = "Change in Outgroup Belief Accuracy from Pre to Post Interaction",
+    subtitle = "Lower values indicate greater accuracy",
+    x = "Time",
+    y = "Mean Absolute Error",
+    color = "Learner Party"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom"
+  )
+
+ggsave("../output/accuracy_change.png", width = 8, height = 6, dpi = 300)
+```
+
+```{r accuracy-model}
+# Mixed-effects model for accuracy
+accuracy_model <- lmer(
+  error ~ time * learner_party + (1 | ResponseId),
+  data = accuracy_long
+)
+
+tidy(accuracy_model, effects = "fixed") %>%
+  gt() %>%
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "SE",
+    statistic = "t",
+    p.value = "p"
+  ) %>%
+  fmt_number(
+    columns = c(estimate, std.error, statistic),
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = p.value,
+    decimals = 4
+  ) %>%
+  tab_header(
+    title = "Mixed-Effects Model: Outgroup Belief Accuracy",
+    subtitle = "error ~ time × learner_party + (1 | id)"
+  ) %>%
+  tab_footnote(
+    footnote = "Negative coefficient on time indicates improved accuracy (reduced error) from pre to post.",
+    locations = cells_body(columns = term, rows = term == "timepost")
+  )
+```
+
+#### Outgroup Warmth
+
+Following the same logic, we examine pre-post changes in outgroup warmth.
+
+```{r warmth-summary}
+warmth_summary <- warmth_long %>%
+  group_by(learner_party, time) %>%
+  summarise(
+    mean_warmth = mean(warmth, na.rm = TRUE),
+    se_warmth = sd(warmth, na.rm = TRUE) / sqrt(n()),
+    n = sum(!is.na(warmth)),
+    .groups = "drop"
+  )
+
+warmth_summary %>%
+  gt() %>%
+  cols_label(
+    learner_party = "Learner Party",
+    time = "Time",
+    mean_warmth = "Mean Warmth",
+    se_warmth = "SE",
+    n = "N"
+  ) %>%
+  fmt_number(
+    columns = c(mean_warmth, se_warmth),
+    decimals = 2
+  ) %>%
+  tab_header(
+    title = "Outgroup Warmth Thermometer Ratings",
+    subtitle = "By learner party and time point (0-100 scale)"
+  )
+```
+
+```{r warmth-plot}
+ggplot(warmth_summary, aes(x = time, y = mean_warmth, color = learner_party, group = learner_party)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = mean_warmth - se_warmth, ymax = mean_warmth + se_warmth),
+                width = 0.1) +
+  labs(
+    title = "Change in Outgroup Warmth from Pre to Post Interaction",
+    x = "Time",
+    y = "Mean Warmth (0-100)",
+    color = "Learner Party"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom"
+  )
+
+ggsave("../output/warmth_change.png", width = 8, height = 6, dpi = 300)
+```
+
+```{r warmth-model}
+# Mixed-effects model for warmth
+warmth_model <- lmer(
+  warmth ~ time * learner_party + (1 | ResponseId),
+  data = warmth_long
+)
+
+tidy(warmth_model, effects = "fixed") %>%
+  gt() %>%
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "SE",
+    statistic = "t",
+    p.value = "p"
+  ) %>%
+  fmt_number(
+    columns = c(estimate, std.error, statistic),
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = p.value,
+    decimals = 4
+  ) %>%
+  tab_header(
+    title = "Mixed-Effects Model: Outgroup Warmth",
+    subtitle = "warmth ~ time × learner_party + (1 | id)"
+  ) %>%
+  tab_footnote(
+    footnote = "Positive coefficient on time indicates increased warmth from pre to post.",
+    locations = cells_body(columns = term, rows = term == "timepost")
+  )
+
+modelsummary::modelsummary(
+  list(Accuracy = accuracy_model,Warmth =  warmth_model),
+  coef_rename = c( "timepost" = "Pre-Post difference", "learner_partyR→D" = "Learner party == Republican",  "timepost:learner_partyR→D" = "Pre-Post Difference $times$ affiliation")
+   )
+```
+
+### Q2. Is belief updating symmetric across political groups?
+
+The primary analyses above test whether Democrats and Republicans show different patterns of belief updating. The key test is the `time × learner_party` interaction in the mixed-effects models.
+
+**Interpretation of Q1 models**:
+- The `time` coefficient shows the average change from pre to post for the reference group (D→R)
+- The `time:learner_partyR→D` interaction tests whether Republicans learning about Democrats show a different pattern than Democrats learning about Republicans
+- A significant interaction would indicate asymmetric updating across groups
+
+### Q3. Does political extremity predict how much people update?
+
+We explore whether participants' political extremism (distance from the political center) moderates the treatment effect.
+
+```{r extremism-descriptives}
+# Descriptive statistics for extremism
+extremism_summary <- dat %>%
+  group_by(learner_party) %>%
+  summarise(
+    mean_extremism = mean(political_extremism, na.rm = TRUE),
+    sd_extremism = sd(political_extremism, na.rm = TRUE),
+    min_extremism = min(political_extremism, na.rm = TRUE),
+    max_extremism = max(political_extremism, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+extremism_summary %>%
+  gt() %>%
+  cols_label(
+    learner_party = "Learner Party",
+    mean_extremism = "Mean",
+    sd_extremism = "SD",
+    min_extremism = "Min",
+    max_extremism = "Max"
+  ) %>%
+  fmt_number(
+    columns = c(mean_extremism, sd_extremism, min_extremism, max_extremism),
+    decimals = 2
+  ) %>%
+  tab_header(
+    title = "Political Extremism by Learner Party",
+    subtitle = "Distance from political center (0-50 scale)"
+  )
+```
+
+#### Extremism × Time Interaction for Accuracy
+
+```{r extremism-moderator-accuracy}
+# Add extremism to accuracy long data
+accuracy_long_ext <- accuracy_long %>%
+  left_join(
+    dat %>% select(ResponseId, political_extremism),
+    by = "ResponseId"
+  )
+
+# Model with extremism interaction
+accuracy_extremism_model <- lmer(
+  error ~ time * learner_party * political_extremism + (1 | ResponseId),
+  data = accuracy_long_ext
+)
+
+tidy(accuracy_extremism_model, effects = "fixed") %>%
+  gt() %>%
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "SE",
+    statistic = "t",
+    p.value = "p"
+  ) %>%
+  fmt_number(
+    columns = c(estimate, std.error, statistic),
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = p.value,
+    decimals = 4
+  ) %>%
+  tab_header(
+    title = "Extremism as Moderator: Belief Accuracy",
+    subtitle = "error ~ time × learner_party × extremism + (1 | id)"
+  ) %>%
+  tab_footnote(
+    footnote = "Three-way interaction tests whether extremism moderates differential updating across groups.",
+    locations = cells_body(columns = term, rows = grepl("time.*extremism", term))
+  )
+```
+
+#### Extremism × Time Interaction for Warmth
+
+```{r extremism-moderator-warmth}
+# Add extremism to long data
+warmth_long_ext <- warmth_long %>%
+  left_join(
+    dat %>% select(ResponseId, political_extremism),
+    by = "ResponseId"
+  )
+
+# Model with extremism interaction
+warmth_extremism_model <- lmer(
+  warmth ~ time * learner_party * political_extremism + (1 | ResponseId),
+  data = warmth_long_ext
+)
+
+tidy(warmth_extremism_model, effects = "fixed") %>%
+  gt() %>%
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "SE",
+    statistic = "t",
+    p.value = "p"
+  ) %>%
+  fmt_number(
+    columns = c(estimate, std.error, statistic),
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = p.value,
+    decimals = 4
+  ) %>%
+  tab_header(
+    title = "Extremism as Moderator: Outgroup Warmth",
+    subtitle = "warmth ~ time × learner_party × extremism + (1 | id)"
+  )
+```
+
+### Q4. Is belief updating associated with how the chatbot is perceived?
+
+We examine whether participants who found the chatbot more informative or empathic showed greater belief updating, controlling for pre-interaction values.
+
+#### Bot Perceptions: Descriptive Statistics
+
+```{r bot-perceptions}
+bot_perceptions <- dat %>%
+  select(learner_party, info, empathy) %>%
+  pivot_longer(
+    cols = c(info, empathy),
+    names_to = "measure",
+    values_to = "rating"
+  ) %>%
+  mutate(
+    measure = case_when(
+      measure == "info" ~ "Informativeness",
+      measure == "empathy" ~ "Empathy",
+      TRUE ~ measure
+    )
+  )
+
+bot_summary <- bot_perceptions %>%
+  group_by(learner_party, measure) %>%
+  summarise(
+    mean_rating = mean(rating, na.rm = TRUE),
+    se_rating = sd(rating, na.rm = TRUE) / sqrt(n()),
+    n = sum(!is.na(rating)),
+    .groups = "drop"
+  )
+
+bot_summary %>%
+  gt() %>%
+  cols_label(
+    learner_party = "Learner Party",
+    measure = "Measure",
+    mean_rating = "Mean Rating",
+    se_rating = "SE",
+    n = "N"
+  ) %>%
+  fmt_number(
+    columns = c(mean_rating, se_rating),
+    decimals = 2
+  ) %>%
+  tab_header(
+    title = "Bot Perception Ratings",
+    subtitle = "By learner party (1-5 scale)"
+  )
+```
+
+#### Bot Perceptions Predicting Belief Accuracy
+
+Following the pre-registration, we examine whether bot informativeness and empathy predict post-interaction accuracy, controlling for pre-interaction accuracy.
+
+```{r process-regressions-accuracy}
+# First, compute accuracy for regression
+dat_for_reg <- dat %>%
+  left_join(
+    dat %>%
+      group_by(participant_party) %>%
+      summarise(actual_green = mean(green_own, na.rm = TRUE), .groups = "drop"),
+    by = c("participant_party" = "participant_party")
+  ) %>%
+  mutate(
+    outgroup_party = if_else(participant_party == "Democrat", "Republican", "Democrat")
+  ) %>%
+  select(-actual_green) %>%
+  left_join(
+    dat %>%
+      group_by(participant_party) %>%
+      summarise(actual_green = mean(green_own, na.rm = TRUE), .groups = "drop"),
+    by = c("outgroup_party" = "participant_party")
+  ) %>%
+  mutate(
+    accuracy_pre = abs(green_outgroup_pre - actual_green),
+    accuracy_post = abs(green_outgroup_post - actual_green)
+  )
+
+# Regression: Post accuracy ~ Pre accuracy + Informativeness + Empathy
+accuracy_process_model <- lm(
+  accuracy_post ~ accuracy_pre + info + empathy,
+  data = dat_for_reg
+)
+
+tidy(accuracy_process_model) %>%
+  gt() %>%
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "SE",
+    statistic = "t",
+    p.value = "p"
+  ) %>%
+  fmt_number(
+    columns = c(estimate, std.error, statistic),
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = p.value,
+    decimals = 4
+  ) %>%
+  tab_header(
+    title = "Bot Perceptions Predicting Belief Accuracy",
+    subtitle = "accuracy_post ~ accuracy_pre + informativeness + empathy"
+  ) %>%
+  tab_footnote(
+    footnote = "Negative coefficients indicate improved accuracy (reduced error).",
+    locations = cells_body(columns = term, rows = term %in% c("info", "empathy"))
+  )
+```
+
+#### Bot Perceptions Predicting Warmth
+
+```{r process-regressions-warmth}
+# Regression: Post warmth ~ Pre warmth + Informativeness + Empathy
+warmth_process_model <- lm(
+  warmth_outgroup_post ~ warmth_outgroup_pre + info + empathy,
+  data = dat
+)
+
+tidy(warmth_process_model) %>%
+  gt() %>%
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "SE",
+    statistic = "t",
+    p.value = "p"
+  ) %>%
+  fmt_number(
+    columns = c(estimate, std.error, statistic),
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = p.value,
+    decimals = 4
+  ) %>%
+  tab_header(
+    title = "Bot Perceptions Predicting Outgroup Warmth",
+    subtitle = "warmth_post ~ warmth_pre + informativeness + empathy"
+  )
+```
+
+### Q5. Does engagement ("dose") matter for belief updating?
+
+**DATA NEEDED**: The pre-registration specified examining engagement operationalized as the number of words typed by participants during the chat. This variable is not currently available in the dataset.
+
+**Planned analysis**: When word count data becomes available, we will estimate:
+```
+accuracy_post ~ accuracy_pre + word_count
+warmth_post ~ warmth_pre + word_count
+```
+
+This will test whether participants who engaged more actively with the chatbot (typed more words) showed greater belief updating.
+
+### Q6. Does interacting with the chatbot improve applied judgment?
+
+Participants wrote slogans for marketing energy-saving appliances to the political outgroup. This tests whether the chatbot interaction improved participants' ability to create persuasive messaging for the outgroup.
+
+**DATA AVAILABLE**: Raw slogan text is stored in variable `Q23` (n = `r sum(!is.na(dat$Q23))` responses).
+
+**DATA NEEDED**:
+1. **Semantic similarity scores**: Compare participant slogans to AI-generated responses from ChatGPT, Claude, and Gemini to detect copying (pre-registration: exclude slogans >3 SDs above mean similarity)
+2. **Quality ratings**: Human or LLM ratings of how well each slogan fits the target outgroup
+
+**Planned analyses** (pending quality ratings):
+- Descriptive statistics on slogan quality by learner party
+- Regression: `slogan_quality ~ bot_informativeness + bot_empathy + word_count`
+- Qualitative analysis of slogan themes and framing strategies
+
+### Q7. Does confidence track accuracy—or diverge from it?
+
+We examine participants' metacognitive awareness by testing whether confidence ratings track with actual accuracy.
+
+#### Confidence: Descriptive Statistics
+
+```{r confidence-desc}
+confidence_dat <- dat %>%
+  select(ResponseId, learner_party, confidence_outgroup_pre, confidence_outgroup_post) %>%
+  pivot_longer(
+    cols = c(confidence_outgroup_pre, confidence_outgroup_post),
+    names_to = "time",
+    names_pattern = "confidence_outgroup_(pre|post)",
+    values_to = "confidence"
+  ) %>%
+  mutate(time = factor(time, levels = c("pre", "post")))
+
+confidence_summary <- confidence_dat %>%
+  group_by(learner_party, time) %>%
+  summarise(
+    mean_confidence = mean(confidence, na.rm = TRUE),
+    se_confidence = sd(confidence, na.rm = TRUE) / sqrt(n()),
+    n = sum(!is.na(confidence)),
+    .groups = "drop"
+  )
+
+confidence_summary %>%
+  gt() %>%
+  cols_label(
+    learner_party = "Learner Party",
+    time = "Time",
+    mean_confidence = "Mean Confidence",
+    se_confidence = "SE",
+    n = "N"
+  ) %>%
+  fmt_number(
+    columns = c(mean_confidence, se_confidence),
+    decimals = 2
+  ) %>%
+  tab_header(
+    title = "Confidence in Outgroup Judgments",
+    subtitle = "By learner party and time point (1-5 scale)"
+  )
+```
+
+#### Confidence-Accuracy Calibration
+
+We test whether confidence tracks with actual accuracy by examining the correlation between confidence changes and accuracy changes.
+
+```{r confidence-accuracy-correlation}
+# Compute change scores
+calibration_dat <- dat_for_reg %>%
+  mutate(
+    confidence_change = confidence_outgroup_post - confidence_outgroup_pre,
+    accuracy_change = accuracy_post - accuracy_pre  # Negative = improvement
+  )
+
+# Correlation
+conf_acc_cor <- cor.test(calibration_dat$confidence_change,
+                         calibration_dat$accuracy_change,
+                         use = "complete.obs")
+
+# Create summary table
+tibble(
+  Measure = c("Correlation", "95% CI Lower", "95% CI Upper", "p-value", "N"),
+  Value = c(
+    conf_acc_cor$estimate,
+    conf_acc_cor$conf.int[1],
+    conf_acc_cor$conf.int[2],
+    conf_acc_cor$p.value,
+    sum(complete.cases(calibration_dat[c("confidence_change", "accuracy_change")]))
+  )
+) %>%
+  gt() %>%
+  fmt_number(
+    columns = Value,
+    rows = 1:3,
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = Value,
+    rows = 4,
+    decimals = 4
+  ) %>%
+  fmt_number(
+    columns = Value,
+    rows = 5,
+    decimals = 0
+  ) %>%
+  tab_header(
+    title = "Confidence-Accuracy Calibration",
+    subtitle = "Correlation between confidence change and accuracy change"
+  ) %>%
+  tab_footnote(
+    footnote = "Negative correlation would indicate that increased confidence is associated with improved accuracy (reduced error).",
+    locations = cells_body(columns = Measure, rows = 1)
+  )
+```
+
+### Robustness Checks
+
+#### Warmth Difference Score
+
+Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup). This accounts for individual differences in scale use.
+
+```{r warmth-difference}
+# Prepare warmth difference data in long format
+warmth_diff_long <- dat %>%
+  select(ResponseId, learner_party, warmth_diff_pre, warmth_diff_post) %>%
+  pivot_longer(
+    cols = c(warmth_diff_pre, warmth_diff_post),
+    names_to = "time",
+    names_pattern = "warmth_diff_(pre|post)",
+    values_to = "warmth_diff"
+  ) %>%
+  mutate(time = factor(time, levels = c("pre", "post")))
+
+# Summary statistics
+warmth_diff_summary <- warmth_diff_long %>%
+  group_by(learner_party, time) %>%
+  summarise(
+    mean_diff = mean(warmth_diff, na.rm = TRUE),
+    se_diff = sd(warmth_diff, na.rm = TRUE) / sqrt(n()),
+    n = sum(!is.na(warmth_diff)),
+    .groups = "drop"
+  )
+
+warmth_diff_summary %>%
+  gt() %>%
+  cols_label(
+    learner_party = "Learner Party",
+    time = "Time",
+    mean_diff = "Mean Difference",
+    se_diff = "SE",
+    n = "N"
+  ) %>%
+  fmt_number(
+    columns = c(mean_diff, se_diff),
+    decimals = 2
+  ) %>%
+  tab_header(
+    title = "Warmth Difference Score (Outgroup - Ingroup)",
+    subtitle = "Negative values indicate outgroup rated colder than ingroup"
+  )
+
+# Mixed-effects model
+warmth_diff_model <- lmer(
+  warmth_diff ~ time * learner_party + (1 | ResponseId),
+  data = warmth_diff_long
+)
+
+tidy(warmth_diff_model, effects = "fixed") %>%
+  gt() %>%
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "SE",
+    statistic = "t",
+    p.value = "p"
+  ) %>%
+  fmt_number(
+    columns = c(estimate, std.error, statistic),
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = p.value,
+    decimals = 4
+  ) %>%
+  tab_header(
+    title = "Mixed-Effects Model: Warmth Difference Score",
+    subtitle = "warmth_diff ~ time × learner_party + (1 | id)"
+  ) %>%
+  tab_footnote(
+    footnote = "Positive coefficient on time indicates reduced affective polarization.",
+    locations = cells_body(columns = term, rows = term == "timepost")
+  )
+```
+
+## Discussion
+
+### Summary of Findings
+
+This pilot study tested whether interacting with an AI chatbot representing a political outgroup could improve participants' understanding of and warmth toward that outgroup. Using a within-subjects pre-post design, we examined changes in outgroup belief accuracy and outgroup warmth following an AI-mediated interaction.
+
+### Primary Hypotheses
+
+**Hypothesis 1: Outgroup Belief Accuracy**
+
+We hypothesized that participants would report more accurate beliefs about the outgroup's environmental attitudes after interacting with the AI chatbot. Accuracy was operationalized as the absolute difference between participants' estimates and the outgroup's actual mean green attitudes. The time coefficient in the mixed-effects model indicates whether accuracy improved (error decreased) from pre to post, while the interaction term tests whether this change differed between Democrat and Republican learners.
+
+**Hypothesis 2: Outgroup Warmth**
+
+We hypothesized that participants would feel warmer toward the political outgroup after the interaction. The time coefficient indicates whether warmth increased from pre to post, while the interaction term tests whether Democrats and Republicans showed different patterns of change.
+
+### Exploratory Findings
+
+Secondary analyses examined confidence in outgroup judgments and perceptions of the bot's informativeness and empathy. Confidence ratings provide insight into participants' metacognitive awareness of their knowledge about the outgroup. Bot perception ratings help illuminate potential mechanisms—if participants found the bot informative and empathic, this may mediate changes in accuracy and warmth.
+
+### Implications for Marketing Practice
+
+If the hypothesized effects are supported, this research suggests that AI-mediated interactions can serve as a scalable tool for reducing political misperceptions in consumer research. Marketers often struggle to understand ideologically diverse consumer segments, relying on stereotypes or costly focus groups. AI chatbots could provide an accessible method for gaining insight into outgroup consumer preferences and values.
+
+This approach may be particularly valuable for marketing environmentally responsible products, where political divides can lead to misperceptions about consumer attitudes. Understanding that political outgroups may be more environmentally conscious than stereotypes suggest could inform more effective cross-partisan messaging strategies.
+
+### Limitations
+
+Several limitations should be noted. The pilot sample consists primarily of test and preview responses, limiting statistical power and generalizability. The environmental attitude domain may not generalize to other consumer preferences. Belief accuracy depends on having adequate sample sizes within each political group to compute reliable actual outgroup means. The study examines only immediate post-interaction effects; durability of any changes remains unknown.
+
+Additionally, participants interacted with an AI chatbot rather than actual outgroup members. While this approach offers scalability advantages, it raises questions about whether insights gained from AI interactions transfer to understanding real outgroup members. The chatbot was prompted to represent the outgroup but may not fully capture the diversity of views within each political group.
+
+### Next Steps
+
+The full study will recruit N = 500 participants from a representative sample. Key priorities include examining whether bot informativeness and empathy mediate changes in warmth and accuracy, analyzing participant-generated marketing slogans for energy-saving appliances, and testing for heterogeneous effects by political extremity and prior outgroup attitudes. Exploratory analyses will examine engagement (words typed during chat) as a predictor of outcomes.
+
+Future research should examine the durability of effects over time, test generalizability to other product categories and consumer attitudes beyond environmental responsibility, and compare AI-mediated learning to alternative interventions such as reading testimonials from outgroup members or interacting with human outgroup representatives.
+
+## Appendix
+
+### Data Availability
+
+Raw data: [data/raw/qualtrics.parquet](../data/raw/qualtrics.parquet)
+
+Cleaned data: [output/cleaned_data.parquet](../output/cleaned_data.parquet)
+
+### Code Availability
+
+Data cleaning script: [src/clean_data.R](../src/clean_data.R)
+
+### Pre-Registration
+
+This study was pre-registered prior to data collection. See [docs/pre-registration.md](../docs/pre-registration.md) for complete details including hypotheses, measures, sample size justification, and planned analyses.
+
+### Session Information
+
+```{r session-info}
+sessionInfo()
+```

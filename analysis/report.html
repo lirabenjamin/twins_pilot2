@@ -1,0 +1,5533 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Benjamin Lira">
+<meta name="dcterms.date" content="2025-12-17">
+
+<title>Learning from Twins: Can marketers learn about consumers across the political divide by interacting with AI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="report_files/libs/quarto-html/quarto.js"></script>
+<script src="report_files/libs/quarto-html/popper.min.js"></script>
+<script src="report_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="report_files/libs/quarto-html/anchor.min.js"></script>
+<link href="report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="report_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="report_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="report_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a>
+  <ul class="collapse">
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">1.1</span> Hypotheses</a></li>
+  </ul></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2</span> Data</a>
+  <ul class="collapse">
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection"><span class="header-section-number">2.1</span> Data Collection</a></li>
+  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">2.2</span> Measures</a></li>
+  <li><a href="#pre-registered-analyses" id="toc-pre-registered-analyses" class="nav-link" data-scroll-target="#pre-registered-analyses"><span class="header-section-number">2.3</span> Pre-Registered Analyses</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">3</span> Results</a>
+  <ul class="collapse">
+  <li><a href="#q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot" id="toc-q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot" class="nav-link" data-scroll-target="#q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot"><span class="header-section-number">3.1</span> Q1. Do people update their beliefs after interacting with the chatbot?</a></li>
+  <li><a href="#q2.-is-belief-updating-symmetric-across-political-groups" id="toc-q2.-is-belief-updating-symmetric-across-political-groups" class="nav-link" data-scroll-target="#q2.-is-belief-updating-symmetric-across-political-groups"><span class="header-section-number">3.2</span> Q2. Is belief updating symmetric across political groups?</a></li>
+  <li><a href="#q3.-does-political-extremity-predict-how-much-people-update" id="toc-q3.-does-political-extremity-predict-how-much-people-update" class="nav-link" data-scroll-target="#q3.-does-political-extremity-predict-how-much-people-update"><span class="header-section-number">3.3</span> Q3. Does political extremity predict how much people update?</a></li>
+  <li><a href="#q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived" id="toc-q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived" class="nav-link" data-scroll-target="#q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived"><span class="header-section-number">3.4</span> Q4. Is belief updating associated with how the chatbot is perceived?</a></li>
+  <li><a href="#q5.-does-engagement-dose-matter-for-belief-updating" id="toc-q5.-does-engagement-dose-matter-for-belief-updating" class="nav-link" data-scroll-target="#q5.-does-engagement-dose-matter-for-belief-updating"><span class="header-section-number">3.5</span> Q5. Does engagement (“dose”) matter for belief updating?</a></li>
+  <li><a href="#q6.-does-interacting-with-the-chatbot-improve-applied-judgment" id="toc-q6.-does-interacting-with-the-chatbot-improve-applied-judgment" class="nav-link" data-scroll-target="#q6.-does-interacting-with-the-chatbot-improve-applied-judgment"><span class="header-section-number">3.6</span> Q6. Does interacting with the chatbot improve applied judgment?</a></li>
+  <li><a href="#q7.-does-confidence-track-accuracyor-diverge-from-it" id="toc-q7.-does-confidence-track-accuracyor-diverge-from-it" class="nav-link" data-scroll-target="#q7.-does-confidence-track-accuracyor-diverge-from-it"><span class="header-section-number">3.7</span> Q7. Does confidence track accuracy—or diverge from it?</a></li>
+  <li><a href="#robustness-checks" id="toc-robustness-checks" class="nav-link" data-scroll-target="#robustness-checks"><span class="header-section-number">3.8</span> Robustness Checks</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">4</span> Discussion</a>
+  <ul class="collapse">
+  <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings"><span class="header-section-number">4.1</span> Summary of Findings</a></li>
+  <li><a href="#primary-hypotheses" id="toc-primary-hypotheses" class="nav-link" data-scroll-target="#primary-hypotheses"><span class="header-section-number">4.2</span> Primary Hypotheses</a></li>
+  <li><a href="#exploratory-findings" id="toc-exploratory-findings" class="nav-link" data-scroll-target="#exploratory-findings"><span class="header-section-number">4.3</span> Exploratory Findings</a></li>
+  <li><a href="#implications-for-marketing-practice" id="toc-implications-for-marketing-practice" class="nav-link" data-scroll-target="#implications-for-marketing-practice"><span class="header-section-number">4.4</span> Implications for Marketing Practice</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">4.5</span> Limitations</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">4.6</span> Next Steps</a></li>
+  </ul></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">5</span> Appendix</a>
+  <ul class="collapse">
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">5.1</span> Descriptive Statistics</a></li>
+  <li><a href="#data-availability" id="toc-data-availability" class="nav-link" data-scroll-target="#data-availability"><span class="header-section-number">5.2</span> Data Availability</a></li>
+  <li><a href="#code-availability" id="toc-code-availability" class="nav-link" data-scroll-target="#code-availability"><span class="header-section-number">5.3</span> Code Availability</a></li>
+  <li><a href="#pre-registration" id="toc-pre-registration" class="nav-link" data-scroll-target="#pre-registration"><span class="header-section-number">5.4</span> Pre-Registration</a></li>
+  <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information"><span class="header-section-number">5.5</span> Session Information</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Learning from Twins: Can marketers learn about consumers across the political divide by interacting with AI</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Benjamin Lira </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 17, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
+<p>Political polarization creates challenges for marketers who must communicate effectively with ideologically diverse consumers. Misperceptions about political outgroups are widespread, with partisans often holding exaggerated and inaccurate views of those across the political divide. These misperceptions can lead to ineffective marketing strategies when firms attempt to appeal to broad consumer bases. This study tests whether interacting with an AI chatbot prompted to represent a political outgroup can improve marketers’ understanding of that outgroup and reduce affective polarization.</p>
+<section id="hypotheses" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="hypotheses"><span class="header-section-number">1.1</span> Hypotheses</h3>
+<p>We hypothesized that after interacting with an AI chatbot representing their political outgroup, participants would:</p>
+<ol type="1">
+<li><strong>Report more accurate beliefs about the outgroup’s attitudes</strong> toward environmentally responsible consumption (Primary Outcome 1).</li>
+<li><strong>Feel warmer toward the political outgroup</strong> (Primary Outcome 2).</li>
+</ol>
+</section>
+</section>
+<section id="data" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="data"><span class="header-section-number">2</span> Data</h2>
+<section id="data-collection" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">2.1</span> Data Collection</h3>
+<p>Data were collected via Qualtrics from 211 participants. Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="ujoyfbleiq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ujoyfbleiq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ujoyfbleiq thead, #ujoyfbleiq tbody, #ujoyfbleiq tfoot, #ujoyfbleiq tr, #ujoyfbleiq td, #ujoyfbleiq th {
+  border-style: none;
+}
+
+#ujoyfbleiq p {
+  margin: 0;
+  padding: 0;
+}
+
+#ujoyfbleiq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ujoyfbleiq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ujoyfbleiq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ujoyfbleiq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ujoyfbleiq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ujoyfbleiq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ujoyfbleiq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ujoyfbleiq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ujoyfbleiq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ujoyfbleiq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ujoyfbleiq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ujoyfbleiq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ujoyfbleiq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ujoyfbleiq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ujoyfbleiq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ujoyfbleiq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ujoyfbleiq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ujoyfbleiq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ujoyfbleiq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ujoyfbleiq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ujoyfbleiq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ujoyfbleiq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ujoyfbleiq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ujoyfbleiq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ujoyfbleiq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ujoyfbleiq .gt_left {
+  text-align: left;
+}
+
+#ujoyfbleiq .gt_center {
+  text-align: center;
+}
+
+#ujoyfbleiq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ujoyfbleiq .gt_font_normal {
+  font-weight: normal;
+}
+
+#ujoyfbleiq .gt_font_bold {
+  font-weight: bold;
+}
+
+#ujoyfbleiq .gt_font_italic {
+  font-style: italic;
+}
+
+#ujoyfbleiq .gt_super {
+  font-size: 65%;
+}
+
+#ujoyfbleiq .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ujoyfbleiq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ujoyfbleiq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ujoyfbleiq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ujoyfbleiq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ujoyfbleiq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ujoyfbleiq .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ujoyfbleiq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ujoyfbleiq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border">Sample Composition</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="learner_party" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Learner Party</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">N</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="measures" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="measures"><span class="header-section-number">2.2</span> Measures</h3>
+<p><strong>Primary Outcomes</strong></p>
+<ul>
+<li><strong>Belief accuracy</strong>: Absolute difference between participants’ estimates of outgroup green attitudes and actual outgroup means (lower = more accurate)</li>
+<li><strong>Outgroup warmth</strong>: Feeling thermometer (0-100 scale) toward the political outgroup</li>
+</ul>
+<p><strong>Secondary Outcomes</strong></p>
+<ul>
+<li>Confidence in outgroup judgments (5-point scale)</li>
+<li>Bot informativeness and empathy ratings (5-point scale)</li>
+</ul>
+</section>
+<section id="pre-registered-analyses" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="pre-registered-analyses"><span class="header-section-number">2.3</span> Pre-Registered Analyses</h3>
+<p>For each primary outcome, we estimated mixed-effects models of the form:</p>
+<p><span class="math display">\[y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})\]</span></p>
+<p>where <code>time</code> indexes pre- versus post-interaction measurement and <code>learner_party</code> indicates D→R versus R→D learning direction.</p>
+</section>
+</section>
+<section id="results" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="results"><span class="header-section-number">3</span> Results</h2>
+<section id="q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot"><span class="header-section-number">3.1</span> Q1. Do people update their beliefs after interacting with the chatbot?</h3>
+<p>We examine whether participants changed their beliefs about the outgroup’s environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth.</p>
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="report_files/figure-html/q1-plots-1.png" class="img-fluid" width="960"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="report_files/figure-html/q1-plots-2.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_oyu6mt62opma7j9gmngj(i, j, css_id) {
+          var table = document.getElementById("tinytable_oyu6mt62opma7j9gmngj");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_oyu6mt62opma7j9gmngj');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_oyu6mt62opma7j9gmngj(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_oyu6mt62opma7j9gmngj");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 7, j: 1 }, { i: 7, j: 2 },  ], css_id: 'tinytable_css_77hm8vdekapjut4m135h',}, 
+          { positions: [ { i: 6, j: 1 }, { i: 6, j: 2 },  ], css_id: 'tinytable_css_jzavyh4ckmn8sro33u5w',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 1 }, { i: 1, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 },  ], css_id: 'tinytable_css_50rtn3u3n5rppnestg79',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_wqwnlge4pog82hg5qxeg',}, 
+          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_9mpravgtorvipv0qwm2w',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_xhjygobc27bkdkn04rax',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_xkv46mpfu0rabui4mra1',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_mthdau599ij087mq3z4r',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_oyu6mt62opma7j9gmngj(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_77hm8vdekapjut4m135h, .table th.tinytable_css_77hm8vdekapjut4m135h { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_jzavyh4ckmn8sro33u5w, .table th.tinytable_css_jzavyh4ckmn8sro33u5w { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_50rtn3u3n5rppnestg79, .table th.tinytable_css_50rtn3u3n5rppnestg79 { text-align: center; }
+      .table td.tinytable_css_wqwnlge4pog82hg5qxeg, .table th.tinytable_css_wqwnlge4pog82hg5qxeg { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_9mpravgtorvipv0qwm2w, .table th.tinytable_css_9mpravgtorvipv0qwm2w { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_xhjygobc27bkdkn04rax, .table th.tinytable_css_xhjygobc27bkdkn04rax { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_xkv46mpfu0rabui4mra1, .table th.tinytable_css_xkv46mpfu0rabui4mra1 { text-align: left; }
+      .table td.tinytable_css_mthdau599ij087mq3z4r, .table th.tinytable_css_mthdau599ij087mq3z4r { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_oyu6mt62opma7j9gmngj" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Accuracy</th>
+                <th scope="col">Warmth</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr>
+<tr><td colspan="3">Note: Accuracy is absolute error (lower = more accurate). * p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>(Intercept)</td>
+                  <td>1.353***</td>
+                  <td>27.237***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.060)</td>
+                  <td>(1.692)</td>
+                </tr>
+                <tr>
+                  <td>timepost</td>
+                  <td>-0.525***</td>
+                  <td>5.701***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.062)</td>
+                  <td>(0.957)</td>
+                </tr>
+                <tr>
+                  <td>SD (Intercept ResponseId)</td>
+                  <td>0.600</td>
+                  <td>22.520</td>
+                </tr>
+                <tr>
+                  <td>SD (Observations)</td>
+                  <td>0.641</td>
+                  <td>9.835</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>422</td>
+                  <td>422</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</section>
+<section id="q2.-is-belief-updating-symmetric-across-political-groups" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="q2.-is-belief-updating-symmetric-across-political-groups"><span class="header-section-number">3.2</span> Q2. Is belief updating symmetric across political groups?</h3>
+<p>The primary analyses above test whether Democrats and Republicans show different patterns of belief updating. The key test is the <code>time × learner_party</code> interaction in the mixed-effects models. A significant interaction would indicate asymmetric updating across groups.</p>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_wac554jeqwkfsd8smv8i(i, j, css_id) {
+          var table = document.getElementById("tinytable_wac554jeqwkfsd8smv8i");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_wac554jeqwkfsd8smv8i');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_wac554jeqwkfsd8smv8i(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_wac554jeqwkfsd8smv8i");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 11, j: 1 }, { i: 11, j: 2 },  ], css_id: 'tinytable_css_1sgj7gofr6gizbowgvbr',}, 
+          { positions: [ { i: 10, j: 1 }, { i: 10, j: 2 },  ], css_id: 'tinytable_css_lwsv1ssuo17bht6kedn1',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 4, j: 1 }, { i: 9, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 8, j: 1 }, { i: 1, j: 2 }, { i: 6, j: 2 }, { i: 7, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 8, j: 2 }, { i: 9, j: 2 },  ], css_id: 'tinytable_css_jcdbpk6ml81s5ll2ybi6',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_3s1qws8qqoud3zj1n5jw',}, 
+          { positions: [ { i: 11, j: 0 },  ], css_id: 'tinytable_css_8yad9lbuzoh80z21109s',}, 
+          { positions: [ { i: 10, j: 0 },  ], css_id: 'tinytable_css_x6oukv64ai0u8ued3e18',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 },  ], css_id: 'tinytable_css_wmv5gvthdexxida94lpz',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_2o4ao4vs564tcuew7rab',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_wac554jeqwkfsd8smv8i(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_1sgj7gofr6gizbowgvbr, .table th.tinytable_css_1sgj7gofr6gizbowgvbr { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_lwsv1ssuo17bht6kedn1, .table th.tinytable_css_lwsv1ssuo17bht6kedn1 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_jcdbpk6ml81s5ll2ybi6, .table th.tinytable_css_jcdbpk6ml81s5ll2ybi6 { text-align: center; }
+      .table td.tinytable_css_3s1qws8qqoud3zj1n5jw, .table th.tinytable_css_3s1qws8qqoud3zj1n5jw { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_8yad9lbuzoh80z21109s, .table th.tinytable_css_8yad9lbuzoh80z21109s { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_x6oukv64ai0u8ued3e18, .table th.tinytable_css_x6oukv64ai0u8ued3e18 { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_wmv5gvthdexxida94lpz, .table th.tinytable_css_wmv5gvthdexxida94lpz { text-align: left; }
+      .table td.tinytable_css_2o4ao4vs564tcuew7rab, .table th.tinytable_css_2o4ao4vs564tcuew7rab { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_wac554jeqwkfsd8smv8i" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Accuracy</th>
+                <th scope="col">Warmth</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr>
+<tr><td colspan="3">Note: Accuracy is absolute error (lower = more accurate). * p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>(Intercept)</td>
+                  <td>1.825***</td>
+                  <td>23.504***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.072)</td>
+                  <td>(2.267)</td>
+                </tr>
+                <tr>
+                  <td>timepost</td>
+                  <td>-0.742***</td>
+                  <td>5.974***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.082)</td>
+                  <td>(1.300)</td>
+                </tr>
+                <tr>
+                  <td>learner_partyR→D</td>
+                  <td>-1.037***</td>
+                  <td>8.204*</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.107)</td>
+                  <td>(3.361)</td>
+                </tr>
+                <tr>
+                  <td>timepost × learner_partyR→D</td>
+                  <td>0.477***</td>
+                  <td>-0.599</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.121)</td>
+                  <td>(1.927)</td>
+                </tr>
+                <tr>
+                  <td>SD (Intercept ResponseId)</td>
+                  <td>0.466</td>
+                  <td>22.225</td>
+                </tr>
+                <tr>
+                  <td>SD (Observations)</td>
+                  <td>0.620</td>
+                  <td>9.856</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>422</td>
+                  <td>422</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</section>
+<section id="q3.-does-political-extremity-predict-how-much-people-update" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="q3.-does-political-extremity-predict-how-much-people-update"><span class="header-section-number">3.3</span> Q3. Does political extremity predict how much people update?</h3>
+<p>We explore whether participants’ political extremism (distance from the political center) moderates the treatment effect.</p>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_wx1x0ryfiqpouij2ay77(i, j, css_id) {
+          var table = document.getElementById("tinytable_wx1x0ryfiqpouij2ay77");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_wx1x0ryfiqpouij2ay77');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_wx1x0ryfiqpouij2ay77(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_wx1x0ryfiqpouij2ay77");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 16, j: 1 }, { i: 16, j: 2 },  ], css_id: 'tinytable_css_v2h9o11rvvm67a7shxq2',}, 
+          { positions: [ { i: 15, j: 1 }, { i: 15, j: 2 },  ], css_id: 'tinytable_css_c3lojk4c8bnzckx9vvgi',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 13, j: 1 }, { i: 14, j: 1 }, { i: 11, j: 2 }, { i: 12, j: 2 }, { i: 4, j: 1 }, { i: 1, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 6, j: 2 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 10, j: 2 }, { i: 13, j: 2 }, { i: 14, j: 2 },  ], css_id: 'tinytable_css_4yi2tlweent3r9l5b6nh',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_bps1layk1z6jx6fss697',}, 
+          { positions: [ { i: 16, j: 0 },  ], css_id: 'tinytable_css_7bwcl9kptzbtjvfippyf',}, 
+          { positions: [ { i: 15, j: 0 },  ], css_id: 'tinytable_css_xhxk4enmfd5h89elexqa',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 }, { i: 13, j: 0 }, { i: 14, j: 0 },  ], css_id: 'tinytable_css_89keo9kv6z6vt6bizj3q',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_0cxcwkuyxib43kpo5wka',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_wx1x0ryfiqpouij2ay77(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_v2h9o11rvvm67a7shxq2, .table th.tinytable_css_v2h9o11rvvm67a7shxq2 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_c3lojk4c8bnzckx9vvgi, .table th.tinytable_css_c3lojk4c8bnzckx9vvgi { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_4yi2tlweent3r9l5b6nh, .table th.tinytable_css_4yi2tlweent3r9l5b6nh { text-align: center; }
+      .table td.tinytable_css_bps1layk1z6jx6fss697, .table th.tinytable_css_bps1layk1z6jx6fss697 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_7bwcl9kptzbtjvfippyf, .table th.tinytable_css_7bwcl9kptzbtjvfippyf { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_xhxk4enmfd5h89elexqa, .table th.tinytable_css_xhxk4enmfd5h89elexqa { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_89keo9kv6z6vt6bizj3q, .table th.tinytable_css_89keo9kv6z6vt6bizj3q { text-align: left; }
+      .table td.tinytable_css_0cxcwkuyxib43kpo5wka, .table th.tinytable_css_0cxcwkuyxib43kpo5wka { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_wx1x0ryfiqpouij2ay77" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Accuracy</th>
+                <th scope="col">Warmth</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr>
+<tr><td colspan="3">Note: Three-way interaction tests whether extremism moderates differential updating. * p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>timepost</td>
+                  <td>-0.628*</td>
+                  <td>2.920</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.255)</td>
+                  <td>(4.018)</td>
+                </tr>
+                <tr>
+                  <td>learner_partyR→D</td>
+                  <td>-0.919**</td>
+                  <td>15.267+</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.296)</td>
+                  <td>(8.994)</td>
+                </tr>
+                <tr>
+                  <td>political_extremism</td>
+                  <td>0.011*</td>
+                  <td>-0.394*</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.005)</td>
+                  <td>(0.162)</td>
+                </tr>
+                <tr>
+                  <td>timepost × learner_partyR→D</td>
+                  <td>0.621+</td>
+                  <td>-4.195</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.337)</td>
+                  <td>(5.315)</td>
+                </tr>
+                <tr>
+                  <td>timepost × political_extremism</td>
+                  <td>-0.003</td>
+                  <td>0.077</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.006)</td>
+                  <td>(0.096)</td>
+                </tr>
+                <tr>
+                  <td>learner_partyR→D × political_extremism</td>
+                  <td>-0.002</td>
+                  <td>-0.250</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.007)</td>
+                  <td>(0.222)</td>
+                </tr>
+                <tr>
+                  <td>timepost × learner_partyR→D × political_extremism</td>
+                  <td>-0.004</td>
+                  <td>0.111</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.008)</td>
+                  <td>(0.131)</td>
+                </tr>
+                <tr>
+                  <td>SD (Observations)</td>
+                  <td>0.620</td>
+                  <td>9.785</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>422</td>
+                  <td>422</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</section>
+<section id="q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived"><span class="header-section-number">3.4</span> Q4. Is belief updating associated with how the chatbot is perceived?</h3>
+<p>We examine whether participants who found the chatbot more informative or empathic showed greater belief updating, controlling for pre-interaction values.</p>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_3ado4uwf2lyytfvxflbg(i, j, css_id) {
+          var table = document.getElementById("tinytable_3ado4uwf2lyytfvxflbg");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_3ado4uwf2lyytfvxflbg');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_3ado4uwf2lyytfvxflbg(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_3ado4uwf2lyytfvxflbg");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 13, j: 1 }, { i: 13, j: 2 },  ], css_id: 'tinytable_css_m8pvrww81xlhg8lwnztn',}, 
+          { positions: [ { i: 10, j: 1 }, { i: 10, j: 2 },  ], css_id: 'tinytable_css_meotuwsvywu0fddgjw3o',}, 
+          { positions: [ { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 9, j: 2 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 12, j: 2 }, { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 6, j: 2 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 11, j: 2 },  ], css_id: 'tinytable_css_j5jb0rvj0sv153bi00sd',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_37ppobalopbiw2mywqtu',}, 
+          { positions: [ { i: 13, j: 0 },  ], css_id: 'tinytable_css_l1hlk285q9f93r8coat2',}, 
+          { positions: [ { i: 10, j: 0 },  ], css_id: 'tinytable_css_e4uqwe7xymz6yr0ya37p',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 },  ], css_id: 'tinytable_css_bt2c31f5lg4eh957a38d',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_hzejxajoy0h5ueeqz6al',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_3ado4uwf2lyytfvxflbg(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_m8pvrww81xlhg8lwnztn, .table th.tinytable_css_m8pvrww81xlhg8lwnztn { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_meotuwsvywu0fddgjw3o, .table th.tinytable_css_meotuwsvywu0fddgjw3o { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_j5jb0rvj0sv153bi00sd, .table th.tinytable_css_j5jb0rvj0sv153bi00sd { text-align: center; }
+      .table td.tinytable_css_37ppobalopbiw2mywqtu, .table th.tinytable_css_37ppobalopbiw2mywqtu { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_l1hlk285q9f93r8coat2, .table th.tinytable_css_l1hlk285q9f93r8coat2 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_e4uqwe7xymz6yr0ya37p, .table th.tinytable_css_e4uqwe7xymz6yr0ya37p { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_bt2c31f5lg4eh957a38d, .table th.tinytable_css_bt2c31f5lg4eh957a38d { text-align: left; }
+      .table td.tinytable_css_hzejxajoy0h5ueeqz6al, .table th.tinytable_css_hzejxajoy0h5ueeqz6al { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_3ado4uwf2lyytfvxflbg" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Accuracy</th>
+                <th scope="col">Warmth</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr>
+<tr><td colspan="3">Note: Regressions control for pre-interaction values. * p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>(Intercept)</td>
+                  <td>1.174***</td>
+                  <td>-6.583+</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.220)</td>
+                  <td>(3.960)</td>
+                </tr>
+                <tr>
+                  <td>accuracy_pre</td>
+                  <td>0.326***</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.047)</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>info</td>
+                  <td>-0.116*</td>
+                  <td>2.621**</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.047)</td>
+                  <td>(0.955)</td>
+                </tr>
+                <tr>
+                  <td>empathy</td>
+                  <td>-0.095*</td>
+                  <td>1.543</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.045)</td>
+                  <td>(0.945)</td>
+                </tr>
+                <tr>
+                  <td>warmth_outgroup_pre</td>
+                  <td></td>
+                  <td>0.875***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>(0.040)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>211</td>
+                  <td>211</td>
+                </tr>
+                <tr>
+                  <td>R2</td>
+                  <td>0.292</td>
+                  <td>0.730</td>
+                </tr>
+                <tr>
+                  <td>R2 Adj.</td>
+                  <td>0.282</td>
+                  <td>0.726</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</section>
+<section id="q5.-does-engagement-dose-matter-for-belief-updating" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="q5.-does-engagement-dose-matter-for-belief-updating"><span class="header-section-number">3.5</span> Q5. Does engagement (“dose”) matter for belief updating?</h3>
+<p><strong>DATA NEEDED</strong>: The pre-registration specified examining engagement operationalized as the number of words typed by participants during the chat. This variable is not currently available in the dataset.</p>
+<p><strong>Planned analysis</strong>: When word count data becomes available:</p>
+<pre><code>accuracy_post ~ accuracy_pre + word_count
+warmth_post ~ warmth_pre + word_count</code></pre>
+</section>
+<section id="q6.-does-interacting-with-the-chatbot-improve-applied-judgment" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="q6.-does-interacting-with-the-chatbot-improve-applied-judgment"><span class="header-section-number">3.6</span> Q6. Does interacting with the chatbot improve applied judgment?</h3>
+<p>Participants wrote slogans for marketing energy-saving appliances to the political outgroup.</p>
+<p><strong>DATA AVAILABLE</strong>: Raw slogan text in variable <code>Q23</code> (n = 211 responses).</p>
+<p><strong>DATA NEEDED</strong>: 1. Semantic similarity scores (compare to AI-generated responses to detect copying) 2. Quality ratings (human or LLM ratings of slogan fit to target outgroup)</p>
+</section>
+<section id="q7.-does-confidence-track-accuracyor-diverge-from-it" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="q7.-does-confidence-track-accuracyor-diverge-from-it"><span class="header-section-number">3.7</span> Q7. Does confidence track accuracy—or diverge from it?</h3>
+<p>We examine participants’ metacognitive awareness by testing whether confidence ratings track with actual accuracy.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="piqgrmhlgf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#piqgrmhlgf table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#piqgrmhlgf thead, #piqgrmhlgf tbody, #piqgrmhlgf tfoot, #piqgrmhlgf tr, #piqgrmhlgf td, #piqgrmhlgf th {
+  border-style: none;
+}
+
+#piqgrmhlgf p {
+  margin: 0;
+  padding: 0;
+}
+
+#piqgrmhlgf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#piqgrmhlgf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#piqgrmhlgf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#piqgrmhlgf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#piqgrmhlgf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#piqgrmhlgf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#piqgrmhlgf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#piqgrmhlgf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#piqgrmhlgf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#piqgrmhlgf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#piqgrmhlgf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#piqgrmhlgf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#piqgrmhlgf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#piqgrmhlgf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#piqgrmhlgf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#piqgrmhlgf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#piqgrmhlgf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#piqgrmhlgf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#piqgrmhlgf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#piqgrmhlgf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#piqgrmhlgf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#piqgrmhlgf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#piqgrmhlgf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#piqgrmhlgf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#piqgrmhlgf .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#piqgrmhlgf .gt_left {
+  text-align: left;
+}
+
+#piqgrmhlgf .gt_center {
+  text-align: center;
+}
+
+#piqgrmhlgf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#piqgrmhlgf .gt_font_normal {
+  font-weight: normal;
+}
+
+#piqgrmhlgf .gt_font_bold {
+  font-weight: bold;
+}
+
+#piqgrmhlgf .gt_font_italic {
+  font-style: italic;
+}
+
+#piqgrmhlgf .gt_super {
+  font-size: 65%;
+}
+
+#piqgrmhlgf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#piqgrmhlgf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#piqgrmhlgf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#piqgrmhlgf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#piqgrmhlgf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#piqgrmhlgf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#piqgrmhlgf .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#piqgrmhlgf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#piqgrmhlgf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="2" class="gt_heading gt_title gt_font_normal">Confidence-Accuracy Calibration</th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Correlation between confidence change and accuracy change</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="Measure" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Measure</th>
+<th id="Value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Value</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Measure">Correlation<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td class="gt_row gt_right" headers="Value">0.312</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Measure">95% CI Lower</td>
+<td class="gt_row gt_right" headers="Value">0.184</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Measure">95% CI Upper</td>
+<td class="gt_row gt_right" headers="Value">0.429</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Measure">p-value</td>
+<td class="gt_row gt_right" headers="Value">0.0000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Measure">N</td>
+<td class="gt_row gt_right" headers="Value">211</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Negative correlation would indicate that increased confidence is associated with improved accuracy (reduced error).</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="robustness-checks" class="level3" data-number="3.8">
+<h3 data-number="3.8" class="anchored" data-anchor-id="robustness-checks"><span class="header-section-number">3.8</span> Robustness Checks</h3>
+<section id="warmth-difference-score" class="level4" data-number="3.8.1">
+<h4 data-number="3.8.1" class="anchored" data-anchor-id="warmth-difference-score"><span class="header-section-number">3.8.1</span> Warmth Difference Score</h4>
+<p>Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup).</p>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_07z6emwtjacooapajb8x(i, j, css_id) {
+          var table = document.getElementById("tinytable_07z6emwtjacooapajb8x");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_07z6emwtjacooapajb8x');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_07z6emwtjacooapajb8x(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_07z6emwtjacooapajb8x");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 11, j: 1 },  ], css_id: 'tinytable_css_5im45ej283puzqc6mzqj',}, 
+          { positions: [ { i: 10, j: 1 },  ], css_id: 'tinytable_css_xu6xktc432uokzs0nwa9',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 },  ], css_id: 'tinytable_css_aoxn55tw5muvzu7ukhui',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_spv9k0158scy4pidsf0h',}, 
+          { positions: [ { i: 11, j: 0 },  ], css_id: 'tinytable_css_hyyyxxtn9rw30cqfdzo2',}, 
+          { positions: [ { i: 10, j: 0 },  ], css_id: 'tinytable_css_3nhnhg05ioy5rvnnsgit',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 },  ], css_id: 'tinytable_css_v5mp5v14mjz4mc1ir4us',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_orfm379lve0skhlfm28s',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_07z6emwtjacooapajb8x(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_5im45ej283puzqc6mzqj, .table th.tinytable_css_5im45ej283puzqc6mzqj { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_xu6xktc432uokzs0nwa9, .table th.tinytable_css_xu6xktc432uokzs0nwa9 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_aoxn55tw5muvzu7ukhui, .table th.tinytable_css_aoxn55tw5muvzu7ukhui { text-align: center; }
+      .table td.tinytable_css_spv9k0158scy4pidsf0h, .table th.tinytable_css_spv9k0158scy4pidsf0h { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_hyyyxxtn9rw30cqfdzo2, .table th.tinytable_css_hyyyxxtn9rw30cqfdzo2 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_3nhnhg05ioy5rvnnsgit, .table th.tinytable_css_3nhnhg05ioy5rvnnsgit { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_v5mp5v14mjz4mc1ir4us, .table th.tinytable_css_v5mp5v14mjz4mc1ir4us { text-align: left; }
+      .table td.tinytable_css_orfm379lve0skhlfm28s, .table th.tinytable_css_orfm379lve0skhlfm28s { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_07z6emwtjacooapajb8x" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Warmth Difference</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr>
+<tr><td colspan="2">Note: Warmth difference = outgroup - ingroup. Positive time coefficient indicates reduced polarization. * p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>(Intercept)</td>
+                  <td>-52.487***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(3.020)</td>
+                </tr>
+                <tr>
+                  <td>timepost</td>
+                  <td>7.600***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(1.649)</td>
+                </tr>
+                <tr>
+                  <td>learner_partyR→D</td>
+                  <td>3.727</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(4.478)</td>
+                </tr>
+                <tr>
+                  <td>timepost × learner_partyR→D</td>
+                  <td>0.108</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(2.444)</td>
+                </tr>
+                <tr>
+                  <td>SD (Intercept ResponseId)</td>
+                  <td>29.879</td>
+                </tr>
+                <tr>
+                  <td>SD (Observations)</td>
+                  <td>12.500</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>422</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="discussion" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="discussion"><span class="header-section-number">4</span> Discussion</h2>
+<section id="summary-of-findings" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="summary-of-findings"><span class="header-section-number">4.1</span> Summary of Findings</h3>
+<p>This pilot study tested whether interacting with an AI chatbot representing a political outgroup could improve participants’ understanding of and warmth toward that outgroup. Using a within-subjects pre-post design, we examined changes in outgroup belief accuracy and outgroup warmth following an AI-mediated interaction.</p>
+</section>
+<section id="primary-hypotheses" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="primary-hypotheses"><span class="header-section-number">4.2</span> Primary Hypotheses</h3>
+<p><strong>Hypothesis 1: Outgroup Belief Accuracy</strong></p>
+<p>We hypothesized that participants would report more accurate beliefs about the outgroup’s environmental attitudes after interacting with the AI chatbot. Accuracy was operationalized as the absolute difference between participants’ estimates and the outgroup’s actual mean green attitudes. The time coefficient in the mixed-effects model indicates whether accuracy improved (error decreased) from pre to post, while the interaction term tests whether this change differed between Democrat and Republican learners.</p>
+<p><strong>Hypothesis 2: Outgroup Warmth</strong></p>
+<p>We hypothesized that participants would feel warmer toward the political outgroup after the interaction. The time coefficient indicates whether warmth increased from pre to post, while the interaction term tests whether Democrats and Republicans showed different patterns of change.</p>
+</section>
+<section id="exploratory-findings" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="exploratory-findings"><span class="header-section-number">4.3</span> Exploratory Findings</h3>
+<p>Secondary analyses examined confidence in outgroup judgments and perceptions of the bot’s informativeness and empathy. Confidence ratings provide insight into participants’ metacognitive awareness of their knowledge about the outgroup. Bot perception ratings help illuminate potential mechanisms—if participants found the bot informative and empathic, this may mediate changes in accuracy and warmth.</p>
+</section>
+<section id="implications-for-marketing-practice" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="implications-for-marketing-practice"><span class="header-section-number">4.4</span> Implications for Marketing Practice</h3>
+<p>If the hypothesized effects are supported, this research suggests that AI-mediated interactions can serve as a scalable tool for reducing political misperceptions in consumer research. Marketers often struggle to understand ideologically diverse consumer segments, relying on stereotypes or costly focus groups. AI chatbots could provide an accessible method for gaining insight into outgroup consumer preferences and values.</p>
+<p>This approach may be particularly valuable for marketing environmentally responsible products, where political divides can lead to misperceptions about consumer attitudes. Understanding that political outgroups may be more environmentally conscious than stereotypes suggest could inform more effective cross-partisan messaging strategies.</p>
+</section>
+<section id="limitations" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="limitations"><span class="header-section-number">4.5</span> Limitations</h3>
+<p>Several limitations should be noted. The pilot sample consists primarily of test and preview responses, limiting statistical power and generalizability. The environmental attitude domain may not generalize to other consumer preferences. Belief accuracy depends on having adequate sample sizes within each political group to compute reliable actual outgroup means. The study examines only immediate post-interaction effects; durability of any changes remains unknown.</p>
+<p>Additionally, participants interacted with an AI chatbot rather than actual outgroup members. While this approach offers scalability advantages, it raises questions about whether insights gained from AI interactions transfer to understanding real outgroup members. The chatbot was prompted to represent the outgroup but may not fully capture the diversity of views within each political group.</p>
+</section>
+<section id="next-steps" class="level3" data-number="4.6">
+<h3 data-number="4.6" class="anchored" data-anchor-id="next-steps"><span class="header-section-number">4.6</span> Next Steps</h3>
+<p>The full study will recruit N = 500 participants from a representative sample. Key priorities include examining whether bot informativeness and empathy mediate changes in warmth and accuracy, analyzing participant-generated marketing slogans for energy-saving appliances, and testing for heterogeneous effects by political extremity and prior outgroup attitudes. Exploratory analyses will examine engagement (words typed during chat) as a predictor of outcomes.</p>
+<p>Future research should examine the durability of effects over time, test generalizability to other product categories and consumer attitudes beyond environmental responsibility, and compare AI-mediated learning to alternative interventions such as reading testimonials from outgroup members or interacting with human outgroup representatives.</p>
+</section>
+</section>
+<section id="appendix" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="appendix"><span class="header-section-number">5</span> Appendix</h2>
+<section id="descriptive-statistics" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">5.1</span> Descriptive Statistics</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tvtgckifkj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tvtgckifkj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tvtgckifkj thead, #tvtgckifkj tbody, #tvtgckifkj tfoot, #tvtgckifkj tr, #tvtgckifkj td, #tvtgckifkj th {
+  border-style: none;
+}
+
+#tvtgckifkj p {
+  margin: 0;
+  padding: 0;
+}
+
+#tvtgckifkj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tvtgckifkj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tvtgckifkj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tvtgckifkj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tvtgckifkj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tvtgckifkj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tvtgckifkj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tvtgckifkj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tvtgckifkj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tvtgckifkj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tvtgckifkj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tvtgckifkj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tvtgckifkj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tvtgckifkj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tvtgckifkj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tvtgckifkj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tvtgckifkj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tvtgckifkj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tvtgckifkj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tvtgckifkj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tvtgckifkj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tvtgckifkj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tvtgckifkj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tvtgckifkj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tvtgckifkj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tvtgckifkj .gt_left {
+  text-align: left;
+}
+
+#tvtgckifkj .gt_center {
+  text-align: center;
+}
+
+#tvtgckifkj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tvtgckifkj .gt_font_normal {
+  font-weight: normal;
+}
+
+#tvtgckifkj .gt_font_bold {
+  font-weight: bold;
+}
+
+#tvtgckifkj .gt_font_italic {
+  font-style: italic;
+}
+
+#tvtgckifkj .gt_super {
+  font-size: 65%;
+}
+
+#tvtgckifkj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tvtgckifkj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tvtgckifkj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tvtgckifkj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tvtgckifkj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tvtgckifkj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tvtgckifkj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tvtgckifkj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tvtgckifkj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="4" class="gt_heading gt_title gt_font_normal">Actual Environmental Attitudes by Political Party</th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Self-reported green attitudes (1-5 scale)</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="participant_party" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Political Party</th>
+<th id="mean_green" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean Green Attitude</th>
+<th id="sd_green" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">N</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="participant_party">Democrat</td>
+<td class="gt_row gt_right" headers="mean_green">4.31</td>
+<td class="gt_row gt_right" headers="sd_green">0.69</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="participant_party">Republican</td>
+<td class="gt_row gt_right" headers="mean_green">3.95</td>
+<td class="gt_row gt_right" headers="sd_green">0.94</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="yfjmskkeja" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yfjmskkeja table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#yfjmskkeja thead, #yfjmskkeja tbody, #yfjmskkeja tfoot, #yfjmskkeja tr, #yfjmskkeja td, #yfjmskkeja th {
+  border-style: none;
+}
+
+#yfjmskkeja p {
+  margin: 0;
+  padding: 0;
+}
+
+#yfjmskkeja .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#yfjmskkeja .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yfjmskkeja .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yfjmskkeja .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yfjmskkeja .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yfjmskkeja .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yfjmskkeja .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yfjmskkeja .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yfjmskkeja .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#yfjmskkeja .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#yfjmskkeja .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yfjmskkeja .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yfjmskkeja .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yfjmskkeja .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yfjmskkeja .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfjmskkeja .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#yfjmskkeja .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#yfjmskkeja .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#yfjmskkeja .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfjmskkeja .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#yfjmskkeja .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfjmskkeja .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yfjmskkeja .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfjmskkeja .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yfjmskkeja .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yfjmskkeja .gt_left {
+  text-align: left;
+}
+
+#yfjmskkeja .gt_center {
+  text-align: center;
+}
+
+#yfjmskkeja .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yfjmskkeja .gt_font_normal {
+  font-weight: normal;
+}
+
+#yfjmskkeja .gt_font_bold {
+  font-weight: bold;
+}
+
+#yfjmskkeja .gt_font_italic {
+  font-style: italic;
+}
+
+#yfjmskkeja .gt_super {
+  font-size: 65%;
+}
+
+#yfjmskkeja .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#yfjmskkeja .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#yfjmskkeja .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#yfjmskkeja .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#yfjmskkeja .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#yfjmskkeja .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#yfjmskkeja .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#yfjmskkeja .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#yfjmskkeja div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="5" class="gt_heading gt_title gt_font_normal">Outgroup Belief Accuracy</th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Absolute error (lower = more accurate)</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="learner_party" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Learner Party</th>
+<th id="time" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Time</th>
+<th id="mean_error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean Error</th>
+<th id="sd_error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">N</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_center" headers="time">pre</td>
+<td class="gt_row gt_right" headers="mean_error">1.825</td>
+<td class="gt_row gt_right" headers="sd_error">0.924</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_center" headers="time">post</td>
+<td class="gt_row gt_right" headers="mean_error">1.083</td>
+<td class="gt_row gt_right" headers="sd_error">0.884</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_center" headers="time">pre</td>
+<td class="gt_row gt_right" headers="mean_error">0.788</td>
+<td class="gt_row gt_right" headers="sd_error">0.724</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_center" headers="time">post</td>
+<td class="gt_row gt_right" headers="mean_error">0.523</td>
+<td class="gt_row gt_right" headers="sd_error">0.396</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="ezhgvhbduc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ezhgvhbduc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ezhgvhbduc thead, #ezhgvhbduc tbody, #ezhgvhbduc tfoot, #ezhgvhbduc tr, #ezhgvhbduc td, #ezhgvhbduc th {
+  border-style: none;
+}
+
+#ezhgvhbduc p {
+  margin: 0;
+  padding: 0;
+}
+
+#ezhgvhbduc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ezhgvhbduc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ezhgvhbduc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ezhgvhbduc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ezhgvhbduc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ezhgvhbduc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ezhgvhbduc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ezhgvhbduc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ezhgvhbduc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ezhgvhbduc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ezhgvhbduc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ezhgvhbduc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ezhgvhbduc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ezhgvhbduc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ezhgvhbduc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezhgvhbduc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ezhgvhbduc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ezhgvhbduc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ezhgvhbduc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezhgvhbduc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ezhgvhbduc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezhgvhbduc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ezhgvhbduc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezhgvhbduc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ezhgvhbduc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ezhgvhbduc .gt_left {
+  text-align: left;
+}
+
+#ezhgvhbduc .gt_center {
+  text-align: center;
+}
+
+#ezhgvhbduc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ezhgvhbduc .gt_font_normal {
+  font-weight: normal;
+}
+
+#ezhgvhbduc .gt_font_bold {
+  font-weight: bold;
+}
+
+#ezhgvhbduc .gt_font_italic {
+  font-style: italic;
+}
+
+#ezhgvhbduc .gt_super {
+  font-size: 65%;
+}
+
+#ezhgvhbduc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ezhgvhbduc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ezhgvhbduc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ezhgvhbduc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ezhgvhbduc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ezhgvhbduc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ezhgvhbduc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ezhgvhbduc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ezhgvhbduc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="5" class="gt_heading gt_title gt_font_normal">Outgroup Warmth (Feeling Thermometer)</th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">By learner party and time point (0-100 scale)</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="learner_party" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Learner Party</th>
+<th id="time" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Time</th>
+<th id="mean_warmth" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean Warmth</th>
+<th id="sd_warmth" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">N</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_center" headers="time">pre</td>
+<td class="gt_row gt_right" headers="mean_warmth">23.50</td>
+<td class="gt_row gt_right" headers="sd_warmth">23.34</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_center" headers="time">post</td>
+<td class="gt_row gt_right" headers="mean_warmth">29.48</td>
+<td class="gt_row gt_right" headers="sd_warmth">24.79</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_center" headers="time">pre</td>
+<td class="gt_row gt_right" headers="mean_warmth">31.71</td>
+<td class="gt_row gt_right" headers="sd_warmth">23.28</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_center" headers="time">post</td>
+<td class="gt_row gt_right" headers="mean_warmth">37.08</td>
+<td class="gt_row gt_right" headers="sd_warmth">25.83</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="qtbrwpkvyd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qtbrwpkvyd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qtbrwpkvyd thead, #qtbrwpkvyd tbody, #qtbrwpkvyd tfoot, #qtbrwpkvyd tr, #qtbrwpkvyd td, #qtbrwpkvyd th {
+  border-style: none;
+}
+
+#qtbrwpkvyd p {
+  margin: 0;
+  padding: 0;
+}
+
+#qtbrwpkvyd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qtbrwpkvyd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qtbrwpkvyd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qtbrwpkvyd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qtbrwpkvyd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qtbrwpkvyd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qtbrwpkvyd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qtbrwpkvyd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qtbrwpkvyd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qtbrwpkvyd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qtbrwpkvyd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qtbrwpkvyd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qtbrwpkvyd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qtbrwpkvyd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qtbrwpkvyd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtbrwpkvyd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qtbrwpkvyd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qtbrwpkvyd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qtbrwpkvyd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtbrwpkvyd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qtbrwpkvyd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtbrwpkvyd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qtbrwpkvyd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtbrwpkvyd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qtbrwpkvyd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qtbrwpkvyd .gt_left {
+  text-align: left;
+}
+
+#qtbrwpkvyd .gt_center {
+  text-align: center;
+}
+
+#qtbrwpkvyd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qtbrwpkvyd .gt_font_normal {
+  font-weight: normal;
+}
+
+#qtbrwpkvyd .gt_font_bold {
+  font-weight: bold;
+}
+
+#qtbrwpkvyd .gt_font_italic {
+  font-style: italic;
+}
+
+#qtbrwpkvyd .gt_super {
+  font-size: 65%;
+}
+
+#qtbrwpkvyd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qtbrwpkvyd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qtbrwpkvyd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qtbrwpkvyd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qtbrwpkvyd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qtbrwpkvyd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qtbrwpkvyd .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qtbrwpkvyd .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qtbrwpkvyd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="5" class="gt_heading gt_title gt_font_normal">Political Extremism by Learner Party</th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Distance from political center (0-50 scale)</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="learner_party" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Learner Party</th>
+<th id="mean_extremism" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean</th>
+<th id="sd_extremism" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</th>
+<th id="min_extremism" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Min</th>
+<th id="max_extremism" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Max</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_right" headers="mean_extremism">39.80</td>
+<td class="gt_row gt_right" headers="sd_extremism">13.56</td>
+<td class="gt_row gt_right" headers="min_extremism">2.00</td>
+<td class="gt_row gt_right" headers="max_extremism">50.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_right" headers="mean_extremism">35.33</td>
+<td class="gt_row gt_right" headers="sd_extremism">15.78</td>
+<td class="gt_row gt_right" headers="min_extremism">0.00</td>
+<td class="gt_row gt_right" headers="max_extremism">50.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="ycdpqhxewg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ycdpqhxewg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ycdpqhxewg thead, #ycdpqhxewg tbody, #ycdpqhxewg tfoot, #ycdpqhxewg tr, #ycdpqhxewg td, #ycdpqhxewg th {
+  border-style: none;
+}
+
+#ycdpqhxewg p {
+  margin: 0;
+  padding: 0;
+}
+
+#ycdpqhxewg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ycdpqhxewg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ycdpqhxewg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ycdpqhxewg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ycdpqhxewg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ycdpqhxewg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ycdpqhxewg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ycdpqhxewg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ycdpqhxewg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ycdpqhxewg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ycdpqhxewg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ycdpqhxewg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ycdpqhxewg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ycdpqhxewg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ycdpqhxewg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ycdpqhxewg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ycdpqhxewg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ycdpqhxewg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ycdpqhxewg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ycdpqhxewg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ycdpqhxewg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ycdpqhxewg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ycdpqhxewg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ycdpqhxewg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ycdpqhxewg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ycdpqhxewg .gt_left {
+  text-align: left;
+}
+
+#ycdpqhxewg .gt_center {
+  text-align: center;
+}
+
+#ycdpqhxewg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ycdpqhxewg .gt_font_normal {
+  font-weight: normal;
+}
+
+#ycdpqhxewg .gt_font_bold {
+  font-weight: bold;
+}
+
+#ycdpqhxewg .gt_font_italic {
+  font-style: italic;
+}
+
+#ycdpqhxewg .gt_super {
+  font-size: 65%;
+}
+
+#ycdpqhxewg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ycdpqhxewg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ycdpqhxewg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ycdpqhxewg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ycdpqhxewg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ycdpqhxewg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ycdpqhxewg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ycdpqhxewg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ycdpqhxewg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="5" class="gt_heading gt_title gt_font_normal">Bot Perception Ratings</th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">By learner party (1-5 scale)</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="learner_party" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Learner Party</th>
+<th id="measure" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Measure</th>
+<th id="mean_rating" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean Rating</th>
+<th id="sd_rating" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">N</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_left" headers="measure">Empathy</td>
+<td class="gt_row gt_right" headers="mean_rating">3.32</td>
+<td class="gt_row gt_right" headers="sd_rating">1.10</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_left" headers="measure">Informativeness</td>
+<td class="gt_row gt_right" headers="mean_rating">3.70</td>
+<td class="gt_row gt_right" headers="sd_rating">1.16</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_left" headers="measure">Empathy</td>
+<td class="gt_row gt_right" headers="mean_rating">3.80</td>
+<td class="gt_row gt_right" headers="sd_rating">0.99</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_left" headers="measure">Informativeness</td>
+<td class="gt_row gt_right" headers="mean_rating">4.16</td>
+<td class="gt_row gt_right" headers="sd_rating">0.87</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="kdaxqmxdur" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kdaxqmxdur table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kdaxqmxdur thead, #kdaxqmxdur tbody, #kdaxqmxdur tfoot, #kdaxqmxdur tr, #kdaxqmxdur td, #kdaxqmxdur th {
+  border-style: none;
+}
+
+#kdaxqmxdur p {
+  margin: 0;
+  padding: 0;
+}
+
+#kdaxqmxdur .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kdaxqmxdur .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kdaxqmxdur .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kdaxqmxdur .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kdaxqmxdur .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kdaxqmxdur .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kdaxqmxdur .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kdaxqmxdur .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kdaxqmxdur .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kdaxqmxdur .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kdaxqmxdur .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kdaxqmxdur .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kdaxqmxdur .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kdaxqmxdur .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kdaxqmxdur .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kdaxqmxdur .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kdaxqmxdur .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kdaxqmxdur .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kdaxqmxdur .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kdaxqmxdur .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kdaxqmxdur .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kdaxqmxdur .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kdaxqmxdur .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kdaxqmxdur .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kdaxqmxdur .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kdaxqmxdur .gt_left {
+  text-align: left;
+}
+
+#kdaxqmxdur .gt_center {
+  text-align: center;
+}
+
+#kdaxqmxdur .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kdaxqmxdur .gt_font_normal {
+  font-weight: normal;
+}
+
+#kdaxqmxdur .gt_font_bold {
+  font-weight: bold;
+}
+
+#kdaxqmxdur .gt_font_italic {
+  font-style: italic;
+}
+
+#kdaxqmxdur .gt_super {
+  font-size: 65%;
+}
+
+#kdaxqmxdur .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kdaxqmxdur .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kdaxqmxdur .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kdaxqmxdur .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kdaxqmxdur .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kdaxqmxdur .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kdaxqmxdur .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kdaxqmxdur .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kdaxqmxdur div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="5" class="gt_heading gt_title gt_font_normal">Confidence in Outgroup Judgments</th>
+</tr>
+<tr class="gt_heading even">
+<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">By learner party and time point (1-5 scale)</th>
+</tr>
+<tr class="gt_col_headings header">
+<th id="learner_party" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Learner Party</th>
+<th id="time" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Time</th>
+<th id="mean_confidence" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mean Confidence</th>
+<th id="sd_confidence" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SD</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">N</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_center" headers="time">pre</td>
+<td class="gt_row gt_right" headers="mean_confidence">2.98</td>
+<td class="gt_row gt_right" headers="sd_confidence">1.06</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">D→R</td>
+<td class="gt_row gt_center" headers="time">post</td>
+<td class="gt_row gt_right" headers="mean_confidence">3.05</td>
+<td class="gt_row gt_right" headers="sd_confidence">1.03</td>
+<td class="gt_row gt_right" headers="n">115</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_center" headers="time">pre</td>
+<td class="gt_row gt_right" headers="mean_confidence">3.33</td>
+<td class="gt_row gt_right" headers="sd_confidence">1.00</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="learner_party">R→D</td>
+<td class="gt_row gt_center" headers="time">post</td>
+<td class="gt_row gt_right" headers="mean_confidence">3.61</td>
+<td class="gt_row gt_right" headers="sd_confidence">1.05</td>
+<td class="gt_row gt_right" headers="n">96</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="data-availability" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="data-availability"><span class="header-section-number">5.2</span> Data Availability</h3>
+<p>Raw data: <a href="../data/raw/qualtrics.parquet">data/raw/qualtrics.parquet</a></p>
+<p>Cleaned data: <a href="../output/cleaned_data.parquet">output/cleaned_data.parquet</a></p>
+</section>
+<section id="code-availability" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="code-availability"><span class="header-section-number">5.3</span> Code Availability</h3>
+<p>Data cleaning script: <a href="../src/clean_data.R">src/clean_data.R</a></p>
+</section>
+<section id="pre-registration" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="pre-registration"><span class="header-section-number">5.4</span> Pre-Registration</h3>
+<p>This study was pre-registered prior to data collection. See <a href="../docs/pre-registration.md">docs/pre-registration.md</a> for complete details including hypotheses, measures, sample size justification, and planned analyses.</p>
+</section>
+<section id="session-information" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="session-information"><span class="header-section-number">5.5</span> Session Information</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.5.0 (2025-04-11)
+Platform: aarch64-apple-darwin20
+Running under: macOS 26.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] C.UTF-8/C.UTF-8/C.UTF-8/C/C.UTF-8/C.UTF-8
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] gt_1.0.0           modelsummary_2.3.0 lmerTest_3.1-3     lme4_1.1-37        Matrix_1.7-3       arrow_19.0.1.1    
+ [7] lubridate_1.9.4    forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4        purrr_1.1.0        readr_2.1.5       
+[13] tidyr_1.3.1        tibble_3.3.0       ggplot2_3.5.2      tidyverse_2.0.0   
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.2.1    farver_2.1.2        fastmap_1.2.0       bayestestR_0.16.1   egg_0.4.5          
+ [6] digest_0.6.37       timechange_0.3.0    estimability_1.5.1  lifecycle_1.0.4     magrittr_2.0.3     
+[11] compiler_4.5.0      rlang_1.1.6         sass_0.4.10         tools_4.5.0         yaml_2.3.10        
+[16] data.table_1.17.8   knitr_1.50          labeling_0.4.3      htmlwidgets_1.6.4   bit_4.6.0          
+[21] xml2_1.3.8          RColorBrewer_1.1-3  tinytable_0.9.0     withr_3.0.2         numDeriv_2016.8-1.1
+[26] grid_4.5.0          datawizard_1.2.0    fansi_1.0.6         xtable_1.8-4        emmeans_1.11.1     
+[31] scales_1.4.0        MASS_7.3-65         insight_1.4.0       cli_3.6.5           mvtnorm_1.3-3      
+[36] rmarkdown_2.29      reformulas_0.4.1    generics_0.1.4      performance_0.15.0  tzdb_0.5.0         
+[41] parameters_0.28.0   minqa_1.2.8         splines_4.5.0       assertthat_0.2.1    effectsize_1.0.1   
+[46] vctrs_0.6.5         boot_1.3-31         jsonlite_2.0.0      litedown_0.7        hms_1.1.3          
+[51] bit64_4.6.0-1       glue_1.8.0          nloptr_2.2.1        stringi_1.8.7       gtable_0.3.6       
+[56] tables_0.9.31       lmtest_0.9-40       pillar_1.11.0       htmltools_0.5.8.1   R6_2.6.1           
+[61] Rdpack_2.6.4        evaluate_1.0.4      lattice_0.22-6      rbibutils_2.3       backports_1.5.0    
+[66] Rcpp_1.0.14         coda_0.19-4.1       gridExtra_2.3       nlme_3.1-168        checkmate_2.3.2    
+[71] xfun_0.52           zoo_1.8-14          pkgconfig_2.0.3    </code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
