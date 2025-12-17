@@ -23,7 +23,8 @@ Help implement analysis and writing in a reproducible way.
 - Figures and tables go in output/figures/ and output/tables/.
 - Prefer adding new scripts in src/ over one-off notebook code.
 - Document assumptions in analysis/report.qmd.
-- Claude can talk to me by editing docs/notes_for_ben.md
+- Claude can talk to me by editing docs/notes_for_ben.md include upgrades in reverse chronological order (new at top), and tag with date and time.
+- Make a makefile to automate the pipeline.
 
 ## Writing Style
 - Make sure every paragraph starts with a strong topic sentence

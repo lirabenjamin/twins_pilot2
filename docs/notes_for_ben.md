@@ -1,5 +1,35 @@
 # Notes for Ben
 
+## 2025-12-17: Makefile Added for Reproducible Pipeline
+
+**What was done**:
+- Created [Makefile](Makefile) to automate the entire analysis pipeline
+- Updated [README.md](README.md) with comprehensive documentation
+
+**Makefile features**:
+- **`make all`** - Runs entire pipeline from raw data to final reports
+- **`make help`** - Shows all available commands
+- **`make data`** - Processes data and downloads conversations
+- **`make analysis`** - Creates analysis datasets
+- **`make report`** - Renders HTML and PDF reports
+- **`make clean`** - Removes all processed data/outputs
+- **`make dev`** - Quick HTML-only render for iteration
+
+**Pipeline steps**:
+1. Clean raw Qualtrics data (`src/r/clean_data.R`)
+2. Download conversations (`src/python/download_conversations.py`)
+3. Create analysis dataset (`src/r/create_analysis_data.R`)
+4. Analyze extreme cases (`src/r/analyze_extreme_cases.R`)
+5. Render reports (`analysis/report.qmd`)
+
+**Benefits**:
+- Single command reproducibility (`make all`)
+- Dependency tracking (only rebuilds what's needed)
+- Clear documentation of pipeline steps
+- Easy for collaborators and reviewers
+
+---
+
 ## 2025-12-17: Extreme Cases Appendix Added
 
 **What was done**:
@@ -140,3 +170,25 @@ All data preparation has been moved to src/clean_data.R:
 - Computed as absolute error: abs(green_outgroup_pre/post - actual_green)
 - Actual outgroup attitudes calculated from within-group means
 - report.qmd now uses pre-computed accuracy variables from cleaned data
+
+## Makefile Pipeline Fixed (Dec 17, 2024)
+
+Fixed the Makefile to correctly run the full pipeline starting from `src/r/download_qualtrics.r`:
+
+**Pipeline sequence:**
+1. **Step 0**: Download raw Qualtrics data (`src/r/download_qualtrics.r` → `data/raw/qualtrics.parquet`)
+2. **Step 1**: Initial data cleaning without conversations (`src/r/clean_data.R`)
+3. **Step 2**: Download conversations from database (`src/python/download_conversations.py` → `data/processed/conversation_metrics.parquet`)
+4. **Step 3**: Re-clean data with conversation metrics merged (`src/r/clean_data.R`)
+5. **Step 4-6**: Run analyses (create analysis dataset, extreme cases)
+6. **Step 7-8**: Render HTML and PDF reports
+
+**Key fixes:**
+- Added virtual environment activation: `source .venv/bin/activate && python`
+- Fixed dependency chain so conversation metrics are merged into cleaned data
+- Reports now depend on both `cleaned_data.parquet` and `conversation_metrics.parquet`
+- Pipeline tested and working with `make all`
+
+**All 306 participants' conversations downloaded successfully:**
+- Mean user turns: 10.6 (range: 1-93)
+- Mean user words: 189.2 (range: 47-734)
