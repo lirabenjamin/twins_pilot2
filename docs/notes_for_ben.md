@@ -1,5 +1,21 @@
 # Notes for Ben
 
+## 2025-12-17: Fixed Line Plot Colors
+
+Fixed color mapping issue in all line plots. The problem was that `learner_party` has values "D→R" and "R→D", but plots were using `party_colors` defined for "Democrat" and "Republican".
+
+**Solution**: Created new `learner_party_colors` mapping:
+- D→R (Democrats learning about Republicans) = Blue (#0015BC)
+- R→D (Republicans learning about Democrats) = Red (#E81B23)
+
+**Plots updated**:
+- Belief Accuracy plot (analysis/report.qmd:161)
+- Outgroup Warmth plot (analysis/report.qmd:171)
+- Empathy vs. Informativeness scatter plot (analysis/report.qmd:280)
+- Confidence plot (analysis/report.qmd:337)
+
+---
+
 ## Data Needed for Complete Analysis
 
 ### Q5: Engagement Analysis
