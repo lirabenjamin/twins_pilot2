@@ -306,7 +306,51 @@ Participants wrote slogans for marketing energy-saving appliances to the politic
 
 ### Q7. Does confidence track accuracy—or diverge from it?
 
-We examine participants' metacognitive awareness by testing whether confidence ratings track with actual accuracy.
+We examine participants' metacognitive awareness by testing (1) whether confidence changes from pre to post, and (2) whether confidence changes track with actual accuracy improvements.
+
+#### Model: Does confidence change pre-to-post?
+
+```{r confidence-model}
+# Prepare confidence data in long format
+confidence_long <- dat %>%
+  select(ResponseId, learner_party, confidence_outgroup_pre, confidence_outgroup_post) %>%
+  pivot_longer(cols = c(confidence_outgroup_pre, confidence_outgroup_post),
+               names_to = "time", names_pattern = "confidence_outgroup_(pre|post)",
+               values_to = "confidence") %>%
+  mutate(time = factor(time, levels = c("pre", "post")))
+
+# Calculate summary statistics for plot
+confidence_summary <- confidence_long %>%
+  group_by(learner_party, time) %>%
+  summarise(mean_confidence = mean(confidence, na.rm = TRUE),
+            se_confidence = sd(confidence, na.rm = TRUE) / sqrt(n()),
+            .groups = "drop")
+
+# Confidence plot
+ggplot(confidence_summary, aes(x = time, y = mean_confidence, color = learner_party, group = learner_party)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = mean_confidence - se_confidence, ymax = mean_confidence + se_confidence), width = 0.1) +
+  scale_color_manual(values = party_colors, name = "Learner Party") +
+  labs(title = "Confidence in Outgroup Judgments", x = "Time", y = "Mean Confidence (1-5)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+
+# Mixed-effects models
+confidence_model0 <- lmer(confidence ~ time + (1 | ResponseId), data = confidence_long)
+confidence_model <- lmer(confidence ~ time * learner_party + (1 | ResponseId), data = confidence_long)
+
+# Display models
+modelsummary(
+  list("Confidence (Main Effect)" = confidence_model0,
+       "Confidence (Interaction)" = confidence_model),
+  stars = TRUE,
+  gof_map = c("nobs", "r.squared"),
+  notes = "Note: Confidence rated on 1-5 scale. * p<0.05, ** p<0.01, *** p<0.001"
+)
+```
+
+#### Correlation: Does confidence change track accuracy improvement?
 
 ```{r confidence-calibration}
 # Compute change scores
