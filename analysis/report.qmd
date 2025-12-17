@@ -26,6 +26,9 @@ dat <- read_parquet("../output/cleaned_data.parquet")
 
 # Define consistent color scheme: Democrats = blue, Republicans = red
 party_colors <- c("Democrat" = "#0015BC", "Republican" = "#E81B23")
+
+# Define learner party colors (D→R = Democrat learning about Republicans, R→D = Republican learning about Democrats)
+learner_party_colors <- c("D→R" = "#0015BC", "R→D" = "#E81B23")
 ```
 
 ## Overview
@@ -155,7 +158,7 @@ ggplot(accuracy_summary, aes(x = time, y = mean_error, color = learner_party, gr
   geom_line(linewidth = 1) +
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_error - se_error, ymax = mean_error + se_error), width = 0.1) +
-  scale_color_manual(values = party_colors, name = "Learner Party") +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(title = "Belief Accuracy", x = "Time", y = "Mean Absolute Error") +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
@@ -165,7 +168,7 @@ ggplot(warmth_summary, aes(x = time, y = mean_warmth, color = learner_party, gro
   geom_line(linewidth = 1) +
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_warmth - se_warmth, ymax = mean_warmth + se_warmth), width = 0.1) +
-  scale_color_manual(values = party_colors, name = "Learner Party") +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(title = "Outgroup Warmth", x = "Time", y = "Mean Warmth") +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
@@ -274,7 +277,7 @@ dat_for_reg %>%
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
   stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
            method = "pearson", show.legend = FALSE, size = 3.5) +
-  scale_color_manual(values = party_colors, name = "Learner Party") +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(
     title = "Relationship Between Bot Empathy and Informativeness",
     x = "Empathy Rating (1-5)",
@@ -331,7 +334,7 @@ ggplot(confidence_summary, aes(x = time, y = mean_confidence, color = learner_pa
   geom_line(linewidth = 1) +
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_confidence - se_confidence, ymax = mean_confidence + se_confidence), width = 0.1) +
-  scale_color_manual(values = party_colors, name = "Learner Party") +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(title = "Confidence in Outgroup Judgments", x = "Time", y = "Mean Confidence (1-5)") +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
