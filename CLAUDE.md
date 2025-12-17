@@ -5,7 +5,9 @@ Help implement analysis and writing in a reproducible way.
 
 ## Repo Map
 - **analysis/report.qmd** - Main analysis + narrative
-- **src/** - Reusable code (R and Python scripts)
+- **src/** - Reusable code
+  - **r/** - R scripts for data processing
+  - **python/** - Python scripts for data download and processing
 - **data/**
   - **raw/** - Immutable raw data (never modify)
   - **processed/** - Cleaned and processed datasets

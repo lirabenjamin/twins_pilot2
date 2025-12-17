@@ -19,6 +19,8 @@ library(lmerTest)
 library(modelsummary)
 library(gt)
 library(ggplot2)
+library(ggpubr)
+
 
 # Load cleaned data
 dat <- read_parquet("../data/processed/cleaned_data.parquet")
@@ -374,6 +376,7 @@ Greater engagement—measured by turn count—was `r if(coef(summary(m_warmth_tu
 # Plots with turn count
 p1 <- ggplot(dat, aes(x = user_turn_count, y = accuracy_change, color = learner_party)) +
   geom_point(alpha = 0.5) +
+  stat_cor()+
   geom_smooth(method = "lm", se = TRUE) +
   scale_color_manual(values = learner_party_colors) +
   labs(
@@ -386,6 +389,7 @@ p1 <- ggplot(dat, aes(x = user_turn_count, y = accuracy_change, color = learner_
 
 p2 <- ggplot(dat, aes(x = user_turn_count, y = warmth_change, color = learner_party)) +
   geom_point(alpha = 0.5) +
+  stat_cor()+
   geom_smooth(method = "lm", se = TRUE) +
   scale_color_manual(values = learner_party_colors) +
   labs(
@@ -399,6 +403,7 @@ p2 <- ggplot(dat, aes(x = user_turn_count, y = warmth_change, color = learner_pa
 # Plots with log word count
 p3 <- ggplot(dat, aes(x = log_word_count, y = accuracy_change, color = learner_party)) +
   geom_point(alpha = 0.5) +
+  stat_cor()+
   geom_smooth(method = "lm", se = TRUE) +
   scale_color_manual(values = learner_party_colors) +
   labs(
@@ -412,6 +417,7 @@ p3 <- ggplot(dat, aes(x = log_word_count, y = accuracy_change, color = learner_p
 p4 <- ggplot(dat, aes(x = log_word_count, y = warmth_change, color = learner_party)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", se = TRUE) +
+  stat_cor()+
   scale_color_manual(values = learner_party_colors) +
   labs(
     x = "Log(Word Count)",
@@ -492,7 +498,6 @@ calibration_dat <- dat_for_reg %>%
   )
 
 # Create scatter plot with correlation statistics
-library(ggpubr)
 ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = learner_party)) +
   geom_point(alpha = 0.6, size = 2.5) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +

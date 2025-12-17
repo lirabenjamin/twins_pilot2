@@ -4,6 +4,10 @@
 
 **Files reorganized** according to best practices:
 
+**Source code organized** by language:
+- R scripts → `src/r/` (clean_data.R, create_analysis_data.R, etc.)
+- Python scripts → `src/python/` (download_conversations.py)
+
 **Data files** (moved to `data/processed/`):
 - `cleaned_data.parquet` - Full cleaned dataset with all variables
 - `conversation_metrics.parquet` - Conversation engagement metrics
@@ -16,10 +20,10 @@
 - `warmth_change.png`
 
 **Scripts updated** with new paths:
-- [src/clean_data.R](src/clean_data.R:200-214) - Now writes to `data/processed/`
+- [src/r/clean_data.R](src/r/clean_data.R:200-214) - Now writes to `data/processed/`
 - [src/python/download_conversations.py](src/python/download_conversations.py:81-120) - Now writes to `data/processed/`
 - [analysis/report.qmd](analysis/report.qmd:24) - Now reads from `data/processed/`
-- [src/create_analysis_data.R](src/create_analysis_data.R) - **NEW** script to create minimal publication dataset
+- [src/r/create_analysis_data.R](src/r/create_analysis_data.R) - **NEW** script to create minimal publication dataset
 
 **Tested**: All scripts run successfully with new paths. Analysis reproduces correctly.
 
