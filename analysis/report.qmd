@@ -419,12 +419,13 @@ dat_with_changes %>%
 
 ```{r}
 # Get simple effects
+# Note: reverse = TRUE ensures contrasts are computed as "post - pre" to match model coefficients
 accuracy_contrasts <- emmeans(accuracy_model, ~ time | learner_party) %>%
-  contrast("pairwise") %>%
+  pairs(reverse = TRUE) %>%
   tidy()
 
 warmth_contrasts <- emmeans(warmth_model, ~ time | learner_party) %>%
-  contrast("pairwise") %>%
+  pairs(reverse = TRUE) %>%
   tidy()
 
 # Extract values for inline reporting
@@ -544,13 +545,13 @@ high_extremism = extremism_mean + extremism_sd
 accuracy_extremism_contrasts <- emmeans(accuracy_extremism_model,
   ~ time | political_extremism,
   at = list(political_extremism = c(low_extremism, high_extremism))) %>%
-  contrast("pairwise") %>%
+  pairs(reverse = TRUE) %>%
   tidy()
 
 warmth_extremism_contrasts <- emmeans(warmth_extremism_model, ~ time | political_extremism,
 at = list(political_extremism = c(low_extremism, high_extremism))
 ) %>%
-  contrast("pairwise") %>%
+  pairs(reverse = TRUE) %>%
   tidy()
 
 # Format simple effects
@@ -824,7 +825,7 @@ confidence_model <- lmer(confidence ~ time * learner_party + (1 | ResponseId), d
 
 # Get simple effects for the interaction model
 confidence_contrasts <- emmeans(confidence_model, ~ time | learner_party) %>%
-  contrast("pairwise") %>%
+  pairs(reverse = TRUE) %>%
   tidy()
 
 # Extract values for inline reporting
@@ -1202,7 +1203,7 @@ warmth_diff_model <- lmer(warmth_diff ~ time * learner_party + (1 | ResponseId),
 
 # Get simple effects
 warmth_diff_contrasts <- emmeans(warmth_diff_model, ~ time | learner_party) %>%
-  contrast("pairwise") %>%
+  pairs(reverse = TRUE) %>%
   tidy()
 
 # Format simple effects
