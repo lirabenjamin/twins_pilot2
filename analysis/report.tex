@@ -272,6 +272,16 @@ Republicans learning about Democrats (R→D) & 252 \\
 \bottomrule
 \end{tabular*}
 
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
+\toprule
+Learning Direction & N \\ 
+\midrule\addlinespace[2.5pt]
+Democrats learning about Republicans (D→R) & 248 \\ 
+Republicans learning about Democrats (R→D) & 252 \\ 
+\bottomrule
+\end{tabular*}
+
 }
 
 \end{table}%
@@ -488,6 +498,26 @@ Num.Obs. & \num{1000} & \num{1000} \\
 \bottomrule
 \end{talltblr}
 
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
+note{ }={Note: Accuracy is negative absolute error (higher = more accurate). * p<0.05, ** p<0.01, *** p<0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]},
+column{2,3}={}{halign=c,},
+column{1}={}{halign=l,},
+hline{4}={1,2,3}{solid, black, 0.05em},
+}                     %% tabularray inner close
+\toprule
+& Accuracy & Warmth \\ \midrule %% TinyTableHeader
+Time (Post) & \num{0.393}*** & \num{4.342}*** \\
+& (\num{0.038}) & (\num{0.525}) \\
+Num.Obs. & \num{1000} & \num{1000} \\
+\bottomrule
+\end{talltblr}
+
 }
 
 \end{table}%
@@ -495,6 +525,14 @@ Num.Obs. & \num{1000} & \num{1000} \\
 Do changes in accuracy correlate with changes in warmth? We examine
 whether people who became more accurate also became warmer toward the
 outgroup.
+
+\begin{verbatim}
+List of 1
+ $ legend.position: chr "bottom"
+ - attr(*, "class")= chr [1:2] "theme" "gg"
+ - attr(*, "complete")= logi FALSE
+ - attr(*, "validate")= logi TRUE
+\end{verbatim}
 
 \begin{figure}
 
@@ -531,6 +569,18 @@ increased by 3.5 degrees (\emph{p} \textless{} .001). The interaction
 was not significant (\emph{b} = -1.60, \emph{p} = 0.127).
 
 \begin{table}
+
+\caption{\label{tbl-symmetry}Tests of asymmetry in belief updating
+across political groups. Upper panel shows simple effects of time
+separately for Democrats learning about Republicans (D→R) and
+Republicans learning about Democrats (R→D). Lower panel shows full
+mixed-effects regression results including the Time × Learner Party
+interaction term. Democrats showed significantly larger accuracy
+improvements than Republicans, while warmth increases were symmetric
+across groups.}
+
+\centering{
+
 \centering
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
@@ -600,7 +650,80 @@ Time × Learner Party & \num{-0.465}*** & \num{-1.602} \\
 Num.Obs. & \num{1000} & \num{1000} \\
 \bottomrule
 \end{talltblr}
-\end{table}
+
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
+note{ }={Note: Accuracy is negative absolute error (higher = more accurate). * p<0.05, ** p<0.01, *** p<0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]},
+cell{2}{1}={c=3}{},cell{7}{1}={c=3}{},
+cell{1}{2}={}{halign=c,},
+cell{1}{3}={}{halign=c,},
+cell{3}{2}={}{halign=c,},
+cell{3}{3}={}{halign=c,},
+cell{4}{2}={}{halign=c,},
+cell{4}{3}={}{halign=c,},
+cell{5}{2}={}{halign=c,},
+cell{5}{3}={}{halign=c,},
+cell{6}{2}={}{halign=c,},
+cell{6}{3}={}{halign=c,},
+cell{8}{2}={}{halign=c,},
+cell{8}{3}={}{halign=c,},
+cell{9}{2}={}{halign=c,},
+cell{9}{3}={}{halign=c,},
+cell{10}{2}={}{halign=c,},
+cell{10}{3}={}{halign=c,},
+cell{11}{2}={}{halign=c,},
+cell{11}{3}={}{halign=c,},
+cell{12}{2}={}{halign=c,},
+cell{12}{3}={}{halign=c,},
+cell{13}{2}={}{halign=c,},
+cell{13}{3}={}{halign=c,},
+cell{14}{2}={}{halign=c,},
+cell{14}{3}={}{halign=c,},
+cell{2}{2}={}{halign=c, cmd=\bfseries,},
+cell{2}{3}={}{halign=c, cmd=\bfseries,},
+cell{7}{2}={}{halign=c, cmd=\bfseries,},
+cell{7}{3}={}{halign=c, cmd=\bfseries,},
+cell{1}{1}={}{halign=l,},
+cell{2}{1}={}{halign=l, cmd=\bfseries,},
+cell{7}{1}={}{halign=l, cmd=\bfseries,},
+cell{3}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{4}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{5}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{6}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{8}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{9}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{10}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{11}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{12}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{13}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{14}{1}={}{halign=l, preto={\hspace{1em}},},
+}                     %% tabularray inner close
+\toprule
+& Accuracy & Warmth \\ \midrule %% TinyTableHeader
+Effects by Political Affiliation && \\
+Time effect (Democrat) & 0.628*** & 5.149*** \\
+& (0.052) & (0.744) \\
+Time effect (Republican) & 0.163** & 3.548*** \\
+& (0.051) & (0.738) \\
+Full Regression Results && \\
+Time (Post) & \num{0.628}*** & \num{5.149}*** \\
+& (\num{0.052}) & (\num{0.744}) \\
+Learner Party (R→D) & \num{0.976}*** & \num{13.324}*** \\
+& (\num{0.064}) & (\num{2.178}) \\
+Time × Learner Party & \num{-0.465}*** & \num{-1.602} \\
+& (\num{0.073}) & (\num{1.048}) \\
+Num.Obs. & \num{1000} & \num{1000} \\
+\bottomrule
+\end{talltblr}
+
+}
+
+\end{table}%
 
 \subsubsection{Q3. Does political extremity predict how much people
 update?}\label{q3.-does-political-extremity-predict-how-much-people-update}
@@ -616,6 +739,17 @@ were equally likely to update their beliefs and warmth toward the
 outgroup.
 
 \begin{table}
+
+\caption{\label{tbl-extremism}Tests of whether political extremism
+moderates belief updating. Upper panel shows simple effects of time at
+low extremism (-1 SD) and high extremism (+1 SD) levels. Lower panel
+shows full mixed-effects regressions with three-way interactions (Time ×
+Learner Party × Political Extremism). While politically extreme
+participants showed greater baseline bias, extremism did not
+significantly moderate the effectiveness of the chatbot intervention.}
+
+\centering{
+
 \centering
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
@@ -719,7 +853,114 @@ Time × Learner Party × Extremism & \num{0.007} & \num{0.076} \\
 Num.Obs. & \num{1000} & \num{1000} \\
 \bottomrule
 \end{talltblr}
-\end{table}
+
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
+note{ }={Note: Time effects show pre-to-post change at Low Extremism (-1 SD) and High Extremism (+1 SD). Three-way interaction tests whether extremism moderates differential updating. * p<0.05, ** p<0.01, *** p<0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]},
+cell{2}{1}={c=3}{},cell{7}{1}={c=3}{},
+cell{1}{2}={}{halign=c,},
+cell{1}{3}={}{halign=c,},
+cell{3}{2}={}{halign=c,},
+cell{3}{3}={}{halign=c,},
+cell{4}{2}={}{halign=c,},
+cell{4}{3}={}{halign=c,},
+cell{5}{2}={}{halign=c,},
+cell{5}{3}={}{halign=c,},
+cell{6}{2}={}{halign=c,},
+cell{6}{3}={}{halign=c,},
+cell{8}{2}={}{halign=c,},
+cell{8}{3}={}{halign=c,},
+cell{9}{2}={}{halign=c,},
+cell{9}{3}={}{halign=c,},
+cell{10}{2}={}{halign=c,},
+cell{10}{3}={}{halign=c,},
+cell{11}{2}={}{halign=c,},
+cell{11}{3}={}{halign=c,},
+cell{12}{2}={}{halign=c,},
+cell{12}{3}={}{halign=c,},
+cell{13}{2}={}{halign=c,},
+cell{13}{3}={}{halign=c,},
+cell{14}{2}={}{halign=c,},
+cell{14}{3}={}{halign=c,},
+cell{15}{2}={}{halign=c,},
+cell{15}{3}={}{halign=c,},
+cell{16}{2}={}{halign=c,},
+cell{16}{3}={}{halign=c,},
+cell{17}{2}={}{halign=c,},
+cell{17}{3}={}{halign=c,},
+cell{18}{2}={}{halign=c,},
+cell{18}{3}={}{halign=c,},
+cell{19}{2}={}{halign=c,},
+cell{19}{3}={}{halign=c,},
+cell{20}{2}={}{halign=c,},
+cell{20}{3}={}{halign=c,},
+cell{21}{2}={}{halign=c,},
+cell{21}{3}={}{halign=c,},
+cell{22}{2}={}{halign=c,},
+cell{22}{3}={}{halign=c,},
+cell{2}{2}={}{halign=c, cmd=\bfseries,},
+cell{2}{3}={}{halign=c, cmd=\bfseries,},
+cell{7}{2}={}{halign=c, cmd=\bfseries,},
+cell{7}{3}={}{halign=c, cmd=\bfseries,},
+cell{1}{1}={}{halign=l,},
+cell{2}{1}={}{halign=l, cmd=\bfseries,},
+cell{7}{1}={}{halign=l, cmd=\bfseries,},
+cell{3}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{4}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{5}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{6}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{8}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{9}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{10}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{11}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{12}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{13}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{14}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{15}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{16}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{17}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{18}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{19}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{20}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{21}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{22}{1}={}{halign=l, preto={\hspace{1em}},},
+hline{22}={1,2,3}{solid, lightgray, 0.1em},
+hline{23}={1,2,3}{solid, lightgray, 0.1em},
+}                     %% tabularray inner close
+\toprule
+& Accuracy & Warmth \\ \midrule %% TinyTableHeader
+Simple Effects by Extremism Level && \\
+Time effect (Low Extremism) & 0.386*** & 3.847*** \\
+& (0.053) & (0.761) \\
+Time effect (High Extremism) & 0.419*** & 5.002*** \\
+& (0.052) & (0.744) \\
+Full Regression Results && \\
+Time (Post) & \num{0.721}*** & \num{5.039}* \\
+& (\num{0.168}) & (\num{2.416}) \\
+Learner Party (R→D) & \num{0.898}*** & \num{14.760}* \\
+& (\num{0.186}) & (\num{6.214}) \\
+Political Extremism & \num{-0.008}* & \num{-0.429}*** \\
+& (\num{0.003}) & (\num{0.115}) \\
+Time × Learner Party & \num{-0.726}*** & \num{-4.336} \\
+& (\num{0.215}) & (\num{3.092}) \\
+Time × Extremism & \num{-0.002} & \num{0.003} \\
+& (\num{0.004}) & (\num{0.057}) \\
+Learner Party × Extremism & \num{0.001} & \num{-0.088} \\
+& (\num{0.005}) & (\num{0.152}) \\
+Time × Learner Party × Extremism & \num{0.007} & \num{0.076} \\
+& (\num{0.005}) & (\num{0.076}) \\
+Num.Obs. & \num{1000} & \num{1000} \\
+\bottomrule
+\end{talltblr}
+
+}
+
+\end{table}%
 
 \subsubsection{Q4. Is belief updating associated with how the chatbot is
 perceived?}\label{q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived}
@@ -732,6 +973,16 @@ change (\emph{b} = 0.050, \emph{p} = 0.091) or warmth change (\emph{b} =
 1.01, \emph{p} = 0.056).
 
 \begin{table}
+
+\caption{\label{tbl-mechanisms}OLS regressions testing whether chatbot
+informativeness and empathy predict post-interaction accuracy and
+warmth, controlling for baseline levels. Bot informativeness
+significantly predicted both improved accuracy and increased warmth
+toward the outgroup, while perceived empathy did not significantly
+predict either outcome.}
+
+\centering{
+
 \centering
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
@@ -759,12 +1010,58 @@ R2 & \num{0.241} & \num{0.805} \\
 R2 Adj. & \num{0.236} & \num{0.804} \\
 \bottomrule
 \end{talltblr}
-\end{table}
+
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
+note{ }={Note: Regressions control for pre-interaction values. * p<0.05, ** p<0.01, *** p<0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]},
+column{2,3}={}{halign=c,},
+column{1}={}{halign=l,},
+hline{10}={1,2,3}{solid, black, 0.05em},
+}                     %% tabularray inner close
+\toprule
+& Accuracy & Warmth \\ \midrule %% TinyTableHeader
+Baseline Accuracy & \num{0.354}*** &  \\
+& (\num{0.033}) &  \\
+Baseline Warmth &  & \num{0.910}*** \\
+&  & (\num{0.021}) \\
+Bot Informativeness & \num{0.086}** & \num{1.927}*** \\
+& (\num{0.029}) & (\num{0.524}) \\
+Bot Empathy & \num{0.050}+ & \num{1.010}+ \\
+& (\num{0.029}) & (\num{0.527}) \\
+Num.Obs. & \num{500} & \num{500} \\
+R2 & \num{0.241} & \num{0.805} \\
+R2 Adj. & \num{0.236} & \num{0.804} \\
+\bottomrule
+\end{talltblr}
+
+}
+
+\end{table}%
 
 Do perceptions of informativeness and empathy correlate with each other?
 Yes, but not strongly (r \textasciitilde{} .30).
 
-\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/unnamed-chunk-5-1.pdf}}
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-empathy-informativeness-1.pdf}}
+
+}
+
+\caption{\label{fig-empathy-informativeness}Correlation between
+perceived chatbot empathy and informativeness. Points are jittered to
+reduce overplotting. The two dimensions showed modest positive
+correlations (r approximately .30), suggesting they capture partially
+distinct aspects of chatbot interaction quality. Correlation statistics
+displayed separately by learner party.}
+
+\end{figure}%
 
 \subsubsection{Q5. Does engagement (``dose'') matter for belief
 updating?}\label{q5.-does-engagement-dose-matter-for-belief-updating}
@@ -786,6 +1083,15 @@ accuracy was not significant (\emph{b} = -0.0496, \emph{p} = 0.442), and
 on warmth was not significant (\emph{b} = -0.8687, \emph{p} = 0.461).
 
 \begin{table}
+
+\caption{\label{tbl-engagement}OLS regressions testing whether
+conversation engagement (turn count and log word count) predicts changes
+in accuracy and warmth, controlling for baseline levels and learner
+party. Models test whether greater dose of interaction produced larger
+belief updates. Engagement showed mixed associations with outcomes.}
+
+\centering{
+
 \centering
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
@@ -845,9 +1151,89 @@ R2 & \num{0.434} & \num{0.434} & \num{0.022} & \num{0.021} \\
 R2 Adj. & \num{0.430} & \num{0.431} & \num{0.016} & \num{0.015} \\
 \bottomrule
 \end{talltblr}
-\end{table}
 
-\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/engagement-plots-1.pdf}}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]},
+column{3,5}={}{halign=c,},
+column{1}={}{halign=l,},
+cell{2}{2}={}{halign=c,},
+cell{2}{4}={}{halign=c,},
+cell{3}{2}={}{halign=c,},
+cell{3}{4}={}{halign=c,},
+cell{4}{2}={}{halign=c,},
+cell{4}{4}={}{halign=c,},
+cell{5}{2}={}{halign=c,},
+cell{5}{4}={}{halign=c,},
+cell{6}{2}={}{halign=c,},
+cell{6}{4}={}{halign=c,},
+cell{7}{2}={}{halign=c,},
+cell{7}{4}={}{halign=c,},
+cell{8}{2}={}{halign=c,},
+cell{8}{4}={}{halign=c,},
+cell{9}{2}={}{halign=c,},
+cell{9}{4}={}{halign=c,},
+cell{10}{2}={}{halign=c,},
+cell{10}{4}={}{halign=c,},
+cell{11}{2}={}{halign=c,},
+cell{11}{4}={}{halign=c,},
+cell{12}{2}={}{halign=c,},
+cell{12}{4}={}{halign=c,},
+cell{13}{2}={}{halign=c,},
+cell{13}{4}={}{halign=c,},
+cell{14}{2}={}{halign=c,},
+cell{14}{4}={}{halign=c,},
+cell{15}{2}={}{halign=c,},
+cell{15}{4}={}{halign=c,},
+cell{1}{2}={c=2,}{halign=c, halign=c,},
+cell{1}{4}={c=2,}{halign=c, halign=c,},
+hline{13}={1,2,3,4,5}{solid, black, 0.05em},
+}                     %% tabularray inner close
+\toprule
+& Accuracy &  & Warmth &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-5}
+& Turn Count & Log(Word Count) & Turn Count  & Log(Word Count)  \\ \midrule %% TinyTableHeader
+Learner Party (R→D) & \num{0.202}** & \num{0.204}** & \num{-0.828} & \num{-0.778} \\
+& (\num{0.068}) & (\num{0.068}) & (\num{1.082}) & (\num{1.082}) \\
+Baseline Accuracy & \num{-0.684}*** & \num{-0.686}*** &  &  \\
+& (\num{0.039}) & (\num{0.039}) &  &  \\
+Baseline Warmth &  &  & \num{-0.062}** & \num{-0.063}** \\
+&  &  & (\num{0.022}) & (\num{0.022}) \\
+Turn Count & \num{-0.002} &  & \num{-0.096} &  \\
+& (\num{0.005}) &  & (\num{0.087}) &  \\
+Log(Word Count) &  & \num{-0.050} &  & \num{-0.869} \\
+&  & (\num{0.064}) &  & (\num{1.178}) \\
+Num.Obs. & \num{500} & \num{500} & \num{500} & \num{500} \\
+R2 & \num{0.434} & \num{0.434} & \num{0.022} & \num{0.021} \\
+R2 Adj. & \num{0.430} & \num{0.431} & \num{0.016} & \num{0.015} \\
+\bottomrule
+\end{talltblr}
+
+}
+
+\end{table}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-engagement-1.pdf}}
+
+}
+
+\caption{\label{fig-engagement}Relationships between conversation
+engagement and belief updating. Top row shows associations between turn
+count and changes in accuracy (left) and warmth (right). Bottom row
+shows associations between log-transformed word count and the same
+outcomes. Points represent individual participants, with outliers
+exceeding 75 turns excluded. Correlation statistics and linear
+regression lines displayed separately by learner party. Negative values
+on accuracy change indicate improvement.}
+
+\end{figure}%
 
 \subsubsection{Q6. Does interacting with the chatbot improve applied
 judgment?}\label{q6.-does-interacting-with-the-chatbot-improve-applied-judgment}
@@ -879,9 +1265,33 @@ interaction (\emph{b} = 0.306, \emph{p} \textless{} .001), despite
 learning less than Democrats. Democrats' confidence did not
 significantly change (\emph{b} = -0.065, \emph{p} = 0.328).
 
-\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/unnamed-chunk-7-1.pdf}}
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-confidence-change-1.pdf}}
+
+}
+
+\caption{\label{fig-confidence-change}Changes in confidence in outgroup
+judgments from pre- to post-interaction. Republicans learning about
+Democrats showed significant increases in confidence, while Democrats
+learning about Republicans showed no significant change. Error bars
+represent standard errors.}
+
+\end{figure}%
 
 \begin{table}
+
+\caption{\label{tbl-confidence}Mixed-effects models testing changes in
+confidence in outgroup judgments. Upper panel shows simple effects of
+time separately by learner party (D→R and R→D). Lower panel shows full
+regression results with Time × Learner Party interaction. Republicans
+gained confidence after the interaction, while Democrats did not,
+suggesting asymmetric metacognitive responses.}
+
+\centering{
+
 \centering
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
@@ -951,7 +1361,80 @@ Time × Learner Party &  & \num{0.370}*** \\
 Num.Obs. & \num{1000} & \num{1000} \\
 \bottomrule
 \end{talltblr}
-\end{table}
+
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
+note{ }={Note: Confidence rated on 1-5 scale. * p<0.05, ** p<0.01, *** p<0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]},
+cell{2}{1}={c=3}{},cell{7}{1}={c=3}{},
+cell{1}{2}={}{halign=c,},
+cell{1}{3}={}{halign=c,},
+cell{3}{2}={}{halign=c,},
+cell{3}{3}={}{halign=c,},
+cell{4}{2}={}{halign=c,},
+cell{4}{3}={}{halign=c,},
+cell{5}{2}={}{halign=c,},
+cell{5}{3}={}{halign=c,},
+cell{6}{2}={}{halign=c,},
+cell{6}{3}={}{halign=c,},
+cell{8}{2}={}{halign=c,},
+cell{8}{3}={}{halign=c,},
+cell{9}{2}={}{halign=c,},
+cell{9}{3}={}{halign=c,},
+cell{10}{2}={}{halign=c,},
+cell{10}{3}={}{halign=c,},
+cell{11}{2}={}{halign=c,},
+cell{11}{3}={}{halign=c,},
+cell{12}{2}={}{halign=c,},
+cell{12}{3}={}{halign=c,},
+cell{13}{2}={}{halign=c,},
+cell{13}{3}={}{halign=c,},
+cell{14}{2}={}{halign=c,},
+cell{14}{3}={}{halign=c,},
+cell{2}{2}={}{halign=c, cmd=\bfseries,},
+cell{2}{3}={}{halign=c, cmd=\bfseries,},
+cell{7}{2}={}{halign=c, cmd=\bfseries,},
+cell{7}{3}={}{halign=c, cmd=\bfseries,},
+cell{1}{1}={}{halign=l,},
+cell{2}{1}={}{halign=l, cmd=\bfseries,},
+cell{7}{1}={}{halign=l, cmd=\bfseries,},
+cell{3}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{4}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{5}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{6}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{8}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{9}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{10}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{11}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{12}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{13}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{14}{1}={}{halign=l, preto={\hspace{1em}},},
+}                     %% tabularray inner close
+\toprule
+& Confidence (Main Effect) & Confidence (Interaction) \\ \midrule %% TinyTableHeader
+Simple Effects by Political Affiliation && \\
+Time effect (D→R) &  & -0.065 \\
+&  & (0.066) \\
+Time effect (R→D) &  & 0.306*** \\
+&  & (0.065) \\
+Full Regression Results && \\
+Time (Post) & \num{0.122}** & \num{-0.065} \\
+& (\num{0.047}) & (\num{0.066}) \\
+Learner Party (R→D) &  & \num{0.150}+ \\
+&  & (\num{0.090}) \\
+Time × Learner Party &  & \num{0.370}*** \\
+&  & (\num{0.093}) \\
+Num.Obs. & \num{1000} & \num{1000} \\
+\bottomrule
+\end{talltblr}
+
+}
+
+\end{table}%
 
 \paragraph{Correlation: Does confidence change track accuracy
 improvement?}\label{correlation-does-confidence-change-track-accuracy-improvement}
@@ -965,7 +1448,25 @@ more confidence. For Republicans learning about Democrats, confidence
 change did not correlate with accuracy change (\emph{r} = -0.038,
 \emph{p} = 0.553).
 
-\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/unnamed-chunk-8-1.pdf}}
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-confidence-calibration-1.pdf}}
+
+}
+
+\caption{\label{fig-confidence-calibration}Metacognitive calibration
+showing relationship between confidence change and accuracy change.
+Points represent individual participants with jittering to reduce
+overplotting. Quadrant labels indicate well-calibrated (rightfully
+more/less confident) versus miscalibrated (wrongly more/less confident)
+changes. Negative values on y-axis indicate accuracy improvement. For
+Democrats (D→R), increased confidence was paradoxically associated with
+becoming less accurate, suggesting poor metacognitive calibration.
+Dashed lines mark no-change thresholds.}
+
+\end{figure}%
 
 \subsection{Discussion}\label{discussion}
 
@@ -1065,6 +1566,16 @@ other scalable interventions for partisan debiasing.
 regressions}\label{summary-table-of-regressions}
 
 \begin{table}
+
+\caption{\label{tbl-appendix-accuracy-summary}Consolidated summary of
+all accuracy models. Columns are grouped by research question: Pre-Post
+Change (main effect and interaction with learner party), Extremism
+(moderation by political extremism), and Mechanisms (bot perceptions and
+engagement dosage). Models 1-3 are mixed-effects with random intercepts
+by participant; Models 4-6 are OLS with baseline controls.}
+
+\centering{
+
 \centering
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
@@ -1148,9 +1659,106 @@ R2 &  &  &  & \num{0.241} & \num{0.434} & \num{0.434} \\
 R2 Adj. &  &  &  & \num{0.236} & \num{0.430} & \num{0.431} \\
 \bottomrule
 \end{talltblr}
-\end{table}
+
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
+note{ }={Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
+column{3,6,7}={}{halign=c,},
+column{1}={}{halign=l,},
+cell{2}{2}={}{halign=c,},
+cell{2}{4}={}{halign=c,},
+cell{2}{5}={}{halign=c,},
+cell{3}{2}={}{halign=c,},
+cell{3}{4}={}{halign=c,},
+cell{3}{5}={}{halign=c,},
+cell{4}{2}={}{halign=c,},
+cell{4}{4}={}{halign=c,},
+cell{4}{5}={}{halign=c,},
+cell{5}{2}={}{halign=c,},
+cell{5}{4}={}{halign=c,},
+cell{5}{5}={}{halign=c,},
+cell{6}{2}={}{halign=c,},
+cell{6}{4}={}{halign=c,},
+cell{6}{5}={}{halign=c,},
+cell{7}{2}={}{halign=c,},
+cell{7}{4}={}{halign=c,},
+cell{7}{5}={}{halign=c,},
+cell{8}{2}={}{halign=c,},
+cell{8}{4}={}{halign=c,},
+cell{8}{5}={}{halign=c,},
+cell{9}{2}={}{halign=c,},
+cell{9}{4}={}{halign=c,},
+cell{9}{5}={}{halign=c,},
+cell{10}{2}={}{halign=c,},
+cell{10}{4}={}{halign=c,},
+cell{10}{5}={}{halign=c,},
+cell{11}{2}={}{halign=c,},
+cell{11}{4}={}{halign=c,},
+cell{11}{5}={}{halign=c,},
+cell{12}{2}={}{halign=c,},
+cell{12}{4}={}{halign=c,},
+cell{12}{5}={}{halign=c,},
+cell{13}{2}={}{halign=c,},
+cell{13}{4}={}{halign=c,},
+cell{13}{5}={}{halign=c,},
+cell{14}{2}={}{halign=c,},
+cell{14}{4}={}{halign=c,},
+cell{14}{5}={}{halign=c,},
+cell{15}{2}={}{halign=c,},
+cell{15}{4}={}{halign=c,},
+cell{15}{5}={}{halign=c,},
+cell{16}{2}={}{halign=c,},
+cell{16}{4}={}{halign=c,},
+cell{16}{5}={}{halign=c,},
+cell{17}{2}={}{halign=c,},
+cell{17}{4}={}{halign=c,},
+cell{17}{5}={}{halign=c,},
+cell{1}{4}={}{halign=c, halign=c,},
+cell{1}{2}={c=2,}{halign=c, halign=c,},
+cell{1}{5}={c=3,}{halign=c, halign=c,},
+hline{15}={1,2,3,4,5,6,7}{solid, black, 0.05em},
+}                     %% tabularray inner close
+\toprule
+& Pre-Post Change &  & Extremism & Mechanisms &  &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-4}\cmidrule[lr]{5-7}
+& Main Effect & Interaction & Extremism & Information/Empathy & Turns & Words \\ \midrule %% TinyTableHeader
+Time (Post) & \num{0.393}*** & \num{0.628}*** & \num{0.721}*** &  &  &  \\
+Learner Party (R→D) &  & \num{0.976}*** & \num{0.898}*** &  & \num{0.202}** & \num{0.204}** \\
+Political Extremism &  &  & \num{-0.008}* &  &  &  \\
+Time × Learner Party &  & \num{-0.465}*** & \num{-0.726}*** &  &  &  \\
+Time × Extremism &  &  & \num{-0.002} &  &  &  \\
+Learner Party × Extremism &  &  & \num{0.001} &  &  &  \\
+Time × Learner Party × Extremism &  &  & \num{0.007} &  &  &  \\
+Baseline Accuracy &  &  &  & \num{0.354}*** & \num{-0.684}*** & \num{-0.686}*** \\
+Bot Informativeness &  &  &  & \num{0.086}** &  &  \\
+Bot Empathy &  &  &  & \num{0.050}+ &  &  \\
+Turn Count &  &  &  &  & \num{-0.002} &  \\
+Log(Word Count) &  &  &  &  &  & \num{-0.050} \\
+Num.Obs. & \num{1000} & \num{1000} & \num{1000} & \num{500} & \num{500} & \num{500} \\
+R2 &  &  &  & \num{0.241} & \num{0.434} & \num{0.434} \\
+R2 Adj. &  &  &  & \num{0.236} & \num{0.430} & \num{0.431} \\
+\bottomrule
+\end{talltblr}
+
+}
+
+\end{table}%
 
 \begin{table}
+
+\caption{\label{tbl-appendix-warmth-summary}Consolidated summary of all
+warmth models. Columns are grouped by research question: Pre-Post Change
+(main effect and interaction with learner party), Extremism (moderation
+by political extremism), and Mechanisms (bot perceptions and engagement
+dosage). Models 1-3 are mixed-effects with random intercepts by
+participant; Models 4-6 are OLS with baseline controls.}
+
+\centering{
+
 \centering
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
@@ -1234,15 +1842,107 @@ R2 &  &  &  & \num{0.805} & \num{0.022} & \num{0.021} \\
 R2 Adj. &  &  &  & \num{0.804} & \num{0.016} & \num{0.015} \\
 \bottomrule
 \end{talltblr}
-\end{table}
+
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
+note{ }={Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
+column{3,6,7}={}{halign=c,},
+column{1}={}{halign=l,},
+cell{2}{2}={}{halign=c,},
+cell{2}{4}={}{halign=c,},
+cell{2}{5}={}{halign=c,},
+cell{3}{2}={}{halign=c,},
+cell{3}{4}={}{halign=c,},
+cell{3}{5}={}{halign=c,},
+cell{4}{2}={}{halign=c,},
+cell{4}{4}={}{halign=c,},
+cell{4}{5}={}{halign=c,},
+cell{5}{2}={}{halign=c,},
+cell{5}{4}={}{halign=c,},
+cell{5}{5}={}{halign=c,},
+cell{6}{2}={}{halign=c,},
+cell{6}{4}={}{halign=c,},
+cell{6}{5}={}{halign=c,},
+cell{7}{2}={}{halign=c,},
+cell{7}{4}={}{halign=c,},
+cell{7}{5}={}{halign=c,},
+cell{8}{2}={}{halign=c,},
+cell{8}{4}={}{halign=c,},
+cell{8}{5}={}{halign=c,},
+cell{9}{2}={}{halign=c,},
+cell{9}{4}={}{halign=c,},
+cell{9}{5}={}{halign=c,},
+cell{10}{2}={}{halign=c,},
+cell{10}{4}={}{halign=c,},
+cell{10}{5}={}{halign=c,},
+cell{11}{2}={}{halign=c,},
+cell{11}{4}={}{halign=c,},
+cell{11}{5}={}{halign=c,},
+cell{12}{2}={}{halign=c,},
+cell{12}{4}={}{halign=c,},
+cell{12}{5}={}{halign=c,},
+cell{13}{2}={}{halign=c,},
+cell{13}{4}={}{halign=c,},
+cell{13}{5}={}{halign=c,},
+cell{14}{2}={}{halign=c,},
+cell{14}{4}={}{halign=c,},
+cell{14}{5}={}{halign=c,},
+cell{15}{2}={}{halign=c,},
+cell{15}{4}={}{halign=c,},
+cell{15}{5}={}{halign=c,},
+cell{16}{2}={}{halign=c,},
+cell{16}{4}={}{halign=c,},
+cell{16}{5}={}{halign=c,},
+cell{17}{2}={}{halign=c,},
+cell{17}{4}={}{halign=c,},
+cell{17}{5}={}{halign=c,},
+cell{1}{4}={}{halign=c, halign=c,},
+cell{1}{2}={c=2,}{halign=c, halign=c,},
+cell{1}{5}={c=3,}{halign=c, halign=c,},
+hline{15}={1,2,3,4,5,6,7}{solid, black, 0.05em},
+}                     %% tabularray inner close
+\toprule
+& Pre-Post Change &  & Extremism & Mechanisms &  &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-4}\cmidrule[lr]{5-7}
+& Main Effect & Interaction & Extremism & Information/Empathy & Turns & Words \\ \midrule %% TinyTableHeader
+Time (Post) & \num{4.342}*** & \num{5.149}*** & \num{5.039}* &  &  &  \\
+Learner Party (R→D) &  & \num{13.324}*** & \num{14.760}* &  & \num{-0.828} & \num{-0.778} \\
+Political Extremism &  &  & \num{-0.429}*** &  &  &  \\
+Time × Learner Party &  & \num{-1.602} & \num{-4.336} &  &  &  \\
+Time × Extremism &  &  & \num{0.003} &  &  &  \\
+Learner Party × Extremism &  &  & \num{-0.088} &  &  &  \\
+Time × Learner Party × Extremism &  &  & \num{0.076} &  &  &  \\
+Baseline Warmth &  &  &  & \num{0.910}*** & \num{-0.062}** & \num{-0.063}** \\
+Bot Informativeness &  &  &  & \num{1.927}*** &  &  \\
+Bot Empathy &  &  &  & \num{1.010}+ &  &  \\
+Turn Count &  &  &  &  & \num{-0.096} &  \\
+Log(Word Count) &  &  &  &  &  & \num{-0.869} \\
+Num.Obs. & \num{1000} & \num{1000} & \num{1000} & \num{500} & \num{500} & \num{500} \\
+R2 &  &  &  & \num{0.805} & \num{0.022} & \num{0.021} \\
+R2 Adj. &  &  &  & \num{0.804} & \num{0.016} & \num{0.015} \\
+\bottomrule
+\end{talltblr}
+
+}
+
+\end{table}%
 
 \subsubsection{Descriptive Statistics}\label{descriptive-statistics}
 
 \begin{table}
-\caption*{
-{\large Actual Environmental Attitudes by Political Party} \\ 
-{\small Self-reported green attitudes (1-5 scale)}
-} 
+
+\caption{\label{tbl-descriptives-green}Actual environmental attitudes by
+political party. Self-reported green attitudes measured on a 1-5 scale,
+with higher values indicating more pro-environmental attitudes.
+Democrats and Republicans showed relatively similar baseline
+environmental values.}
+
+\centering{
+
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr}
 \toprule
@@ -1252,13 +1952,21 @@ Democrat & 4.15 & 0.77 & 248 \\
 Republican & 3.73 & 1.06 & 252 \\ 
 \bottomrule
 \end{tabular*}
-\end{table}
+
+}
+
+\end{table}%
 
 \begin{table}
-\caption*{
-{\large Outgroup Belief Accuracy} \\ 
-{\small Absolute error (lower = more accurate)}
-} 
+
+\caption{\label{tbl-descriptives-accuracy}Outgroup belief accuracy by
+learner party and time point. Values represent absolute error between
+participants' estimates of outgroup green attitudes and actual outgroup
+means, with lower values indicating more accurate beliefs. Both groups
+showed improvements from pre- to post-interaction.}
+
+\centering{
+
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcrrr}
 \toprule
@@ -1270,13 +1978,21 @@ R→D & pre & -0.705 & 0.628 & 252 \\
 R→D & post & -0.542 & 0.488 & 252 \\ 
 \bottomrule
 \end{tabular*}
-\end{table}
+
+}
+
+\end{table}%
 
 \begin{table}
-\caption*{
-{\large Outgroup Warmth (Feeling Thermometer)} \\ 
-{\small By learner party and time point (0-100 scale)}
-} 
+
+\caption{\label{tbl-descriptives-warmth}Outgroup warmth by learner party
+and time point. Warmth measured using a feeling thermometer on a 0-100
+scale, with higher values indicating warmer feelings toward the
+political outgroup. Both groups showed increases in warmth from pre- to
+post-interaction.}
+
+\centering{
+
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcrrr}
 \toprule
@@ -1288,13 +2004,21 @@ R→D & pre & 35.92 & 24.41 & 252 \\
 R→D & post & 39.47 & 25.07 & 252 \\ 
 \bottomrule
 \end{tabular*}
-\end{table}
+
+}
+
+\end{table}%
 
 \begin{table}
-\caption*{
-{\large Political Extremism by Learner Party} \\ 
-{\small Distance from political center (0-50 scale)}
-} 
+
+\caption{\label{tbl-descriptives-extremism}Political extremism by
+learner party. Extremism operationalized as absolute distance from the
+political center (50 on the 0-100 political orientation scale), ranging
+from 0 (centrist) to 50 (maximum extremism). Both Democrats and
+Republicans showed similar levels of extremism in this sample.}
+
+\centering{
+
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr}
 \toprule
@@ -1304,13 +2028,21 @@ D→R & 40.05 & 12.98 & 2.00 & 50.00 \\
 R→D & 36.02 & 14.95 & 0.00 & 50.00 \\ 
 \bottomrule
 \end{tabular*}
-\end{table}
+
+}
+
+\end{table}%
 
 \begin{table}
-\caption*{
-{\large Bot Perception Ratings} \\ 
-{\small By learner party (1-5 scale)}
-} 
+
+\caption{\label{tbl-descriptives-bot}Chatbot perception ratings by
+learner party. Participants rated the chatbot's informativeness (how
+much they learned) and empathy (how empathetic it was) on 1-5 scales
+immediately after the interaction. Ratings were generally positive
+across both dimensions and political groups.}
+
+\centering{
+
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrrr}
 \toprule
@@ -1322,13 +2054,21 @@ R→D & Empathy & 3.68 & 1.00 & 252 \\
 R→D & Informativeness & 4.06 & 0.93 & 252 \\ 
 \bottomrule
 \end{tabular*}
-\end{table}
+
+}
+
+\end{table}%
 
 \begin{table}
-\caption*{
-{\large Confidence in Outgroup Judgments} \\ 
-{\small By learner party and time point (1-5 scale)}
-} 
+
+\caption{\label{tbl-descriptives-confidence}Confidence in outgroup
+judgments by learner party and time point. Confidence measured on a 1-5
+scale asking how confident participants felt about their understanding
+of the political outgroup. Republicans showed increases in confidence
+from pre- to post-interaction, while Democrats did not.}
+
+\centering{
+
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcrrr}
 \toprule
@@ -1340,7 +2080,10 @@ R→D & pre & 3.22 & 1.02 & 252 \\
 R→D & post & 3.53 & 1.00 & 252 \\ 
 \bottomrule
 \end{tabular*}
-\end{table}
+
+}
+
+\end{table}%
 
 \subsubsection{Robustness Checks}\label{robustness-checks}
 
@@ -1351,6 +2094,17 @@ examine warmth using a difference score (outgroup - ingroup). Effects
 replicate what is reported on the main text.
 
 \begin{table}
+
+\caption{\label{tbl-robustness-warmth-diff}Robustness check using warmth
+difference scores (outgroup minus ingroup warmth). This
+operationalization follows standard practice in affective polarization
+research. Upper panel shows simple effects by learner party. Lower panel
+shows full mixed-effects regression. Results replicate main findings,
+confirming that participants became less affectively polarized toward
+the political outgroup.}
+
+\centering{
+
 \centering
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
@@ -1407,7 +2161,10 @@ Time × Learner Party & \num{-1.011} \\
 Num.Obs. & \num{1000} \\
 \bottomrule
 \end{talltblr}
-\end{table}
+
+}
+
+\end{table}%
 
 \subsubsection{Extreme Cases Analysis}\label{extreme-cases-analysis}
 
@@ -1416,10 +2173,18 @@ learning, we examined participants who showed the most and least
 improvement in accuracy about their political outgroup.
 
 \begin{table}
-\caption*{
-{\large Extreme Cases: Most vs. Least Improved} \\ 
-{\small Accuracy improvement by learner party}
-} 
+
+\caption{\label{tbl-extreme-cases}Comparison of participants showing the
+most versus least improvement in accuracy. For each learner party, we
+identified the single participant who improved most and the single
+participant who worsened most (or improved least). Positive values
+indicate improvement (reduced error). Engagement metrics (word count,
+turn count) did not consistently distinguish successful from
+unsuccessful learners, suggesting quality of engagement matters more
+than quantity.}
+
+\centering{
+
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llrrr}
 \toprule
@@ -1434,7 +2199,10 @@ R→D & Least Improved & -3.000 & 147 & 10 \\
 \begin{minipage}{\linewidth}
 \textsuperscript{\textit{1}}Positive values indicate improvement (reduced error)\\
 \end{minipage}
-\end{table}
+
+}
+
+\end{table}%
 
 \paragraph{Marketing Messages from Extreme
 Cases}\label{marketing-messages-from-extreme-cases}
@@ -1481,10 +2249,15 @@ throughout and remained adversarial.
 Learning}\label{patterns-in-successful-vs.-unsuccessful-learning}
 
 \begin{table}
-\caption*{
-{\large Engagement by Learning Outcome} \\ 
-{\small Comparing extreme cases}
-} 
+
+\caption{\label{tbl-extreme-engagement}Engagement levels comparing
+successful versus unsuccessful learners among extreme cases. Based on
+n=4 participants (2 improved, 2 worsened). Participants who worsened
+actually showed slightly higher engagement on average, reinforcing that
+conversation quality matters more than quantity for belief updating.}
+
+\centering{
+
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr}
 \toprule
@@ -1494,7 +2267,10 @@ Improved & 145.0 & 10.0 \\
 Worsened & 151.0 & 11.0 \\ 
 \bottomrule
 \end{tabular*}
-\end{table}
+
+}
+
+\end{table}%
 
 The qualitative analysis of conversations (full transcripts available in
 data/processed/conversations/) reveals distinct patterns:
@@ -2319,22 +3095,25 @@ other attached packages:
 [19] tibble_3.3.0       ggplot2_3.5.2      tidyverse_2.0.0   
 
 loaded via a namespace (and not attached):
- [1] tidyselect_1.2.1    farver_2.1.2        fastmap_1.2.0       bayestestR_0.16.1   egg_0.4.5          
- [6] digest_0.6.37       timechange_0.3.0    estimability_1.5.1  lifecycle_1.0.4     magrittr_2.0.3     
-[11] compiler_4.5.0      rlang_1.1.6         tools_4.5.0         yaml_2.3.10         data.table_1.17.8  
-[16] knitr_1.50          ggsignif_0.6.4      labeling_0.4.3      bit_4.6.0           xml2_1.3.8         
-[21] RColorBrewer_1.1-3  abind_1.4-8         withr_3.0.2         numDeriv_2016.8-1.1 datawizard_1.2.0   
-[26] grid_4.5.0          fansi_1.0.6         xtable_1.8-4        scales_1.4.0        MASS_7.3-65        
-[31] insight_1.4.0       cli_3.6.5           mvtnorm_1.3-3       Ben_0.1.0           rmarkdown_2.29     
-[36] reformulas_0.4.1    generics_0.1.4      performance_0.15.0  tzdb_0.5.0          parameters_0.28.0  
-[41] minqa_1.2.8         splines_4.5.0       parallel_4.5.0      assertthat_0.2.1    effectsize_1.0.1   
-[46] vctrs_0.6.5         boot_1.3-31         carData_3.0-5       litedown_0.7        car_3.1-3          
-[51] hms_1.1.3           pbkrtest_0.5.4      bit64_4.6.0-1       rstatix_0.7.2       Formula_1.2-5      
-[56] glue_1.8.0          nloptr_2.2.1        stringi_1.8.7       gtable_0.3.6        tables_0.9.31      
-[61] lmtest_0.9-40       pillar_1.11.0       htmltools_0.5.8.1   R6_2.6.1            Rdpack_2.6.4       
-[66] evaluate_1.0.4      lattice_0.22-6      rbibutils_2.3       backports_1.5.0     broom_1.0.9        
-[71] Rcpp_1.0.14         checkmate_2.3.2     coda_0.19-4.1       gridExtra_2.3       nlme_3.1-168       
-[76] mgcv_1.9-1          xfun_0.52           zoo_1.8-14          pkgconfig_2.0.3    
+ [1] Rdpack_2.6.4        gridExtra_2.3       rlang_1.1.6         magrittr_2.0.3      compiler_4.5.0     
+ [6] mgcv_1.9-1          systemfonts_1.2.3   vctrs_0.6.5         pkgconfig_2.0.3     fastmap_1.2.0      
+[11] backports_1.5.0     labeling_0.4.3      effectsize_1.0.1    promises_1.3.3      rmarkdown_2.29     
+[16] tzdb_0.5.0          ps_1.9.1            nloptr_2.2.1        ragg_1.4.0          bit_4.6.0          
+[21] xfun_0.52           litedown_0.7        later_1.4.2         parallel_4.5.0      broom_1.0.9        
+[26] R6_2.6.1            tables_0.9.31       stringi_1.8.7       RColorBrewer_1.1-3  car_3.1-3          
+[31] boot_1.3-31         lmtest_0.9-40       numDeriv_2016.8-1.1 estimability_1.5.1  Rcpp_1.0.14        
+[36] assertthat_0.2.1    knitr_1.50          zoo_1.8-14          parameters_0.28.0   splines_4.5.0      
+[41] timechange_0.3.0    tidyselect_1.2.1    abind_1.4-8         yaml_2.3.10         websocket_1.4.4    
+[46] processx_3.8.6      lattice_0.22-6      withr_3.0.2         bayestestR_0.16.1   coda_0.19-4.1      
+[51] evaluate_1.0.4      xml2_1.3.8          pillar_1.11.0       carData_3.0-5       checkmate_2.3.2    
+[56] reformulas_0.4.1    insight_1.4.0       generics_0.1.4      chromote_0.5.1      hms_1.1.3          
+[61] scales_1.4.0        minqa_1.2.8         xtable_1.8-4        glue_1.8.0          tools_4.5.0        
+[66] webshot2_0.1.2      data.table_1.17.8   egg_0.4.5           ggsignif_0.6.4      fs_1.6.6           
+[71] mvtnorm_1.3-3       grid_4.5.0          Ben_0.1.0           rbibutils_2.3       datawizard_1.2.0   
+[76] nlme_3.1-168        performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1  
+[81] fansi_1.0.6         gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37      
+[86] pbkrtest_0.5.4      farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4     bit64_4.6.0-1      
+[91] MASS_7.3-65        
 \end{verbatim}
 
 \phantomsection\label{refs}
