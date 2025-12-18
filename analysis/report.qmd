@@ -34,9 +34,9 @@ is_running_in_quarto <- function() {
 
 # Example usage:
 if (is_running_in_quarto()) {
-  dat <- read_parquet("../data/processed/cleaned_data.parquet")
+  dat <- read_parquet("../data/processed/analysis_data.parquet")
 } else {
- dat <- read_parquet("./data/processed/cleaned_data.parquet")
+ dat <- read_parquet("./data/processed/analysis_data.parquet")
 }
 
 
@@ -139,6 +139,7 @@ dat %>%
   ggplot(aes(politicalorientation_1)) + 
   geom_histogram(aes(fill = after_stat(x))) + 
   labs(x = 'Political Orientation', y = "Count")+
+  theme_minimal()+
   theme(legend.position = "none")+
   scale_fill_gradient2(low = party_colors["Democrat"], 
                        mid = "gray40", 
@@ -243,7 +244,6 @@ p2 <- dat %>%
   theme(
     plot.title = element_text(face = "bold"),
     legend.position = c(0.85, 0.85),
-    legend.background = element_rect(fill = "white", color = "gray80", linewidth = 0.3)
   )
 
 p1
@@ -272,27 +272,43 @@ dat %>%
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 ```
 
-Does baseline confidence predict baseline accuracy? We examine whether more confident participants are less accurate in their judgments, consistent with Dunning-Kruger effects.
+Does baseline accuracy predict baseline confidence? We examine whether less accurate participants are overconfident in their judgments, consistent with Dunning-Kruger effects.
 
 ```{r baseline-accuracy-confidence-correlation}
-#| fig-width: 6
+#| fig-width: 8
 #| fig-height: 4
 
-dat %>%
-  ggplot(aes(x = confidence_outgroup_pre, y = accuracy_pre, color = participant_party)) +
-  geom_point(alpha = 0.6, size = 2.5) +
-  geom_smooth(method = "loess", se = TRUE, linewidth = 1) +
-  stat_cor(aes(label = paste((..r.label..), ..p.label.., sep = "~`,`~")),
-           method = "pearson", show.legend = FALSE, size = 3.5) +
-  scale_color_manual(values = party_colors, name = "Political Party") +
+# Create inverted accuracy for plotting (higher = better skill)
+dat_dk <- dat %>%
+  mutate(
+    skill_pre = -accuracy_pre,  # Flip so higher = more accurate
+    skill_post = -accuracy_post
+  ) %>%
+  select(ResponseId, participant_party, skill_pre, skill_post,
+         confidence_outgroup_pre, confidence_outgroup_post) %>%
+  pivot_longer(cols = c(skill_pre, skill_post, confidence_outgroup_pre, confidence_outgroup_post),
+               names_to = c(".value", "time"),
+               names_pattern = "(.+)_(pre|post)") %>%
+  mutate(time = factor(time, levels = c("pre", "post")))
+
+ggplot(dat_dk, aes(x = skill, y = confidence_outgroup, linetype = time, color = participant_party, fill = participant_party)) +
+  geom_smooth(method = "loess", se = TRUE, linewidth = 1, alpha = .1) +
+  facet_wrap(~participant_party) +
+  scale_linetype_manual(values = c("pre" = "solid", "post" = "dashed"),
+                        labels = c("pre" = "Pre-interaction", "post" = "Post-interaction"),
+                        name = "Time") +
   labs(
-    title = "Relationship Between Baseline Confidence and Accuracy",
-    subtitle = "Testing for Dunning-Kruger effects",
-    x = "Baseline Confidence (1-5 scale)",
-    y = "Baseline Accuracy (Absolute Error)"
+    title = "Relationship Between Skill and Confidence",
+    subtitle = "Testing for Dunning-Kruger effects pre- and post-interaction",
+    x = "Skill (Higher = More Accurate)",
+    y = "Confidence (1-5 scale)"
   ) +
   theme_minimal() +
-  theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+  scale_color_manual(values = party_colors)+
+  scale_fill_manual(values = party_colors)+
+  theme(plot.title = element_text(face = "bold"),
+        legend.position = "none",
+        strip.text = element_text(face = "bold"))
 ```
 
 ### Q1. Do people update their beliefs after interacting with the chatbot?
@@ -644,6 +660,7 @@ dat_for_reg %>%
     x = "Empathy Rating (1-5)",
     y = "Informativeness Rating (1-5)"
   ) +
+  theme_minimal()+
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 ```
 

@@ -15,7 +15,6 @@ analysis_data <- dat %>%
 
     # Political orientation and grouping
     politicalorientation_1,
-    participant_party,
     learner_party,
     political_extremism,
 
@@ -58,7 +57,16 @@ analysis_data <- dat %>%
     has_conversation,
 
     # Applied judgment (slogans)
-    Q23
+    slogan = Q23
+  ) %>%
+
+  # Derive participant_party from learner_party (avoiding redundancy)
+  mutate(
+    participant_party = case_when(
+      learner_party == "D→R" ~ "Democrat",
+      learner_party == "R→D" ~ "Republican",
+      TRUE ~ NA_character_
+    )
   )
 
 # Save minimal dataset
