@@ -220,7 +220,7 @@ p1 <- dat %>%
   geom_density(color = NA, fill = "gray30", alpha = 0.6) +
   labs(
     title = "Overall Distribution",
-    x = "Baseline Accuracy (Absolute Error)",
+    x = "Baseline Accuracy (higher = more accurate)",
     y = "Density"
   ) +
   theme_minimal() +
@@ -236,7 +236,7 @@ p2 <- dat %>%
   ) +
   labs(
     title = "By Participant Party",
-    x = "Baseline Accuracy (Absolute Error)",
+    x = "Baseline Accuracy (higher = more accurate)",
     y = "Density"
   ) +
   theme_minimal() +
@@ -265,7 +265,7 @@ dat %>%
   scale_color_manual(values = party_colors, name = "Political Party") +
   labs(
     title = "Relationship Between Baseline Accuracy and Warmth",
-    x = "Baseline Accuracy (Absolute Error)",
+    x = "Baseline Accuracy (higher = more accurate)",
     y = "Baseline Warmth (0-100 scale)"
   ) +
   theme_minimal() +
@@ -289,7 +289,7 @@ dat %>%
     title = "Relationship Between Baseline Confidence and Accuracy",
     subtitle = "Testing for Dunning-Kruger effects",
     x = "Baseline Confidence (1-5 scale)",
-    y = "Baseline Accuracy (Absolute Error)"
+    y = "Baseline Accuracy (higher = more accurate)"
   ) +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
@@ -323,7 +323,7 @@ accuracy_model <- lmer(error ~ time * learner_party + (1 | ResponseId), data = a
 warmth_model <- lmer(warmth ~ time * learner_party + (1 | ResponseId), data = warmth_long)
 
 # Extract coefficients for inline reporting
-accuracy_time_coef <- abs(fixef(accuracy_model0)["timepost"])
+accuracy_time_coef <- fixef(accuracy_model0)["timepost"]
 warmth_time_coef <- fixef(warmth_model0)["timepost"]
 
 
@@ -341,7 +341,7 @@ p_accuracy <- ggplot(accuracy_summary, aes(x = time, y = mean_error, color = lea
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_error - se_error, ymax = mean_error + se_error), width = 0.1) +
   scale_color_manual(values = learner_party_colors, name = "Learner Party") +
-  labs(title = "Belief Accuracy", x = "Time", y = "Mean Absolute Error") +
+  labs(title = "Belief Accuracy", x = "Time", y = "Mean Accuracy") +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 
@@ -361,12 +361,12 @@ p_accuracy + p_warmth + plot_layout(guides = "collect") & theme(legend.position 
 # Display models side by side
 modelsummary(
   list(
-    "Accuracy" = accuracy_model0, 
+    "Accuracy" = accuracy_model0,
     "Warmth" = warmth_model0),
   stars = TRUE,
   gof_map = c("nobs", "r.squared"),
   coef_map = coef_map_common,
-  notes = "Note: Accuracy is absolute error (lower = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
+  notes = "Note: Accuracy is negative absolute error (higher = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
 )
 ```
 
@@ -470,7 +470,7 @@ modelsummary(
   add_rows = rows,
   gof_map = c("nobs", "r.squared"),
   coef_map = coef_map_common,
-  notes = "Note: Accuracy is absolute error (lower = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
+  notes = "Note: Accuracy is negative absolute error (higher = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
 ) %>%
  strip_tt(line = TRUE) |>
     group_tt(i = list("Effects by Political Affiliation" = 1, "Full Regression Results" = 5)) |>

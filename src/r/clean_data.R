@@ -191,9 +191,9 @@ clean_dat <- clean_dat %>%
     suffix = c("", "_actual")
   ) %>%
   mutate(
-    # Compute absolute error (lower = more accurate)
-    accuracy_pre = abs(green_outgroup_pre - actual_green),
-    accuracy_post = abs(green_outgroup_post - actual_green)
+    # Compute negative absolute error (higher = more accurate)
+    accuracy_pre = -abs(green_outgroup_pre - actual_green),
+    accuracy_post = -abs(green_outgroup_post - actual_green)
   )
 
 # Merge conversation metrics if available

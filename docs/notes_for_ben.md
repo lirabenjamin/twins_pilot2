@@ -1,5 +1,32 @@
 # Notes for Ben
 
+## 2025-12-18: Fixed Accuracy Scoring to Use Negative Absolute Error
+
+**What was changed**:
+- Modified accuracy calculation in `src/r/clean_data.R` to use **negative absolute error** instead of absolute error
+- This means **higher scores now indicate better accuracy**, making interpretation more intuitive
+- Removed the `abs()` wrapper that was flipping signs for reporting (line 326 in report.qmd)
+- Updated all plot axis labels and table notes to reflect the new scoring direction
+
+**Specific changes**:
+1. **clean_data.R:194-196**: Changed from `abs(green_outgroup_pre/post - actual_green)` to `-abs(...)`
+2. **report.qmd:326**: Removed `abs()` wrapper around `accuracy_time_coef`
+3. **report.qmd**: Updated all axis labels from "Absolute Error" to "(higher = more accurate)"
+4. **report.qmd**: Updated table notes to say "negative absolute error (higher = more accurate)"
+
+**Why this is better**:
+- Aligns accuracy with other measures (warmth, confidence) where higher = better
+- Eliminates confusion about direction of effects
+- Removes need for sign-flipping workarounds that were specific to Dunning-Kruger analyses
+- Makes correlation interpretations straightforward (positive correlation = more X, more accuracy)
+
+**Action needed**:
+- Re-run `src/r/clean_data.R` to regenerate the cleaned data with new accuracy scores
+- Then re-run `src/r/create_analysis_data.R` and render the report
+- Or simply run `make all` to regenerate the entire pipeline
+
+---
+
 ## 2025-12-17: Writing Review of report.qmd
 
 I've reviewed your report and identified areas for improvement based on your writing guidelines. Here are the main issues organized by priority:
