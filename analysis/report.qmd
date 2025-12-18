@@ -20,7 +20,10 @@ library(modelsummary)
 library(gt)
 library(ggplot2)
 library(ggpubr)
-
+library(patchwork)
+library(emmeans)
+library(tinytable)
+library(jsonlite)
 
 # Load cleaned data
 dat <- read_parquet("../data/processed/cleaned_data.parquet")
@@ -96,6 +99,22 @@ warmth_long <- dat %>%
 
 ### Preliminaries
 
+Where does our sample fall in the political spectrum?
+
+```{r}
+#| fig-height: 3
+#| fig-width: 4
+dat %>% 
+  ggplot(aes(politicalorientation_1)) + 
+  geom_histogram(aes(fill = after_stat(x))) + 
+  labs(x = 'Political Orientation', y = "Count")+
+  theme(legend.position = "none")+
+  scale_fill_gradient2(low = party_colors["Democrat"], 
+                       mid = "gray40", 
+                       high = party_colors["Republican"],
+                       midpoint = 50)  # Adjust midpoint to your scale center
+```
+
 Democrats' and Republicans' actual green values and their perceptions of ingroup and outgroup attitudes.
 
 ```{r preliminaries, fig.width=6, fig.height=4}
@@ -127,9 +146,49 @@ ggplot(prelim_data, aes(x = participant_party, y = value, fill = participant_par
   theme(
     plot.title = element_text(face = "bold", size = 14),
     strip.text = element_text(face = "bold"),
-    legend.position = "bottom",
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    legend.position = "none"
   )
+```
+
+What is the distribution of bias?
+```{r bias-distribution}
+#| layout-ncol: 2
+#| fig-width: 4
+#| fig-height: 3
+
+# Overall distribution
+p1 <- dat %>%
+  ggplot(aes(x = accuracy_pre)) +
+  geom_density(color = NA, fill = "gray30", alpha = 0.6) +
+  labs(
+    title = "Overall Distribution",
+    x = "Baseline Accuracy (Absolute Error)",
+    y = "Density"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"))
+
+# By participant party
+p2 <- dat %>%
+  ggplot(aes(x = accuracy_pre, fill = participant_party)) +
+  geom_density(color = NA, alpha = 0.6) +
+  scale_fill_manual(
+    values = c("Democrat" = "steelblue", "Republican" = "firebrick"),
+    name = "Participant Party"
+  ) +
+  labs(
+    title = "By Participant Party",
+    x = "Baseline Accuracy (Absolute Error)",
+    y = "Density"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom"
+  )
+
+p1
+p2
 ```
 
 ### Q1. Do people update their beliefs after interacting with the chatbot?
@@ -151,11 +210,12 @@ warmth_summary <- warmth_long %>%
             .groups = "drop")
 ```
 
-```{r q1-plots, fig.width=10, fig.height=4}
-#| layout-ncol: 2
+```{r q1-plots}
+#| fig-width: 10
+#| fig-height: 4
 
-# Accuracy plot
-ggplot(accuracy_summary, aes(x = time, y = mean_error, color = learner_party, group = learner_party)) +
+# Combine plots side by side using patchwork
+p_accuracy <- ggplot(accuracy_summary, aes(x = time, y = mean_error, color = learner_party, group = learner_party)) +
   geom_line(linewidth = 1) +
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_error - se_error, ymax = mean_error + se_error), width = 0.1) +
@@ -164,8 +224,7 @@ ggplot(accuracy_summary, aes(x = time, y = mean_error, color = learner_party, gr
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 
-# Warmth plot
-ggplot(warmth_summary, aes(x = time, y = mean_warmth, color = learner_party, group = learner_party)) +
+p_warmth <- ggplot(warmth_summary, aes(x = time, y = mean_warmth, color = learner_party, group = learner_party)) +
   geom_line(linewidth = 1) +
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_warmth - se_warmth, ymax = mean_warmth + se_warmth), width = 0.1) +
@@ -173,6 +232,8 @@ ggplot(warmth_summary, aes(x = time, y = mean_warmth, color = learner_party, gro
   labs(title = "Outgroup Warmth", x = "Time", y = "Mean Warmth") +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+
+p_accuracy + p_warmth + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 ```
 
 ```{r q1-models}
@@ -199,9 +260,6 @@ modelsummary(
 The primary analyses above test whether Democrats and Republicans show different patterns of belief updating. The key test is the `time × learner_party` interaction in the mixed-effects models. A significant interaction would indicate asymmetric updating across groups.
 
 ```{r}
-library(emmeans)
-library(broom)
-
 # Get simple effects
 accuracy_contrasts <- emmeans(accuracy_model, ~ time | learner_party) %>%
   contrast("pairwise") %>%
@@ -229,29 +287,32 @@ format_emmeans <- function(contrasts) {
 acc_formatted <- format_emmeans(accuracy_contrasts)
 warmth_formatted <- format_emmeans(warmth_contrasts)
 
-# Create the table with add_rows
-modelsummary(
-  list("Accuracy" = accuracy_model, "Warmth" = warmth_model),
-  stars = TRUE,
-  gof_map = c("nobs", "r.squared"),
-  add_rows = tibble(
+rows = tibble(
     term = c("Time effect (Democrat)", "", "Time effect (Republican)", ""),
     `Accuracy` = c(acc_formatted$formatted[1], acc_formatted$se_formatted[1],
                    acc_formatted$formatted[2], acc_formatted$se_formatted[2]),
     `Warmth` = c(warmth_formatted$formatted[1], warmth_formatted$se_formatted[1],
                  warmth_formatted$formatted[2], warmth_formatted$se_formatted[2])
+  )
+attr(rows, "position") <- c(1, 2, 3, 4) # Inserts at rows 1 and 2
+
+# Create the table with add_rows
+modelsummary(
+  list("Accuracy" = accuracy_model, "Warmth" = warmth_model),
+  stars = TRUE,
+  add_rows = rows,
+  gof_map = c("nobs", "r.squared"),
+  coef_rename = c(
+    "timepost" = "Time (Post)",
+    "learner_partyR→D" = "Learner Party (R→D)",
+    "timepost:learner_partyR→D" = "Time × Learner Party"
   ),
   notes = "Note: Accuracy is absolute error (lower = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
-)
-# Display models side by side
-modelsummary(
-  list(
-    "Accuracy" = accuracy_model, 
-    "Warmth" = warmth_model),
-  stars = TRUE,
-  gof_map = c("nobs", "r.squared"),
-  notes = "Note: Accuracy is absolute error (lower = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
-)
+) %>%
+ strip_tt(line = TRUE) |>
+    group_tt(i = list("Effects by Political Affiliation" = 1, "Full Regression Results" = 5)) |>
+      style_tt(i = c(1, 6), bold = TRUE) |>
+    style_tt(i = c(14, 16), line = "b", line_color = "lightgray")
 ```
 
 ### Q3. Does political extremity predict how much people update?
@@ -277,14 +338,82 @@ warmth_extremism_model <- lmer(
   data = warmth_long_ext
 )
 
+
+# Get simple effects at different extremism levels (low = -1 SD, high = +1 SD)
+extremism_mean <- mean(accuracy_long_ext$political_extremism, na.rm = TRUE)
+extremism_sd <- sd(accuracy_long_ext$political_extremism, na.rm = TRUE)
+
+low_extremism = extremism_mean - extremism_sd
+high_extremism = extremism_mean + extremism_sd
+
+accuracy_extremism_contrasts <- emmeans(accuracy_extremism_model,
+  ~ time | political_extremism,
+  at = list(political_extremism = c(low_extremism, high_extremism))) %>%
+  contrast("pairwise") %>%
+  tidy()
+
+warmth_extremism_contrasts <- emmeans(warmth_extremism_model, ~ time | political_extremism,
+at = list(political_extremism = c(low_extremism, high_extremism))
+) %>%
+  contrast("pairwise") %>%
+  tidy()
+
+# Format simple effects
+acc_ext_formatted <- accuracy_extremism_contrasts %>%
+  mutate(
+    stars = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01 ~ "**",
+      p.value < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    formatted = sprintf("%.3f%s", estimate, stars),
+    se_formatted = sprintf("(%.3f)", std.error)
+  )
+
+warmth_ext_formatted <- warmth_extremism_contrasts %>%
+  mutate(
+    stars = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01 ~ "**",
+      p.value < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    formatted = sprintf("%.3f%s", estimate, stars),
+    se_formatted = sprintf("(%.3f)", std.error)
+  )
+
+rows_extremism <- tibble(
+  term = c("Time effect (Low Extremism)", "", "Time effect (High Extremism)", ""),
+  `Accuracy` = c(acc_ext_formatted$formatted[1], acc_ext_formatted$se_formatted[1],
+                 acc_ext_formatted$formatted[2], acc_ext_formatted$se_formatted[2]),
+  `Warmth` = c(warmth_ext_formatted$formatted[1], warmth_ext_formatted$se_formatted[1],
+               warmth_ext_formatted$formatted[2], warmth_ext_formatted$se_formatted[2])
+)
+attr(rows_extremism, "position") <- c(1, 2, 3, 4)
+
 # Display models
 modelsummary(
   list("Accuracy" = accuracy_extremism_model, "Warmth" = warmth_extremism_model),
   stars = TRUE,
+  add_rows = rows_extremism,
   coef_omit = "Intercept",
   gof_map = c("nobs", "r.squared"),
-  notes = "Note: Three-way interaction tests whether extremism moderates differential updating. * p<0.05, ** p<0.01, *** p<0.001"
-)
+  coef_rename = c(
+    "timepost" = "Time (Post)",
+    "learner_partyR→D" = "Learner Party (R→D)",
+    "political_extremism" = "Political Extremism",
+    "timepost:learner_partyR→D" = "Time × Learner Party",
+    "timepost:political_extremism" = "Time × Extremism",
+    "learner_partyR→D:political_extremism" = "Learner Party × Extremism",
+    "timepost:learner_partyR→D:political_extremism" = "Time × Learner Party × Extremism"
+  ),
+  notes = "Note: Time effects show pre-to-post change at Low Extremism (-1 SD) and High Extremism (+1 SD). Three-way interaction tests whether extremism moderates differential updating. * p<0.05, ** p<0.01, *** p<0.001"
+) %>%
+  strip_tt(line = TRUE) %>%
+  group_tt(i = list("Simple Effects by Extremism Level" = 1, "Full Regression Results" = 5)) %>%
+  style_tt(i = c(1, 6), bold = TRUE) %>%
+  style_tt(i = c(17, 19), line = "b", line_color = "lightgray")
 ```
 
 ### Q4. Is belief updating associated with how the chatbot is perceived?
@@ -307,6 +436,12 @@ modelsummary(
   list("Accuracy" = accuracy_process_model, "Warmth" = warmth_process_model),
   stars = TRUE,
   gof_map = c("nobs", "r.squared", "adj.r.squared"),
+  coef_rename = c(
+    "accuracy_pre" = "Baseline Accuracy",
+    "warmth_outgroup_pre" = "Baseline Warmth",
+    "info" = "Bot Informativeness",
+    "empathy" = "Bot Empathy"
+  ),
   notes = "Note: Regressions control for pre-interaction values. * p<0.05, ** p<0.01, *** p<0.001"
 )
 ```
@@ -314,11 +449,9 @@ modelsummary(
 Do perceptions of informativeness and empathy correlate with each other?
 
 ```{r}
-library(ggpubr)
-
 dat_for_reg %>%
   ggplot(aes(x = empathy, y = info, color = learner_party)) +
-  geom_jitter(alpha = 0.6, size = 2.5, width = 0.1, height = 0.1) +
+  geom_jitter(alpha = 0.6, size = 2.5, width = 0.3, height = 0.3) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
   stat_cor(aes(label = paste((..r.label..), ..p.label.., sep = "~`,`~")),
            method = "pearson", show.legend = FALSE, size = 3.5) +
@@ -328,13 +461,10 @@ dat_for_reg %>%
     x = "Empathy Rating (1-5)",
     y = "Informativeness Rating (1-5)"
   ) +
-  theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 ```
 
 ### Q5. Does engagement ("dose") matter for belief updating?
-
-The pre-registration specified examining whether engagement with the chatbot—operationalized as the number of words typed by participants during the chat—is associated with post-interaction outcomes. We test whether greater engagement predicts more belief updating and warmth change.
 
 ```{r engagement-descriptives}
 # Descriptive statistics for engagement
@@ -354,17 +484,15 @@ dat <- dat %>%
     warmth_change = warmth_outgroup_post - warmth_outgroup_pre,
     log_word_count = log(user_word_count)
   )
-
-cat("Engagement metrics:\n")
-cat(sprintf("  Turn count: M = %.2f, SD = %.2f\n",
-            engagement_summary$mean_turns, engagement_summary$sd_turns))
-cat(sprintf("  Word count: M = %.2f, SD = %.2f\n",
-            engagement_summary$mean_words, engagement_summary$sd_turns))
 ```
+
+The pre-registration specified examining whether engagement with the chatbot—operationalized as the number of words typed by participants during the chat—is associated with post-interaction outcomes. Participants engaged in an average of `r sprintf("%.2f", engagement_summary$mean_turns)` conversation turns (*SD* = `r sprintf("%.2f", engagement_summary$sd_turns)`) and typed an average of `r sprintf("%.2f", engagement_summary$mean_words)` words (*SD* = `r sprintf("%.2f", engagement_summary$sd_words)`). We test whether greater engagement predicts more belief updating and warmth change.
 
 #### Does engagement predict belief accuracy improvement?
 
 ```{r engagement-accuracy}
+# TO-DO. Move Log(Word Count) to just below Turn Count. Put the rest of the control variables at the bottom.
+
 # Model: Engagement predicting accuracy change
 m_accuracy_turns <- lm(accuracy_change ~ user_turn_count + accuracy_pre + learner_party,
                        data = dat)
@@ -392,6 +520,8 @@ Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_
 #### Does engagement predict warmth change?
 
 ```{r engagement-warmth}
+# TO-DO
+
 # Model: Engagement predicting warmth change
 m_warmth_turns <- lm(warmth_change ~ user_turn_count + warmth_outgroup_pre + learner_party,
                      data = dat)
@@ -412,67 +542,90 @@ modelsummary(
     "learner_partyR→D" = "Learner: R→D"
   )
 )
+
+# TO-DO: Consolidate into this table below.
+modelsummary(
+  list(
+    "Turn Count" = m_accuracy_turns,
+    "Log(Word Count)" = m_accuracy_log_words,
+    "Turn Count" = m_warmth_turns,
+    "Log(Word Count)" = m_warmth_log_words
+  ),
+  stars = TRUE,
+  gof_map = c("nobs", "r.squared", "adj.r.squared"),
+  coef_rename = c(
+    "user_turn_count" = "Turn Count",
+    "log_word_count" = "Log(Word Count)",
+    "warmth_outgroup_pre" = "Baseline Warmth",
+    "learner_partyR→D" = "Learner: R→D"
+  )
+)  %>% 
+  group_tt(j = list("Accuracy" = 2:3, "Warmth" = 4:5)) 
 ```
 
 Greater engagement—measured by turn count—was `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
 
-```{r engagement-plots, fig.width=10, fig.height=8}
+```{r engagement-plots}
+#| fig-width: 10
+#| fig-height: 8
+
+# Filter out outliers with over 75 turns
+dat_filtered <- dat %>% filter(user_turn_count <= 75)
+
 # Plots with turn count
-p1 <- ggplot(dat, aes(x = user_turn_count, y = accuracy_change, color = learner_party)) +
+p1 <- ggplot(dat_filtered, aes(x = user_turn_count, y = accuracy_change, color = learner_party)) +
   geom_point(alpha = 0.5) +
   stat_cor()+
   geom_smooth(method = "lm", se = TRUE) +
-  scale_color_manual(values = learner_party_colors) +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(
     x = "Turn Count",
     y = "Accuracy Change\n(Negative = Improvement)",
-    color = "Learner Party",
     title = "Turn Count and Accuracy Change"
   ) +
   theme_minimal()
 
-p2 <- ggplot(dat, aes(x = user_turn_count, y = warmth_change, color = learner_party)) +
+p2 <- ggplot(dat_filtered, aes(x = user_turn_count, y = warmth_change, color = learner_party)) +
   geom_point(alpha = 0.5) +
   stat_cor()+
   geom_smooth(method = "lm", se = TRUE) +
-  scale_color_manual(values = learner_party_colors) +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(
     x = "Turn Count",
     y = "Warmth Change\n(Positive = Increase)",
-    color = "Learner Party",
     title = "Turn Count and Warmth Change"
   ) +
   theme_minimal()
 
 # Plots with log word count
-p3 <- ggplot(dat, aes(x = log_word_count, y = accuracy_change, color = learner_party)) +
+p3 <- ggplot(dat_filtered, aes(x = log_word_count, y = accuracy_change, color = learner_party)) +
   geom_point(alpha = 0.5) +
   stat_cor()+
   geom_smooth(method = "lm", se = TRUE) +
-  scale_color_manual(values = learner_party_colors) +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(
     x = "Log(Word Count)",
     y = "Accuracy Change\n(Negative = Improvement)",
-    color = "Learner Party",
     title = "Log(Word Count) and Accuracy Change"
   ) +
   theme_minimal()
 
-p4 <- ggplot(dat, aes(x = log_word_count, y = warmth_change, color = learner_party)) +
+p4 <- ggplot(dat_filtered, aes(x = log_word_count, y = warmth_change, color = learner_party)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", se = TRUE) +
   stat_cor()+
-  scale_color_manual(values = learner_party_colors) +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
   labs(
     x = "Log(Word Count)",
     y = "Warmth Change\n(Positive = Increase)",
-    color = "Learner Party",
     title = "Log(Word Count) and Warmth Change"
   ) +
   theme_minimal()
 
-library(patchwork)
-(p1 + p2) / (p3 + p4) + plot_layout(guides = "collect")
+# Combine plots with single shared legend at bottom
+(p1 + p2) / (p3 + p4) +
+  plot_layout(guides = "collect") &
+  theme(legend.position = "bottom")
 ```
 
 ### Q6. Does interacting with the chatbot improve applied judgment?
@@ -521,14 +674,45 @@ ggplot(confidence_summary, aes(x = time, y = mean_confidence, color = learner_pa
 confidence_model0 <- lmer(confidence ~ time + (1 | ResponseId), data = confidence_long)
 confidence_model <- lmer(confidence ~ time * learner_party + (1 | ResponseId), data = confidence_long)
 
+# Get simple effects for the interaction model
+confidence_contrasts <- emmeans(confidence_model, ~ time | learner_party) %>%
+  contrast("pairwise") %>%
+  tidy()
+
+# Format simple effects
+conf_formatted <- confidence_contrasts %>%
+  mutate(
+    stars = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01 ~ "**",
+      p.value < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    formatted = sprintf("%.3f%s", estimate, stars),
+    se_formatted = sprintf("(%.3f)", std.error)
+  )
+
+rows_confidence <- tibble(
+  term = c("Time effect (D→R)", "", "Time effect (R→D)", ""),
+  `Confidence (Main Effect)` = c("", "", "", ""),
+  `Confidence (Interaction)` = c(conf_formatted$formatted[1], conf_formatted$se_formatted[1],
+                                 conf_formatted$formatted[2], conf_formatted$se_formatted[2])
+)
+attr(rows_confidence, "position") <- c(1, 2, 3, 4)
+
 # Display models
 modelsummary(
   list("Confidence (Main Effect)" = confidence_model0,
        "Confidence (Interaction)" = confidence_model),
   stars = TRUE,
+  add_rows = rows_confidence,
   gof_map = c("nobs", "r.squared"),
   notes = "Note: Confidence rated on 1-5 scale. * p<0.05, ** p<0.01, *** p<0.001"
-)
+) %>%
+  strip_tt(line = TRUE) %>%
+  group_tt(i = list("Simple Effects by Political Affiliation" = 1, "Full Regression Results" = 5)) %>%
+  style_tt(i = c(1, 6), bold = TRUE) %>%
+  style_tt(i = c(14, 16), line = "b", line_color = "lightgray")
 ```
 
 #### Correlation: Does confidence change track accuracy improvement?
@@ -543,7 +727,7 @@ calibration_dat <- dat_for_reg %>%
 
 # Create scatter plot with correlation statistics
 ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = learner_party)) +
-  geom_point(alpha = 0.6, size = 2.5) +
+  geom_jitter(alpha = 0.6, size = 2.5, width = .2, height= 0) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
   stat_cor(aes(label = paste((..r.label..), ..p.label.., sep = "~`,`~")),
            method = "pearson", show.legend = FALSE, size = 3.5) +
@@ -555,6 +739,10 @@ ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = 
     subtitle = "Does confidence change track with accuracy improvement?",
     caption = "Note: Negative correlation would indicate increased confidence associated with improved accuracy"
   ) +
+  geom_hline(yintercept = 0)+
+  geom_vline(xintercept = 0)+
+  annotate(geom = 'text', x = 2.5, y = -2.5, label= 'Rightfully more confident') +
+  # TODO: Complete annotations
   theme_minimal() +
   theme(
     plot.title = element_text(face = "bold", size = 14),
@@ -581,13 +769,48 @@ warmth_diff_long <- dat %>%
 # Mixed-effects model
 warmth_diff_model <- lmer(warmth_diff ~ time * learner_party + (1 | ResponseId), data = warmth_diff_long)
 
+# Get simple effects
+warmth_diff_contrasts <- emmeans(warmth_diff_model, ~ time | learner_party) %>%
+  contrast("pairwise") %>%
+  tidy()
+
+# Format simple effects
+warmth_diff_formatted <- warmth_diff_contrasts %>%
+  mutate(
+    stars = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01 ~ "**",
+      p.value < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    formatted = sprintf("%.3f%s", estimate, stars),
+    se_formatted = sprintf("(%.3f)", std.error)
+  )
+
+rows_warmth_diff <- tibble(
+  term = c("Time effect (D→R)", "", "Time effect (R→D)", ""),
+  `Warmth Difference` = c(warmth_diff_formatted$formatted[1], warmth_diff_formatted$se_formatted[1],
+                          warmth_diff_formatted$formatted[2], warmth_diff_formatted$se_formatted[2])
+)
+attr(rows_warmth_diff, "position") <- c(1, 2, 3, 4)
+
 # Display model
 modelsummary(
   list("Warmth Difference" = warmth_diff_model),
   stars = TRUE,
+  add_rows = rows_warmth_diff,
   gof_map = c("nobs", "r.squared"),
-  notes = "Note: Warmth difference = outgroup - ingroup. Positive time coefficient indicates reduced polarization. * p<0.05, ** p<0.01, *** p<0.001"
-)
+  coef_rename = c(
+    "timepost" = "Time (Post)",
+    "learner_partyR→D" = "Learner Party (R→D)",
+    "timepost:learner_partyR→D" = "Time × Learner Party"
+  ),
+  notes = "Note: Warmth difference = outgroup - ingroup. Positive values indicate reduced polarization. * p<0.05, ** p<0.01, *** p<0.001"
+) %>%
+  strip_tt(line = TRUE) %>%
+  group_tt(i = list("Simple Effects by Political Affiliation" = 1, "Full Regression Results" = 5)) %>%
+  style_tt(i = c(1, 6), bold = TRUE) %>%
+  style_tt(i = c(12, 14), line = "b", line_color = "lightgray")
 ```
 
 ## Discussion
@@ -923,7 +1146,6 @@ The following sections present the complete conversations for each extreme case,
 **Marketing message**: "Energy-saving Appliances, Helps Make America Great!"
 
 ```{r conversation-dr-most, results='asis'}
-library(jsonlite)
 convo <- fromJSON("../data/processed/conversations/R_3smKFSFIo8Nlgir.json")
 
 cat("\n")

@@ -1,5 +1,36 @@
 # Notes for Ben
 
+## 2025-12-17: Simple Effects Added to All MLM Tables
+
+**What was done**:
+Following the pattern from Q2, added simple effects/slopes at the top of all multilevel model tables in [report.qmd](../analysis/report.qmd)
+
+**Changes made**:
+
+**Q2 (Time × Party interaction):**
+- Already had simple effects of time for each learner party
+- Shows whether D→R and R→D participants updated differently
+
+**Q3 (Extremism moderation) - UPDATED:**
+- Shows time effects (pre-to-post change) at Low Extremism (-1 SD) and High Extremism (+1 SD)
+- Uses `emmeans()` to compute effects at specific extremism levels
+- Directly answers whether people at different extremism levels update differently
+- Table grouped: "Simple Effects by Extremism Level" at top, "Full Regression Results" below
+
+**Q7 (Confidence changes) - NEW:**
+- Added simple effects of time for each learner party
+- Uses `emmeans()` with contrast to show pre-to-post change for D→R and R→D
+- Table grouped: "Simple Effects by Political Affiliation" at top, "Full Regression Results" below
+
+**Formatting approach**:
+- All tables use `add_rows` with position attributes to insert simple effects at top
+- Use `group_tt()` to separate simple effects section from full regression results
+- Use `style_tt()` for bold headers and horizontal separator lines
+- Consistent presentation makes it easy to directly answer each research question
+
+**Why this helps**:
+Makes tables more reader-friendly by highlighting the key effects that directly answer each research question before showing the full model output with all coefficients.
+
 ## 2025-12-17: Makefile Added for Reproducible Pipeline
 
 **What was done**:

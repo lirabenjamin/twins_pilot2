@@ -7,7 +7,7 @@ library(tidyr)
 
 # Load raw data
 dat <- read_parquet("data/raw/qualtrics.parquet")
-tail(dat) %>% pull(ResponseId)
+
 # Clean data
 clean_dat <- dat %>%
   # Determine participant's party based on political orientation
