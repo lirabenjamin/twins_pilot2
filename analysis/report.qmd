@@ -272,6 +272,29 @@ dat %>%
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 ```
 
+Does baseline confidence predict baseline accuracy? We examine whether more confident participants are less accurate in their judgments, consistent with Dunning-Kruger effects.
+
+```{r baseline-accuracy-confidence-correlation}
+#| fig-width: 6
+#| fig-height: 4
+
+dat %>%
+  ggplot(aes(x = confidence_outgroup_pre, y = accuracy_pre, color = participant_party)) +
+  geom_point(alpha = 0.6, size = 2.5) +
+  geom_smooth(method = "loess", se = TRUE, linewidth = 1) +
+  stat_cor(aes(label = paste((..r.label..), ..p.label.., sep = "~`,`~")),
+           method = "pearson", show.legend = FALSE, size = 3.5) +
+  scale_color_manual(values = party_colors, name = "Political Party") +
+  labs(
+    title = "Relationship Between Baseline Confidence and Accuracy",
+    subtitle = "Testing for Dunning-Kruger effects",
+    x = "Baseline Confidence (1-5 scale)",
+    y = "Baseline Accuracy (Absolute Error)"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+```
+
 ### Q1. Do people update their beliefs after interacting with the chatbot?
 
 ```{r q1-data-prep}
