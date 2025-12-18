@@ -26,14 +26,47 @@ library(emmeans)
 library(tinytable)
 library(jsonlite)
 
+# switch for data load.
+is_running_in_quarto <- function() {
+  # Check if a Quarto-specific environment variable is set
+  return(Sys.getenv("QUARTO_DOCUMENT_PATH") != "")
+}
+
+# Example usage:
+if (is_running_in_quarto()) {
+  dat <- read_parquet("../data/processed/cleaned_data.parquet")
+} else {
+ dat <- read_parquet("./data/processed/cleaned_data.parquet")
+}
+
+
 # Load cleaned data
-dat <- read_parquet("../data/processed/cleaned_data.parquet")
+
 
 # Define consistent color scheme: Democrats = blue, Republicans = red
 party_colors <- c("Democrat" = "#0015BC", "Republican" = "#E81B23")
 
 # Define learner party colors (D→R = Democrat learning about Republicans, R→D = Republican learning about Democrats)
 learner_party_colors <- c("D→R" = "#0015BC", "R→D" = "#E81B23")
+
+# Define common coefficient mapping for all modelsummary tables
+coef_map_common <- c(
+  "timepost" = "Time (Post)",
+  "learner_partyR→D" = "Learner Party (R→D)",
+  "political_extremism" = "Political Extremism",
+  "timepost:learner_partyR→D" = "Time × Learner Party",
+  "timepost:political_extremism" = "Time × Extremism",
+  "learner_partyR→D:political_extremism" = "Learner Party × Extremism",
+  "timepost:learner_partyR→D:political_extremism" = "Time × Learner Party × Extremism",
+  "accuracy_pre" = "Baseline Accuracy",
+  "warmth_outgroup_pre" = "Baseline Warmth",
+  "confidence_outgroup_pre" = "Baseline Confidence",
+  "info" = "Bot Informativeness",
+  "empathy" = "Bot Empathy",
+  "user_turn_count" = "Turn Count",
+  "log_word_count" = "Log(Word Count)",
+  "SD (Intercept ResponseID)" = "SD(Intercept)"
+)
 ```
 
 ## Overview
@@ -68,10 +101,7 @@ We measured two primary outcomes to assess belief updating and affective change.
 - **Belief accuracy**: Absolute difference between participants' estimates of outgroup green attitudes and actual outgroup means (lower = more accurate)
 - **Outgroup warmth**: Feeling thermometer (0-100 scale) toward the political outgroup
 
-**Secondary Outcomes**
-
-- Confidence in outgroup judgments (5-point scale)
-- Bot informativeness and empathy ratings (5-point scale)
+Additionally, we collected confidence in outgroup judgments (5-point scale) and bot informativeness and empathy ratings (5-point scale)
 
 ### Pre-Registered Analyses
 
@@ -127,7 +157,7 @@ prelim_data <- dat %>%
   mutate(
     measure_type = factor(measure_type,
                           levels = c("green_own", "green_ingroup", "green_outgroup_pre", "green_outgroup_post"),
-                          labels = c("Own Attitudes", "Ingroup Perception", "Outgroup Perception (Pre)", "Outgroup Perception (Post)")),
+                          labels = c("Own Attitudes", "Ingroup Perception", "Outgroup Perception\n(Pre)", "Outgroup Perception\n(Post)")),
     participant_party = factor(participant_party, levels = c("Democrat", "Republican"))
   )
 
@@ -236,6 +266,25 @@ warmth_summary <- warmth_long %>%
             .groups = "drop")
 ```
 
+
+
+```{r q1-models}
+# Estimate mixed-effects models
+accuracy_model0 <- lmer(error ~ time  + (1 | ResponseId), data = accuracy_long)
+warmth_model0 <- lmer(warmth ~ time  + (1 | ResponseId), data = warmth_long)
+
+accuracy_model <- lmer(error ~ time * learner_party + (1 | ResponseId), data = accuracy_long)
+warmth_model <- lmer(warmth ~ time * learner_party + (1 | ResponseId), data = warmth_long)
+
+# Extract coefficients for inline reporting
+accuracy_time_coef <- abs(fixef(accuracy_model0)["timepost"])
+warmth_time_coef <- fixef(warmth_model0)["timepost"]
+
+
+```
+
+We examined whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown in the table above, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer).
+
 ```{r q1-plots}
 #| fig-width: 10
 #| fig-height: 4
@@ -262,18 +311,7 @@ p_warmth <- ggplot(warmth_summary, aes(x = time, y = mean_warmth, color = learne
 p_accuracy + p_warmth + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 ```
 
-```{r q1-models}
-# Estimate mixed-effects models
-accuracy_model0 <- lmer(error ~ time  + (1 | ResponseId), data = accuracy_long)
-warmth_model0 <- lmer(warmth ~ time  + (1 | ResponseId), data = warmth_long)
-
-accuracy_model <- lmer(error ~ time * learner_party + (1 | ResponseId), data = accuracy_long)
-warmth_model <- lmer(warmth ~ time * learner_party + (1 | ResponseId), data = warmth_long)
-
-# Extract coefficients for inline reporting
-accuracy_time_coef <- abs(fixef(accuracy_model0)["timepost"])
-warmth_time_coef <- fixef(warmth_model0)["timepost"]
-
+```{r}
 # Display models side by side
 modelsummary(
   list(
@@ -281,11 +319,10 @@ modelsummary(
     "Warmth" = warmth_model0),
   stars = TRUE,
   gof_map = c("nobs", "r.squared"),
+  coef_map = coef_map_common,
   notes = "Note: Accuracy is absolute error (lower = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
 )
 ```
-
-We examined whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown in the table above, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer).
 
 ### Q2. Is belief updating symmetric across political groups?
 
@@ -344,17 +381,20 @@ rows = tibble(
   )
 attr(rows, "position") <- c(1, 2, 3, 4) # Inserts at rows 1 and 2
 
+```
+
+While both groups became more accurate, it was Democrats learning about Republicans who showed greater improvement (*b* = `r sprintf("%.2f", acc_dr_est)`, *p* `r if(acc_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_dr_p))`). Republicans also became less biased about Democrats, though to a lesser extent (*b* = `r sprintf("%.2f", acc_rd_est)`, *p* `r if(acc_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_rd_p))`). The interaction term was `r if(acc_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", acc_interaction_coef)`, *p* `r if(acc_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_interaction_p))`).
+
+Both groups became warmer toward the outgroup at similar rates. Democrats learning about Republicans increased warmth by `r sprintf("%.1f", warmth_dr_est)` degrees (*p* `r if(warmth_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_dr_p))`), while Republicans learning about Democrats increased by `r sprintf("%.1f", warmth_rd_est)` degrees (*p* `r if(warmth_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_rd_p))`). The interaction was `r if(warmth_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", warmth_interaction_coef)`, *p* `r if(warmth_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_interaction_p))`).
+
+```{r}
 # Create the table with add_rows
 modelsummary(
   list("Accuracy" = accuracy_model, "Warmth" = warmth_model),
   stars = TRUE,
   add_rows = rows,
   gof_map = c("nobs", "r.squared"),
-  coef_rename = c(
-    "timepost" = "Time (Post)",
-    "learner_partyR→D" = "Learner Party (R→D)",
-    "timepost:learner_partyR→D" = "Time × Learner Party"
-  ),
+  coef_map = coef_map_common,
   notes = "Note: Accuracy is absolute error (lower = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
 ) %>%
  strip_tt(line = TRUE) |>
@@ -362,10 +402,6 @@ modelsummary(
       style_tt(i = c(1, 6), bold = TRUE) |>
     style_tt(i = c(14, 16), line = "b", line_color = "lightgray")
 ```
-
-While both groups became more accurate, it was Democrats learning about Republicans who showed greater improvement (*b* = `r sprintf("%.2f", acc_dr_est)`, *p* `r if(acc_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_dr_p))`). Republicans also became less biased about Democrats, though to a lesser extent (*b* = `r sprintf("%.2f", acc_rd_est)`, *p* `r if(acc_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_rd_p))`). The interaction term was `r if(acc_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", acc_interaction_coef)`, *p* `r if(acc_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_interaction_p))`).
-
-Both groups became warmer toward the outgroup at similar rates. Democrats learning about Republicans increased warmth by `r sprintf("%.1f", warmth_dr_est)` degrees (*p* `r if(warmth_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_dr_p))`), while Republicans learning about Democrats increased by `r sprintf("%.1f", warmth_rd_est)` degrees (*p* `r if(warmth_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_rd_p))`). The interaction was `r if(warmth_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", warmth_interaction_coef)`, *p* `r if(warmth_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_interaction_p))`).
 
 ### Q3. Does political extremity predict how much people update?
 
@@ -459,7 +495,11 @@ rows_extremism <- tibble(
                warmth_ext_formatted$formatted[2], warmth_ext_formatted$se_formatted[2])
 )
 attr(rows_extremism, "position") <- c(1, 2, 3, 4)
+```
 
+Politically extreme participants showed greater bias about the outgroup at baseline (*b* = `r sprintf("%.3f", extremism_acc_baseline_b)`, *p* `r if(extremism_acc_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_acc_baseline_p))`) and felt less warm toward them (*b* = `r sprintf("%.2f", extremism_warmth_baseline_b)`, *p* `r if(extremism_warmth_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_warmth_baseline_p))`). However, political extremism did not moderate the effect of the chatbot interaction. The three-way interaction for accuracy was `r if(extremism_3way_acc_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.3f", extremism_3way_acc_coef)`, *p* `r if(extremism_3way_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_acc_p))`), and for warmth was `r if(extremism_3way_warmth_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", extremism_3way_warmth_coef)`, *p* `r if(extremism_3way_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_warmth_p))`). More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.
+
+```{r}
 # Display models
 modelsummary(
   list("Accuracy" = accuracy_extremism_model, "Warmth" = warmth_extremism_model),
@@ -467,24 +507,14 @@ modelsummary(
   add_rows = rows_extremism,
   coef_omit = "Intercept",
   gof_map = c("nobs", "r.squared"),
-  coef_rename = c(
-    "timepost" = "Time (Post)",
-    "learner_partyR→D" = "Learner Party (R→D)",
-    "political_extremism" = "Political Extremism",
-    "timepost:learner_partyR→D" = "Time × Learner Party",
-    "timepost:political_extremism" = "Time × Extremism",
-    "learner_partyR→D:political_extremism" = "Learner Party × Extremism",
-    "timepost:learner_partyR→D:political_extremism" = "Time × Learner Party × Extremism"
-  ),
+  coef_map = coef_map_common,
   notes = "Note: Time effects show pre-to-post change at Low Extremism (-1 SD) and High Extremism (+1 SD). Three-way interaction tests whether extremism moderates differential updating. * p<0.05, ** p<0.01, *** p<0.001"
 ) %>%
   strip_tt(line = TRUE) %>%
   group_tt(i = list("Simple Effects by Extremism Level" = 1, "Full Regression Results" = 5)) %>%
   style_tt(i = c(1, 6), bold = TRUE) %>%
-  style_tt(i = c(17, 19), line = "b", line_color = "lightgray")
+  style_tt(i = c(20, 21), line = "b", line_color = "lightgray")
 ```
-
-Politically extreme participants showed greater bias about the outgroup at baseline (*b* = `r sprintf("%.3f", extremism_acc_baseline_b)`, *p* `r if(extremism_acc_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_acc_baseline_p))`) and felt less warm toward them (*b* = `r sprintf("%.2f", extremism_warmth_baseline_b)`, *p* `r if(extremism_warmth_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_warmth_baseline_p))`). However, political extremism did not moderate the effect of the chatbot interaction. The three-way interaction for accuracy was `r if(extremism_3way_acc_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.3f", extremism_3way_acc_coef)`, *p* `r if(extremism_3way_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_acc_p))`), and for warmth was `r if(extremism_3way_warmth_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", extremism_3way_warmth_coef)`, *p* `r if(extremism_3way_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_warmth_p))`). More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.
 
 ### Q4. Is belief updating associated with how the chatbot is perceived?
 
@@ -509,23 +539,20 @@ info_warmth_b <- coef(warmth_process_model)["info"]
 info_warmth_p <- summary(warmth_process_model)$coefficients["info", "Pr(>|t|)"]
 empathy_warmth_b <- coef(warmth_process_model)["empathy"]
 empathy_warmth_p <- summary(warmth_process_model)$coefficients["empathy", "Pr(>|t|)"]
+```
 
+Participants who found the chatbot more informative showed `r if(info_acc_p < 0.05) "significantly" else "marginally"` better accuracy improvement (*b* = `r sprintf("%.3f", info_acc_b)`, *p* `r if(info_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_acc_p))`) and `r if(info_warmth_p < 0.05) "significantly" else "marginally"` greater warmth increases (*b* = `r sprintf("%.2f", info_warmth_b)`, *p* `r if(info_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_warmth_p))`). Bot empathy did not significantly predict accuracy change (*b* = `r sprintf("%.3f", empathy_acc_b)`, *p* `r if(empathy_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_acc_p))`) or warmth change (*b* = `r sprintf("%.2f", empathy_warmth_b)`, *p* `r if(empathy_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_warmth_p))`).
+
+```{r}
 # Display models
 modelsummary(
   list("Accuracy" = accuracy_process_model, "Warmth" = warmth_process_model),
   stars = TRUE,
   gof_map = c("nobs", "r.squared", "adj.r.squared"),
-  coef_rename = c(
-    "accuracy_pre" = "Baseline Accuracy",
-    "warmth_outgroup_pre" = "Baseline Warmth",
-    "info" = "Bot Informativeness",
-    "empathy" = "Bot Empathy"
-  ),
+  coef_map = coef_map_common,
   notes = "Note: Regressions control for pre-interaction values. * p<0.05, ** p<0.01, *** p<0.001"
 )
 ```
-
-Participants who found the chatbot more informative showed `r if(info_acc_p < 0.05) "significantly" else "marginally"` better accuracy improvement (*b* = `r sprintf("%.3f", info_acc_b)`, *p* `r if(info_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_acc_p))`) and `r if(info_warmth_p < 0.05) "significantly" else "marginally"` greater warmth increases (*b* = `r sprintf("%.2f", info_warmth_b)`, *p* `r if(info_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_warmth_p))`). Bot empathy did not significantly predict accuracy change (*b* = `r sprintf("%.3f", empathy_acc_b)`, *p* `r if(empathy_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_acc_p))`) or warmth change (*b* = `r sprintf("%.2f", empathy_warmth_b)`, *p* `r if(empathy_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_warmth_p))`).
 
 Do perceptions of informativeness and empathy correlate with each other? Yes, but not strongly (r ~ .30). 
 
@@ -582,7 +609,11 @@ m_warmth_turns <- lm(warmth_change ~ user_turn_count + warmth_outgroup_pre + lea
                      data = dat)
 m_warmth_log_words <- lm(warmth_change ~ log_word_count + warmth_outgroup_pre + learner_party,
                          data = dat)
+```
 
+Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with accuracy change (*b* = `r sprintf("%.4f", coef(m_accuracy_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"])`), and `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect on accuracy was `r if(coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_accuracy_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"])`), and on warmth was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
+
+```{r}
 # Consolidated table
 modelsummary(
   list(
@@ -593,18 +624,10 @@ modelsummary(
   ),
   stars = TRUE,
   gof_map = c("nobs", "r.squared", "adj.r.squared"),
-  coef_map = c(
-    "user_turn_count" = "Turn Count",
-    "log_word_count" = "Log(Word Count)",
-    "accuracy_pre" = "Baseline Accuracy",
-    "warmth_outgroup_pre" = "Baseline Warmth",
-    "learner_partyR→D" = "Learner: R→D"
-  )
+  coef_map = coef_map_common
 )  %>%
   group_tt(j = list("Accuracy" = 2:3, "Warmth" = 4:5))
 ```
-
-Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with accuracy change (*b* = `r sprintf("%.4f", coef(m_accuracy_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"])`), and `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect on accuracy was `r if(coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_accuracy_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"])`), and on warmth was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
 
 ```{r engagement-plots}
 #| fig-width: 10
@@ -671,7 +694,7 @@ p4 <- ggplot(dat_filtered, aes(x = log_word_count, y = warmth_change, color = le
 
 ### Q6. Does interacting with the chatbot improve applied judgment?
 
-Participants wrote slogans for marketing energy-saving appliances to the political outgroup.
+Participants wrote slogans for marketing energy-saving appliances to the political outgroup. I haven't touched this data yet, because we don't have a control condition or a baseline slogan to make a meaningful comparison to.
 
 **DATA AVAILABLE**: Raw slogan text in variable `Q23` (n = `r sum(!is.na(dat$Q23))` responses).
 
@@ -683,8 +706,7 @@ Participants wrote slogans for marketing energy-saving appliances to the politic
 
 We examine participants' metacognitive awareness by testing (1) whether confidence changes from pre to post, and (2) whether confidence changes track with actual accuracy improvements.
 
-#### Model: Does confidence change pre-to-post?
-Republicans learning about Democrats gained confidence after the interaction, despite learning less than Democrats. Democrats' confidence did not change. See Figure below.
+#### Does confidence change pre-to-post?
 
 ```{r confidence-model}
 # Prepare confidence data in long format
@@ -702,15 +724,7 @@ confidence_summary <- confidence_long %>%
             se_confidence = sd(confidence, na.rm = TRUE) / sqrt(n()),
             .groups = "drop")
 
-# Confidence plot
-ggplot(confidence_summary, aes(x = time, y = mean_confidence, color = learner_party, group = learner_party)) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 3) +
-  geom_errorbar(aes(ymin = mean_confidence - se_confidence, ymax = mean_confidence + se_confidence), width = 0.1) +
-  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
-  labs(title = "Confidence in Outgroup Judgments", x = "Time", y = "Mean Confidence (1-5)") +
-  theme_minimal() +
-  theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+
 
 # Mixed-effects models
 confidence_model0 <- lmer(confidence ~ time + (1 | ResponseId), data = confidence_long)
@@ -720,6 +734,12 @@ confidence_model <- lmer(confidence ~ time * learner_party + (1 | ResponseId), d
 confidence_contrasts <- emmeans(confidence_model, ~ time | learner_party) %>%
   contrast("pairwise") %>%
   tidy()
+
+# Extract values for inline reporting
+conf_dr_est <- confidence_contrasts$estimate[1]  # D→R effect
+conf_dr_p <- confidence_contrasts$p.value[1]
+conf_rd_est <- confidence_contrasts$estimate[2]  # R→D effect
+conf_rd_p <- confidence_contrasts$p.value[2]
 
 # Format simple effects
 conf_formatted <- confidence_contrasts %>%
@@ -741,6 +761,20 @@ rows_confidence <- tibble(
                                  conf_formatted$formatted[2], conf_formatted$se_formatted[2])
 )
 attr(rows_confidence, "position") <- c(1, 2, 3, 4)
+```
+
+Republicans learning about Democrats gained confidence after the interaction (*b* = `r sprintf("%.3f", conf_rd_est)`, *p* `r if(conf_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_rd_p))`), despite learning less than Democrats. Democrats' confidence did not significantly change (*b* = `r sprintf("%.3f", conf_dr_est)`, *p* `r if(conf_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_dr_p))`).
+
+```{r}
+# Confidence plot
+ggplot(confidence_summary, aes(x = time, y = mean_confidence, color = learner_party, group = learner_party)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = mean_confidence - se_confidence, ymax = mean_confidence + se_confidence), width = 0.1) +
+  scale_color_manual(values = learner_party_colors, name = "Learner Party") +
+  labs(title = "Confidence in Outgroup Judgments", x = "Time", y = "Mean Confidence (1-5)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 
 # Display models
 modelsummary(
@@ -749,6 +783,7 @@ modelsummary(
   stars = TRUE,
   add_rows = rows_confidence,
   gof_map = c("nobs", "r.squared"),
+  coef_map = coef_map_common,
   notes = "Note: Confidence rated on 1-5 scale. * p<0.05, ** p<0.01, *** p<0.001"
 ) %>%
   strip_tt(line = TRUE) %>%
@@ -777,7 +812,11 @@ cor_rd <- cor.test(
   calibration_dat$confidence_change[calibration_dat$learner_party == "R→D"],
   calibration_dat$accuracy_change[calibration_dat$learner_party == "R→D"]
 )
+```
 
+Overall, confidence change did not track with accuracy improvement (*r* = `r sprintf("%.3f", cor_overall$estimate)`, *p* `r if(cor_overall$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_overall$p.value))`). For Democrats learning about Republicans, there was a `r if(cor_dr$p.value < 0.05) "significant positive" else "positive"` correlation between confidence change and accuracy change (*r* = `r sprintf("%.3f", cor_dr$estimate)`, *p* `r if(cor_dr$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_dr$p.value))`), indicating that those who became less accurate gained more confidence. For Republicans learning about Democrats, confidence change did not correlate with accuracy change (*r* = `r sprintf("%.3f", cor_rd$estimate)`, *p* `r if(cor_rd$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_rd$p.value))`).
+
+```{r}
 # Create scatter plot with correlation statistics
 ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = learner_party)) +
   geom_jitter(alpha = 0.6, size = 2.5, width = .2, height= 0) +
@@ -807,68 +846,6 @@ ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = 
   )
 ```
 
-Overall, confidence change did not track with accuracy improvement (*r* = `r sprintf("%.3f", cor_overall$estimate)`, *p* `r if(cor_overall$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_overall$p.value))`). For Democrats learning about Republicans, there was a `r if(cor_dr$p.value < 0.05) "significant positive" else "positive"` correlation between confidence change and accuracy change (*r* = `r sprintf("%.3f", cor_dr$estimate)`, *p* `r if(cor_dr$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_dr$p.value))`), indicating that those who became less accurate gained more confidence. For Republicans learning about Democrats, confidence change did not correlate with accuracy change (*r* = `r sprintf("%.3f", cor_rd$estimate)`, *p* `r if(cor_rd$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_rd$p.value))`).
-
-### Robustness Checks
-
-#### Warmth Difference Score
-
-Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup). Effects replicate what is reported on the main text.
-
-```{r warmth-difference}
-# Prepare warmth difference data
-warmth_diff_long <- dat %>%
-  select(ResponseId, learner_party, warmth_diff_pre, warmth_diff_post) %>%
-  pivot_longer(cols = c(warmth_diff_pre, warmth_diff_post), names_to = "time",
-               names_pattern = "warmth_diff_(pre|post)", values_to = "warmth_diff") %>%
-  mutate(time = factor(time, levels = c("pre", "post")))
-
-# Mixed-effects model
-warmth_diff_model <- lmer(warmth_diff ~ time * learner_party + (1 | ResponseId), data = warmth_diff_long)
-
-# Get simple effects
-warmth_diff_contrasts <- emmeans(warmth_diff_model, ~ time | learner_party) %>%
-  contrast("pairwise") %>%
-  tidy()
-
-# Format simple effects
-warmth_diff_formatted <- warmth_diff_contrasts %>%
-  mutate(
-    stars = case_when(
-      p.value < 0.001 ~ "***",
-      p.value < 0.01 ~ "**",
-      p.value < 0.05 ~ "*",
-      TRUE ~ ""
-    ),
-    formatted = sprintf("%.3f%s", estimate, stars),
-    se_formatted = sprintf("(%.3f)", std.error)
-  )
-
-rows_warmth_diff <- tibble(
-  term = c("Time effect (D→R)", "", "Time effect (R→D)", ""),
-  `Warmth Difference` = c(warmth_diff_formatted$formatted[1], warmth_diff_formatted$se_formatted[1],
-                          warmth_diff_formatted$formatted[2], warmth_diff_formatted$se_formatted[2])
-)
-attr(rows_warmth_diff, "position") <- c(1, 2, 3, 4)
-
-# Display model
-modelsummary(
-  list("Warmth Difference" = warmth_diff_model),
-  stars = TRUE,
-  add_rows = rows_warmth_diff,
-  gof_map = c("nobs", "r.squared"),
-  coef_rename = c(
-    "timepost" = "Time (Post)",
-    "learner_partyR→D" = "Learner Party (R→D)",
-    "timepost:learner_partyR→D" = "Time × Learner Party"
-  ),
-  notes = "Note: Warmth difference = outgroup - ingroup. Positive values indicate reduced polarization. * p<0.05, ** p<0.01, *** p<0.001"
-) %>%
-  strip_tt(line = TRUE) %>%
-  group_tt(i = list("Simple Effects by Political Affiliation" = 1, "Full Regression Results" = 5)) %>%
-  style_tt(i = c(1, 6), bold = TRUE) %>%
-  style_tt(i = c(12, 14), line = "b", line_color = "lightgray")
-```
 
 ## Discussion
 
@@ -899,6 +876,56 @@ This study has several limitations that provide directions for future research.
 **Comparison to alternative interventions.** This study does not compare the chatbot intervention to other approaches for reducing partisan misperceptions. Standard perspective-taking interventions have shown some effectiveness in reducing intergroup bias in the psychological literature. Information provision through simple fact sheets or Google searches might achieve similar accuracy improvements at lower cost. Interactions with digital twins based on actual individuals' response patterns could combine scalability with greater authenticity. Future research should directly compare these alternatives to determine the relative effectiveness and cost-efficiency of AI chatbots versus other scalable interventions for partisan debiasing.
 
 ## Appendix
+
+### Summary table of regressions
+```{r}
+# Accuracy models panel
+modelsummary(
+  list(
+    "Main Effect" = accuracy_model0,
+    "Interaction" = accuracy_model,
+    "Extremism" = accuracy_extremism_model,
+    # "Baseline" = baseline_accuracy_extremism,
+    "Information/Empathy" = accuracy_process_model,
+    "Turns" = m_accuracy_turns,
+    "Words" = m_accuracy_log_words
+  ),
+  stars = TRUE,
+  gof_map = c("nobs", "r.squared", "adj.r.squared"),
+  coef_omit = "Intercept",
+  statistic = NULL,
+  coef_map = coef_map_common,
+  notes = "Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001"
+) %>%
+  group_tt(j = list(
+    "Pre-Post Change" = 2:3,
+    "Extremism" = 4,
+    "Mechanisms" = 5:7
+  ))
+
+# Warmth models panel
+modelsummary(
+  list(
+    "Main Effect" = warmth_model0,
+    "Interaction" = warmth_model,
+    "Extremism" = warmth_extremism_model,
+    "Information/Empathy" = warmth_process_model,
+    "Turns" = m_warmth_turns,
+    "Words" = m_warmth_log_words
+  ),
+  stars = TRUE,
+  statistic = NULL,
+  gof_map = c("nobs", "r.squared", "adj.r.squared"),
+  coef_omit = "Intercept",
+  coef_map = coef_map_common,
+  notes = "Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001"
+) %>%
+  group_tt(j = list(
+    "Pre-Post Change" = 2:3,
+    "Extremism" = 4,
+    "Mechanisms" = 5:7
+  ))
+```
 
 ### Descriptive Statistics
 
@@ -1062,6 +1089,63 @@ dat %>%
     title = "Confidence in Outgroup Judgments",
     subtitle = "By learner party and time point (1-5 scale)"
   )
+```
+
+### Robustness Checks
+
+#### Warmth Difference Score
+
+Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup). Effects replicate what is reported on the main text.
+
+```{r warmth-difference}
+# Prepare warmth difference data
+warmth_diff_long <- dat %>%
+  select(ResponseId, learner_party, warmth_diff_pre, warmth_diff_post) %>%
+  pivot_longer(cols = c(warmth_diff_pre, warmth_diff_post), names_to = "time",
+               names_pattern = "warmth_diff_(pre|post)", values_to = "warmth_diff") %>%
+  mutate(time = factor(time, levels = c("pre", "post")))
+
+# Mixed-effects model
+warmth_diff_model <- lmer(warmth_diff ~ time * learner_party + (1 | ResponseId), data = warmth_diff_long)
+
+# Get simple effects
+warmth_diff_contrasts <- emmeans(warmth_diff_model, ~ time | learner_party) %>%
+  contrast("pairwise") %>%
+  tidy()
+
+# Format simple effects
+warmth_diff_formatted <- warmth_diff_contrasts %>%
+  mutate(
+    stars = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01 ~ "**",
+      p.value < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    formatted = sprintf("%.3f%s", estimate, stars),
+    se_formatted = sprintf("(%.3f)", std.error)
+  )
+
+rows_warmth_diff <- tibble(
+  term = c("Time effect (D→R)", "", "Time effect (R→D)", ""),
+  `Warmth Difference` = c(warmth_diff_formatted$formatted[1], warmth_diff_formatted$se_formatted[1],
+                          warmth_diff_formatted$formatted[2], warmth_diff_formatted$se_formatted[2])
+)
+attr(rows_warmth_diff, "position") <- c(1, 2, 3, 4)
+
+# Display model
+modelsummary(
+  list("Warmth Difference" = warmth_diff_model),
+  stars = TRUE,
+  add_rows = rows_warmth_diff,
+  gof_map = c("nobs", "r.squared"),
+  coef_map = coef_map_common,
+  notes = "Note: Warmth difference = outgroup - ingroup. Positive values indicate reduced polarization. * p<0.05, ** p<0.01, *** p<0.001"
+) %>%
+  strip_tt(line = TRUE) %>%
+  group_tt(i = list("Simple Effects by Political Affiliation" = 1, "Full Regression Results" = 5)) %>%
+  style_tt(i = c(1, 6), bold = TRUE) %>%
+  style_tt(i = c(12, 14), line = "b", line_color = "lightgray")
 ```
 
 ### Extreme Cases Analysis
