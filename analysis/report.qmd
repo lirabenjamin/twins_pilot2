@@ -4,7 +4,8 @@ author: "Benjamin Lira"
 date: today
 format:
   html: default
-  pdf: default
+  pdf: 
+    keep-tex: true
 execute:
   echo: false
   warning: false
@@ -99,7 +100,7 @@ warmth_long <- dat %>%
 
 ### Preliminaries
 
-Where does our sample fall in the political spectrum?
+Where does our sample fall in the political spectrum? As shown in the figure below, most participants were partisan, with most lying in the top and bottom 25%.
 
 ```{r}
 #| fig-height: 3
@@ -115,7 +116,7 @@ dat %>%
                        midpoint = 50)  # Adjust midpoint to your scale center
 ```
 
-Democrats' and Republicans' actual green values and their perceptions of ingroup and outgroup attitudes.
+Democrats' and Republicans' actual green values and their perceptions of ingroup and outgroup attitudes are shown in the figure below. The real gap at baseline is much smaller than the *perceived* gap. Perceptions of the ingroup are much more accurate.
 
 ```{r preliminaries, fig.width=6, fig.height=4}
 # Prepare data for faceted plot
@@ -150,7 +151,34 @@ ggplot(prelim_data, aes(x = participant_party, y = value, fill = participant_par
   )
 ```
 
-What is the distribution of bias?
+```{r bias}
+# Calculate baseline bias comparison
+bias_test <- dat %>%
+  select(learner_party, accuracy_pre) %>%
+  rstatix::t_test(accuracy_pre~learner_party)
+
+p <- bias_test %>% pull(p)
+
+d <- dat %>%
+  select(learner_party, accuracy_pre) %>%
+  rstatix::cohens_d(accuracy_pre~learner_party) %>% pull(effsize) %>% Ben::numformat()
+
+# Calculate means and SDs by group
+bias_descriptives <- dat %>%
+  group_by(learner_party) %>%
+  summarise(
+    mean_bias = mean(accuracy_pre, na.rm = TRUE),
+    sd_bias = sd(accuracy_pre, na.rm = TRUE)
+  )
+
+mean_dr <- bias_descriptives %>% filter(learner_party == "D→R") %>% pull(mean_bias)
+sd_dr <- bias_descriptives %>% filter(learner_party == "D→R") %>% pull(sd_bias)
+mean_rd <- bias_descriptives %>% filter(learner_party == "R→D") %>% pull(mean_bias)
+sd_rd <- bias_descriptives %>% filter(learner_party == "R→D") %>% pull(sd_bias)
+```
+
+What is the distribution of bias? At baseline, Democrats were more biased about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans were about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* = `r sprintf("%.3f", p)`.
+
 ```{r bias-distribution}
 #| layout-ncol: 2
 #| fig-width: 4
@@ -193,9 +221,11 @@ p2
 
 ### Q1. Do people update their beliefs after interacting with the chatbot?
 
-We examine whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth.
+We examine whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown on the table below, participants became more accurate (by 0.41 points in a 5-point scale) and more warm towards the outgroup (by 4.5 degrees in a 100-point thermometer scale.)
 
 ```{r q1-data-prep}
+# TO-DO: pull the numbers above from the model rather than hard coded.
+
 # Calculate summary statistics for plots
 accuracy_summary <- accuracy_long %>%
   group_by(learner_party, time) %>%
@@ -257,7 +287,9 @@ modelsummary(
 
 ### Q2. Is belief updating symmetric across political groups?
 
-The primary analyses above test whether Democrats and Republicans show different patterns of belief updating. The key test is the `time × learner_party` interaction in the mixed-effects models. A significant interaction would indicate asymmetric updating across groups.
+While both groups become more accurate, the effect is driven by democrats becoming less biased about republicans (b = 0.65, p < .001). Republicans become slightly less biased about democrats (TO-DO: pull numbers, also report interaction term here). 
+
+Both groups become warmer at similar rates. (TO-DO: pull numbers.)
 
 ```{r}
 # Get simple effects
@@ -317,7 +349,7 @@ modelsummary(
 
 ### Q3. Does political extremity predict how much people update?
 
-We explore whether participants' political extremism (distance from the political center) moderates the treatment effect.
+More politically extreme participants were more likely to be biased about the outgroup (TODO ADD STATS) and feel less warm about them (TODO ADD STATS). However, political extremism did not moderate the effect of talking to the chatbot, such that more and less extreme participnats were equally likely to update their beliefs and warmth towards the outgroup (TODO. Add stats).
 
 ```{r extremism-models}
 # Add extremism to long data
@@ -418,7 +450,7 @@ modelsummary(
 
 ### Q4. Is belief updating associated with how the chatbot is perceived?
 
-We examine whether participants who found the chatbot more informative or empathic showed greater belief updating, controlling for pre-interaction values.
+Participants who found the chatbot to be more informative improved more in accuracy (TODO ADD STATS) and warmth (ADD STATS). However, perceptions of bot empathy did not predict updates in accuracy or warmth.
 
 ```{r process-models}
 # Prepare data for regressions
@@ -446,7 +478,7 @@ modelsummary(
 )
 ```
 
-Do perceptions of informativeness and empathy correlate with each other?
+Do perceptions of informativeness and empathy correlate with each other? Yes, but not strongly (r ~ .30). 
 
 ```{r}
 dat_for_reg %>%
@@ -643,6 +675,7 @@ Participants wrote slogans for marketing energy-saving appliances to the politic
 We examine participants' metacognitive awareness by testing (1) whether confidence changes from pre to post, and (2) whether confidence changes track with actual accuracy improvements.
 
 #### Model: Does confidence change pre-to-post?
+As shown in the figure below, republican participants learning about democrats become more confident after talking to the bot (despite actually learning less than democrats). Democrats do not become more confident.
 
 ```{r confidence-model}
 # Prepare confidence data in long format
@@ -717,6 +750,8 @@ modelsummary(
 
 #### Correlation: Does confidence change track accuracy improvement?
 
+We do not observe that participants who become more accurate are the ones who gain confidence (TODO ADD STATS). Rather, the less democrats learned about republicans, the more their confidence increased (TODO ADD STATS). Republican participants do not adjust their confidence as a function of accuracy gain (TODO ADD STATS).
+
 ```{r confidence-calibration, fig.width=8, fig.height=6}
 # Compute change scores
 calibration_dat <- dat_for_reg %>%
@@ -756,7 +791,7 @@ ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = 
 
 #### Warmth Difference Score
 
-Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup).
+Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup). Effects replicate what is reported on the main text.
 
 ```{r warmth-difference}
 # Prepare warmth difference data
@@ -817,21 +852,7 @@ modelsummary(
 
 ### Summary of Findings
 
-This pilot study tested whether interacting with an AI chatbot representing a political outgroup could improve participants' understanding of and warmth toward that outgroup. Using a within-subjects pre-post design, we examined changes in outgroup belief accuracy and outgroup warmth following an AI-mediated interaction.
-
-### Primary Hypotheses
-
-**Hypothesis 1: Outgroup Belief Accuracy**
-
-We hypothesized that participants would report more accurate beliefs about the outgroup's environmental attitudes after interacting with the AI chatbot. Accuracy was operationalized as the absolute difference between participants' estimates and the outgroup's actual mean green attitudes. The time coefficient in the mixed-effects model indicates whether accuracy improved (error decreased) from pre to post, while the interaction term tests whether this change differed between Democrat and Republican learners.
-
-**Hypothesis 2: Outgroup Warmth**
-
-We hypothesized that participants would feel warmer toward the political outgroup after the interaction. The time coefficient indicates whether warmth increased from pre to post, while the interaction term tests whether Democrats and Republicans showed different patterns of change.
-
-### Exploratory Findings
-
-Secondary analyses examined confidence in outgroup judgments and perceptions of the bot's informativeness and empathy. Confidence ratings provide insight into participants' metacognitive awareness of their knowledge about the outgroup. Bot perception ratings help illuminate potential mechanisms—if participants found the bot informative and empathic, this may mediate changes in accuracy and warmth.
+TODO: read what i wrote and write a straight forward summary.
 
 ### Implications for Marketing Practice
 
@@ -841,15 +862,11 @@ This approach may be particularly valuable for marketing environmentally respons
 
 ### Limitations
 
-Several limitations should be noted. The pilot sample consists primarily of test and preview responses, limiting statistical power and generalizability. The environmental attitude domain may not generalize to other consumer preferences. Belief accuracy depends on having adequate sample sizes within each political group to compute reliable actual outgroup means. The study examines only immediate post-interaction effects; durability of any changes remains unknown.
+Several limitations should be noted. (TODO ONE PARAGRAPH FOR EACH). The environmental attitude domain may not generalize to other consumer preferences. The study examines only immediate post-interaction effects; durability of any changes remains unknown.
 
 Additionally, participants interacted with an AI chatbot rather than actual outgroup members. While this approach offers scalability advantages, it raises questions about whether insights gained from AI interactions transfer to understanding real outgroup members. The chatbot was prompted to represent the outgroup but may not fully capture the diversity of views within each political group.
 
-### Next Steps
-
-The full study will recruit N = 500 participants from a representative sample. Key priorities include examining whether bot informativeness and empathy mediate changes in warmth and accuracy, analyzing participant-generated marketing slogans for energy-saving appliances, and testing for heterogeneous effects by political extremity and prior outgroup attitudes. Exploratory analyses will examine engagement (words typed during chat) as a predictor of outcomes.
-
-Future research should examine the durability of effects over time, test generalizability to other product categories and consumer attitudes beyond environmental responsibility, and compare AI-mediated learning to alternative interventions such as reading testimonials from outgroup members or interacting with human outgroup representatives.
+(TODO WRITE THIS UP) We'd like to compare our chatbot intervention to other interventions that might be useful like standard perspective taking interventions that are SOTA in psychological research, to google searches, to talking to digital twins of actual people, etc.
 
 ## Appendix
 
@@ -1017,7 +1034,7 @@ dat %>%
   )
 ```
 
-## Appendix: Extreme Cases Analysis
+### Extreme Cases Analysis
 
 To understand what characterizes successful versus unsuccessful learning, we examined participants who showed the most and least improvement in accuracy about their political outgroup.
 
@@ -1059,7 +1076,7 @@ extreme_cases %>%
   )
 ```
 
-### Marketing Messages from Extreme Cases
+#### Marketing Messages from Extreme Cases
 
 Participants wrote marketing slogans for energy-saving appliances targeted at their political outgroup. The messages reveal stark differences between successful and unsuccessful learners.
 
@@ -1087,7 +1104,7 @@ This message authentically reflects Democratic environmental values with simple,
 
 This openly hostile message reinforces stereotypes rather than bridging divides. The participant challenged the chatbot's authenticity throughout and remained adversarial.
 
-### Patterns in Successful vs. Unsuccessful Learning
+#### Patterns in Successful vs. Unsuccessful Learning
 
 ```{r extreme-cases-engagement}
 # Compare engagement between successful and unsuccessful learners
