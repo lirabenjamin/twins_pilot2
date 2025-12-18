@@ -2,10 +2,10 @@
 # Author: Benjamin Lira
 # Description: Reproducible pipeline for data processing and analysis
 
-.PHONY: all clean data analysis report help
+.PHONY: all clean data analysis report slides help
 
 # Default target: run entire pipeline
-all: report
+all: report slides
 
 # Help message
 help:
@@ -13,10 +13,11 @@ help:
 	@echo "========================================"
 	@echo ""
 	@echo "Available targets:"
-	@echo "  make all        - Run entire pipeline (download → clean → conversations → analysis → report)"
+	@echo "  make all        - Run entire pipeline (download → clean → conversations → analysis → report → slides)"
 	@echo "  make data       - Download raw data, clean it, and download conversations"
 	@echo "  make analysis   - Create analysis dataset"
 	@echo "  make report     - Render the report (HTML and PDF)"
+	@echo "  make slides     - Render the presentation slides (PDF)"
 	@echo "  make clean      - Remove all processed data and outputs"
 	@echo "  make help       - Show this help message"
 	@echo ""
@@ -42,6 +43,7 @@ clean:
 	rm -f output/extreme_cases_summary.md
 	rm -f analysis/report.html
 	rm -f analysis/report.pdf
+	rm -f analysis/slides.pdf
 	@echo "Clean complete!"
 
 # Step 0: Download raw Qualtrics data
@@ -118,9 +120,16 @@ analysis/report.pdf: analysis/report.qmd data/processed/cleaned_data.parquet dat
 report: report-html report-pdf
 	@echo "✓ All reports generated"
 	@echo ""
-	@echo "Pipeline complete! 🎉"
 	@echo "  - HTML: analysis/report.html"
 	@echo "  - PDF:  analysis/report.pdf"
+
+# Step 9: Render presentation slides
+slides: analysis/slides.pdf
+
+analysis/slides.pdf: analysis/slides.qmd data/processed/cleaned_data.parquet data/processed/conversation_metrics.parquet
+	@echo "Step 9: Rendering presentation slides..."
+	cd analysis && quarto render slides.qmd --to beamer
+	@echo "✓ Slides generated: analysis/slides.pdf"
 
 # Development: quick HTML-only render (faster for iteration)
 dev: data
