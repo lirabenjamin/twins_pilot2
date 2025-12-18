@@ -205,18 +205,17 @@ their political outgroup, participants would:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Report more accurate beliefs about the outgroup's attitudes}
-  toward environmentally responsible consumption (Primary Outcome 1).
+  ``\textbf{Report more accurate beliefs} about the outgroup's attitudes
+  toward environmentally responsible consumption.''
 \item
-  \textbf{Feel warmer toward the political outgroup} (Primary Outcome
-  2).
+  ``\textbf{Report warmer feelings} toward the political outgroup.''
 \end{enumerate}
 
 \subsection{Data}\label{data}
 
 \subsubsection{Data Collection}\label{data-collection}
 
-Data were collected via Qualtrics from 464 participants. Participants
+We collected data via Qualtrics from 474 participants. Participants
 self-reported their political orientation on a 0-100 slider scale, where
 values below 50 indicate Democratic leaning and values 50 and above
 indicate Republican leaning.
@@ -230,15 +229,16 @@ indicate Republican leaning.
 \toprule
 Learner Party & N \\ 
 \midrule\addlinespace[2.5pt]
-D→R & 232 \\ 
-R→D & 232 \\ 
+D→R & 240 \\ 
+R→D & 234 \\ 
 \bottomrule
 \end{tabular*}
 \end{table}
 
 \subsubsection{Measures}\label{measures}
 
-\textbf{Primary Outcomes}
+We measured two primary outcomes to assess belief updating and affective
+change.
 
 \begin{itemize}
 \tightlist
@@ -274,16 +274,22 @@ where \texttt{time} indexes pre- versus post-interaction measurement and
 
 \subsubsection{Preliminaries}\label{preliminaries}
 
-Where does our sample fall in the political spectrum?
+Most participants held strong partisan identities, with the majority in
+the top and bottom quartiles of the political spectrum.
 
 \pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/unnamed-chunk-1-1.pdf}}
 
-Democrats' and Republicans' actual green values and their perceptions of
-ingroup and outgroup attitudes.
+The figure below compares actual green values with perceived ingroup and
+outgroup attitudes for Democrats and Republicans. The actual gap at
+baseline was much smaller than participants perceived. Perceptions of
+the ingroup are much more accurate.
 
 \pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/preliminaries-1.pdf}}
 
-What is the distribution of bias?
+What is the distribution of bias? At baseline, Democrats were more
+biased about Republicans (\emph{M} = 1.71, \emph{SD} = 0.85) than
+Republicans were about Democrats (\emph{M} = 0.72, \emph{SD} = 0.65),
+\emph{d} = 1.31, \emph{p} = 0.000.
 
 \begin{figure}
 
@@ -298,10 +304,6 @@ What is the distribution of bias?
 \subsubsection{Q1. Do people update their beliefs after interacting with
 the
 chatbot?}\label{q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot}
-
-We examine whether participants changed their beliefs about the
-outgroup's environmental attitudes from pre- to post-interaction,
-analyzing both accuracy and warmth.
 
 \pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/q1-plots-1.pdf}}
 
@@ -320,25 +322,26 @@ hline{8}={1,2,3}{solid, black, 0.05em},
 }                     %% tabularray inner close
 \toprule
 & Accuracy & Warmth \\ \midrule %% TinyTableHeader
-(Intercept) & \num{1.216}*** & \num{29.366}*** \\
-& (\num{0.038}) & (\num{1.165}) \\
-timepost & \num{-0.414}*** & \num{4.509}*** \\
-& (\num{0.040}) & (\num{0.559}) \\
-SD (Intercept ResponseId) & \num{0.557} & \num{23.606} \\
-SD (Observations) & \num{0.613} & \num{8.521} \\
-Num.Obs. & \num{928} & \num{928} \\
+(Intercept) & \num{1.219}*** & \num{29.171}*** \\
+& (\num{0.038}) & (\num{1.148}) \\
+timepost & \num{-0.417}*** & \num{4.578}*** \\
+& (\num{0.040}) & (\num{0.551}) \\
+SD (Intercept ResponseId) & \num{0.550} & \num{23.503} \\
+SD (Observations) & \num{0.615} & \num{8.480} \\
+Num.Obs. & \num{948} & \num{948} \\
 \bottomrule
 \end{talltblr}
 \end{table}
 
+We examined whether participants changed their beliefs about the
+outgroup's environmental attitudes from pre- to post-interaction,
+analyzing both accuracy and warmth. As shown in the table above,
+participants became significantly more accurate (improving by 0.42
+points on the 5-point scale) and warmer toward the outgroup (increasing
+by 4.6 degrees on the 100-point thermometer).
+
 \subsubsection{Q2. Is belief updating symmetric across political
 groups?}\label{q2.-is-belief-updating-symmetric-across-political-groups}
-
-The primary analyses above test whether Democrats and Republicans show
-different patterns of belief updating. The key test is the
-\texttt{time\ ×\ learner\_party} interaction in the mixed-effects
-models. A significant interaction would indicate asymmetric updating
-across groups.
 
 \begin{table}
 \centering
@@ -410,31 +413,41 @@ hline{18}={1,2,3}{solid, lightgray, 0.1em},
 \toprule
 & Accuracy & Warmth \\ \midrule %% TinyTableHeader
 Effects by Political Affiliation && \\
-Time effect (Democrat) & 0.652*** & -5.216*** \\
-& (0.055) & (0.791) \\
-Time effect (Republican) & 0.176** & -3.802*** \\
-& (0.055) & (0.791) \\
+Time effect (Democrat) & 0.655*** & -5.317*** \\
+& (0.054) & (0.773) \\
+Time effect (Republican) & 0.172** & -3.821*** \\
+& (0.055) & (0.783) \\
 Full Regression Results && \\
-(Intercept) & \num{1.714}*** & \num{22.897}*** \\
-& (\num{0.048}) & (\num{1.599}) \\
-Time (Post) & \num{-0.652}*** & \num{5.216}*** \\
-& (\num{0.055}) & (\num{0.791}) \\
-Learner Party (R→D) & \num{-0.996}*** & \num{12.940}*** \\
-& (\num{0.068}) & (\num{2.262}) \\
-Time × Learner Party & \num{0.476}*** & \num{-1.414} \\
-& (\num{0.078}) & (\num{1.118}) \\
-SD (Intercept ResponseId) & \num{0.425} & \num{22.825} \\
-SD (Observations) & \num{0.590} & \num{8.516} \\
-Num.Obs. & \num{928} & \num{928} \\
+(Intercept) & \num{1.707}*** & \num{22.783}*** \\
+& (\num{0.047}) & (\num{1.565}) \\
+Time (Post) & \num{-0.655}*** & \num{5.317}*** \\
+& (\num{0.054}) & (\num{0.773}) \\
+Learner Party (R→D) & \num{-0.989}*** & \num{12.939}*** \\
+& (\num{0.067}) & (\num{2.228}) \\
+Time × Learner Party & \num{0.482}*** & \num{-1.496} \\
+& (\num{0.077}) & (\num{1.101}) \\
+SD (Intercept ResponseId) & \num{0.420} & \num{22.724} \\
+SD (Observations) & \num{0.592} & \num{8.472} \\
+Num.Obs. & \num{948} & \num{948} \\
 \bottomrule
 \end{talltblr}
 \end{table}
 
+While both groups became more accurate, it was Democrats learning about
+Republicans who showed greater improvement (\emph{b} = 0.65, \emph{p}
+\textless{} .001). Republicans also became less biased about Democrats,
+though to a lesser extent (\emph{b} = 0.17, \emph{p} = 0.002). The
+interaction term was significant (\emph{b} = 0.48, \emph{p} \textless{}
+.001).
+
+Both groups became warmer toward the outgroup at similar rates.
+Democrats learning about Republicans increased warmth by -5.3 degrees
+(\emph{p} \textless{} .001), while Republicans learning about Democrats
+increased by -3.8 degrees (\emph{p} \textless{} .001). The interaction
+was not significant (\emph{b} = -1.50, \emph{p} = 0.175).
+
 \subsubsection{Q3. Does political extremity predict how much people
 update?}\label{q3.-does-political-extremity-predict-how-much-people-update}
-
-We explore whether participants' political extremism (distance from the
-political center) moderates the treatment effect.
 
 \begin{table}
 \centering
@@ -521,37 +534,43 @@ hline{21}={1,2,3}{solid, lightgray, 0.1em},
 \toprule
 & Accuracy & Warmth \\ \midrule %% TinyTableHeader
 Simple Effects by Extremism Level && \\
-Time effect (Low Extremism) & 0.399*** & -3.962*** \\
-& (0.056) & (0.812) \\
-Time effect (High Extremism) & 0.446*** & -5.240*** \\
-& (0.055) & (0.795) \\
+Time effect (Low Extremism) & 0.399*** & -4.092*** \\
+& (0.056) & (0.798) \\
+Time effect (High Extremism) & 0.446*** & -5.235*** \\
+& (0.055) & (0.784) \\
 Full Regression Results && \\
-Time (Post) & \num{-0.751}*** & \num{5.117}* \\
-& (\num{0.178}) & (\num{2.573}) \\
-Learner Party (R→D) & \num{-0.904}*** & \num{14.169}* \\
-& (\num{0.198}) & (\num{6.467}) \\
-Political Extremism & \num{0.009}* & \num{-0.419}*** \\
-& (\num{0.004}) & (\num{0.119}) \\
-Time × Learner Party & \num{0.782}*** & \num{-4.469} \\
-& (\num{0.228}) & (\num{3.296}) \\
-Time × Extremism & \num{0.002} & \num{0.002} \\
-& (\num{0.004}) & (\num{0.061}) \\
-Learner Party × Extremism & \num{-0.002} & \num{-0.085} \\
-& (\num{0.005}) & (\num{0.158}) \\
-Time × Learner Party × Extremism & \num{-0.008} & \num{0.085} \\
-& (\num{0.006}) & (\num{0.081}) \\
-SD (Observations) & \num{0.590} & \num{8.509} \\
-Num.Obs. & \num{928} & \num{928} \\
+Time (Post) & \num{-0.748}*** & \num{5.435}* \\
+& (\num{0.176}) & (\num{2.519}) \\
+Learner Party (R→D) & \num{-0.894}*** & \num{14.118}* \\
+& (\num{0.195}) & (\num{6.356}) \\
+Political Extremism & \num{0.009}* & \num{-0.418}*** \\
+& (\num{0.004}) & (\num{0.117}) \\
+Time × Learner Party & \num{0.777}*** & \num{-4.621} \\
+& (\num{0.226}) & (\num{3.240}) \\
+Time × Extremism & \num{0.002} & \num{-0.003} \\
+& (\num{0.004}) & (\num{0.060}) \\
+Learner Party × Extremism & \num{-0.002} & \num{-0.083} \\
+& (\num{0.005}) & (\num{0.156}) \\
+Time × Learner Party × Extremism & \num{-0.008} & \num{0.087} \\
+& (\num{0.006}) & (\num{0.079}) \\
+SD (Observations) & \num{0.591} & \num{8.467} \\
+Num.Obs. & \num{948} & \num{948} \\
 \bottomrule
 \end{talltblr}
 \end{table}
 
+Politically extreme participants showed greater bias about the outgroup
+at baseline (\emph{b} = 0.013, \emph{p} \textless{} .001) and felt less
+warm toward them (\emph{b} = -0.52, \emph{p} \textless{} .001). However,
+political extremism did not moderate the effect of the chatbot
+interaction. The three-way interaction for accuracy was not significant
+(\emph{b} = -0.008, \emph{p} = 0.152), and for warmth was not
+significant (\emph{b} = 0.09, \emph{p} = 0.275). More and less extreme
+participants were equally likely to update their beliefs and warmth
+toward the outgroup.
+
 \subsubsection{Q4. Is belief updating associated with how the chatbot is
 perceived?}\label{q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived}
-
-We examine whether participants who found the chatbot more informative
-or empathic showed greater belief updating, controlling for
-pre-interaction values.
 
 \begin{table}
 \centering
@@ -568,110 +587,46 @@ hline{12}={1,2,3}{solid, black, 0.05em},
 }                     %% tabularray inner close
 \toprule
 & Accuracy & Warmth \\ \midrule %% TinyTableHeader
-(Intercept) & \num{0.917}*** & \num{-3.710} \\
-& (\num{0.146}) & (\num{2.380}) \\
-Baseline Accuracy & \num{0.342}*** &  \\
+(Intercept) & \num{0.943}*** & \num{-3.990}+ \\
+& (\num{0.146}) & (\num{2.351}) \\
+Baseline Accuracy & \num{0.340}*** &  \\
 & (\num{0.034}) &  \\
-Bot Informativeness & \num{-0.110}*** & \num{2.212}*** \\
-& (\num{0.031}) & (\num{0.557}) \\
-Bot Empathy & \num{-0.031} & \num{0.725} \\
-& (\num{0.031}) & (\num{0.562}) \\
-Baseline Warmth &  & \num{0.904}*** \\
+Bot Informativeness & \num{-0.101}** & \num{2.119}*** \\
+& (\num{0.031}) & (\num{0.549}) \\
+Bot Empathy & \num{-0.047} & \num{0.888} \\
+& (\num{0.031}) & (\num{0.551}) \\
+Baseline Warmth &  & \num{0.907}*** \\
 &  & (\num{0.023}) \\
-Num.Obs. & \num{464} & \num{464} \\
-R2 & \num{0.244} & \num{0.795} \\
-R2 Adj. & \num{0.239} & \num{0.794} \\
+Num.Obs. & \num{474} & \num{474} \\
+R2 & \num{0.236} & \num{0.796} \\
+R2 Adj. & \num{0.231} & \num{0.794} \\
 \bottomrule
 \end{talltblr}
 \end{table}
 
+Participants who found the chatbot more informative showed significantly
+better accuracy improvement (\emph{b} = -0.101, \emph{p} = 0.001) and
+significantly greater warmth increases (\emph{b} = 2.12, \emph{p}
+\textless{} .001). Bot empathy did not significantly predict accuracy
+change (\emph{b} = -0.047, \emph{p} = 0.124) or warmth change (\emph{b}
+= 0.89, \emph{p} = 0.108).
+
 Do perceptions of informativeness and empathy correlate with each other?
+Yes, but not strongly (r \textasciitilde{} .30).
 
 \pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/unnamed-chunk-3-1.pdf}}
 
 \subsubsection{Q5. Does engagement (``dose'') matter for belief
 updating?}\label{q5.-does-engagement-dose-matter-for-belief-updating}
 
-The pre-registration specified examining whether engagement with the
-chatbot---operationalized as the number of words typed by participants
-during the chat---is associated with post-interaction outcomes.
-Participants engaged in an average of 11.02 conversation turns
-(\emph{SD} = 5.85) and typed an average of 198.17 words (\emph{SD} =
-124.57). We test whether greater engagement predicts more belief
-updating and warmth change.
+We measured engagement as the number of words participants typed during
+the chat and tested whether greater engagement predicted larger changes
+in beliefs and warmth. Participants engaged in an average of 11.04
+conversation turns (\emph{SD} = 5.84) and typed an average of 199.03
+words (\emph{SD} = 124.13).
 
 \paragraph{Does engagement predict belief accuracy
 improvement?}\label{does-engagement-predict-belief-accuracy-improvement}
-
-\begin{table}
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]},
-column{2,3}={}{halign=c,},
-column{1}={}{halign=l,},
-hline{12}={1,2,3}{solid, black, 0.05em},
-}                     %% tabularray inner close
-\toprule
-& Turn Count & Log(Word Count) \\ \midrule %% TinyTableHeader
-(Intercept) & \num{0.507}*** & \num{0.359} \\
-& (\num{0.099}) & (\num{0.359}) \\
-Turn Count & \num{0.002} &  \\
-& (\num{0.005}) &  \\
-Baseline Accuracy & \num{-0.689}*** & \num{-0.690}*** \\
-& (\num{0.040}) & (\num{0.040}) \\
-Learner: R→D & \num{-0.209}** & \num{-0.210}** \\
-& (\num{0.072}) & (\num{0.072}) \\
-Log(Word Count) &  & \num{0.033} \\
-&  & (\num{0.068}) \\
-Num.Obs. & \num{464} & \num{464} \\
-R2 & \num{0.441} & \num{0.441} \\
-R2 Adj. & \num{0.437} & \num{0.438} \\
-\bottomrule
-\end{talltblr}
-\end{table}
-
-Greater engagement---measured by turn count---was not significantly
-associated with accuracy change (\emph{b} = 0.0020, \emph{p} = 0.706).
-Using log-transformed word count, the effect was not significant
-(\emph{b} = 0.0331, \emph{p} = 0.629).
-
-\paragraph{Does engagement predict warmth
-change?}\label{does-engagement-predict-warmth-change}
-
-\begin{table}
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]},
-column{2,3}={}{halign=c,},
-column{1}={}{halign=l,},
-hline{12}={1,2,3}{solid, black, 0.05em},
-}                     %% tabularray inner close
-\toprule
-& Turn Count & Log(Word Count) \\ \midrule %% TinyTableHeader
-(Intercept) & \num{7.767}*** & \num{11.613}+ \\
-& (\num{1.451}) & (\num{6.685}) \\
-Turn Count & \num{-0.089} &  \\
-& (\num{0.095}) &  \\
-Baseline Warmth & \num{-0.067}** & \num{-0.068}** \\
-& (\num{0.024}) & (\num{0.024}) \\
-Learner: R→D & \num{-0.617} & \num{-0.565} \\
-& (\num{1.153}) & (\num{1.152}) \\
-Log(Word Count) &  & \num{-0.929} \\
-&  & (\num{1.261}) \\
-Num.Obs. & \num{464} & \num{464} \\
-R2 & \num{0.022} & \num{0.022} \\
-R2 Adj. & \num{0.016} & \num{0.015} \\
-\bottomrule
-\end{talltblr}
-\end{table}
 
 \begin{table}
 \centering
@@ -711,40 +666,36 @@ cell{14}{2}={}{halign=c,},
 cell{14}{4}={}{halign=c,},
 cell{15}{2}={}{halign=c,},
 cell{15}{4}={}{halign=c,},
-cell{16}{2}={}{halign=c,},
-cell{16}{4}={}{halign=c,},
-cell{17}{2}={}{halign=c,},
-cell{17}{4}={}{halign=c,},
 cell{1}{2}={c=2,}{halign=c, halign=c,},
 cell{1}{4}={c=2,}{halign=c, halign=c,},
-hline{15}={1,2,3,4,5}{solid, black, 0.05em},
+hline{13}={1,2,3,4,5}{solid, black, 0.05em},
 }                     %% tabularray inner close
 \toprule
 & Accuracy &  & Warmth &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-5}
 & Turn Count & Log(Word Count) & Turn Count  & Log(Word Count)  \\ \midrule %% TinyTableHeader
-(Intercept) & \num{0.507}*** & \num{0.359} & \num{7.767}*** & \num{11.613}+ \\
-& (\num{0.099}) & (\num{0.359}) & (\num{1.451}) & (\num{6.685}) \\
-Turn Count & \num{0.002} &  & \num{-0.089} &  \\
-& (\num{0.005}) &  & (\num{0.095}) &  \\
-accuracy\_pre & \num{-0.689}*** & \num{-0.690}*** &  &  \\
+Turn Count & \num{0.002} &  & \num{-0.099} &  \\
+& (\num{0.005}) &  & (\num{0.094}) &  \\
+Log(Word Count) &  & \num{0.036} &  & \num{-0.983} \\
+&  & (\num{0.068}) &  & (\num{1.242}) \\
+Baseline Accuracy & \num{-0.691}*** & \num{-0.693}*** &  &  \\
 & (\num{0.040}) & (\num{0.040}) &  &  \\
-Learner: R→D & \num{-0.209}** & \num{-0.210}** & \num{-0.617} & \num{-0.565} \\
-& (\num{0.072}) & (\num{0.072}) & (\num{1.153}) & (\num{1.152}) \\
-Log(Word Count) &  & \num{0.033} &  & \num{-0.929} \\
-&  & (\num{0.068}) &  & (\num{1.261}) \\
-Baseline Warmth &  &  & \num{-0.067}** & \num{-0.068}** \\
-&  &  & (\num{0.024}) & (\num{0.024}) \\
-Num.Obs. & \num{464} & \num{464} & \num{464} & \num{464} \\
-R2 & \num{0.441} & \num{0.441} & \num{0.022} & \num{0.022} \\
-R2 Adj. & \num{0.437} & \num{0.438} & \num{0.016} & \num{0.015} \\
+Baseline Warmth &  &  & \num{-0.063}** & \num{-0.065}** \\
+&  &  & (\num{0.023}) & (\num{0.024}) \\
+Learner: R→D & \num{-0.200}** & \num{-0.202}** & \num{-0.743} & \num{-0.691} \\
+& (\num{0.072}) & (\num{0.072}) & (\num{1.136}) & (\num{1.135}) \\
+Num.Obs. & \num{474} & \num{474} & \num{474} & \num{474} \\
+R2 & \num{0.436} & \num{0.436} & \num{0.021} & \num{0.020} \\
+R2 Adj. & \num{0.433} & \num{0.433} & \num{0.015} & \num{0.014} \\
 \bottomrule
 \end{talltblr}
 \end{table}
 
 Greater engagement---measured by turn count---was not significantly
-associated with warmth change (\emph{b} = -0.0895, \emph{p} = 0.347).
-Using log-transformed word count, the effect was not significant
-(\emph{b} = -0.9295, \emph{p} = 0.462).
+associated with accuracy change (\emph{b} = 0.0024, \emph{p} = 0.638),
+and not significantly associated with warmth change (\emph{b} = -0.0995,
+\emph{p} = 0.290). Using log-transformed word count, the effect on
+accuracy was not significant (\emph{b} = 0.0359, \emph{p} = 0.599), and
+on warmth was not significant (\emph{b} = -0.9826, \emph{p} = 0.429).
 
 \pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/engagement-plots-1.pdf}}
 
@@ -755,7 +706,7 @@ Participants wrote slogans for marketing energy-saving appliances to the
 political outgroup.
 
 \textbf{DATA AVAILABLE}: Raw slogan text in variable \texttt{Q23} (n =
-464 responses).
+474 responses).
 
 \textbf{DATA NEEDED}: 1. Semantic similarity scores (compare to
 AI-generated responses to detect copying) 2. Quality ratings (human or
@@ -770,6 +721,10 @@ track with actual accuracy improvements.
 
 \paragraph{Model: Does confidence change
 pre-to-post?}\label{model-does-confidence-change-pre-to-post}
+
+Republicans learning about Democrats gained confidence after the
+interaction, despite learning less than Democrats. Democrats' confidence
+did not change. See Figure below.
 
 \pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/confidence-model-1.pdf}}
 
@@ -843,22 +798,22 @@ hline{18}={1,2,3}{solid, lightgray, 0.1em},
 \toprule
 & Confidence (Main Effect) & Confidence (Interaction) \\ \midrule %% TinyTableHeader
 Simple Effects by Political Affiliation && \\
-Time effect (D→R) &  & 0.056 \\
-&  & (0.068) \\
-Time effect (R→D) &  & -0.310*** \\
+Time effect (D→R) &  & 0.058 \\
+&  & (0.067) \\
+Time effect (R→D) &  & -0.308*** \\
 &  & (0.068) \\
 Full Regression Results && \\
-(Intercept) & \num{3.155}*** & \num{3.078}*** \\
-& (\num{0.048}) & (\num{0.066}) \\
-timepost & \num{0.127}** & \num{-0.056} \\
-& (\num{0.049}) & (\num{0.068}) \\
-learner\_partyR→D &  & \num{0.155}+ \\
-&  & (\num{0.094}) \\
+(Intercept) & \num{3.160}*** & \num{3.075}*** \\
+& (\num{0.047}) & (\num{0.065}) \\
+timepost & \num{0.122}* & \num{-0.058} \\
+& (\num{0.049}) & (\num{0.067}) \\
+learner\_partyR→D &  & \num{0.173}+ \\
+&  & (\num{0.093}) \\
 timepost × learner\_partyR→D &  & \num{0.366}*** \\
 &  & (\num{0.096}) \\
-SD (Intercept ResponseId) & \num{0.709} & \num{0.695} \\
-SD (Observations) & \num{0.745} & \num{0.734} \\
-Num.Obs. & \num{928} & \num{928} \\
+SD (Intercept ResponseId) & \num{0.710} & \num{0.694} \\
+SD (Observations) & \num{0.748} & \num{0.737} \\
+Num.Obs. & \num{948} & \num{948} \\
 \bottomrule
 \end{talltblr}
 \end{table}
@@ -868,12 +823,22 @@ improvement?}\label{correlation-does-confidence-change-track-accuracy-improvemen
 
 \pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/confidence-calibration-1.pdf}}
 
+Overall, confidence change did not track with accuracy improvement
+(\emph{r} = 0.280, \emph{p} \textless{} .001). For Democrats learning
+about Republicans, there was a significant positive correlation between
+confidence change and accuracy change (\emph{r} = 0.390, \emph{p}
+\textless{} .001), indicating that those who became less accurate gained
+more confidence. For Republicans learning about Democrats, confidence
+change did not correlate with accuracy change (\emph{r} = 0.051,
+\emph{p} = 0.440).
+
 \subsubsection{Robustness Checks}\label{robustness-checks}
 
 \paragraph{Warmth Difference Score}\label{warmth-difference-score}
 
 Following common practice in the affective polarization literature, we
-examine warmth using a difference score (outgroup - ingroup).
+examine warmth using a difference score (outgroup - ingroup). Effects
+replicate what is reported on the main text.
 
 \begin{table}
 \centering
@@ -927,22 +892,22 @@ hline{16}={1,2}{solid, lightgray, 0.1em},
 \toprule
 & Warmth Difference \\ \midrule %% TinyTableHeader
 Simple Effects by Political Affiliation & \\
-Time effect (D→R) & -6.478*** \\
-& (1.002) \\
-Time effect (R→D) & -5.509*** \\
-& (1.002) \\
+Time effect (D→R) & -6.442*** \\
+& (0.979) \\
+Time effect (R→D) & -5.538*** \\
+& (0.991) \\
 Full Regression Results & \\
-(Intercept) & \num{-53.375}*** \\
-& (\num{2.053}) \\
-Time (Post) & \num{6.478}*** \\
-& (\num{1.002}) \\
-Learner Party (R→D) & \num{8.306}** \\
-& (\num{2.903}) \\
-Time × Learner Party & \num{-0.970} \\
-& (\num{1.416}) \\
-SD (Intercept ResponseId) & \num{29.349} \\
-SD (Observations) & \num{10.787} \\
-Num.Obs. & \num{928} \\
+(Intercept) & \num{-53.296}*** \\
+& (\num{2.008}) \\
+Time (Post) & \num{6.442}*** \\
+& (\num{0.979}) \\
+Learner Party (R→D) & \num{8.129}** \\
+& (\num{2.857}) \\
+Time × Learner Party & \num{-0.903} \\
+& (\num{1.393}) \\
+SD (Intercept ResponseId) & \num{29.197} \\
+SD (Observations) & \num{10.721} \\
+Num.Obs. & \num{948} \\
 \bottomrule
 \end{talltblr}
 \end{table}
@@ -951,51 +916,37 @@ Num.Obs. & \num{928} \\
 
 \subsubsection{Summary of Findings}\label{summary-of-findings}
 
-This pilot study tested whether interacting with an AI chatbot
-representing a political outgroup could improve participants'
-understanding of and warmth toward that outgroup. Using a
-within-subjects pre-post design, we examined changes in outgroup belief
-accuracy and outgroup warmth following an AI-mediated interaction.
+Brief interactions with an AI chatbot representing a political outgroup
+improved accuracy of beliefs about that outgroup and increased warmth
+toward them. Participants became more accurate in estimating their
+political outgroup's environmental attitudes and reported warmer
+feelings toward the outgroup on a feeling thermometer. These effects
+were asymmetric: Democrats learning about Republicans showed greater
+accuracy improvements than Republicans learning about Democrats, though
+both groups increased warmth at similar rates.
 
-\subsubsection{Primary Hypotheses}\label{primary-hypotheses}
+Political extremism predicted greater baseline bias and lower baseline
+warmth but did not moderate the intervention's effectiveness. More and
+less extreme participants benefited equally from the interaction.
+Perceptions of the chatbot's informativeness predicted better outcomes,
+while perceived empathy did not. Greater engagement, measured by
+conversation length, showed mixed associations with belief updating.
 
-\textbf{Hypothesis 1: Outgroup Belief Accuracy}
-
-We hypothesized that participants would report more accurate beliefs
-about the outgroup's environmental attitudes after interacting with the
-AI chatbot. Accuracy was operationalized as the absolute difference
-between participants' estimates and the outgroup's actual mean green
-attitudes. The time coefficient in the mixed-effects model indicates
-whether accuracy improved (error decreased) from pre to post, while the
-interaction term tests whether this change differed between Democrat and
-Republican learners.
-
-\textbf{Hypothesis 2: Outgroup Warmth}
-
-We hypothesized that participants would feel warmer toward the political
-outgroup after the interaction. The time coefficient indicates whether
-warmth increased from pre to post, while the interaction term tests
-whether Democrats and Republicans showed different patterns of change.
-
-\subsubsection{Exploratory Findings}\label{exploratory-findings}
-
-Secondary analyses examined confidence in outgroup judgments and
-perceptions of the bot's informativeness and empathy. Confidence ratings
-provide insight into participants' metacognitive awareness of their
-knowledge about the outgroup. Bot perception ratings help illuminate
-potential mechanisms---if participants found the bot informative and
-empathic, this may mediate changes in accuracy and warmth.
+Confidence changes did not track with accuracy improvements. Republicans
+learning about Democrats gained confidence despite smaller accuracy
+gains, while Democrats' confidence did not change. For Democrats,
+confidence increases were paradoxically associated with becoming less
+accurate, suggesting poor metacognitive calibration in this context.
 
 \subsubsection{Implications for Marketing
 Practice}\label{implications-for-marketing-practice}
 
-If the hypothesized effects are supported, this research suggests that
-AI-mediated interactions can serve as a scalable tool for reducing
-political misperceptions in consumer research. Marketers often struggle
-to understand ideologically diverse consumer segments, relying on
-stereotypes or costly focus groups. AI chatbots could provide an
-accessible method for gaining insight into outgroup consumer preferences
-and values.
+These findings suggest that AI-mediated interactions can serve as a
+scalable tool for reducing political misperceptions in consumer
+research. Marketers often struggle to understand ideologically diverse
+consumer segments, relying on stereotypes or costly focus groups. AI
+chatbots could provide an accessible method for gaining insight into
+outgroup consumer preferences and values.
 
 This approach may be particularly valuable for marketing environmentally
 responsible products, where political divides can lead to misperceptions
@@ -1005,36 +956,53 @@ more effective cross-partisan messaging strategies.
 
 \subsubsection{Limitations}\label{limitations}
 
-Several limitations should be noted. The pilot sample consists primarily
-of test and preview responses, limiting statistical power and
-generalizability. The environmental attitude domain may not generalize
-to other consumer preferences. Belief accuracy depends on having
-adequate sample sizes within each political group to compute reliable
-actual outgroup means. The study examines only immediate
-post-interaction effects; durability of any changes remains unknown.
+This study has several limitations that provide directions for future
+research.
 
-Additionally, participants interacted with an AI chatbot rather than
-actual outgroup members. While this approach offers scalability
+\textbf{Domain specificity.} The environmental attitude domain may not
+generalize to other consumer preferences or policy areas. Environmental
+attitudes represent a domain where partisan divides exist but are not as
+stark as other politically charged topics. Future research should
+examine whether AI-mediated learning transfers to domains with deeper
+partisan disagreement, such as immigration, healthcare, or gun policy.
+The effectiveness of this intervention may vary depending on the
+perceived relevance of the attitude domain to partisan identity.
+
+\textbf{Temporal dynamics.} This study examines only immediate
+post-interaction effects. The durability of accuracy improvements and
+warmth increases remains unknown. Research on intergroup contact
+suggests that initial attitude changes can decay over time, particularly
+without repeated exposure. Future studies should include delayed
+follow-up measurements to assess whether belief updates persist days,
+weeks, or months after the interaction. Understanding decay rates would
+inform practical recommendations about intervention frequency for
+sustained effects.
+
+\textbf{AI representation versus human reality.} Participants interacted
+with an AI chatbot prompted to represent a political outgroup rather
+than actual outgroup members. While this approach offers scalability
 advantages, it raises questions about whether insights gained from AI
 interactions transfer to understanding real outgroup members. The
 chatbot was prompted to represent the outgroup but may not fully capture
-the diversity of views within each political group.
+the diversity of views within each political group. Individual variation
+within partisan groups is substantial, and the AI's responses may
+reinforce stereotypes about group homogeneity even as they correct
+specific attitude misperceptions. Future research should examine whether
+learning from AI translates to more accurate perceptions of actual
+individuals and whether AI-mediated learning produces different outcomes
+than human-mediated contact.
 
-\subsubsection{Next Steps}\label{next-steps}
-
-The full study will recruit N = 500 participants from a representative
-sample. Key priorities include examining whether bot informativeness and
-empathy mediate changes in warmth and accuracy, analyzing
-participant-generated marketing slogans for energy-saving appliances,
-and testing for heterogeneous effects by political extremity and prior
-outgroup attitudes. Exploratory analyses will examine engagement (words
-typed during chat) as a predictor of outcomes.
-
-Future research should examine the durability of effects over time, test
-generalizability to other product categories and consumer attitudes
-beyond environmental responsibility, and compare AI-mediated learning to
-alternative interventions such as reading testimonials from outgroup
-members or interacting with human outgroup representatives.
+\textbf{Comparison to alternative interventions.} This study does not
+compare the chatbot intervention to other approaches for reducing
+partisan misperceptions. Standard perspective-taking interventions have
+shown some effectiveness in reducing intergroup bias in the
+psychological literature. Information provision through simple fact
+sheets or Google searches might achieve similar accuracy improvements at
+lower cost. Interactions with digital twins based on actual individuals'
+response patterns could combine scalability with greater authenticity.
+Future research should directly compare these alternatives to determine
+the relative effectiveness and cost-efficiency of AI chatbots versus
+other scalable interventions for partisan debiasing.
 
 \subsection{Appendix}\label{appendix}
 
@@ -1050,8 +1018,8 @@ members or interacting with human outgroup representatives.
 \toprule
 Political Party & Mean Green Attitude & SD & N \\ 
 \midrule\addlinespace[2.5pt]
-Democrat & 4.17 & 0.78 & 232 \\ 
-Republican & 3.77 & 1.04 & 232 \\ 
+Democrat & 4.16 & 0.77 & 240 \\ 
+Republican & 3.76 & 1.04 & 234 \\ 
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -1066,10 +1034,10 @@ Republican & 3.77 & 1.04 & 232 \\
 \toprule
 Learner Party & Time & Mean Error & SD & N \\ 
 \midrule\addlinespace[2.5pt]
-D→R & pre & 1.714 & 0.859 & 232 \\ 
-D→R & post & 1.062 & 0.839 & 232 \\ 
-R→D & pre & 0.718 & 0.651 & 232 \\ 
-R→D & post & 0.542 & 0.501 & 232 \\ 
+D→R & pre & 1.707 & 0.848 & 240 \\ 
+D→R & post & 1.053 & 0.842 & 240 \\ 
+R→D & pre & 0.718 & 0.647 & 234 \\ 
+R→D & post & 0.546 & 0.499 & 234 \\ 
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -1084,10 +1052,10 @@ R→D & post & 0.542 & 0.501 & 232 \\
 \toprule
 Learner Party & Time & Mean Warmth & SD & N \\ 
 \midrule\addlinespace[2.5pt]
-D→R & pre & 22.90 & 22.98 & 232 \\ 
-D→R & post & 28.11 & 25.11 & 232 \\ 
-R→D & pre & 35.84 & 24.25 & 232 \\ 
-R→D & post & 39.64 & 25.05 & 232 \\ 
+D→R & pre & 22.78 & 22.75 & 240 \\ 
+D→R & post & 28.10 & 25.02 & 240 \\ 
+R→D & pre & 35.72 & 24.19 & 234 \\ 
+R→D & post & 39.54 & 24.99 & 234 \\ 
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -1102,8 +1070,8 @@ R→D & post & 39.64 & 25.05 & 232 \\
 \toprule
 Learner Party & Mean & SD & Min & Max \\ 
 \midrule\addlinespace[2.5pt]
-D→R & 40.25 & 13.01 & 2.00 & 50.00 \\ 
-R→D & 35.91 & 14.94 & 0.00 & 50.00 \\ 
+D→R & 40.19 & 12.98 & 2.00 & 50.00 \\ 
+R→D & 35.88 & 14.97 & 0.00 & 50.00 \\ 
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -1118,10 +1086,10 @@ R→D & 35.91 & 14.94 & 0.00 & 50.00 \\
 \toprule
 Learner Party & Measure & Mean Rating & SD & N \\ 
 \midrule\addlinespace[2.5pt]
-D→R & Empathy & 3.38 & 1.05 & 232 \\ 
-D→R & Informativeness & 3.60 & 1.15 & 232 \\ 
-R→D & Empathy & 3.72 & 0.99 & 232 \\ 
-R→D & Informativeness & 4.06 & 0.92 & 232 \\ 
+D→R & Empathy & 3.39 & 1.06 & 240 \\ 
+D→R & Informativeness & 3.62 & 1.14 & 240 \\ 
+R→D & Empathy & 3.72 & 0.99 & 234 \\ 
+R→D & Informativeness & 4.06 & 0.92 & 234 \\ 
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -1136,16 +1104,15 @@ R→D & Informativeness & 4.06 & 0.92 & 232 \\
 \toprule
 Learner Party & Time & Mean Confidence & SD & N \\ 
 \midrule\addlinespace[2.5pt]
-D→R & pre & 3.08 & 1.05 & 232 \\ 
-D→R & post & 3.02 & 0.97 & 232 \\ 
-R→D & pre & 3.23 & 1.01 & 232 \\ 
-R→D & post & 3.54 & 1.01 & 232 \\ 
+D→R & pre & 3.08 & 1.05 & 240 \\ 
+D→R & post & 3.02 & 0.96 & 240 \\ 
+R→D & pre & 3.25 & 1.01 & 234 \\ 
+R→D & post & 3.56 & 1.02 & 234 \\ 
 \bottomrule
 \end{tabular*}
 \end{table}
 
-\subsection{Appendix: Extreme Cases
-Analysis}\label{appendix-extreme-cases-analysis}
+\subsubsection{Extreme Cases Analysis}\label{extreme-cases-analysis}
 
 To understand what characterizes successful versus unsuccessful
 learning, we examined participants who showed the most and least
@@ -1161,8 +1128,8 @@ improvement in accuracy about their political outgroup.
 \toprule
 Group & Case & Accuracy Improvement\textsuperscript{\textit{1}} & Word Count & Turn Count \\ 
 \midrule\addlinespace[2.5pt]
-D→R & Most Improved & 2.697 & 198 & 10 \\ 
-D→R & Least Improved & -1.333 & 261 & 6 \\ 
+D→R & Most Improved & 2.692 & 198 & 10 \\ 
+D→R & Least Improved & -1.667 & 153 & 7 \\ 
 R→D & Most Improved & 3.000 & 147 & 10 \\ 
 R→D & Least Improved & -2.833 & 137 & 13 \\ 
 \bottomrule
@@ -1172,7 +1139,7 @@ R→D & Least Improved & -2.833 & 137 & 13 \\
 \end{minipage}
 \end{table}
 
-\subsubsection{Marketing Messages from Extreme
+\paragraph{Marketing Messages from Extreme
 Cases}\label{marketing-messages-from-extreme-cases}
 
 Participants wrote marketing slogans for energy-saving appliances
@@ -1213,7 +1180,7 @@ This openly hostile message reinforces stereotypes rather than bridging
 divides. The participant challenged the chatbot's authenticity
 throughout and remained adversarial.
 
-\subsubsection{Patterns in Successful vs.~Unsuccessful
+\paragraph{Patterns in Successful vs.~Unsuccessful
 Learning}\label{patterns-in-successful-vs.-unsuccessful-learning}
 
 \begin{table}
@@ -1227,7 +1194,7 @@ Learning}\label{patterns-in-successful-vs.-unsuccessful-learning}
 Outcome & Mean Word Count & Mean Turn Count \\ 
 \midrule\addlinespace[2.5pt]
 Improved & 172.5 & 10.0 \\ 
-Worsened & 199.0 & 9.5 \\ 
+Worsened & 145.0 & 10.0 \\ 
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -2061,16 +2028,16 @@ loaded via a namespace (and not attached):
 [16] knitr_1.50          ggsignif_0.6.4      labeling_0.4.3      bit_4.6.0           xml2_1.3.8         
 [21] RColorBrewer_1.1-3  abind_1.4-8         withr_3.0.2         numDeriv_2016.8-1.1 datawizard_1.2.0   
 [26] grid_4.5.0          fansi_1.0.6         xtable_1.8-4        scales_1.4.0        MASS_7.3-65        
-[31] insight_1.4.0       cli_3.6.5           mvtnorm_1.3-3       rmarkdown_2.29      reformulas_0.4.1   
-[36] generics_0.1.4      performance_0.15.0  tzdb_0.5.0          parameters_0.28.0   minqa_1.2.8        
-[41] splines_4.5.0       parallel_4.5.0      assertthat_0.2.1    effectsize_1.0.1    vctrs_0.6.5        
-[46] boot_1.3-31         carData_3.0-5       litedown_0.7        car_3.1-3           hms_1.1.3          
-[51] pbkrtest_0.5.4      bit64_4.6.0-1       rstatix_0.7.2       Formula_1.2-5       glue_1.8.0         
-[56] nloptr_2.2.1        stringi_1.8.7       gtable_0.3.6        tables_0.9.31       lmtest_0.9-40      
-[61] pillar_1.11.0       htmltools_0.5.8.1   R6_2.6.1            Rdpack_2.6.4        evaluate_1.0.4     
-[66] lattice_0.22-6      rbibutils_2.3       backports_1.5.0     broom_1.0.9         Rcpp_1.0.14        
-[71] checkmate_2.3.2     coda_0.19-4.1       gridExtra_2.3       nlme_3.1-168        mgcv_1.9-1         
-[76] xfun_0.52           zoo_1.8-14          pkgconfig_2.0.3    
+[31] insight_1.4.0       cli_3.6.5           mvtnorm_1.3-3       Ben_0.1.0           rmarkdown_2.29     
+[36] reformulas_0.4.1    generics_0.1.4      performance_0.15.0  tzdb_0.5.0          parameters_0.28.0  
+[41] minqa_1.2.8         splines_4.5.0       parallel_4.5.0      assertthat_0.2.1    effectsize_1.0.1   
+[46] vctrs_0.6.5         boot_1.3-31         carData_3.0-5       litedown_0.7        car_3.1-3          
+[51] hms_1.1.3           pbkrtest_0.5.4      bit64_4.6.0-1       rstatix_0.7.2       Formula_1.2-5      
+[56] glue_1.8.0          nloptr_2.2.1        stringi_1.8.7       gtable_0.3.6        tables_0.9.31      
+[61] lmtest_0.9-40       pillar_1.11.0       htmltools_0.5.8.1   R6_2.6.1            Rdpack_2.6.4       
+[66] evaluate_1.0.4      lattice_0.22-6      rbibutils_2.3       backports_1.5.0     broom_1.0.9        
+[71] Rcpp_1.0.14         checkmate_2.3.2     coda_0.19-4.1       gridExtra_2.3       nlme_3.1-168       
+[76] mgcv_1.9-1          xfun_0.52           zoo_1.8-14          pkgconfig_2.0.3    
 \end{verbatim}
 
 

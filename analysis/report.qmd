@@ -44,14 +44,14 @@ Political polarization creates challenges for marketers who must communicate eff
 
 We hypothesized that after interacting with an AI chatbot representing their political outgroup, participants would:
 
-1. **Report more accurate beliefs about the outgroup's attitudes** toward environmentally responsible consumption (Primary Outcome 1).
-2. **Feel warmer toward the political outgroup** (Primary Outcome 2).
+1. "**Report more accurate beliefs** about the outgroup's attitudes toward environmentally responsible consumption."
+2. "**Report warmer feelings** toward the political outgroup."
 
 ## Data
 
 ### Data Collection
 
-Data were collected via Qualtrics from `r nrow(dat)` participants. Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
+We collected data via Qualtrics from `r nrow(dat)` participants. Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
 
 ```{r participant-breakdown}
 dat %>%
@@ -63,7 +63,7 @@ dat %>%
 
 ### Measures
 
-**Primary Outcomes**
+We measured two primary outcomes to assess belief updating and affective change.
 
 - **Belief accuracy**: Absolute difference between participants' estimates of outgroup green attitudes and actual outgroup means (lower = more accurate)
 - **Outgroup warmth**: Feeling thermometer (0-100 scale) toward the political outgroup
@@ -100,7 +100,7 @@ warmth_long <- dat %>%
 
 ### Preliminaries
 
-Where does our sample fall in the political spectrum? As shown in the figure below, most participants were partisan, with most lying in the top and bottom 25%.
+Most participants held strong partisan identities, with the majority in the top and bottom quartiles of the political spectrum.
 
 ```{r}
 #| fig-height: 3
@@ -116,7 +116,7 @@ dat %>%
                        midpoint = 50)  # Adjust midpoint to your scale center
 ```
 
-Democrats' and Republicans' actual green values and their perceptions of ingroup and outgroup attitudes are shown in the figure below. The real gap at baseline is much smaller than the *perceived* gap. Perceptions of the ingroup are much more accurate.
+The figure below compares actual green values with perceived ingroup and outgroup attitudes for Democrats and Republicans. The actual gap at baseline was much smaller than participants perceived. Perceptions of the ingroup are much more accurate.
 
 ```{r preliminaries, fig.width=6, fig.height=4}
 # Prepare data for faceted plot
@@ -221,11 +221,7 @@ p2
 
 ### Q1. Do people update their beliefs after interacting with the chatbot?
 
-We examine whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown on the table below, participants became more accurate (by 0.41 points in a 5-point scale) and more warm towards the outgroup (by 4.5 degrees in a 100-point thermometer scale.)
-
 ```{r q1-data-prep}
-# TO-DO: pull the numbers above from the model rather than hard coded.
-
 # Calculate summary statistics for plots
 accuracy_summary <- accuracy_long %>%
   group_by(learner_party, time) %>%
@@ -274,6 +270,10 @@ warmth_model0 <- lmer(warmth ~ time  + (1 | ResponseId), data = warmth_long)
 accuracy_model <- lmer(error ~ time * learner_party + (1 | ResponseId), data = accuracy_long)
 warmth_model <- lmer(warmth ~ time * learner_party + (1 | ResponseId), data = warmth_long)
 
+# Extract coefficients for inline reporting
+accuracy_time_coef <- abs(fixef(accuracy_model0)["timepost"])
+warmth_time_coef <- fixef(warmth_model0)["timepost"]
+
 # Display models side by side
 modelsummary(
   list(
@@ -285,11 +285,9 @@ modelsummary(
 )
 ```
 
+We examined whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown in the table above, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer).
+
 ### Q2. Is belief updating symmetric across political groups?
-
-While both groups become more accurate, the effect is driven by democrats becoming less biased about republicans (b = 0.65, p < .001). Republicans become slightly less biased about democrats (TO-DO: pull numbers, also report interaction term here). 
-
-Both groups become warmer at similar rates. (TO-DO: pull numbers.)
 
 ```{r}
 # Get simple effects
@@ -300,6 +298,24 @@ accuracy_contrasts <- emmeans(accuracy_model, ~ time | learner_party) %>%
 warmth_contrasts <- emmeans(warmth_model, ~ time | learner_party) %>%
   contrast("pairwise") %>%
   tidy()
+
+# Extract values for inline reporting
+acc_dr_est <- abs(accuracy_contrasts$estimate[1])  # D→R effect (negative = improvement)
+acc_dr_p <- accuracy_contrasts$p.value[1]
+acc_rd_est <- abs(accuracy_contrasts$estimate[2])  # R→D effect
+acc_rd_p <- accuracy_contrasts$p.value[2]
+
+warmth_dr_est <- warmth_contrasts$estimate[1]  # D→R effect
+warmth_dr_p <- warmth_contrasts$p.value[1]
+warmth_rd_est <- warmth_contrasts$estimate[2]  # R→D effect
+warmth_rd_p <- warmth_contrasts$p.value[2]
+
+# Get interaction term from model
+acc_interaction_coef <- fixef(accuracy_model)["timepost:learner_partyR→D"]
+acc_interaction_p <- summary(accuracy_model)$coefficients["timepost:learner_partyR→D", "Pr(>|t|)"]
+
+warmth_interaction_coef <- fixef(warmth_model)["timepost:learner_partyR→D"]
+warmth_interaction_p <- summary(warmth_model)$coefficients["timepost:learner_partyR→D", "Pr(>|t|)"]
 
 # Format for modelsummary
 format_emmeans <- function(contrasts) {
@@ -347,9 +363,11 @@ modelsummary(
     style_tt(i = c(14, 16), line = "b", line_color = "lightgray")
 ```
 
-### Q3. Does political extremity predict how much people update?
+While both groups became more accurate, it was Democrats learning about Republicans who showed greater improvement (*b* = `r sprintf("%.2f", acc_dr_est)`, *p* `r if(acc_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_dr_p))`). Republicans also became less biased about Democrats, though to a lesser extent (*b* = `r sprintf("%.2f", acc_rd_est)`, *p* `r if(acc_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_rd_p))`). The interaction term was `r if(acc_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", acc_interaction_coef)`, *p* `r if(acc_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_interaction_p))`).
 
-More politically extreme participants were more likely to be biased about the outgroup (TODO ADD STATS) and feel less warm about them (TODO ADD STATS). However, political extremism did not moderate the effect of talking to the chatbot, such that more and less extreme participnats were equally likely to update their beliefs and warmth towards the outgroup (TODO. Add stats).
+Both groups became warmer toward the outgroup at similar rates. Democrats learning about Republicans increased warmth by `r sprintf("%.1f", warmth_dr_est)` degrees (*p* `r if(warmth_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_dr_p))`), while Republicans learning about Democrats increased by `r sprintf("%.1f", warmth_rd_est)` degrees (*p* `r if(warmth_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_rd_p))`). The interaction was `r if(warmth_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", warmth_interaction_coef)`, *p* `r if(warmth_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_interaction_p))`).
+
+### Q3. Does political extremity predict how much people update?
 
 ```{r extremism-models}
 # Add extremism to long data
@@ -358,6 +376,17 @@ accuracy_long_ext <- accuracy_long %>%
 
 warmth_long_ext <- warmth_long %>%
   left_join(dat %>% select(ResponseId, political_extremism), by = "ResponseId")
+
+# First, test extremism predicting baseline outcomes
+baseline_accuracy_extremism <- lm(accuracy_pre ~ political_extremism, data = dat)
+baseline_warmth_extremism <- lm(warmth_outgroup_pre ~ political_extremism, data = dat)
+
+# Extract coefficients for inline reporting
+extremism_acc_baseline_b <- coef(baseline_accuracy_extremism)["political_extremism"]
+extremism_acc_baseline_p <- summary(baseline_accuracy_extremism)$coefficients["political_extremism", "Pr(>|t|)"]
+
+extremism_warmth_baseline_b <- coef(baseline_warmth_extremism)["political_extremism"]
+extremism_warmth_baseline_p <- summary(baseline_warmth_extremism)$coefficients["political_extremism", "Pr(>|t|)"]
 
 # Models with extremism interaction
 accuracy_extremism_model <- lmer(
@@ -369,6 +398,13 @@ warmth_extremism_model <- lmer(
   warmth ~ time * learner_party * political_extremism + (1 | ResponseId),
   data = warmth_long_ext
 )
+
+# Extract three-way interaction terms for inline reporting
+extremism_3way_acc_coef <- fixef(accuracy_extremism_model)["timepost:learner_partyR→D:political_extremism"]
+extremism_3way_acc_p <- summary(accuracy_extremism_model)$coefficients["timepost:learner_partyR→D:political_extremism", "Pr(>|t|)"]
+
+extremism_3way_warmth_coef <- fixef(warmth_extremism_model)["timepost:learner_partyR→D:political_extremism"]
+extremism_3way_warmth_p <- summary(warmth_extremism_model)$coefficients["timepost:learner_partyR→D:political_extremism", "Pr(>|t|)"]
 
 
 # Get simple effects at different extremism levels (low = -1 SD, high = +1 SD)
@@ -448,9 +484,9 @@ modelsummary(
   style_tt(i = c(17, 19), line = "b", line_color = "lightgray")
 ```
 
-### Q4. Is belief updating associated with how the chatbot is perceived?
+Politically extreme participants showed greater bias about the outgroup at baseline (*b* = `r sprintf("%.3f", extremism_acc_baseline_b)`, *p* `r if(extremism_acc_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_acc_baseline_p))`) and felt less warm toward them (*b* = `r sprintf("%.2f", extremism_warmth_baseline_b)`, *p* `r if(extremism_warmth_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_warmth_baseline_p))`). However, political extremism did not moderate the effect of the chatbot interaction. The three-way interaction for accuracy was `r if(extremism_3way_acc_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.3f", extremism_3way_acc_coef)`, *p* `r if(extremism_3way_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_acc_p))`), and for warmth was `r if(extremism_3way_warmth_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", extremism_3way_warmth_coef)`, *p* `r if(extremism_3way_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_warmth_p))`). More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.
 
-Participants who found the chatbot to be more informative improved more in accuracy (TODO ADD STATS) and warmth (ADD STATS). However, perceptions of bot empathy did not predict updates in accuracy or warmth.
+### Q4. Is belief updating associated with how the chatbot is perceived?
 
 ```{r process-models}
 # Prepare data for regressions
@@ -462,6 +498,17 @@ dat_for_reg <- dat %>%
 # Process measure regressions
 accuracy_process_model <- lm(accuracy_post ~ accuracy_pre + info + empathy, data = dat_for_reg)
 warmth_process_model <- lm(warmth_outgroup_post ~ warmth_outgroup_pre + info + empathy, data = dat_for_reg)
+
+# Extract coefficients for inline reporting
+info_acc_b <- coef(accuracy_process_model)["info"]
+info_acc_p <- summary(accuracy_process_model)$coefficients["info", "Pr(>|t|)"]
+empathy_acc_b <- coef(accuracy_process_model)["empathy"]
+empathy_acc_p <- summary(accuracy_process_model)$coefficients["empathy", "Pr(>|t|)"]
+
+info_warmth_b <- coef(warmth_process_model)["info"]
+info_warmth_p <- summary(warmth_process_model)$coefficients["info", "Pr(>|t|)"]
+empathy_warmth_b <- coef(warmth_process_model)["empathy"]
+empathy_warmth_p <- summary(warmth_process_model)$coefficients["empathy", "Pr(>|t|)"]
 
 # Display models
 modelsummary(
@@ -477,6 +524,8 @@ modelsummary(
   notes = "Note: Regressions control for pre-interaction values. * p<0.05, ** p<0.01, *** p<0.001"
 )
 ```
+
+Participants who found the chatbot more informative showed `r if(info_acc_p < 0.05) "significantly" else "marginally"` better accuracy improvement (*b* = `r sprintf("%.3f", info_acc_b)`, *p* `r if(info_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_acc_p))`) and `r if(info_warmth_p < 0.05) "significantly" else "marginally"` greater warmth increases (*b* = `r sprintf("%.2f", info_warmth_b)`, *p* `r if(info_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_warmth_p))`). Bot empathy did not significantly predict accuracy change (*b* = `r sprintf("%.3f", empathy_acc_b)`, *p* `r if(empathy_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_acc_p))`) or warmth change (*b* = `r sprintf("%.2f", empathy_warmth_b)`, *p* `r if(empathy_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_warmth_p))`).
 
 Do perceptions of informativeness and empathy correlate with each other? Yes, but not strongly (r ~ .30). 
 
@@ -518,64 +567,23 @@ dat <- dat %>%
   )
 ```
 
-The pre-registration specified examining whether engagement with the chatbot—operationalized as the number of words typed by participants during the chat—is associated with post-interaction outcomes. Participants engaged in an average of `r sprintf("%.2f", engagement_summary$mean_turns)` conversation turns (*SD* = `r sprintf("%.2f", engagement_summary$sd_turns)`) and typed an average of `r sprintf("%.2f", engagement_summary$mean_words)` words (*SD* = `r sprintf("%.2f", engagement_summary$sd_words)`). We test whether greater engagement predicts more belief updating and warmth change.
+We measured engagement as the number of words participants typed during the chat and tested whether greater engagement predicted larger changes in beliefs and warmth. 
+Participants engaged in an average of `r sprintf("%.2f", engagement_summary$mean_turns)` conversation turns (*SD* = `r sprintf("%.2f", engagement_summary$sd_turns)`) and typed an average of `r sprintf("%.2f", engagement_summary$mean_words)` words (*SD* = `r sprintf("%.2f", engagement_summary$sd_words)`).
 
 #### Does engagement predict belief accuracy improvement?
 
-```{r engagement-accuracy}
-# TO-DO. Move Log(Word Count) to just below Turn Count. Put the rest of the control variables at the bottom.
-
-# Model: Engagement predicting accuracy change
+```{r engagement-models}
+# Model: Engagement predicting accuracy and warmth change
 m_accuracy_turns <- lm(accuracy_change ~ user_turn_count + accuracy_pre + learner_party,
                        data = dat)
 m_accuracy_log_words <- lm(accuracy_change ~ log_word_count + accuracy_pre + learner_party,
                            data = dat)
-
-modelsummary(
-  list(
-    "Turn Count" = m_accuracy_turns,
-    "Log(Word Count)" = m_accuracy_log_words
-  ),
-  stars = TRUE,
-  gof_map = c("nobs", "r.squared", "adj.r.squared"),
-  coef_rename = c(
-    "user_turn_count" = "Turn Count",
-    "log_word_count" = "Log(Word Count)",
-    "accuracy_pre" = "Baseline Accuracy",
-    "learner_partyR→D" = "Learner: R→D"
-  )
-)
-```
-
-Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with accuracy change (*b* = `r sprintf("%.4f", coef(m_accuracy_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect was `r if(coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_accuracy_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"])`).
-
-#### Does engagement predict warmth change?
-
-```{r engagement-warmth}
-# TO-DO
-
-# Model: Engagement predicting warmth change
 m_warmth_turns <- lm(warmth_change ~ user_turn_count + warmth_outgroup_pre + learner_party,
                      data = dat)
 m_warmth_log_words <- lm(warmth_change ~ log_word_count + warmth_outgroup_pre + learner_party,
                          data = dat)
 
-modelsummary(
-  list(
-    "Turn Count" = m_warmth_turns,
-    "Log(Word Count)" = m_warmth_log_words
-  ),
-  stars = TRUE,
-  gof_map = c("nobs", "r.squared", "adj.r.squared"),
-  coef_rename = c(
-    "user_turn_count" = "Turn Count",
-    "log_word_count" = "Log(Word Count)",
-    "warmth_outgroup_pre" = "Baseline Warmth",
-    "learner_partyR→D" = "Learner: R→D"
-  )
-)
-
-# TO-DO: Consolidate into this table below.
+# Consolidated table
 modelsummary(
   list(
     "Turn Count" = m_accuracy_turns,
@@ -585,17 +593,18 @@ modelsummary(
   ),
   stars = TRUE,
   gof_map = c("nobs", "r.squared", "adj.r.squared"),
-  coef_rename = c(
+  coef_map = c(
     "user_turn_count" = "Turn Count",
     "log_word_count" = "Log(Word Count)",
+    "accuracy_pre" = "Baseline Accuracy",
     "warmth_outgroup_pre" = "Baseline Warmth",
     "learner_partyR→D" = "Learner: R→D"
   )
-)  %>% 
-  group_tt(j = list("Accuracy" = 2:3, "Warmth" = 4:5)) 
+)  %>%
+  group_tt(j = list("Accuracy" = 2:3, "Warmth" = 4:5))
 ```
 
-Greater engagement—measured by turn count—was `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
+Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with accuracy change (*b* = `r sprintf("%.4f", coef(m_accuracy_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"])`), and `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect on accuracy was `r if(coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_accuracy_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"])`), and on warmth was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
 
 ```{r engagement-plots}
 #| fig-width: 10
@@ -675,7 +684,7 @@ Participants wrote slogans for marketing energy-saving appliances to the politic
 We examine participants' metacognitive awareness by testing (1) whether confidence changes from pre to post, and (2) whether confidence changes track with actual accuracy improvements.
 
 #### Model: Does confidence change pre-to-post?
-As shown in the figure below, republican participants learning about democrats become more confident after talking to the bot (despite actually learning less than democrats). Democrats do not become more confident.
+Republicans learning about Democrats gained confidence after the interaction, despite learning less than Democrats. Democrats' confidence did not change. See Figure below.
 
 ```{r confidence-model}
 # Prepare confidence data in long format
@@ -750,8 +759,6 @@ modelsummary(
 
 #### Correlation: Does confidence change track accuracy improvement?
 
-We do not observe that participants who become more accurate are the ones who gain confidence (TODO ADD STATS). Rather, the less democrats learned about republicans, the more their confidence increased (TODO ADD STATS). Republican participants do not adjust their confidence as a function of accuracy gain (TODO ADD STATS).
-
 ```{r confidence-calibration, fig.width=8, fig.height=6}
 # Compute change scores
 calibration_dat <- dat_for_reg %>%
@@ -759,6 +766,17 @@ calibration_dat <- dat_for_reg %>%
     confidence_change = confidence_outgroup_post - confidence_outgroup_pre,
     accuracy_change = accuracy_post - accuracy_pre  # Negative = improvement
   )
+
+# Compute correlations by group
+cor_overall <- cor.test(calibration_dat$confidence_change, calibration_dat$accuracy_change)
+cor_dr <- cor.test(
+  calibration_dat$confidence_change[calibration_dat$learner_party == "D→R"],
+  calibration_dat$accuracy_change[calibration_dat$learner_party == "D→R"]
+)
+cor_rd <- cor.test(
+  calibration_dat$confidence_change[calibration_dat$learner_party == "R→D"],
+  calibration_dat$accuracy_change[calibration_dat$learner_party == "R→D"]
+)
 
 # Create scatter plot with correlation statistics
 ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = learner_party)) +
@@ -774,10 +792,12 @@ ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = 
     subtitle = "Does confidence change track with accuracy improvement?",
     caption = "Note: Negative correlation would indicate increased confidence associated with improved accuracy"
   ) +
-  geom_hline(yintercept = 0)+
-  geom_vline(xintercept = 0)+
-  annotate(geom = 'text', x = 2.5, y = -2.5, label= 'Rightfully more confident') +
-  # TODO: Complete annotations
+  geom_hline(yintercept = 0, linetype = "dashed", alpha = 0.5)+
+  geom_vline(xintercept = 0, linetype = "dashed", alpha = 0.5)+
+  annotate(geom = 'text', x = 2.5, y = -2.5, label= 'Rightfully\nmore confident', size = 3) +
+  annotate(geom = 'text', x = -2.5, y = -2.5, label= 'Rightfully\nless confident', size = 3) +
+  annotate(geom = 'text', x = 2.5, y = 2.5, label= 'Wrongly\nmore confident', size = 3) +
+  annotate(geom = 'text', x = -2.5, y = 2.5, label= 'Wrongly\nless confident', size = 3) +
   theme_minimal() +
   theme(
     plot.title = element_text(face = "bold", size = 14),
@@ -786,6 +806,8 @@ ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = 
     legend.position = "bottom"
   )
 ```
+
+Overall, confidence change did not track with accuracy improvement (*r* = `r sprintf("%.3f", cor_overall$estimate)`, *p* `r if(cor_overall$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_overall$p.value))`). For Democrats learning about Republicans, there was a `r if(cor_dr$p.value < 0.05) "significant positive" else "positive"` correlation between confidence change and accuracy change (*r* = `r sprintf("%.3f", cor_dr$estimate)`, *p* `r if(cor_dr$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_dr$p.value))`), indicating that those who became less accurate gained more confidence. For Republicans learning about Democrats, confidence change did not correlate with accuracy change (*r* = `r sprintf("%.3f", cor_rd$estimate)`, *p* `r if(cor_rd$p.value < 0.001) "< .001" else paste("=", sprintf("%.3f", cor_rd$p.value))`).
 
 ### Robustness Checks
 
@@ -852,21 +874,29 @@ modelsummary(
 
 ### Summary of Findings
 
-TODO: read what i wrote and write a straight forward summary.
+Brief interactions with an AI chatbot representing a political outgroup improved accuracy of beliefs about that outgroup and increased warmth toward them. Participants became more accurate in estimating their political outgroup's environmental attitudes and reported warmer feelings toward the outgroup on a feeling thermometer. These effects were asymmetric: Democrats learning about Republicans showed greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates.
+
+Political extremism predicted greater baseline bias and lower baseline warmth but did not moderate the intervention's effectiveness. More and less extreme participants benefited equally from the interaction. Perceptions of the chatbot's informativeness predicted better outcomes, while perceived empathy did not. Greater engagement, measured by conversation length, showed mixed associations with belief updating.
+
+Confidence changes did not track with accuracy improvements. Republicans learning about Democrats gained confidence despite smaller accuracy gains, while Democrats' confidence did not change. For Democrats, confidence increases were paradoxically associated with becoming less accurate, suggesting poor metacognitive calibration in this context.
 
 ### Implications for Marketing Practice
 
-If the hypothesized effects are supported, this research suggests that AI-mediated interactions can serve as a scalable tool for reducing political misperceptions in consumer research. Marketers often struggle to understand ideologically diverse consumer segments, relying on stereotypes or costly focus groups. AI chatbots could provide an accessible method for gaining insight into outgroup consumer preferences and values.
+These findings suggest that AI-mediated interactions can serve as a scalable tool for reducing political misperceptions in consumer research. Marketers often struggle to understand ideologically diverse consumer segments, relying on stereotypes or costly focus groups. AI chatbots could provide an accessible method for gaining insight into outgroup consumer preferences and values.
 
 This approach may be particularly valuable for marketing environmentally responsible products, where political divides can lead to misperceptions about consumer attitudes. Understanding that political outgroups may be more environmentally conscious than stereotypes suggest could inform more effective cross-partisan messaging strategies.
 
 ### Limitations
 
-Several limitations should be noted. (TODO ONE PARAGRAPH FOR EACH). The environmental attitude domain may not generalize to other consumer preferences. The study examines only immediate post-interaction effects; durability of any changes remains unknown.
+This study has several limitations that provide directions for future research.
 
-Additionally, participants interacted with an AI chatbot rather than actual outgroup members. While this approach offers scalability advantages, it raises questions about whether insights gained from AI interactions transfer to understanding real outgroup members. The chatbot was prompted to represent the outgroup but may not fully capture the diversity of views within each political group.
+**Domain specificity.** The environmental attitude domain may not generalize to other consumer preferences or policy areas. Environmental attitudes represent a domain where partisan divides exist but are not as stark as other politically charged topics. Future research should examine whether AI-mediated learning transfers to domains with deeper partisan disagreement, such as immigration, healthcare, or gun policy. The effectiveness of this intervention may vary depending on the perceived relevance of the attitude domain to partisan identity.
 
-(TODO WRITE THIS UP) We'd like to compare our chatbot intervention to other interventions that might be useful like standard perspective taking interventions that are SOTA in psychological research, to google searches, to talking to digital twins of actual people, etc.
+**Temporal dynamics.** This study examines only immediate post-interaction effects. The durability of accuracy improvements and warmth increases remains unknown. Research on intergroup contact suggests that initial attitude changes can decay over time, particularly without repeated exposure. Future studies should include delayed follow-up measurements to assess whether belief updates persist days, weeks, or months after the interaction. Understanding decay rates would inform practical recommendations about intervention frequency for sustained effects.
+
+**AI representation versus human reality.** Participants interacted with an AI chatbot prompted to represent a political outgroup rather than actual outgroup members. While this approach offers scalability advantages, it raises questions about whether insights gained from AI interactions transfer to understanding real outgroup members. The chatbot was prompted to represent the outgroup but may not fully capture the diversity of views within each political group. Individual variation within partisan groups is substantial, and the AI's responses may reinforce stereotypes about group homogeneity even as they correct specific attitude misperceptions. Future research should examine whether learning from AI translates to more accurate perceptions of actual individuals and whether AI-mediated learning produces different outcomes than human-mediated contact.
+
+**Comparison to alternative interventions.** This study does not compare the chatbot intervention to other approaches for reducing partisan misperceptions. Standard perspective-taking interventions have shown some effectiveness in reducing intergroup bias in the psychological literature. Information provision through simple fact sheets or Google searches might achieve similar accuracy improvements at lower cost. Interactions with digital twins based on actual individuals' response patterns could combine scalability with greater authenticity. Future research should directly compare these alternatives to determine the relative effectiveness and cost-efficiency of AI chatbots versus other scalable interventions for partisan debiasing.
 
 ## Appendix
 

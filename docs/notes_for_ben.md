@@ -1,5 +1,138 @@
 # Notes for Ben
 
+## 2025-12-17: Writing Review of report.qmd
+
+I've reviewed your report and identified areas for improvement based on your writing guidelines. Here are the main issues organized by priority:
+
+### 1. PASSIVE VOICE → ACTIVE VOICE
+
+**Line 53-54** (Data Collection)
+- Current: "Data were collected via Qualtrics from `r nrow(dat)` participants."
+- Suggest: "We collected data via Qualtrics from `r nrow(dat)` participants."
+
+**Line 119** (Preliminaries)
+- Current: "Democrats' and Republicans' actual green values and their perceptions of ingroup and outgroup attitudes are shown in the figure below."
+- Suggest: "The figure below shows Democrats' and Republicans' actual green values and their perceptions of ingroup and outgroup attitudes."
+- OR BETTER: "Figure X compares actual green values with perceived ingroup and outgroup attitudes for Democrats and Republicans."
+
+**Line 289-290** (Q2)
+- Current: "While both groups become more accurate, the effect is driven by democrats becoming less biased about republicans"
+- Suggest: "While both groups become more accurate, Democrats drive this effect by becoming substantially less biased about Republicans"
+
+**Line 351-352** (Q3)
+- Current: "More politically extreme participants were more likely to be biased about the outgroup (TODO ADD STATS) and feel less warm about them"
+- Suggest: "Politically extreme participants showed greater bias about the outgroup (TODO ADD STATS) and felt less warm toward them"
+
+**Line 865** (Limitations)
+- Current: "Several limitations should be noted."
+- Suggest: "This study has several limitations." OR "We note several limitations."
+
+### 2. WEAK TOPIC SENTENCES
+
+**Line 103** (Preliminaries)
+- Current: "Where does our sample fall in the political spectrum?"
+- Suggest: "Our sample consists of highly partisan participants." OR "Most participants held strong partisan identities, with the majority in the top and bottom quartiles of the political spectrum."
+
+**Lines 66-67** (Measures section)
+- Current: Just a header "**Primary Outcomes**" with no intro
+- Suggest: Add a topic sentence before diving into the list: "We measured two primary outcomes to assess belief updating and affective change."
+
+**Line 855** (Discussion - Summary of Findings)
+- Current: "TODO: read what i wrote and write a straight forward summary."
+- This needs to be written, but when you do, start with a clear topic sentence like: "This study demonstrates that brief AI-mediated interactions can reduce political misperceptions, though effects vary by partisan group."
+
+### 3. WORDINESS & UNCLEAR LANGUAGE
+
+**Line 41-42** (Overview)
+- Current: Three-sentence opener is wordy and buries the lede
+- Suggest combining and sharpening: "Political polarization creates marketing challenges when firms must appeal to ideologically diverse consumers. Partisans hold exaggerated and inaccurate views of political outgroups, leading to ineffective marketing strategies. This study tests whether interacting with an AI chatbot representing a political outgroup can improve marketers' understanding and reduce affective polarization."
+
+**Line 103-104** (Preliminaries)
+- Current: "Where does our sample fall in the political spectrum? As shown in the figure below, most participants were partisan, with most lying in the top and bottom 25%."
+- Issues: (1) Repetitive "most", (2) "Where does our sample fall" is conversational not direct
+- Suggest: "Most participants held strongly partisan views, falling in the top and bottom quartiles of the political spectrum."
+
+**Line 520-521** (Q5)
+- Current: "The pre-registration specified examining whether engagement with the chatbot—operationalized as the number of words typed by participants during the chat—is associated with post-interaction outcomes."
+- Too wordy; suggest: "We measured engagement as the number of words participants typed during the chat and tested whether greater engagement predicted larger changes in beliefs and warmth."
+
+**Line 677-678** (Q7)
+- Current: "As shown in the figure below, republican participants learning about democrats become more confident after talking to the bot (despite actually learning less than democrats). Democrats do not become more confident."
+- Issues: (1) "As shown in the figure below" is overused throughout, (2) Could be more concise
+- Suggest: "Republicans learning about Democrats gained confidence after the interaction, despite learning less than Democrats. Democrats' confidence did not change."
+
+### 4. PARALLEL STRUCTURE ISSUES
+
+**Lines 45-48** (Hypotheses)
+Current list structure is inconsistent:
+1. "**Report more accurate beliefs** about the outgroup's attitudes..."
+2. "**Feel warmer** toward the political outgroup..."
+
+Suggest making them more parallel:
+1. "**Report more accurate beliefs** about the outgroup's attitudes toward environmentally responsible consumption (Primary Outcome 1)."
+2. "**Report warmer feelings** toward the political outgroup (Primary Outcome 2)."
+
+**Lines 1139-1152** (Extreme cases patterns)
+Current lists are GOOD - keep these as a model:
+- Both start with past tense verbs
+- Both have parallel bullet structure
+- This is exactly what parallel structure should look like
+
+### 5. INCONSISTENT TENSE
+
+**Line 289-292** (Q2)
+- Current: Mixes present ("become") with past in other sections
+- Throughout Results, standardize to past tense: "became more accurate" not "become more accurate"
+
+### 6. REPETITIVE PHRASES
+
+**Overused: "As shown in the figure below"**
+- Appears at lines: 103, 119, 677, and probably others
+- Vary your transitions: "Figure X reveals...", "The data show...", or just describe directly: "Republicans learning about Democrats gained confidence..."
+
+**Overused: "TODO ADD STATS"**
+- Lines 290, 292, 351, 352, 453
+- Either add the stats or remove these placeholders before calling it done
+
+### 7. SPECIFIC SMALLER FIXES
+
+**Line 224**: "more warm" → "warmer"
+
+**Line 119**: "The real gap at baseline is much smaller than the *perceived* gap."
+- Good directness, but "real" vs "perceived" could be clearer: "The actual gap at baseline was much smaller than participants perceived."
+
+**Line 859-861** (Implications)
+- Current: "If the hypothesized effects are supported, this research suggests..."
+- Issue: You already HAVE the results, so don't hedge with "if"
+- Suggest: "These findings suggest that AI-mediated interactions can serve as a scalable tool..."
+
+### OVERALL PATTERNS TO WATCH:
+
+1. **Passive voice creep**: Search for "were", "was", "is shown", "should be noted" and convert to active
+2. **Weak verbs**: "can serve as", "may be", "suggests that" - be more direct when you have evidence
+3. **Conversational questions as topic sentences**: Replace with declarative statements
+4. **Over-hedging in Discussion**: You have results - own them (while noting limitations separately)
+
+### STRENGTHS TO MAINTAIN:
+
+- Your extreme cases analysis (lines 1037-1154) has excellent writing: strong topic sentences, parallel structure in lists, active voice
+- Q1 and Q4 openings are direct and clear
+- Your use of inline statistics is appropriate and well-integrated
+- The hypotheses section is clear and testable
+
+---
+
+Priority order for revisions:
+1. Fix all passive voice (15 min)
+2. Strengthen topic sentences for each section (20 min)
+3. Remove "TODO" placeholders or fill them in (10 min)
+4. Make tense consistent throughout Results (10 min)
+5. Vary transition phrases (10 min)
+
+Total estimated revision time: ~65 minutes for major improvements
+
+---
+
 ## 2025-12-17: Simple Effects Added to All MLM Tables
 
 **What was done**:
