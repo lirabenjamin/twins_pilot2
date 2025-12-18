@@ -1,5 +1,78 @@
 # Notes for Ben
 
+## 2025-12-18 17:35 - Figure and Table Saving Implementation
+
+### Summary
+Implemented automatic saving of all figures and tables from report.qmd to output/ directories for easy use in presentations and slides.
+
+### Changes Made
+
+1. **Setup Configuration** (analysis/report.qmd):
+   - Added automatic detection of output paths (works both when running in Quarto and standalone)
+   - Created `fig_path` and `tab_path` variables that automatically adjust based on context
+   - Added helper function `save_table()` that handles both gt tables and tinytable objects
+   - Directories created automatically if they don't exist
+
+2. **Figures Saved** (all saved to `output/figures/` as PNG at 300 dpi):
+   - `fig_political_orientation.png` - Distribution of political orientation
+   - `fig_green_attitudes.png` - Green attitudes: actual and perceived
+   - `fig_bias_distribution_overall.png` - Overall distribution of bias
+   - `fig_bias_distribution_by_party.png` - Bias distribution by party
+   - `fig_baseline_accuracy_warmth.png` - Baseline accuracy-warmth correlation
+   - `fig_dunning_kruger.png` - Skill-confidence relationship
+   - `fig_q1_accuracy_warmth.png` - Main results: accuracy and warmth changes
+   - `fig_accuracy_warmth_change.png` - Correlation between changes
+   - `fig_empathy_info.png` - Bot empathy vs informativeness
+   - `fig_engagement.png` - All engagement plots (4-panel)
+   - `fig_confidence.png` - Confidence changes over time
+   - `fig_confidence_calibration.png` - Confidence-accuracy calibration
+
+3. **Tables Saved** (saved to `output/tables/` as both HTML and PNG):
+   - `tab_sample_composition` - Participant breakdown
+   - `tab_q1_main_effects` - Q1: Main effects of time
+   - `tab_q2_interaction` - Q2: Interaction with learner party
+   - `tab_q3_extremism` - Q3: Extremism moderation
+   - `tab_q4_process` - Q4: Bot perceptions
+   - `tab_q5_engagement` - Q5: Engagement effects
+   - `tab_q7_confidence` - Q7: Confidence changes
+   - `tab_appendix_accuracy_summary` - Appendix: All accuracy models
+   - `tab_appendix_warmth_summary` - Appendix: All warmth models
+
+### How to Use
+
+1. **Render the report** to generate all figures and tables:
+   ```bash
+   cd analysis
+   quarto render report.qmd
+   ```
+
+2. **Find your outputs**:
+   - Figures: `output/figures/` (PNG files, 300 dpi, ready for slides)
+   - Tables: `output/tables/` (HTML and PNG formats)
+
+3. **For slides**: All figures are high-resolution PNG files that can be directly inserted into PowerPoint, Google Slides, Keynote, etc.
+
+### Technical Details
+
+- All figures use `ggsave()` with 300 dpi resolution
+- Tables are saved in both HTML (for web) and PNG (for slides) formats
+- The save_table() helper automatically detects table type and uses appropriate save method
+- Paths are context-aware: works both when rendering with Quarto and when running chunks interactively in RStudio
+
+### What's Not Included
+
+- Extreme cases conversation transcripts (these are generated dynamically from JSON)
+- Some descriptive statistics tables in appendix (can be added if needed)
+
+### Next Steps
+
+If you need:
+- Different image formats (PDF, SVG, etc.), modify the ggsave() calls
+- Different resolutions, change the `dpi` parameter
+- Additional tables saved, use the same pattern with `save_table(tbl, "filename")`
+
+---
+
 ## 2025-12-18: Fixed Accuracy Scoring to Use Negative Absolute Error
 
 **What was changed**:

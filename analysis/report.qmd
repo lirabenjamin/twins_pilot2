@@ -35,10 +35,35 @@ is_running_in_quarto <- function() {
 # Example usage:
 if (is_running_in_quarto()) {
   dat <- read_parquet("../data/processed/analysis_data.parquet")
+  fig_path <- "../output/figures/"
+  tab_path <- "../output/tables/"
 } else {
  dat <- read_parquet("./data/processed/analysis_data.parquet")
+ fig_path <- "./output/figures/"
+ tab_path <- "./output/tables/"
 }
 
+# Create output directories if they don't exist
+dir.create(fig_path, recursive = TRUE, showWarnings = FALSE)
+dir.create(tab_path, recursive = TRUE, showWarnings = FALSE)
+
+# Helper function to save tables
+save_table <- function(table_obj, filename, path = tab_path) {
+  full_path <- paste0(path, filename)
+
+  # Check if it's a gt table
+  if ("gt_tbl" %in% class(table_obj)) {
+    gtsave(table_obj, paste0(full_path, ".html"))
+    gtsave(table_obj, paste0(full_path, ".png"))
+  }
+  # Check if it's a tinytable (from modelsummary)
+  else if ("tinytable" %in% class(table_obj)) {
+    save_tt(table_obj, paste0(full_path, ".html"), overwrite = TRUE)
+    save_tt(table_obj, paste0(full_path, ".png"), overwrite = TRUE)
+  }
+
+  return(table_obj)
+}
 
 # Load cleaned data
 
@@ -87,11 +112,13 @@ We hypothesized that after interacting with an AI chatbot representing their pol
 We collected data via Qualtrics from `r nrow(dat)` participants. Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
 
 ```{r participant-breakdown}
-dat %>%
+tbl <- dat %>%
   count(learner_party) %>%
   gt() %>%
   cols_label(learner_party = "Learner Party", n = "N") %>%
   tab_header(title = "Sample Composition")
+save_table(tbl, "tab_sample_composition")
+tbl
 ```
 
 ### Measures
@@ -135,16 +162,18 @@ Most participants held strong partisan identities, with the majority in the top 
 ```{r}
 #| fig-height: 3
 #| fig-width: 4
-dat %>% 
-  ggplot(aes(politicalorientation_1)) + 
-  geom_histogram(aes(fill = after_stat(x))) + 
+p <- dat %>%
+  ggplot(aes(politicalorientation_1)) +
+  geom_histogram(aes(fill = after_stat(x))) +
   labs(x = 'Political Orientation', y = "Count")+
   theme_minimal()+
   theme(legend.position = "none")+
-  scale_fill_gradient2(low = party_colors["Democrat"], 
-                       mid = "gray40", 
+  scale_fill_gradient2(low = party_colors["Democrat"],
+                       mid = "gray40",
                        high = party_colors["Republican"],
                        midpoint = 50)  # Adjust midpoint to your scale center
+ggsave(paste0(fig_path, "fig_political_orientation.png"), p, width = 4, height = 3, dpi = 300)
+p
 ```
 
 The figure below compares actual green values with perceived ingroup and outgroup attitudes for Democrats and Republicans. The actual gap at baseline was much smaller than participants perceived. Perceptions of the ingroup are much more accurate.
@@ -163,7 +192,7 @@ prelim_data <- dat %>%
   )
 
 # Create faceted plot
-ggplot(prelim_data, aes(x = participant_party, y = value, fill = participant_party)) +
+p <- ggplot(prelim_data, aes(x = participant_party, y = value, fill = participant_party)) +
   stat_summary(fun = mean, geom = "bar", alpha = 0.8) +
   stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
   facet_wrap(~measure_type, ncol = 4) +
@@ -180,6 +209,8 @@ ggplot(prelim_data, aes(x = participant_party, y = value, fill = participant_par
     strip.text = element_text(face = "bold"),
     legend.position = "none"
   )
+ggsave(paste0(fig_path, "fig_green_attitudes.png"), p, width = 6, height = 4, dpi = 300)
+p
 ```
 
 ```{r bias}
@@ -246,6 +277,8 @@ p2 <- dat %>%
     legend.position = c(0.85, 0.85),
   )
 
+ggsave(paste0(fig_path, "fig_bias_distribution_overall.png"), p1, width = 4, height = 3, dpi = 300)
+ggsave(paste0(fig_path, "fig_bias_distribution_by_party.png"), p2, width = 4, height = 3, dpi = 300)
 p1
 p2
 ```
@@ -256,7 +289,7 @@ Does baseline accuracy correlate with baseline warmth? We examine whether people
 #| fig-width: 6
 #| fig-height: 4
 
-dat %>%
+p <- dat %>%
   ggplot(aes(x = accuracy_pre, y = warmth_outgroup_pre, color = participant_party)) +
   geom_point(alpha = 0.6, size = 2.5) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
@@ -270,6 +303,8 @@ dat %>%
   ) +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+ggsave(paste0(fig_path, "fig_baseline_accuracy_warmth.png"), p, width = 6, height = 4, dpi = 300)
+p
 ```
 
 Does baseline accuracy predict baseline confidence? We examine whether less accurate participants are overconfident in their judgments, consistent with Dunning-Kruger effects.
@@ -291,7 +326,7 @@ dat_dk <- dat %>%
                names_pattern = "(.+)_(pre|post)") %>%
   mutate(time = factor(time, levels = c("pre", "post")))
 
-ggplot(dat_dk, aes(x = skill, y = confidence_outgroup, linetype = time, color = participant_party, fill = participant_party)) +
+p <- ggplot(dat_dk, aes(x = skill, y = confidence_outgroup, linetype = time, color = participant_party, fill = participant_party)) +
   geom_smooth(method = "loess", se = TRUE, linewidth = 1, alpha = .1) +
   facet_wrap(~participant_party) +
   scale_linetype_manual(values = c("pre" = "solid", "post" = "dashed"),
@@ -309,6 +344,8 @@ ggplot(dat_dk, aes(x = skill, y = confidence_outgroup, linetype = time, color = 
   theme(plot.title = element_text(face = "bold"),
         legend.position = "none",
         strip.text = element_text(face = "bold"))
+ggsave(paste0(fig_path, "fig_dunning_kruger.png"), p, width = 8, height = 4, dpi = 300)
+p
 ```
 
 ### Q1. Do people update their beliefs after interacting with the chatbot?
@@ -370,12 +407,14 @@ p_warmth <- ggplot(warmth_summary, aes(x = time, y = mean_warmth, color = learne
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 
-p_accuracy + p_warmth + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+p_combined <- p_accuracy + p_warmth + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+ggsave(paste0(fig_path, "fig_q1_accuracy_warmth.png"), p_combined, width = 10, height = 4, dpi = 300)
+p_combined
 ```
 
 ```{r}
 # Display models side by side
-modelsummary(
+tbl <- modelsummary(
   list(
     "Accuracy" = accuracy_model0,
     "Warmth" = warmth_model0),
@@ -384,6 +423,8 @@ modelsummary(
   coef_map = coef_map_common,
   notes = "Note: Accuracy is negative absolute error (higher = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
 )
+save_table(tbl, "tab_q1_main_effects")
+tbl
 ```
 
 Do changes in accuracy correlate with changes in warmth? We examine whether people who became more accurate also became warmer toward the outgroup.
@@ -399,7 +440,7 @@ dat_with_changes <- dat %>%
     warmth_change = warmth_outgroup_post - warmth_outgroup_pre
   )
 
-dat_with_changes %>%
+p <- dat_with_changes %>%
   ggplot(aes(x = accuracy_change, y = warmth_change, color = learner_party)) +
   geom_point(alpha = 0.6, size = 2.5) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
@@ -413,6 +454,8 @@ dat_with_changes %>%
   ) +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+ggsave(paste0(fig_path, "fig_accuracy_warmth_change.png"), p, width = 6, height = 4, dpi = 300)
+p
 ```
 
 ### Q2. Is belief updating symmetric across political groups?
@@ -481,7 +524,7 @@ Both groups became warmer toward the outgroup at similar rates. Democrats learni
 
 ```{r}
 # Create the table with add_rows
-modelsummary(
+tbl <- modelsummary(
   list("Accuracy" = accuracy_model, "Warmth" = warmth_model),
   stars = TRUE,
   add_rows = rows,
@@ -493,6 +536,8 @@ modelsummary(
     group_tt(i = list("Effects by Political Affiliation" = 1, "Full Regression Results" = 5)) |>
       style_tt(i = c(1, 6), bold = TRUE) |>
     style_tt(i = c(14, 16), line = "b", line_color = "lightgray")
+save_table(tbl, "tab_q2_interaction")
+tbl
 ```
 
 ### Q3. Does political extremity predict how much people update?
@@ -593,7 +638,7 @@ Politically extreme participants showed greater bias about the outgroup at basel
 
 ```{r}
 # Display models
-modelsummary(
+tbl <- modelsummary(
   list("Accuracy" = accuracy_extremism_model, "Warmth" = warmth_extremism_model),
   stars = TRUE,
   add_rows = rows_extremism,
@@ -606,6 +651,8 @@ modelsummary(
   group_tt(i = list("Simple Effects by Extremism Level" = 1, "Full Regression Results" = 5)) %>%
   style_tt(i = c(1, 6), bold = TRUE) %>%
   style_tt(i = c(20, 21), line = "b", line_color = "lightgray")
+save_table(tbl, "tab_q3_extremism")
+tbl
 ```
 
 ### Q4. Is belief updating associated with how the chatbot is perceived?
@@ -637,19 +684,21 @@ Participants who found the chatbot more informative showed `r if(info_acc_p < 0.
 
 ```{r}
 # Display models
-modelsummary(
+tbl <- modelsummary(
   list("Accuracy" = accuracy_process_model, "Warmth" = warmth_process_model),
   stars = TRUE,
   gof_map = c("nobs", "r.squared", "adj.r.squared"),
   coef_map = coef_map_common,
   notes = "Note: Regressions control for pre-interaction values. * p<0.05, ** p<0.01, *** p<0.001"
 )
+save_table(tbl, "tab_q4_process")
+tbl
 ```
 
 Do perceptions of informativeness and empathy correlate with each other? Yes, but not strongly (r ~ .30). 
 
 ```{r}
-dat_for_reg %>%
+p <- dat_for_reg %>%
   ggplot(aes(x = empathy, y = info, color = learner_party)) +
   geom_jitter(alpha = 0.6, size = 2.5, width = 0.3, height = 0.3) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
@@ -663,6 +712,8 @@ dat_for_reg %>%
   ) +
   theme_minimal()+
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+ggsave(paste0(fig_path, "fig_empathy_info.png"), p, width = 6, height = 4, dpi = 300)
+p
 ```
 
 ### Q5. Does engagement ("dose") matter for belief updating?
@@ -708,7 +759,7 @@ Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_
 
 ```{r}
 # Consolidated table
-modelsummary(
+tbl <- modelsummary(
   list(
     "Turn Count" = m_accuracy_turns,
     "Log(Word Count)" = m_accuracy_log_words,
@@ -720,6 +771,8 @@ modelsummary(
   coef_map = coef_map_common
 )  %>%
   group_tt(j = list("Accuracy" = 2:3, "Warmth" = 4:5))
+save_table(tbl, "tab_q5_engagement")
+tbl
 ```
 
 ```{r engagement-plots}
@@ -780,9 +833,11 @@ p4 <- ggplot(dat_filtered, aes(x = log_word_count, y = warmth_change, color = le
   theme_minimal()
 
 # Combine plots with single shared legend at bottom
-(p1 + p2) / (p3 + p4) +
+p_combined <- (p1 + p2) / (p3 + p4) +
   plot_layout(guides = "collect") &
   theme(legend.position = "bottom")
+ggsave(paste0(fig_path, "fig_engagement.png"), p_combined, width = 10, height = 8, dpi = 300)
+p_combined
 ```
 
 ### Q6. Does interacting with the chatbot improve applied judgment?
@@ -860,7 +915,7 @@ Republicans learning about Democrats gained confidence after the interaction (*b
 
 ```{r}
 # Confidence plot
-ggplot(confidence_summary, aes(x = time, y = mean_confidence, color = learner_party, group = learner_party)) +
+p <- ggplot(confidence_summary, aes(x = time, y = mean_confidence, color = learner_party, group = learner_party)) +
   geom_line(linewidth = 1) +
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_confidence - se_confidence, ymax = mean_confidence + se_confidence), width = 0.1) +
@@ -868,9 +923,11 @@ ggplot(confidence_summary, aes(x = time, y = mean_confidence, color = learner_pa
   labs(title = "Confidence in Outgroup Judgments", x = "Time", y = "Mean Confidence (1-5)") +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+ggsave(paste0(fig_path, "fig_confidence.png"), p, width = 6, height = 4, dpi = 300)
+p
 
 # Display models
-modelsummary(
+tbl <- modelsummary(
   list("Confidence (Main Effect)" = confidence_model0,
        "Confidence (Interaction)" = confidence_model),
   stars = TRUE,
@@ -883,6 +940,8 @@ modelsummary(
   group_tt(i = list("Simple Effects by Political Affiliation" = 1, "Full Regression Results" = 5)) %>%
   style_tt(i = c(1, 6), bold = TRUE) %>%
   style_tt(i = c(14, 16), line = "b", line_color = "lightgray")
+save_table(tbl, "tab_q7_confidence")
+tbl
 ```
 
 #### Correlation: Does confidence change track accuracy improvement?
@@ -911,7 +970,7 @@ Overall, confidence change did not track with accuracy improvement (*r* = `r spr
 
 ```{r}
 # Create scatter plot with correlation statistics
-ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = learner_party)) +
+p <- ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = learner_party)) +
   geom_jitter(alpha = 0.6, size = 2.5, width = .2, height= 0) +
   geom_smooth(method = "lm", se = TRUE, linewidth = 1) +
   stat_cor(aes(label = paste((..r.label..), ..p.label.., sep = "~`,`~")),
@@ -937,6 +996,8 @@ ggplot(calibration_dat, aes(x = confidence_change, y = accuracy_change, color = 
     plot.caption = element_text(hjust = 0, size = 9, color = "gray40"),
     legend.position = "bottom"
   )
+ggsave(paste0(fig_path, "fig_confidence_calibration.png"), p, width = 8, height = 6, dpi = 300)
+p
 ```
 
 
@@ -973,7 +1034,7 @@ This study has several limitations that provide directions for future research.
 ### Summary table of regressions
 ```{r}
 # Accuracy models panel
-modelsummary(
+tbl_acc <- modelsummary(
   list(
     "Main Effect" = accuracy_model0,
     "Interaction" = accuracy_model,
@@ -995,9 +1056,11 @@ modelsummary(
     "Extremism" = 4,
     "Mechanisms" = 5:7
   ))
+save_table(tbl_acc, "tab_appendix_accuracy_summary")
+tbl_acc
 
 # Warmth models panel
-modelsummary(
+tbl_warmth <- modelsummary(
   list(
     "Main Effect" = warmth_model0,
     "Interaction" = warmth_model,
@@ -1018,6 +1081,8 @@ modelsummary(
     "Extremism" = 4,
     "Mechanisms" = 5:7
   ))
+save_table(tbl_warmth, "tab_appendix_warmth_summary")
+tbl_warmth
 ```
 
 ### Descriptive Statistics
