@@ -169,6 +169,16 @@ Can AI Digital Twins Bridge the Partisan Insight Gap?}
 }
 
 \date{\today}
+\usepackage{float}
+\usepackage{tabularray}
+\usepackage[normalem]{ulem}
+\usepackage{graphicx}
+\usepackage{rotating}
+\UseTblrLibrary{booktabs}
+\UseTblrLibrary{siunitx}
+\NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
+\newcommand{\tinytableTabularrayUnderline}[1]{\underline{#1}}
+\newcommand{\tinytableTabularrayStrikeout}[1]{\sout{#1}}
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{longtable}
@@ -305,16 +315,16 @@ polarization. We examine both informational mechanisms (does the chatbot
 provide useful information?) and empathic mechanisms (does the chatbot
 foster emotional connection?), and assess whether participants gain
 metacognitive insight into their improved understanding. We recruited
-500 partisan participants (prescreened to exclude moderates; 248
-Democrats, 252 Republicans). Participants reported their own
-environmental attitudes, estimated the environmental attitudes of the
-average Democrat and Republican, and rated their warmth toward each
-political group. They then conversed for 10 minutes with a chatbot
-prompted to represent their political outgroup before re-rating outgroup
-warmth and re-estimating outgroup environmental attitudes. We
-hypothesized that participants would report more accurate beliefs about
-outgroup environmental attitudes and warmer feelings toward the
-political outgroup after the interaction.
+500 partisan participants (prescreened to include participants who
+identified as democrats or republicans; 248 Democrats, 252 Republicans).
+Participants reported their own environmental attitudes, estimated the
+environmental attitudes of the average Democrat and Republican, and
+rated their warmth toward each political group. They then conversed for
+10 minutes with a chatbot prompted to represent their political outgroup
+before re-rating outgroup warmth and re-estimating outgroup
+environmental attitudes. We hypothesized that participants would report
+more accurate beliefs about outgroup environmental attitudes and warmer
+feelings toward the political outgroup after the interaction.
 
 \subsection{Results}\label{results}
 
@@ -1248,9 +1258,18 @@ scored below 25 or above 75 on a 0-100 political orientation scale
 during prescreening, where 0 represents strong Democratic identification
 and 100 represents strong Republican identification. The final sample
 included 248 Democrats learning about Republicans (D→R) and 252
-Republicans learning about Democrats (R→D). Participants were
-compensated through the Qualtrics panel system. This research was
-approved by the University of Pennsylvania Institutional Review Board.
+Republicans learning about Democrats (R→D).
+
+Participants' mean age was 43.5 years (\emph{SD} = 13.5, range =
+18--80). The sample was 52.6\% female, 46.0\% male, and 1.4\% other
+gender identities. Racial/ethnic composition was 0.0\% White, 0.0\%
+Black or African American, 0.0\% Latino, 0.0\% Asian, and NaN\% other
+racial/ethnic identities (participants could select multiple
+categories).
+
+Participants were compensated through the Qualtrics panel system. This
+research was approved by the University of Pennsylvania Institutional
+Review Board.
 
 \subsubsection{Procedure}\label{procedure}
 
@@ -1329,6 +1348,71 @@ comparison to.
 \textbf{DATA NEEDED}: 1. Semantic similarity scores (compare to
 AI-generated responses to detect copying) 2. Quality ratings (human or
 LLM ratings of slogan fit to target outgroup)
+
+\paragraph{Example Slogans}\label{example-slogans}
+
+\textbf{Democrats Marketing to Republicans (D→R):}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ``Smart Savings, Reliable Power, Your Choice.''
+\item
+  ``Save money every month with our energy-saving home appliances''
+\item
+  ``it's easy, affordable, and efficient to switch to energy-saving home
+  appliances today to better our home and communities''
+\item
+  ``We only have 1 environment. Buy responsibly!''
+\item
+  ``Smart savings, stronger independence.''
+\item
+  ``Left or right we need to do what's right and buy energy efficient
+  appliances. Let's work together on this !''
+\item
+  ``Saves time and money, American-made!''
+\item
+  ``Buy energy-efficient appliances!''
+\item
+  ``Taking actions getting results''
+\item
+  ``Lower your energy bill with expertly created appliances designed and
+  made in the USA specifically to help fellow Americans amidst the
+  affordability crisis.''
+\end{enumerate}
+
+\textbf{Republicans Marketing to Democrats (R→D):}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ``Don't waste''
+\item
+  ``It is important that everyone take advantage of these energy-saving
+  appliance's. They will not only save you money, but will ultimately
+  help the planet, buy yours today!''
+\item
+  ``We save money and the environment''
+\item
+  ``Help save the planet, and make the land green.''
+\item
+  ``Save energy, protect the planet, and build a cleaner future at
+  home.''
+\item
+  ``A small inconvenience for everyone is better than a large problem
+  for the environment, which is actually a large problem for everyone.''
+\item
+  ``save energy, protect the planet''
+\item
+  ``We Are Different, But We ALL Equal.''
+\item
+  ``go out with the 2025 applicances, and step into 2026 more energy
+  saving for you.''
+\item
+  ``Smart energy choices today for a cleaner tomorrow''
+\end{enumerate}
 
 \subsubsection{Correlation Matrix}\label{correlation-matrix}
 
@@ -2864,11 +2948,10 @@ loaded via a namespace (and not attached):
 [56] reformulas_0.4.1    insight_1.4.0       generics_0.1.4      chromote_0.5.1      hms_1.1.3          
 [61] scales_1.4.0        minqa_1.2.8         xtable_1.8-4        glue_1.8.0          tools_4.5.0        
 [66] webshot2_0.1.2      data.table_1.17.8   egg_0.4.5           ggsignif_0.6.4      fs_1.6.6           
-[71] mvtnorm_1.3-3       grid_4.5.0          Ben_0.1.0           rbibutils_2.3       datawizard_1.2.0   
-[76] nlme_3.1-168        performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1  
-[81] fansi_1.0.6         gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37      
-[86] pbkrtest_0.5.4      farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4     bit64_4.6.0-1      
-[91] MASS_7.3-65        
+[71] mvtnorm_1.3-3       grid_4.5.0          rbibutils_2.3       datawizard_1.2.0    nlme_3.1-168       
+[76] performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1   fansi_1.0.6        
+[81] gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37       pbkrtest_0.5.4     
+[86] farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4     bit64_4.6.0-1       MASS_7.3-65        
 \end{verbatim}
 
 \phantomsection\label{refs}

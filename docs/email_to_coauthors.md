@@ -1,0 +1,100 @@
+# Email to Coauthors - Pilot Results and Next Steps
+
+**Subject:** Pilot Results: AI Chatbots Reduce Political Misperceptions + Proposal for Replication with Controls
+
+---
+
+Dear Noah, Olivier, and Stefano,
+
+I'm excited to share results from our pilot study on AI-mediated learning about political outgroups. The findings are promising and suggest a clear path forward for a full replication with proper controls.
+
+## What We Did
+
+We recruited 500 partisan participants (prescreened to exclude moderates) via Qualtrics panels. Participants:
+1. Reported their own environmental attitudes and estimated those of both Democrats and Republicans
+2. Engaged in a 10-minute conversation with an AI chatbot (Claude Sonnet 3.5) prompted to represent their political outgroup
+3. Re-estimated outgroup environmental attitudes and re-rated outgroup warmth
+
+We measured two primary outcomes: belief accuracy (inverse absolute error) and outgroup warmth (0-100 feeling thermometer).
+
+## Key Findings
+
+1. **Partisans systematically misperceive each other at baseline.** Democrats rated themselves higher in environmental concern (*M* = X.XX) than Republicans (*M* = X.XX), *d* = X.XX. While participants accurately perceived their ingroups, they dramatically underestimated how environmentally friendly their opponents actually were. Democrats showed significantly greater bias about Republicans than vice versa.
+
+2. **AI chatbot interactions significantly improved both accuracy and warmth.** Overall, participants became substantially more accurate (*d* = X.XX, *p* < .001) and warmer toward the outgroup (*d* = X.XX, *p* < .001) after the 10-minute conversation.
+
+3. **Effects were asymmetric across partisan groups.** Democrats learning about Republicans improved dramatically in accuracy, while Republicans learning about Democrats showed smaller improvements (significant time × party interaction). However, both groups increased warmth at similar rates.
+
+4. **Political extremism predicted baseline bias but not intervention effectiveness.** More extreme partisans started with worse accuracy and lower warmth, but they benefited equally from the intervention (no moderation by extremism).
+
+5. **Bot informativeness drove outcomes, not perceived empathy.** Participants who rated the chatbot as more informative showed significantly better accuracy improvement (*b* = X.XX, *p* < .05) and greater warmth increases (*b* = X.XX, *p* < .05). Perceived empathy did not predict either outcome.
+
+6. **Engagement showed mixed effects.** Turn count and word count showed weak and inconsistent associations with outcomes. Democrats who wrote more showed better accuracy gains, but this pattern didn't hold for Republicans or for warmth outcomes.
+
+7. **Accuracy and warmth gains were correlated for Democrats but not Republicans.** Democrats who became more accurate also became warmer (*r* = X.XX, *p* < .001), but this relationship was absent for Republicans (*r* = X.XX, *p* = ns).
+
+8. **Confidence patterns revealed Dunning-Kruger effects at baseline.** Less accurate Democrats were overconfident about their outgroup judgments. After the intervention, more accurate participants gained confidence while less accurate ones did not.
+
+## Limitations of Current Pilot
+
+The pilot has one critical limitation: **no control condition**. We cannot determine whether:
+- Effects are specific to AI chatbots vs. any form of information exposure
+- The AI interaction offers advantages over cheaper/simpler alternatives
+- Effects are due to active engagement vs. passive information reception
+
+Without controls, we cannot make strong claims about causality or relative effectiveness.
+
+## Proposed Next Steps: Replication with Control Conditions
+
+I propose we run a full replication (target N = 600-800) with four conditions, as we discussed with Stefano:
+
+**1. Passive Control**
+- Participants complete pre and post measures with no intervention
+- Establishes test-retest effects and natural belief change
+
+**2. Google Search**
+- Participants spend 10 minutes searching Google for information about outgroup environmental attitudes
+- Tests whether simple information seeking produces similar effects
+- Low cost, highly scalable alternative
+
+**3. Perspective-Taking Intervention**
+- Following Wang et al. (2014, PLOS ONE): Participants imagine "a day in the life" of an outgroup member, actively imagining the world from their perspective—"walking through the world in his shoes"
+- Classic psychological intervention; tests whether generic perspective-taking matches AI effects
+- Citation: Wang CS, Kenneth T, Ku G, Galinsky AD (2014) Perspective-Taking Increases Willingness to Engage in Intergroup Contact. PLoS ONE 9(1): e85681. https://doi.org/10.1371/journal.pone.0085681
+
+**4. AI Chatbot (Replication)**
+- Same as pilot: 10-minute conversation with AI representing outgroup
+- Direct replication to confirm effects
+
+This design would allow us to:
+- Establish causal effects (vs. passive control)
+- Test relative effectiveness (AI vs. Google vs. perspective-taking)
+- Make stronger claims about when/why AI chatbots work
+- Address cost-benefit questions (is the AI worth it vs. simpler alternatives?)
+
+## Timeline and Logistics
+
+If we move forward, I propose:
+- Finalize design and pre-registration: 2 weeks
+- Data collection: 2-3 weeks
+- Analysis and writing: 4 weeks
+- Target submission: Journal of Marketing or JCR
+
+The pilot data and analysis code are fully reproducible and available at [repo link]. I've prepared a complete draft manuscript with methods, results, and discussion sections ready for your review.
+
+## Questions for Discussion
+
+1. Do the pilot findings justify a full replication?
+2. Are these the right control conditions, or should we modify?
+3. Should we add any additional measures (e.g., behavioral intentions, policy support)?
+4. What's our target sample size and desired power for between-condition comparisons?
+5. Any concerns about the AI chatbot implementation or measures?
+
+I'm happy to schedule a call to discuss next steps, or we can iterate via email. Looking forward to your thoughts!
+
+Best,
+Ben
+
+---
+
+**Attached:** Full pilot manuscript (report.html, report.pdf)

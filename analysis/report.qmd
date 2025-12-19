@@ -1173,6 +1173,7 @@ p_combined
 ### Does confidence track accuracy—or diverge from it?
 
 We examine participants' metacognitive awareness by testing (1) whether confidence changes from pre to post, (2) The relationship between accuracy and confidence,  and (3) whether confidence changes track with actual accuracy improvements.
+
 #### Does confidence change pre-to-post?
 
 ```{r confidence-model}
