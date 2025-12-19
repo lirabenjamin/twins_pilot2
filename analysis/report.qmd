@@ -33,6 +33,7 @@ library(patchwork)
 library(emmeans)
 library(tinytable)
 library(jsonlite)
+library(effectsize)
 
 # switch for data load.
 is_running_in_quarto <- function() {
@@ -399,10 +400,13 @@ warmth_model <- lmer(warmth ~ time * learner_party + (1 | ResponseId), data = wa
 accuracy_time_coef <- fixef(accuracy_model0)["timepost"]
 warmth_time_coef <- fixef(warmth_model0)["timepost"]
 
+# Calculate Cohen's d for main effects
+accuracy_d <- cohens_d(error ~ time, data = accuracy_long, pooled_sd = FALSE)$Cohens_d
+warmth_d <- cohens_d(warmth ~ time, data = warmth_long, pooled_sd = FALSE)$Cohens_d
 
 ```
 
-We examined whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown in the table above, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer).
+We examined whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown in the table above, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale, *d* = `r sprintf("%.2f", accuracy_d)`) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer, *d* = `r sprintf("%.2f", warmth_d)`).
 
 ```{r q1-plots}
 #| label: fig-accuracy-warmth-change
@@ -508,6 +512,13 @@ warmth_dr_p <- warmth_contrasts$p.value[1]
 warmth_rd_est <- warmth_contrasts$estimate[2]  # R→D effect
 warmth_rd_p <- warmth_contrasts$p.value[2]
 
+# Calculate Cohen's d for simple effects by learner party
+acc_dr_d <- cohens_d(error ~ time, data = accuracy_long %>% filter(learner_party == "D→R"), pooled_sd = FALSE)$Cohens_d
+acc_rd_d <- cohens_d(error ~ time, data = accuracy_long %>% filter(learner_party == "R→D"), pooled_sd = FALSE)$Cohens_d
+
+warmth_dr_d <- cohens_d(warmth ~ time, data = warmth_long %>% filter(learner_party == "D→R"), pooled_sd = FALSE)$Cohens_d
+warmth_rd_d <- cohens_d(warmth ~ time, data = warmth_long %>% filter(learner_party == "R→D"), pooled_sd = FALSE)$Cohens_d
+
 # Get interaction term from model
 acc_interaction_coef <- fixef(accuracy_model)["timepost:learner_partyR→D"]
 acc_interaction_p <- summary(accuracy_model)$coefficients["timepost:learner_partyR→D", "Pr(>|t|)"]
@@ -544,9 +555,9 @@ attr(rows, "position") <- c(1, 2, 3, 4) # Inserts at rows 1 and 2
 
 ```
 
-While both groups became more accurate, it was Democrats learning about Republicans who showed greater improvement (*b* = `r sprintf("%.2f", acc_dr_est)`, *p* `r if(acc_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_dr_p))`). Republicans also became less biased about Democrats, though to a lesser extent (*b* = `r sprintf("%.2f", acc_rd_est)`, *p* `r if(acc_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_rd_p))`). The interaction term was `r if(acc_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", acc_interaction_coef)`, *p* `r if(acc_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_interaction_p))`).
+While both groups became more accurate, it was Democrats learning about Republicans who showed greater improvement (*b* = `r sprintf("%.2f", acc_dr_est)`, *d* = `r sprintf("%.2f", acc_dr_d)`, *p* `r if(acc_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_dr_p))`). Republicans also became less biased about Democrats, though to a lesser extent (*b* = `r sprintf("%.2f", acc_rd_est)`, *d* = `r sprintf("%.2f", acc_rd_d)`, *p* `r if(acc_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_rd_p))`). The interaction term was `r if(acc_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", acc_interaction_coef)`, *p* `r if(acc_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_interaction_p))`).
 
-Both groups became warmer toward the outgroup at similar rates. Democrats learning about Republicans increased warmth by `r sprintf("%.1f", warmth_dr_est)` degrees (*p* `r if(warmth_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_dr_p))`), while Republicans learning about Democrats increased by `r sprintf("%.1f", warmth_rd_est)` degrees (*p* `r if(warmth_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_rd_p))`). The interaction was `r if(warmth_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", warmth_interaction_coef)`, *p* `r if(warmth_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_interaction_p))`).
+Both groups became warmer toward the outgroup at similar rates. Democrats learning about Republicans increased warmth by `r sprintf("%.1f", warmth_dr_est)` degrees (*d* = `r sprintf("%.2f", warmth_dr_d)`, *p* `r if(warmth_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_dr_p))`), while Republicans learning about Democrats increased by `r sprintf("%.1f", warmth_rd_est)` degrees (*d* = `r sprintf("%.2f", warmth_rd_d)`, *p* `r if(warmth_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_rd_p))`). The interaction was `r if(warmth_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", warmth_interaction_coef)`, *p* `r if(warmth_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_interaction_p))`).
 
 ```{r}
 #| label: tbl-symmetry
@@ -588,6 +599,10 @@ extremism_acc_baseline_p <- summary(baseline_accuracy_extremism)$coefficients["p
 
 extremism_warmth_baseline_b <- coef(baseline_warmth_extremism)["political_extremism"]
 extremism_warmth_baseline_p <- summary(baseline_warmth_extremism)$coefficients["political_extremism", "Pr(>|t|)"]
+
+# Calculate correlation-based effect sizes for baseline extremism effects
+extremism_acc_baseline_r <- cor(dat$political_extremism, dat$accuracy_pre, use = "complete.obs")
+extremism_warmth_baseline_r <- cor(dat$political_extremism, dat$warmth_outgroup_pre, use = "complete.obs")
 
 # Models with extremism interaction
 accuracy_extremism_model <- lmer(
@@ -662,7 +677,7 @@ rows_extremism <- tibble(
 attr(rows_extremism, "position") <- c(1, 2, 3, 4)
 ```
 
-Politically extreme participants showed greater bias about the outgroup at baseline (*b* = `r sprintf("%.3f", extremism_acc_baseline_b)`, *p* `r if(extremism_acc_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_acc_baseline_p))`) and felt less warm toward them (*b* = `r sprintf("%.2f", extremism_warmth_baseline_b)`, *p* `r if(extremism_warmth_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_warmth_baseline_p))`). However, political extremism did not moderate the effect of the chatbot interaction. The three-way interaction for accuracy was `r if(extremism_3way_acc_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.3f", extremism_3way_acc_coef)`, *p* `r if(extremism_3way_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_acc_p))`), and for warmth was `r if(extremism_3way_warmth_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", extremism_3way_warmth_coef)`, *p* `r if(extremism_3way_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_warmth_p))`). More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.
+Politically extreme participants showed greater bias about the outgroup at baseline (*b* = `r sprintf("%.3f", extremism_acc_baseline_b)`, *r* = `r sprintf("%.2f", extremism_acc_baseline_r)`, *p* `r if(extremism_acc_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_acc_baseline_p))`) and felt less warm toward them (*b* = `r sprintf("%.2f", extremism_warmth_baseline_b)`, *r* = `r sprintf("%.2f", extremism_warmth_baseline_r)`, *p* `r if(extremism_warmth_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_warmth_baseline_p))`). However, political extremism did not moderate the effect of the chatbot interaction. The three-way interaction for accuracy was `r if(extremism_3way_acc_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.3f", extremism_3way_acc_coef)`, *p* `r if(extremism_3way_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_acc_p))`), and for warmth was `r if(extremism_3way_warmth_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", extremism_3way_warmth_coef)`, *p* `r if(extremism_3way_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_warmth_p))`). More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.
 
 ```{r}
 #| label: tbl-extremism
@@ -924,6 +939,10 @@ conf_dr_p <- confidence_contrasts$p.value[1]
 conf_rd_est <- confidence_contrasts$estimate[2]  # R→D effect
 conf_rd_p <- confidence_contrasts$p.value[2]
 
+# Calculate Cohen's d for confidence changes by learner party
+conf_dr_d <- cohens_d(confidence ~ time, data = confidence_long %>% filter(learner_party == "D→R"), pooled_sd = FALSE)$Cohens_d
+conf_rd_d <- cohens_d(confidence ~ time, data = confidence_long %>% filter(learner_party == "R→D"), pooled_sd = FALSE)$Cohens_d
+
 # Format simple effects
 conf_formatted <- confidence_contrasts %>%
   mutate(
@@ -946,7 +965,7 @@ rows_confidence <- tibble(
 attr(rows_confidence, "position") <- c(1, 2, 3, 4)
 ```
 
-Republicans learning about Democrats gained confidence after the interaction (*b* = `r sprintf("%.3f", conf_rd_est)`, *p* `r if(conf_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_rd_p))`), despite learning less than Democrats. Democrats' confidence did not significantly change (*b* = `r sprintf("%.3f", conf_dr_est)`, *p* `r if(conf_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_dr_p))`).
+Republicans learning about Democrats gained confidence after the interaction (*b* = `r sprintf("%.3f", conf_rd_est)`, *d* = `r sprintf("%.2f", conf_rd_d)`, *p* `r if(conf_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_rd_p))`), despite learning less than Democrats. Democrats' confidence did not significantly change (*b* = `r sprintf("%.3f", conf_dr_est)`, *d* = `r sprintf("%.2f", conf_dr_d)`, *p* `r if(conf_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_dr_p))`).
 
 ```{r}
 #| label: fig-confidence-change
