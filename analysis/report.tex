@@ -4,9 +4,8 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
-  letterpaper,
-  DIV=11,
-  numbers=noendperiod]{scrartcl}
+  11pt,
+  oneside]{article}
 
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -127,6 +126,49 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
+\usepackage{siunitx}
+
+
+% Encoding & Fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Layout
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{enumerate}
+\setlength{\parskip}{.5em}      % vertical space between paragraphs
+\usepackage{indentfirst}  % ensures first paragraph *is* indented
+\onehalfspacing
+
+% Math & Graphics
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{comment} 
+
+% Hyperlinks
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+
+\usepackage{xcolor}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+% Title info
+\title{Understanding Consumers Across the Aisle: \\
+Can AI Digital Twins Bridge the Partisan Insight Gap?}
+
+\author{
+  Benjamin Lira\thanks{Wharton School, University of Pennsylvania; blira@sas.upenn.edu} \and
+  Noah Castelo\thanks{Alberta School of Business, University of Alberta; ncastelo@ualberta.ca} \and
+  Olivier Toubia\thanks{Columbia Business School, Columbia University; ot2107@gsb.columbia.edu} \and
+  Stefano Puntoni\thanks{Wharton School, University of Pennsylvania; puntoni@wharton.upenn.edu}
+}
+
+\date{\today}
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{longtable}
@@ -134,17 +176,6 @@
 \usepackage{array}
 \usepackage{anyfontsize}
 \usepackage{multirow}
-\usepackage{float}
-\usepackage{tabularray}
-\usepackage[normalem]{ulem}
-\usepackage{graphicx}
-\usepackage{rotating}
-\UseTblrLibrary{booktabs}
-\UseTblrLibrary{siunitx}
-\NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
-\newcommand{\tinytableTabularrayUnderline}[1]{\underline{#1}}
-\newcommand{\tinytableTabularrayStrikeout}[1]{\sout{#1}}
-\KOMAoption{captions}{tableheading}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -181,6 +212,9 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
+\usepackage{pdflscape}
+\makeatother
+\makeatletter
 \makeatother
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -192,8 +226,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Learning from Twins: Can marketers learn about consumers across the political divide by interacting with AI},
-  pdfauthor={Benjamin Lira},
+  pdftitle={Learning from AI Personas: Can marketers learn about consumers across the political divide by interacting with AI},
+  pdfauthor={Benjamin Lira; Noah Castelo; Olivier Toubia; Stefano Puntoni},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -202,117 +236,77 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Learning from Twins: Can marketers learn about consumers across
-the political divide by interacting with AI}
-\author{Benjamin Lira}
+\title{Learning from AI Personas: Can marketers learn about consumers
+across the political divide by interacting with AI}
+\author{Benjamin Lira \and Noah Castelo \and Olivier Toubia \and Stefano
+Puntoni}
 \date{2025-12-19}
 
 \begin{document}
 \maketitle
+\begin{abstract}
+Political polarization poses a fundamental challenge for marketers who
+must communicate effectively with ideologically diverse consumers.
+Misperceptions about political outgroups---where partisans hold
+exaggerated and inaccurate views of those across the political
+divide---can undermine marketing strategies targeting broad consumer
+bases. This study tests whether brief interactions with an AI chatbot
+representing a political outgroup can improve marketers' understanding
+of that outgroup and reduce affective polarization. Participants
+interacted with a chatbot prompted to represent their political outgroup
+and responded to questions about environmental attitudes before and
+after the interaction. Results demonstrate that chatbot interactions
+significantly improved both belief accuracy and warmth toward the
+outgroup. However, these effects were asymmetric: Democrats learning
+about Republicans showed substantially greater accuracy improvements
+than Republicans learning about Democrats, though both groups increased
+warmth at similar rates. Political extremism predicted greater baseline
+bias and lower warmth but did not moderate the intervention's
+effectiveness, indicating that both moderate and extreme partisans
+benefited equally. Bot informativeness predicted better outcomes, while
+perceived empathy did not. These findings suggest AI-mediated
+interactions offer a scalable tool for reducing political misperceptions
+in consumer research, though important questions remain about domain
+specificity, temporal durability, and how insights from AI interactions
+transfer to understanding actual outgroup members.
+\end{abstract}
 
-\renewcommand*\contentsname{Table of contents}
-{
-\hypersetup{linkcolor=}
-\setcounter{tocdepth}{3}
-\tableofcontents
-}
 
-\subsection{Overview}\label{overview}
+\subsection{Introduction}\label{introduction}
 
-Political polarization Author \& Author
-(\citeproc{ref-example2024}{2024}) creates challenges for marketers who
-must communicate effectively with ideologically
-(\citeproc{ref-example2024}{Author \& Author, 2024}) diverse consumers.
-Misperceptions about political outgroups are widespread, with partisans
-often holding exaggerated and inaccurate views of those across the
-political divide. These misperceptions can lead to ineffective marketing
-strategies when firms attempt to appeal to broad consumer bases. This
-study tests whether interacting with an AI chatbot prompted to represent
-a political outgroup can improve marketers' understanding of that
-outgroup and reduce affective polarization.
+Political polarization undermines marketers' ability to understand and
+serve ideologically diverse consumers
+(\citeproc{ref-hsieh_partisan_2024}{Hsieh et al., 2024}). Partisans hold
+exaggerated views of political outgroups
+(\citeproc{ref-iyengar_origins_2019}{Iyengar et al., 2019};
+\citeproc{ref-yudkin_perception_2019}{Yudkin et al., 2019}),
+misperceptions that can lead to ineffective marketing strategies when
+firms target broad consumer bases.
 
-\subsubsection{Hypotheses}\label{hypotheses}
+Intergroup contact reduces prejudice and corrects misperceptions
+(\citeproc{ref-allport1954nature}{Allport, 1954};
+\citeproc{ref-pettigrew_meta-analytic_2006}{Pettigrew \& Tropp, 2006}),
+but real-world contact is logistically costly, socially awkward, and
+increasingly rare across party lines. Recent advances in AI enable
+``synthetic contact''---conversations with AI chatbots representing
+outgroup members---that may replicate these benefits at scale
+(\citeproc{ref-hermann_reducing_2025}{Hermann et al., 2025}). Digital
+twins built from survey data can accurately represent individuals'
+psychological characteristics
+(\citeproc{ref-park_generative_nodate}{Park et al., n.d.};
+\citeproc{ref-toubia_database_2025}{Toubia et al., 2025}), but whether
+marketers can extract this knowledge through conversation remains
+untested.
 
-We hypothesized that after interacting with an AI chatbot representing
-their political outgroup, participants would:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  ``\textbf{Report more accurate beliefs} about the outgroup's attitudes
-  toward environmentally responsible consumption.''
-\item
-  ``\textbf{Report warmer feelings} toward the political outgroup.''
-\end{enumerate}
-
-\subsection{Data}\label{data}
-
-\subsubsection{Data Collection}\label{data-collection}
-
-We collected data via Qualtrics from 500 participants. Participants
-self-reported their political orientation on a 0-100 slider scale, where
-values below 50 indicate Democratic leaning and values 50 and above
-indicate Republican leaning.
-
-\begin{table}
-
-\caption{\label{tbl-sample-composition}Sample composition by learning
-direction.}
-
-\centering{
-
-\fontsize{12.0pt}{14.4pt}\selectfont
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
-\toprule
-Learning Direction & N \\ 
-\midrule\addlinespace[2.5pt]
-Democrats learning about Republicans (D→R) & 248 \\ 
-Republicans learning about Democrats (R→D) & 252 \\ 
-\bottomrule
-\end{tabular*}
-
-\fontsize{12.0pt}{14.4pt}\selectfont
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr}
-\toprule
-Learning Direction & N \\ 
-\midrule\addlinespace[2.5pt]
-Democrats learning about Republicans (D→R) & 248 \\ 
-Republicans learning about Democrats (R→D) & 252 \\ 
-\bottomrule
-\end{tabular*}
-
-}
-
-\end{table}%
-
-\subsubsection{Measures}\label{measures}
-
-We measured two primary outcomes to assess belief updating and affective
-change.
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Belief accuracy}: Absolute difference between participants'
-  estimates of outgroup green attitudes and actual outgroup means (lower
-  = more accurate)
-\item
-  \textbf{Outgroup warmth}: Feeling thermometer (0-100 scale) toward the
-  political outgroup
-\end{itemize}
-
-Additionally, we collected confidence in outgroup judgments (5-point
-scale) and bot informativeness and empathy ratings (5-point scale)
-
-\subsubsection{Pre-Registered Analyses}\label{pre-registered-analyses}
-
-For each primary outcome, we estimated mixed-effects models of the form:
-
-\[y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})\]
-
-where \texttt{time} indexes pre- versus post-interaction measurement and
-\texttt{learner\_party} indicates D→R versus R→D learning direction.
+We test whether brief interactions with an AI chatbot representing a
+political outgroup improve belief accuracy and reduce affective
+polarization. We recruited 500 partisan participants (prescreened to
+exclude moderates; 248 Democrats, 252 Republicans) who conversed with a
+chatbot prompted to represent their political outgroup and estimated
+outgroup attitudes toward environmental consumption before and after the
+interaction. We hypothesized that participants would report more
+accurate beliefs about outgroup environmental attitudes and warmer
+feelings toward the political outgroup after the interaction.
 
 \subsection{Results}\label{results}
 
@@ -359,7 +353,7 @@ standard errors.}
 What is the distribution of bias? At baseline, Democrats were more
 biased about Republicans (\emph{M} = -1.68, \emph{SD} = 0.84) than
 Republicans were about Democrats (\emph{M} = -0.70, \emph{SD} = 0.63),
-\emph{d} = -1.32, \emph{p} = 0.000.
+\emph{d} = -1.32, \emph{p} \textless{} .001.
 
 \begin{figure}
 
@@ -416,7 +410,8 @@ statistics displayed on plot.}
 
 \end{figure}%
 
-Does baseline accuracy predict baseline confidence? We examine whether
+Does baseline accuracy predict baseline confidence? {[}TO-DO: Move this
+to the confidence section at the end of results.{]} We examine whether
 less accurate participants are overconfident in their judgments,
 consistent with Dunning-Kruger effects.
 
@@ -438,15 +433,14 @@ confidence bands.}
 
 \end{figure}%
 
-\subsubsection{Q1. Do people update their beliefs after interacting with
-the
-chatbot?}\label{q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot}
+\subsubsection{Do people update their beliefs after interacting with the
+chatbot?}\label{do-people-update-their-beliefs-after-interacting-with-the-chatbot}
 
 We examined whether participants changed their beliefs about the
 outgroup's environmental attitudes from pre- to post-interaction,
 analyzing both accuracy and warmth. As shown in the table above,
 participants became significantly more accurate (improving by 0.39
-points on the 5-point scale, \emph{d} = -0.49) and warmer toward the
+points on the 5-point scale, \emph{d} = 0.49) and warmer toward the
 outgroup (increasing by 4.3 degrees on the 100-point thermometer,
 \emph{d} = -0.17).
 
@@ -499,26 +493,6 @@ Num.Obs. & \num{1000} & \num{1000} \\
 \bottomrule
 \end{talltblr}
 
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Accuracy is negative absolute error (higher = more accurate). * p<0.05, ** p<0.01, *** p<0.001},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]},
-column{2,3}={}{halign=c,},
-column{1}={}{halign=l,},
-hline{4}={1,2,3}{solid, black, 0.05em},
-}                     %% tabularray inner close
-\toprule
-& Accuracy & Warmth \\ \midrule %% TinyTableHeader
-Time (Post) & \num{0.393}*** & \num{4.342}*** \\
-& (\num{0.038}) & (\num{0.525}) \\
-Num.Obs. & \num{1000} & \num{1000} \\
-\bottomrule
-\end{talltblr}
-
 }
 
 \end{table}%
@@ -545,14 +519,14 @@ party.}
 
 \end{figure}%
 
-\subsubsection{Q2. Is belief updating symmetric across political
-groups?}\label{q2.-is-belief-updating-symmetric-across-political-groups}
+\subsubsection{Is belief updating symmetric across political
+groups?}\label{is-belief-updating-symmetric-across-political-groups}
 
 While both groups became more accurate, it was Democrats learning about
 Republicans who showed greater improvement (\emph{b} = 0.63, \emph{d} =
--0.75, \emph{p} \textless{} .001). Republicans also became less biased
+0.75, \emph{p} \textless{} .001). Republicans also became less biased
 about Democrats, though to a lesser extent (\emph{b} = 0.16, \emph{d} =
--0.29, \emph{p} = 0.002). The interaction term was significant (\emph{b}
+0.29, \emph{p} = 0.002). The interaction term was significant (\emph{b}
 = -0.46, \emph{p} \textless{} .001).
 
 Both groups became warmer toward the outgroup at similar rates.
@@ -645,82 +619,12 @@ Num.Obs. & \num{1000} & \num{1000} \\
 \bottomrule
 \end{talltblr}
 
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Accuracy is negative absolute error (higher = more accurate). * p<0.05, ** p<0.01, *** p<0.001},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]},
-cell{2}{1}={c=3}{},cell{7}{1}={c=3}{},
-cell{1}{2}={}{halign=c,},
-cell{1}{3}={}{halign=c,},
-cell{3}{2}={}{halign=c,},
-cell{3}{3}={}{halign=c,},
-cell{4}{2}={}{halign=c,},
-cell{4}{3}={}{halign=c,},
-cell{5}{2}={}{halign=c,},
-cell{5}{3}={}{halign=c,},
-cell{6}{2}={}{halign=c,},
-cell{6}{3}={}{halign=c,},
-cell{8}{2}={}{halign=c,},
-cell{8}{3}={}{halign=c,},
-cell{9}{2}={}{halign=c,},
-cell{9}{3}={}{halign=c,},
-cell{10}{2}={}{halign=c,},
-cell{10}{3}={}{halign=c,},
-cell{11}{2}={}{halign=c,},
-cell{11}{3}={}{halign=c,},
-cell{12}{2}={}{halign=c,},
-cell{12}{3}={}{halign=c,},
-cell{13}{2}={}{halign=c,},
-cell{13}{3}={}{halign=c,},
-cell{14}{2}={}{halign=c,},
-cell{14}{3}={}{halign=c,},
-cell{2}{2}={}{halign=c, cmd=\bfseries,},
-cell{2}{3}={}{halign=c, cmd=\bfseries,},
-cell{7}{2}={}{halign=c, cmd=\bfseries,},
-cell{7}{3}={}{halign=c, cmd=\bfseries,},
-cell{1}{1}={}{halign=l,},
-cell{2}{1}={}{halign=l, cmd=\bfseries,},
-cell{7}{1}={}{halign=l, cmd=\bfseries,},
-cell{3}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{4}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{5}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{6}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{8}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{9}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{10}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{11}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{12}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{13}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{14}{1}={}{halign=l, preto={\hspace{1em}},},
-}                     %% tabularray inner close
-\toprule
-& Accuracy & Warmth \\ \midrule %% TinyTableHeader
-Effects by Political Affiliation && \\
-Time effect (Democrat) & 0.628*** & 5.149*** \\
-& (0.052) & (0.744) \\
-Time effect (Republican) & 0.163** & 3.548*** \\
-& (0.051) & (0.738) \\
-Full Regression Results && \\
-Time (Post) & \num{0.628}*** & \num{5.149}*** \\
-& (\num{0.052}) & (\num{0.744}) \\
-Learner Party (R→D) & \num{0.976}*** & \num{13.324}*** \\
-& (\num{0.064}) & (\num{2.178}) \\
-Time × Learner Party & \num{-0.465}*** & \num{-1.602} \\
-& (\num{0.073}) & (\num{1.048}) \\
-Num.Obs. & \num{1000} & \num{1000} \\
-\bottomrule
-\end{talltblr}
-
 }
 
 \end{table}%
 
-\subsubsection{Q3. Does political extremity predict how much people
-update?}\label{q3.-does-political-extremity-predict-how-much-people-update}
+\subsubsection{Does political extremity predict how much people
+update?}\label{does-political-extremity-predict-how-much-people-update}
 
 Politically extreme participants showed greater bias about the outgroup
 at baseline (\emph{b} = -0.012, \emph{r} = -0.20, \emph{p} \textless{}
@@ -848,116 +752,12 @@ Num.Obs. & \num{1000} & \num{1000} \\
 \bottomrule
 \end{talltblr}
 
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Time effects show pre-to-post change at Low Extremism (-1 SD) and High Extremism (+1 SD). Three-way interaction tests whether extremism moderates differential updating. * p<0.05, ** p<0.01, *** p<0.001},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]},
-cell{2}{1}={c=3}{},cell{7}{1}={c=3}{},
-cell{1}{2}={}{halign=c,},
-cell{1}{3}={}{halign=c,},
-cell{3}{2}={}{halign=c,},
-cell{3}{3}={}{halign=c,},
-cell{4}{2}={}{halign=c,},
-cell{4}{3}={}{halign=c,},
-cell{5}{2}={}{halign=c,},
-cell{5}{3}={}{halign=c,},
-cell{6}{2}={}{halign=c,},
-cell{6}{3}={}{halign=c,},
-cell{8}{2}={}{halign=c,},
-cell{8}{3}={}{halign=c,},
-cell{9}{2}={}{halign=c,},
-cell{9}{3}={}{halign=c,},
-cell{10}{2}={}{halign=c,},
-cell{10}{3}={}{halign=c,},
-cell{11}{2}={}{halign=c,},
-cell{11}{3}={}{halign=c,},
-cell{12}{2}={}{halign=c,},
-cell{12}{3}={}{halign=c,},
-cell{13}{2}={}{halign=c,},
-cell{13}{3}={}{halign=c,},
-cell{14}{2}={}{halign=c,},
-cell{14}{3}={}{halign=c,},
-cell{15}{2}={}{halign=c,},
-cell{15}{3}={}{halign=c,},
-cell{16}{2}={}{halign=c,},
-cell{16}{3}={}{halign=c,},
-cell{17}{2}={}{halign=c,},
-cell{17}{3}={}{halign=c,},
-cell{18}{2}={}{halign=c,},
-cell{18}{3}={}{halign=c,},
-cell{19}{2}={}{halign=c,},
-cell{19}{3}={}{halign=c,},
-cell{20}{2}={}{halign=c,},
-cell{20}{3}={}{halign=c,},
-cell{21}{2}={}{halign=c,},
-cell{21}{3}={}{halign=c,},
-cell{22}{2}={}{halign=c,},
-cell{22}{3}={}{halign=c,},
-cell{2}{2}={}{halign=c, cmd=\bfseries,},
-cell{2}{3}={}{halign=c, cmd=\bfseries,},
-cell{7}{2}={}{halign=c, cmd=\bfseries,},
-cell{7}{3}={}{halign=c, cmd=\bfseries,},
-cell{1}{1}={}{halign=l,},
-cell{2}{1}={}{halign=l, cmd=\bfseries,},
-cell{7}{1}={}{halign=l, cmd=\bfseries,},
-cell{3}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{4}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{5}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{6}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{8}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{9}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{10}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{11}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{12}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{13}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{14}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{15}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{16}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{17}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{18}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{19}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{20}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{21}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{22}{1}={}{halign=l, preto={\hspace{1em}},},
-hline{22}={1,2,3}{solid, lightgray, 0.1em},
-hline{23}={1,2,3}{solid, lightgray, 0.1em},
-}                     %% tabularray inner close
-\toprule
-& Accuracy & Warmth \\ \midrule %% TinyTableHeader
-Simple Effects by Extremism Level && \\
-Time effect (Low Extremism) & 0.386*** & 3.847*** \\
-& (0.053) & (0.761) \\
-Time effect (High Extremism) & 0.419*** & 5.002*** \\
-& (0.052) & (0.744) \\
-Full Regression Results && \\
-Time (Post) & \num{0.721}*** & \num{5.039}* \\
-& (\num{0.168}) & (\num{2.416}) \\
-Learner Party (R→D) & \num{0.898}*** & \num{14.760}* \\
-& (\num{0.186}) & (\num{6.214}) \\
-Political Extremism & \num{-0.008}* & \num{-0.429}*** \\
-& (\num{0.003}) & (\num{0.115}) \\
-Time × Learner Party & \num{-0.726}*** & \num{-4.336} \\
-& (\num{0.215}) & (\num{3.092}) \\
-Time × Extremism & \num{-0.002} & \num{0.003} \\
-& (\num{0.004}) & (\num{0.057}) \\
-Learner Party × Extremism & \num{0.001} & \num{-0.088} \\
-& (\num{0.005}) & (\num{0.152}) \\
-Time × Learner Party × Extremism & \num{0.007} & \num{0.076} \\
-& (\num{0.005}) & (\num{0.076}) \\
-Num.Obs. & \num{1000} & \num{1000} \\
-\bottomrule
-\end{talltblr}
-
 }
 
 \end{table}%
 
-\subsubsection{Q4. Is belief updating associated with how the chatbot is
-perceived?}\label{q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived}
+\subsubsection{Is belief updating associated with how the chatbot is
+perceived?}\label{is-belief-updating-associated-with-how-the-chatbot-is-perceived}
 
 Participants who found the chatbot more informative showed significantly
 better accuracy improvement (\emph{b} = 0.086, \emph{p} = 0.004) and
@@ -976,34 +776,6 @@ toward the outgroup, while perceived empathy did not significantly
 predict either outcome.}
 
 \centering{
-
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Regressions control for pre-interaction values. * p<0.05, ** p<0.01, *** p<0.001},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]},
-column{2,3}={}{halign=c,},
-column{1}={}{halign=l,},
-hline{10}={1,2,3}{solid, black, 0.05em},
-}                     %% tabularray inner close
-\toprule
-& Accuracy & Warmth \\ \midrule %% TinyTableHeader
-Baseline Accuracy & \num{0.354}*** &  \\
-& (\num{0.033}) &  \\
-Baseline Warmth &  & \num{0.910}*** \\
-&  & (\num{0.021}) \\
-Bot Informativeness & \num{0.086}** & \num{1.927}*** \\
-& (\num{0.029}) & (\num{0.524}) \\
-Bot Empathy & \num{0.050}+ & \num{1.010}+ \\
-& (\num{0.029}) & (\num{0.527}) \\
-Num.Obs. & \num{500} & \num{500} \\
-R2 & \num{0.241} & \num{0.805} \\
-R2 Adj. & \num{0.236} & \num{0.804} \\
-\bottomrule
-\end{talltblr}
 
 \centering
 \begin{talltblr}[         %% tabularray outer open
@@ -1057,8 +829,8 @@ displayed separately by learner party.}
 
 \end{figure}%
 
-\subsubsection{Q5. Does engagement (``dose'') matter for belief
-updating?}\label{q5.-does-engagement-dose-matter-for-belief-updating}
+\subsubsection{Does engagement (``dose'') matter for belief
+updating?}\label{does-engagement-dose-matter-for-belief-updating}
 
 We measured engagement as the number of words participants typed during
 the chat and tested whether greater engagement predicted larger changes
@@ -1146,66 +918,6 @@ R2 Adj. & \num{0.430} & \num{0.431} & \num{0.016} & \num{0.015} \\
 \bottomrule
 \end{talltblr}
 
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]Q[]Q[]},
-column{3,5}={}{halign=c,},
-column{1}={}{halign=l,},
-cell{2}{2}={}{halign=c,},
-cell{2}{4}={}{halign=c,},
-cell{3}{2}={}{halign=c,},
-cell{3}{4}={}{halign=c,},
-cell{4}{2}={}{halign=c,},
-cell{4}{4}={}{halign=c,},
-cell{5}{2}={}{halign=c,},
-cell{5}{4}={}{halign=c,},
-cell{6}{2}={}{halign=c,},
-cell{6}{4}={}{halign=c,},
-cell{7}{2}={}{halign=c,},
-cell{7}{4}={}{halign=c,},
-cell{8}{2}={}{halign=c,},
-cell{8}{4}={}{halign=c,},
-cell{9}{2}={}{halign=c,},
-cell{9}{4}={}{halign=c,},
-cell{10}{2}={}{halign=c,},
-cell{10}{4}={}{halign=c,},
-cell{11}{2}={}{halign=c,},
-cell{11}{4}={}{halign=c,},
-cell{12}{2}={}{halign=c,},
-cell{12}{4}={}{halign=c,},
-cell{13}{2}={}{halign=c,},
-cell{13}{4}={}{halign=c,},
-cell{14}{2}={}{halign=c,},
-cell{14}{4}={}{halign=c,},
-cell{15}{2}={}{halign=c,},
-cell{15}{4}={}{halign=c,},
-cell{1}{2}={c=2,}{halign=c, halign=c,},
-cell{1}{4}={c=2,}{halign=c, halign=c,},
-hline{13}={1,2,3,4,5}{solid, black, 0.05em},
-}                     %% tabularray inner close
-\toprule
-& Accuracy &  & Warmth &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-5}
-& Turn Count & Log(Word Count) & Turn Count  & Log(Word Count)  \\ \midrule %% TinyTableHeader
-Learner Party (R→D) & \num{0.202}** & \num{0.204}** & \num{-0.828} & \num{-0.778} \\
-& (\num{0.068}) & (\num{0.068}) & (\num{1.082}) & (\num{1.082}) \\
-Baseline Accuracy & \num{-0.684}*** & \num{-0.686}*** &  &  \\
-& (\num{0.039}) & (\num{0.039}) &  &  \\
-Baseline Warmth &  &  & \num{-0.062}** & \num{-0.063}** \\
-&  &  & (\num{0.022}) & (\num{0.022}) \\
-Turn Count & \num{-0.002} &  & \num{-0.096} &  \\
-& (\num{0.005}) &  & (\num{0.087}) &  \\
-Log(Word Count) &  & \num{-0.050} &  & \num{-0.869} \\
-&  & (\num{0.064}) &  & (\num{1.178}) \\
-Num.Obs. & \num{500} & \num{500} & \num{500} & \num{500} \\
-R2 & \num{0.434} & \num{0.434} & \num{0.022} & \num{0.021} \\
-R2 Adj. & \num{0.430} & \num{0.431} & \num{0.016} & \num{0.015} \\
-\bottomrule
-\end{talltblr}
-
 }
 
 \end{table}%
@@ -1229,8 +941,8 @@ on accuracy change indicate improvement.}
 
 \end{figure}%
 
-\subsubsection{Q6. Does interacting with the chatbot improve applied
-judgment?}\label{q6.-does-interacting-with-the-chatbot-improve-applied-judgment}
+\subsubsection{Does interacting with the chatbot improve applied
+judgment?}\label{does-interacting-with-the-chatbot-improve-applied-judgment}
 
 Participants wrote slogans for marketing energy-saving appliances to the
 political outgroup. I haven't touched this data yet, because we don't
@@ -1244,8 +956,8 @@ comparison to.
 AI-generated responses to detect copying) 2. Quality ratings (human or
 LLM ratings of slogan fit to target outgroup)
 
-\subsubsection{Q7. Does confidence track accuracy---or diverge from
-it?}\label{q7.-does-confidence-track-accuracyor-diverge-from-it}
+\subsubsection{Does confidence track accuracy---or diverge from
+it?}\label{does-confidence-track-accuracyor-diverge-from-it}
 
 We examine participants' metacognitive awareness by testing (1) whether
 confidence changes from pre to post, and (2) whether confidence changes
@@ -1286,76 +998,6 @@ gained confidence after the interaction, while Democrats did not,
 suggesting asymmetric metacognitive responses.}
 
 \centering{
-
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Confidence rated on 1-5 scale. * p<0.05, ** p<0.01, *** p<0.001},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]},
-cell{2}{1}={c=3}{},cell{7}{1}={c=3}{},
-cell{1}{2}={}{halign=c,},
-cell{1}{3}={}{halign=c,},
-cell{3}{2}={}{halign=c,},
-cell{3}{3}={}{halign=c,},
-cell{4}{2}={}{halign=c,},
-cell{4}{3}={}{halign=c,},
-cell{5}{2}={}{halign=c,},
-cell{5}{3}={}{halign=c,},
-cell{6}{2}={}{halign=c,},
-cell{6}{3}={}{halign=c,},
-cell{8}{2}={}{halign=c,},
-cell{8}{3}={}{halign=c,},
-cell{9}{2}={}{halign=c,},
-cell{9}{3}={}{halign=c,},
-cell{10}{2}={}{halign=c,},
-cell{10}{3}={}{halign=c,},
-cell{11}{2}={}{halign=c,},
-cell{11}{3}={}{halign=c,},
-cell{12}{2}={}{halign=c,},
-cell{12}{3}={}{halign=c,},
-cell{13}{2}={}{halign=c,},
-cell{13}{3}={}{halign=c,},
-cell{14}{2}={}{halign=c,},
-cell{14}{3}={}{halign=c,},
-cell{2}{2}={}{halign=c, cmd=\bfseries,},
-cell{2}{3}={}{halign=c, cmd=\bfseries,},
-cell{7}{2}={}{halign=c, cmd=\bfseries,},
-cell{7}{3}={}{halign=c, cmd=\bfseries,},
-cell{1}{1}={}{halign=l,},
-cell{2}{1}={}{halign=l, cmd=\bfseries,},
-cell{7}{1}={}{halign=l, cmd=\bfseries,},
-cell{3}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{4}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{5}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{6}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{8}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{9}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{10}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{11}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{12}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{13}{1}={}{halign=l, preto={\hspace{1em}},},
-cell{14}{1}={}{halign=l, preto={\hspace{1em}},},
-}                     %% tabularray inner close
-\toprule
-& Confidence (Main Effect) & Confidence (Interaction) \\ \midrule %% TinyTableHeader
-Simple Effects by Political Affiliation && \\
-Time effect (D→R) &  & -0.065 \\
-&  & (0.066) \\
-Time effect (R→D) &  & 0.306*** \\
-&  & (0.065) \\
-Full Regression Results && \\
-Time (Post) & \num{0.122}** & \num{-0.065} \\
-& (\num{0.047}) & (\num{0.066}) \\
-Learner Party (R→D) &  & \num{0.150}+ \\
-&  & (\num{0.090}) \\
-Time × Learner Party &  & \num{0.370}*** \\
-&  & (\num{0.093}) \\
-Num.Obs. & \num{1000} & \num{1000} \\
-\bottomrule
-\end{talltblr}
 
 \centering
 \begin{talltblr}[         %% tabularray outer open
@@ -1555,24 +1197,67 @@ Future research should directly compare these alternatives to determine
 the relative effectiveness and cost-efficiency of AI chatbots versus
 other scalable interventions for partisan debiasing.
 
+\subsection{Methods}\label{methods}
+
+\subsection{Data}\label{data}
+
+\subsubsection{Data Collection}\label{data-collection}
+
+We collected data via Qualtrics from 500 participants. Of these, 248
+were Democrats learning about Republicans (D→R) and 252 were Republicans
+learning about Democrats (R→D). Participants self-reported their
+political orientation on a 0-100 slider scale, where values below 50
+indicate Democratic leaning and values 50 and above indicate Republican
+leaning.
+
+\subsubsection{Measures}\label{measures}
+
+We measured two primary outcomes to assess belief updating and affective
+change.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Belief accuracy}: Absolute difference between participants'
+  estimates of outgroup green attitudes and actual outgroup means (lower
+  = more accurate)
+\item
+  \textbf{Outgroup warmth}: Feeling thermometer (0-100 scale) toward the
+  political outgroup
+\end{itemize}
+
+Additionally, we collected confidence in outgroup judgments (5-point
+scale) and bot informativeness and empathy ratings (5-point scale)
+
+\subsubsection{Pre-Registered Analyses}\label{pre-registered-analyses}
+
+For each primary outcome, we estimated mixed-effects models of the form:
+
+\[y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})\]
+
+where \texttt{time} indexes pre- versus post-interaction measurement and
+\texttt{learner\_party} indicates D→R versus R→D learning direction.
+
 \subsection{Appendix}\label{appendix}
 
 \subsubsection{Correlation Matrix}\label{correlation-matrix}
 
+\paragraph{Overall Correlations}\label{overall-correlations}
+
 \begin{table}
 
-\caption{\label{tbl-correlation-matrix}Correlation matrix with
-significance stars for all key variables. Lower triangle shows Pearson
-correlation coefficients with significance indicators (* p\textless0.05,
-** p\textless0.01, *** p\textless0.001). Upper triangle intentionally
-left blank for readability. Variables include political orientation,
-belief accuracy, environmental attitudes, outgroup warmth, confidence,
-bot perceptions, and engagement measures.}
+\caption{\label{tbl-correlation-matrix-overall}Overall correlation
+matrix with significance stars for all key variables. Lower triangle
+shows Pearson correlation coefficients with significance indicators (*
+p\textless0.05, ** p\textless0.01, *** p\textless0.001). Upper triangle
+intentionally left blank for readability. Variables include political
+orientation, belief accuracy, environmental attitudes, outgroup warmth,
+confidence, bot perceptions, and engagement measures.}
 
 \centering{
 
 \caption*{
-{\large Correlation Matrix of Key Variables}
+{\large Overall Correlation Matrix}
 } 
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llllllllllllllllllll}
@@ -1601,40 +1286,62 @@ bot perceptions, and engagement measures.}
 \bottomrule
 \end{tabular*}
 \begin{minipage}{\linewidth}
-* p<0.05, ** p<0.01, *** p<0.001. Lower triangle shows correlations with significance stars. Upper triangle left blank for readability.\\
+* p<0.05, ** p<0.01, *** p<0.001.
+Lower triangle shows correlations with significance stars.
+Upper triangle left blank for readability.\\
 \end{minipage}
 
+}
+
+\end{table}%
+
+\paragraph{Correlations by Political
+Party}\label{correlations-by-political-party}
+
+\begin{table}
+
+\caption{\label{tbl-correlation-matrix}Correlation matrix with
+significance stars by political party. Upper triangle shows correlations
+for Republicans, lower triangle shows correlations for Democrats.
+Diagonal shows em-dashes. Significance indicators: * p\textless0.05, **
+p\textless0.01, *** p\textless0.001. Variables include political
+orientation, belief accuracy, environmental attitudes, outgroup warmth,
+confidence, bot perceptions, and engagement measures.}
+
+\centering{
+
 \caption*{
-{\large Correlation Matrix of Key Variables}
+{\large Correlation Matrix by Political Party} \\ 
+{\small Upper Triangle: Republicans | Lower Triangle: Democrats}
 } 
 \fontsize{12.0pt}{14.4pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llllllllllllllllllll}
 \toprule
  & {\bfseries Political Orientation} & {\bfseries Political Extremism} & {\bfseries Accuracy (Pre)} & {\bfseries Accuracy (Post)} & {\bfseries Green Own} & {\bfseries Green Ingroup} & {\bfseries Green Outgroup (Pre)} & {\bfseries Green Outgroup (Post)} & {\bfseries Warmth Outgroup (Pre)} & {\bfseries Warmth Outgroup (Post)} & {\bfseries Warmth Ingroup (Pre)} & {\bfseries Warmth Ingroup (Post)} & {\bfseries Confidence Ingroup} & {\bfseries Confidence Outgroup (Pre)} & {\bfseries Confidence Outgroup (Post)} & {\bfseries Bot Informativeness} & {\bfseries Bot Empathy} & {\bfseries Turn Count} & {\bfseries Word Count} \\ 
 \midrule\addlinespace[2.5pt]
-{\bfseries Political Orientation} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Political Extremism} & {-0.08} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Accuracy (Pre)} & {0.51***} & {-0.20***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Accuracy (Post)} & {0.35***} & {-0.16***} & {0.46***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Green Own} & {-0.22***} & {0.14**} & {-0.17***} & {-0.05} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Green Ingroup} & {-0.36***} & {0.30***} & {-0.32***} & {-0.18***} & {0.66***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Green Outgroup (Pre)} & {0.64***} & {-0.16***} & {0.88***} & {0.40***} & {-0.15***} & {-0.33***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Green Outgroup (Post)} & {0.49***} & {-0.09} & {0.55***} & {0.71***} & {0.07} & {-0.13**} & {0.64***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Warmth Outgroup (Pre)} & {0.23***} & {-0.31***} & {0.49***} & {0.32***} & {0.01} & {-0.09*} & {0.46***} & {0.37***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Warmth Outgroup (Post)} & {0.20***} & {-0.27***} & {0.45***} & {0.35***} & {0.07} & {-0.02} & {0.42***} & {0.41***} & {0.89***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Warmth Ingroup (Pre)} & {0.16***} & {0.49***} & {0.04} & {0.00} & {0.14**} & {0.28***} & {0.08} & {0.15**} & {0.04} & {0.07} & {—} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Warmth Ingroup (Post)} & {0.13**} & {0.45***} & {0.02} & {-0.00} & {0.12**} & {0.26***} & {0.05} & {0.13**} & {0.03} & {0.05} & {0.91***} & {—} & {} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Confidence Ingroup} & {0.11*} & {0.25***} & {-0.09*} & {-0.06} & {0.25***} & {0.26***} & {0.01} & {0.12**} & {-0.01} & {0.02} & {0.33***} & {0.30***} & {—} & {} & {} & {} & {} & {} & {} \\ 
-{\bfseries Confidence Outgroup (Pre)} & {0.07} & {0.13**} & {-0.17***} & {-0.15***} & {0.08} & {0.07} & {-0.02} & {0.04} & {-0.12**} & {-0.08} & {0.17***} & {0.15***} & {0.52***} & {—} & {} & {} & {} & {} & {} \\ 
-{\bfseries Confidence Outgroup (Post)} & {0.25***} & {0.07} & {0.12**} & {-0.12**} & {0.07} & {0.01} & {0.26***} & {0.14**} & {0.10*} & {0.15***} & {0.23***} & {0.21***} & {0.45***} & {0.47***} & {—} & {} & {} & {} & {} \\ 
-{\bfseries Bot Informativeness} & {0.20***} & {0.03} & {0.22***} & {0.25***} & {0.17***} & {0.06} & {0.25***} & {0.37***} & {0.22***} & {0.29***} & {0.20***} & {0.19***} & {0.23***} & {0.13**} & {0.24***} & {—} & {} & {} & {} \\ 
-{\bfseries Bot Empathy} & {0.17***} & {-0.01} & {0.04} & {0.13**} & {0.12**} & {0.06} & {0.08} & {0.21***} & {0.13**} & {0.18***} & {0.15***} & {0.14**} & {0.18***} & {0.16***} & {0.20***} & {0.35***} & {—} & {} & {} \\ 
-{\bfseries Turn Count} & {-0.04} & {-0.04} & {-0.05} & {-0.04} & {-0.09*} & {-0.11*} & {-0.00} & {-0.02} & {-0.03} & {-0.05} & {-0.04} & {-0.05} & {-0.04} & {-0.01} & {-0.06} & {-0.08} & {-0.05} & {—} & {} \\ 
-{\bfseries Word Count} & {0.05} & {0.02} & {-0.03} & {-0.02} & {-0.03} & {-0.10*} & {-0.01} & {0.02} & {-0.02} & {-0.04} & {-0.01} & {-0.00} & {-0.00} & {0.08} & {0.02} & {-0.03} & {0.06} & {0.18***} & {—} \\ 
+{\bfseries Political Orientation} & {—} & {1.00***} & {-0.17**} & {-0.07} & {0.06} & {0.29***} & {-0.06} & {0.08} & {-0.32***} & {-0.26***} & {0.60***} & {0.53***} & {0.32***} & {0.13*} & {0.13*} & {0.10} & {0.09} & {-0.03} & {0.03} \\ 
+{\bfseries Political Extremism} & {-1.00***} & {—} & {-0.17**} & {-0.07} & {0.06} & {0.29***} & {-0.06} & {0.08} & {-0.32***} & {-0.26***} & {0.60***} & {0.53***} & {0.32***} & {0.13*} & {0.13*} & {0.10} & {0.09} & {-0.03} & {0.03} \\ 
+{\bfseries Accuracy (Pre)} & {0.13*} & {-0.13*} & {—} & {0.15*} & {-0.13*} & {-0.28***} & {0.67***} & {0.21***} & {0.27***} & {0.27***} & {-0.20**} & {-0.16**} & {-0.19**} & {-0.07} & {0.00} & {-0.03} & {-0.06} & {-0.00} & {0.00} \\ 
+{\bfseries Accuracy (Post)} & {0.16**} & {-0.16**} & {0.43***} & {—} & {0.10} & {-0.02} & {-0.00} & {0.38***} & {0.19**} & {0.18**} & {-0.08} & {-0.06} & {-0.07} & {-0.15*} & {-0.11} & {0.12} & {-0.03} & {0.00} & {-0.04} \\ 
+{\bfseries Green Own} & {-0.20**} & {0.20**} & {0.01} & {-0.02} & {—} & {0.73***} & {-0.06} & {0.28***} & {0.17**} & {0.22***} & {0.15*} & {0.12*} & {0.24***} & {0.05} & {0.07} & {0.28***} & {0.28***} & {-0.15*} & {-0.02} \\ 
+{\bfseries Green Ingroup} & {-0.24***} & {0.24***} & {0.06} & {-0.06} & {0.45***} & {—} & {-0.18**} & {0.10} & {0.04} & {0.10} & {0.38***} & {0.32***} & {0.33***} & {0.09} & {0.08} & {0.22***} & {0.25***} & {-0.16**} & {-0.10} \\ 
+{\bfseries Green Outgroup (Pre)} & {0.12} & {-0.12} & {0.93***} & {0.38***} & {0.06} & {0.12} & {—} & {0.46***} & {0.19**} & {0.20**} & {-0.12} & {-0.14*} & {-0.06} & {0.15*} & {0.22***} & {0.01} & {0.01} & {-0.01} & {0.03} \\ 
+{\bfseries Green Outgroup (Post)} & {0.09} & {-0.09} & {0.46***} & {0.76***} & {0.19**} & {0.11} & {0.51***} & {—} & {0.14*} & {0.20**} & {0.09} & {0.06} & {0.08} & {0.14*} & {0.27***} & {0.30***} & {0.15*} & {-0.08} & {0.07} \\ 
+{\bfseries Warmth Outgroup (Pre)} & {0.24***} & {-0.24***} & {0.56***} & {0.30***} & {-0.06} & {-0.01} & {0.58***} & {0.39***} & {—} & {0.88***} & {-0.08} & {-0.08} & {-0.07} & {-0.13*} & {-0.03} & {0.15*} & {0.13*} & {-0.11} & {0.05} \\ 
+{\bfseries Warmth Outgroup (Post)} & {0.22***} & {-0.22***} & {0.51***} & {0.37***} & {0.01} & {0.07} & {0.52***} & {0.46***} & {0.89***} & {—} & {-0.04} & {-0.03} & {-0.02} & {-0.08} & {0.08} & {0.24***} & {0.22***} & {-0.12} & {0.03} \\ 
+{\bfseries Warmth Ingroup (Pre)} & {-0.42***} & {0.42***} & {0.08} & {-0.03} & {0.20**} & {0.39***} & {0.10} & {0.11} & {0.10} & {0.14*} & {—} & {0.89***} & {0.32***} & {0.15*} & {0.15*} & {0.18**} & {0.19**} & {-0.11} & {0.03} \\ 
+{\bfseries Warmth Ingroup (Post)} & {-0.41***} & {0.41***} & {0.04} & {-0.03} & {0.19**} & {0.39***} & {0.07} & {0.11} & {0.08} & {0.09} & {0.93***} & {—} & {0.22***} & {0.12} & {0.15*} & {0.15*} & {0.15*} & {-0.11} & {0.02} \\ 
+{\bfseries Confidence Ingroup} & {-0.20**} & {0.20**} & {-0.16*} & {-0.11} & {0.33***} & {0.34***} & {-0.06} & {0.10} & {0.01} & {0.03} & {0.34***} & {0.36***} & {—} & {0.48***} & {0.42***} & {0.23***} & {0.24***} & {-0.11} & {-0.01} \\ 
+{\bfseries Confidence Outgroup (Pre)} & {-0.16*} & {0.16*} & {-0.40***} & {-0.23***} & {0.17**} & {0.15*} & {-0.32***} & {-0.08} & {-0.15*} & {-0.12} & {0.18**} & {0.16*} & {0.55***} & {—} & {0.52***} & {0.16*} & {0.17**} & {-0.06} & {0.06} \\ 
+{\bfseries Confidence Outgroup (Post)} & {-0.08} & {0.08} & {-0.05} & {-0.32***} & {0.23***} & {0.21***} & {0.03} & {-0.14*} & {0.11} & {0.12} & {0.26***} & {0.23***} & {0.48***} & {0.42***} & {—} & {0.27***} & {0.18**} & {-0.12} & {0.06} \\ 
+{\bfseries Bot Informativeness} & {-0.02} & {0.02} & {0.24***} & {0.23***} & {0.19**} & {0.12} & {0.25***} & {0.32***} & {0.20**} & {0.27***} & {0.17**} & {0.19**} & {0.21**} & {0.09} & {0.14*} & {—} & {0.41***} & {-0.19**} & {-0.04} \\ 
+{\bfseries Bot Empathy} & {0.08} & {-0.08} & {-0.03} & {0.16*} & {0.01} & {-0.01} & {-0.05} & {0.17**} & {0.06} & {0.09} & {0.07} & {0.11} & {0.10} & {0.13*} & {0.15*} & {0.27***} & {—} & {-0.06} & {0.02} \\ 
+{\bfseries Turn Count} & {0.06} & {-0.06} & {-0.05} & {-0.04} & {-0.08} & {-0.16*} & {0.07} & {0.04} & {0.04} & {0.01} & {0.02} & {0.00} & {0.02} & {0.04} & {-0.00} & {-0.01} & {-0.03} & {—} & {0.19**} \\ 
+{\bfseries Word Count} & {-0.02} & {0.02} & {-0.21***} & {-0.06} & {-0.03} & {-0.05} & {-0.23***} & {-0.11} & {-0.24***} & {-0.23***} & {-0.11} & {-0.07} & {0.01} & {0.12} & {-0.11} & {-0.07} & {0.13*} & {0.23***} & {—} \\ 
 \bottomrule
 \end{tabular*}
 \begin{minipage}{\linewidth}
-* p<0.05, ** p<0.01, *** p<0.001. Lower triangle shows correlations with significance stars. Upper triangle left blank for readability.\\
+* p<0.05, ** p<0.01, *** p<0.001\\
 \end{minipage}
 
 }
@@ -1644,371 +1351,254 @@ bot perceptions, and engagement measures.}
 \subsubsection{Summary table of
 regressions}\label{summary-table-of-regressions}
 
+\begin{landscape}
+
 \begin{table}
 
-\caption{\label{tbl-appendix-accuracy-summary}Consolidated summary of
-all accuracy models. Columns are grouped by research question: Pre-Post
-Change (main effect and interaction with learner party), Extremism
-(moderation by political extremism), and Mechanisms (bot perceptions and
-engagement dosage). Models 1-3 are mixed-effects with random intercepts
-by participant; Models 4-6 are OLS with baseline controls.}
+\caption{\label{tbl-appendix-consolidated}Consolidated summary of all
+models examining belief accuracy and outgroup warmth. Upper panels show
+simple effects at different levels of partisanship (D→R vs.~R→D) and
+extremism (±1 SD). Lower panel shows full regression results. Models
+test main effects of time, interactions with learner party
+(partisanship), and moderation by political extremism.}
 
 \centering{
 
 \centering
+\resizebox{\ifdim\width>\linewidth 0.9\linewidth\else\width\fi}{!}{
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
 note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001},
+note{ }={Note: Simple effects show pre-to-post change by learner party (D→R vs. R→D) and extremism level (±1 SD). Full regression results below. * p<0.05, ** p<0.01, *** p<0.001},
 ]                     %% tabularray outer close
 {                     %% tabularray inner open
-colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
-column{3,6,7}={}{halign=c,},
-column{1}={}{halign=l,},
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
+cell{3}{1}={c=9}{},cell{8}{1}={c=9}{},cell{13}{1}={c=9}{},
+cell{1}{3}={}{halign=c,},
+cell{1}{4}={}{halign=c,},
+cell{1}{5}={}{halign=c,},
+cell{1}{7}={}{halign=c,},
+cell{1}{8}={}{halign=c,},
+cell{1}{9}={}{halign=c,},
 cell{2}{2}={}{halign=c,},
+cell{2}{3}={}{halign=c,},
 cell{2}{4}={}{halign=c,},
 cell{2}{5}={}{halign=c,},
-cell{3}{2}={}{halign=c,},
-cell{3}{4}={}{halign=c,},
-cell{3}{5}={}{halign=c,},
+cell{2}{6}={}{halign=c,},
+cell{2}{7}={}{halign=c,},
+cell{2}{8}={}{halign=c,},
+cell{2}{9}={}{halign=c,},
 cell{4}{2}={}{halign=c,},
+cell{4}{3}={}{halign=c,},
 cell{4}{4}={}{halign=c,},
 cell{4}{5}={}{halign=c,},
+cell{4}{6}={}{halign=c,},
+cell{4}{7}={}{halign=c,},
+cell{4}{8}={}{halign=c,},
+cell{4}{9}={}{halign=c,},
 cell{5}{2}={}{halign=c,},
+cell{5}{3}={}{halign=c,},
 cell{5}{4}={}{halign=c,},
 cell{5}{5}={}{halign=c,},
+cell{5}{6}={}{halign=c,},
+cell{5}{7}={}{halign=c,},
+cell{5}{8}={}{halign=c,},
+cell{5}{9}={}{halign=c,},
 cell{6}{2}={}{halign=c,},
+cell{6}{3}={}{halign=c,},
 cell{6}{4}={}{halign=c,},
 cell{6}{5}={}{halign=c,},
+cell{6}{6}={}{halign=c,},
+cell{6}{7}={}{halign=c,},
+cell{6}{8}={}{halign=c,},
+cell{6}{9}={}{halign=c,},
 cell{7}{2}={}{halign=c,},
+cell{7}{3}={}{halign=c,},
 cell{7}{4}={}{halign=c,},
 cell{7}{5}={}{halign=c,},
-cell{8}{2}={}{halign=c,},
-cell{8}{4}={}{halign=c,},
-cell{8}{5}={}{halign=c,},
+cell{7}{6}={}{halign=c,},
+cell{7}{7}={}{halign=c,},
+cell{7}{8}={}{halign=c,},
+cell{7}{9}={}{halign=c,},
 cell{9}{2}={}{halign=c,},
+cell{9}{3}={}{halign=c,},
 cell{9}{4}={}{halign=c,},
 cell{9}{5}={}{halign=c,},
+cell{9}{6}={}{halign=c,},
+cell{9}{7}={}{halign=c,},
+cell{9}{8}={}{halign=c,},
+cell{9}{9}={}{halign=c,},
 cell{10}{2}={}{halign=c,},
+cell{10}{3}={}{halign=c,},
 cell{10}{4}={}{halign=c,},
 cell{10}{5}={}{halign=c,},
+cell{10}{6}={}{halign=c,},
+cell{10}{7}={}{halign=c,},
+cell{10}{8}={}{halign=c,},
+cell{10}{9}={}{halign=c,},
 cell{11}{2}={}{halign=c,},
+cell{11}{3}={}{halign=c,},
 cell{11}{4}={}{halign=c,},
 cell{11}{5}={}{halign=c,},
+cell{11}{6}={}{halign=c,},
+cell{11}{7}={}{halign=c,},
+cell{11}{8}={}{halign=c,},
+cell{11}{9}={}{halign=c,},
 cell{12}{2}={}{halign=c,},
+cell{12}{3}={}{halign=c,},
 cell{12}{4}={}{halign=c,},
 cell{12}{5}={}{halign=c,},
-cell{13}{2}={}{halign=c,},
-cell{13}{4}={}{halign=c,},
-cell{13}{5}={}{halign=c,},
+cell{12}{6}={}{halign=c,},
+cell{12}{7}={}{halign=c,},
+cell{12}{8}={}{halign=c,},
+cell{12}{9}={}{halign=c,},
 cell{14}{2}={}{halign=c,},
+cell{14}{3}={}{halign=c,},
 cell{14}{4}={}{halign=c,},
 cell{14}{5}={}{halign=c,},
+cell{14}{6}={}{halign=c,},
+cell{14}{7}={}{halign=c,},
+cell{14}{8}={}{halign=c,},
+cell{14}{9}={}{halign=c,},
 cell{15}{2}={}{halign=c,},
+cell{15}{3}={}{halign=c,},
 cell{15}{4}={}{halign=c,},
 cell{15}{5}={}{halign=c,},
+cell{15}{6}={}{halign=c,},
+cell{15}{7}={}{halign=c,},
+cell{15}{8}={}{halign=c,},
+cell{15}{9}={}{halign=c,},
 cell{16}{2}={}{halign=c,},
+cell{16}{3}={}{halign=c,},
 cell{16}{4}={}{halign=c,},
 cell{16}{5}={}{halign=c,},
+cell{16}{6}={}{halign=c,},
+cell{16}{7}={}{halign=c,},
+cell{16}{8}={}{halign=c,},
+cell{16}{9}={}{halign=c,},
 cell{17}{2}={}{halign=c,},
+cell{17}{3}={}{halign=c,},
 cell{17}{4}={}{halign=c,},
 cell{17}{5}={}{halign=c,},
-cell{1}{4}={}{halign=c, halign=c,},
-cell{1}{2}={c=2,}{halign=c, halign=c,},
-cell{1}{5}={c=3,}{halign=c, halign=c,},
-hline{15}={1,2,3,4,5,6,7}{solid, black, 0.05em},
+cell{17}{6}={}{halign=c,},
+cell{17}{7}={}{halign=c,},
+cell{17}{8}={}{halign=c,},
+cell{17}{9}={}{halign=c,},
+cell{18}{2}={}{halign=c,},
+cell{18}{3}={}{halign=c,},
+cell{18}{4}={}{halign=c,},
+cell{18}{5}={}{halign=c,},
+cell{18}{6}={}{halign=c,},
+cell{18}{7}={}{halign=c,},
+cell{18}{8}={}{halign=c,},
+cell{18}{9}={}{halign=c,},
+cell{19}{2}={}{halign=c,},
+cell{19}{3}={}{halign=c,},
+cell{19}{4}={}{halign=c,},
+cell{19}{5}={}{halign=c,},
+cell{19}{6}={}{halign=c,},
+cell{19}{7}={}{halign=c,},
+cell{19}{8}={}{halign=c,},
+cell{19}{9}={}{halign=c,},
+cell{20}{2}={}{halign=c,},
+cell{20}{3}={}{halign=c,},
+cell{20}{4}={}{halign=c,},
+cell{20}{5}={}{halign=c,},
+cell{20}{6}={}{halign=c,},
+cell{20}{7}={}{halign=c,},
+cell{20}{8}={}{halign=c,},
+cell{20}{9}={}{halign=c,},
+cell{21}{2}={}{halign=c,},
+cell{21}{3}={}{halign=c,},
+cell{21}{4}={}{halign=c,},
+cell{21}{5}={}{halign=c,},
+cell{21}{6}={}{halign=c,},
+cell{21}{7}={}{halign=c,},
+cell{21}{8}={}{halign=c,},
+cell{21}{9}={}{halign=c,},
+cell{3}{2}={}{halign=c, cmd=\bfseries,},
+cell{3}{3}={}{halign=c, cmd=\bfseries,},
+cell{3}{4}={}{halign=c, cmd=\bfseries,},
+cell{3}{5}={}{halign=c, cmd=\bfseries,},
+cell{3}{6}={}{halign=c, cmd=\bfseries,},
+cell{3}{7}={}{halign=c, cmd=\bfseries,},
+cell{3}{8}={}{halign=c, cmd=\bfseries,},
+cell{3}{9}={}{halign=c, cmd=\bfseries,},
+cell{8}{2}={}{halign=c, cmd=\bfseries,},
+cell{8}{3}={}{halign=c, cmd=\bfseries,},
+cell{8}{4}={}{halign=c, cmd=\bfseries,},
+cell{8}{5}={}{halign=c, cmd=\bfseries,},
+cell{8}{6}={}{halign=c, cmd=\bfseries,},
+cell{8}{7}={}{halign=c, cmd=\bfseries,},
+cell{8}{8}={}{halign=c, cmd=\bfseries,},
+cell{8}{9}={}{halign=c, cmd=\bfseries,},
+cell{13}{2}={}{halign=c, cmd=\bfseries,},
+cell{13}{3}={}{halign=c, cmd=\bfseries,},
+cell{13}{4}={}{halign=c, cmd=\bfseries,},
+cell{13}{5}={}{halign=c, cmd=\bfseries,},
+cell{13}{6}={}{halign=c, cmd=\bfseries,},
+cell{13}{7}={}{halign=c, cmd=\bfseries,},
+cell{13}{8}={}{halign=c, cmd=\bfseries,},
+cell{13}{9}={}{halign=c, cmd=\bfseries,},
+cell{1}{1}={}{halign=l,},
+cell{2}{1}={}{halign=l,},
+cell{3}{1}={}{halign=l, cmd=\bfseries,},
+cell{8}{1}={}{halign=l, cmd=\bfseries,},
+cell{13}{1}={}{halign=l, cmd=\bfseries,},
+cell{4}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{5}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{6}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{7}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{9}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{10}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{11}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{12}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{14}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{15}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{16}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{17}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{18}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{19}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{20}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{21}{1}={}{halign=l, preto={\hspace{1em}},},
+cell{1}{2}={c=4,}{halign=c, halign=c,},
+cell{1}{6}={c=4,}{halign=c, halign=c,},
+hline{8}={1,2,3,4,5,6,7,8,9}{solid, lightgray, 0.1em},
+hline{13}={1,2,3,4,5,6,7,8,9}{solid, lightgray, 0.1em},
+hline{21}={1,2,3,4,5,6,7,8,9}{solid, lightgray, 0.1em},
+rowsep=-2pt, colsep=3pt,
 }                     %% tabularray inner close
 \toprule
-& Pre-Post Change &  & Extremism & Mechanisms &  &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-4}\cmidrule[lr]{5-7}
-& Main Effect & Interaction & Extremism & Information/Empathy & Turns & Words \\ \midrule %% TinyTableHeader
-Time (Post) & \num{0.393}*** & \num{0.628}*** & \num{0.721}*** &  &  &  \\
-Learner Party (R→D) &  & \num{0.976}*** & \num{0.898}*** &  & \num{0.202}** & \num{0.204}** \\
-Political Extremism &  &  & \num{-0.008}* &  &  &  \\
-Time × Learner Party &  & \num{-0.465}*** & \num{-0.726}*** &  &  &  \\
-Time × Extremism &  &  & \num{-0.002} &  &  &  \\
-Learner Party × Extremism &  &  & \num{0.001} &  &  &  \\
-Time × Learner Party × Extremism &  &  & \num{0.007} &  &  &  \\
-Baseline Accuracy &  &  &  & \num{0.354}*** & \num{-0.684}*** & \num{-0.686}*** \\
-Bot Informativeness &  &  &  & \num{0.086}** &  &  \\
-Bot Empathy &  &  &  & \num{0.050}+ &  &  \\
-Turn Count &  &  &  &  & \num{-0.002} &  \\
-Log(Word Count) &  &  &  &  &  & \num{-0.050} \\
-Num.Obs. & \num{1000} & \num{1000} & \num{1000} & \num{500} & \num{500} & \num{500} \\
-R2 &  &  &  & \num{0.241} & \num{0.434} & \num{0.434} \\
-R2 Adj. &  &  &  & \num{0.236} & \num{0.430} & \num{0.431} \\
+& Accuracy &  &  &  & Warmth &  &  &  \\ \cmidrule[lr]{2-5}\cmidrule[lr]{6-9}
+& Main Effect & Partisanship & Extremism & Full Model & Main Effect  & Partisanship  & Extremism  & Full Model  \\ \midrule %% TinyTableHeader
+Simple Effects by Learner Party &&&&&&&& \\
+Time effect (D→R) & 0.628*** & 0.628*** &  &  & 5.149*** & 5.149*** &  &  \\
+& (0.052) & (0.052) &  &  & (0.744) & (0.744) &  &  \\
+Time effect (R→D) & 0.163** & 0.163** &  &  & 3.548*** & 3.548*** &  &  \\
+& (0.051) & (0.051) &  &  & (0.738) & (0.738) &  &  \\
+Simple Effects by Extremism Level &&&&&&&& \\
+Time effect (Low Extremism) &  &  & 0.386*** & 0.386*** &  &  & 3.847*** & 3.847*** \\
+&  &  & (0.053) & (0.053) &  &  & (0.761) & (0.761) \\
+Time effect (High Extremism) &  &  & 0.419*** & 0.419*** &  &  & 5.002*** & 5.002*** \\
+&  &  & (0.052) & (0.052) &  &  & (0.744) & (0.744) \\
+Full Regression Results &&&&&&&& \\
+Time (Post) & \num{0.393}*** & \num{0.628}*** & \num{0.241}* & \num{0.721}*** & \num{4.342}*** & \num{5.149}*** & \num{2.303} & \num{5.039}* \\
+Learner Party (R→D) &  & \num{0.976}*** & \num{0.717}*** & \num{0.898}*** &  & \num{13.324}*** & \num{10.686}*** & \num{14.760}* \\
+Political Extremism &  &  & \num{-0.009}*** & \num{-0.008}* &  &  & \num{-0.483}*** & \num{-0.429}*** \\
+Time × Learner Party &  & \num{-0.465}*** &  & \num{-0.726}*** &  & \num{-1.602} &  & \num{-4.336} \\
+Time × Extremism &  &  & \num{0.004} & \num{-0.002} &  &  & \num{0.054} & \num{0.003} \\
+Learner Party × Extremism &  &  &  & \num{0.001} &  &  &  & \num{-0.088} \\
+Time × Learner Party × Extremism &  &  &  & \num{0.007} &  &  &  & \num{0.076} \\
+Num.Obs. & \num{1000} & \num{1000} & \num{1000} & \num{1000} & \num{1000} & \num{1000} & \num{1000} & \num{1000} \\
 \bottomrule
 \end{talltblr}
-
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
-column{3,6,7}={}{halign=c,},
-column{1}={}{halign=l,},
-cell{2}{2}={}{halign=c,},
-cell{2}{4}={}{halign=c,},
-cell{2}{5}={}{halign=c,},
-cell{3}{2}={}{halign=c,},
-cell{3}{4}={}{halign=c,},
-cell{3}{5}={}{halign=c,},
-cell{4}{2}={}{halign=c,},
-cell{4}{4}={}{halign=c,},
-cell{4}{5}={}{halign=c,},
-cell{5}{2}={}{halign=c,},
-cell{5}{4}={}{halign=c,},
-cell{5}{5}={}{halign=c,},
-cell{6}{2}={}{halign=c,},
-cell{6}{4}={}{halign=c,},
-cell{6}{5}={}{halign=c,},
-cell{7}{2}={}{halign=c,},
-cell{7}{4}={}{halign=c,},
-cell{7}{5}={}{halign=c,},
-cell{8}{2}={}{halign=c,},
-cell{8}{4}={}{halign=c,},
-cell{8}{5}={}{halign=c,},
-cell{9}{2}={}{halign=c,},
-cell{9}{4}={}{halign=c,},
-cell{9}{5}={}{halign=c,},
-cell{10}{2}={}{halign=c,},
-cell{10}{4}={}{halign=c,},
-cell{10}{5}={}{halign=c,},
-cell{11}{2}={}{halign=c,},
-cell{11}{4}={}{halign=c,},
-cell{11}{5}={}{halign=c,},
-cell{12}{2}={}{halign=c,},
-cell{12}{4}={}{halign=c,},
-cell{12}{5}={}{halign=c,},
-cell{13}{2}={}{halign=c,},
-cell{13}{4}={}{halign=c,},
-cell{13}{5}={}{halign=c,},
-cell{14}{2}={}{halign=c,},
-cell{14}{4}={}{halign=c,},
-cell{14}{5}={}{halign=c,},
-cell{15}{2}={}{halign=c,},
-cell{15}{4}={}{halign=c,},
-cell{15}{5}={}{halign=c,},
-cell{16}{2}={}{halign=c,},
-cell{16}{4}={}{halign=c,},
-cell{16}{5}={}{halign=c,},
-cell{17}{2}={}{halign=c,},
-cell{17}{4}={}{halign=c,},
-cell{17}{5}={}{halign=c,},
-cell{1}{4}={}{halign=c, halign=c,},
-cell{1}{2}={c=2,}{halign=c, halign=c,},
-cell{1}{5}={c=3,}{halign=c, halign=c,},
-hline{15}={1,2,3,4,5,6,7}{solid, black, 0.05em},
-}                     %% tabularray inner close
-\toprule
-& Pre-Post Change &  & Extremism & Mechanisms &  &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-4}\cmidrule[lr]{5-7}
-& Main Effect & Interaction & Extremism & Information/Empathy & Turns & Words \\ \midrule %% TinyTableHeader
-Time (Post) & \num{0.393}*** & \num{0.628}*** & \num{0.721}*** &  &  &  \\
-Learner Party (R→D) &  & \num{0.976}*** & \num{0.898}*** &  & \num{0.202}** & \num{0.204}** \\
-Political Extremism &  &  & \num{-0.008}* &  &  &  \\
-Time × Learner Party &  & \num{-0.465}*** & \num{-0.726}*** &  &  &  \\
-Time × Extremism &  &  & \num{-0.002} &  &  &  \\
-Learner Party × Extremism &  &  & \num{0.001} &  &  &  \\
-Time × Learner Party × Extremism &  &  & \num{0.007} &  &  &  \\
-Baseline Accuracy &  &  &  & \num{0.354}*** & \num{-0.684}*** & \num{-0.686}*** \\
-Bot Informativeness &  &  &  & \num{0.086}** &  &  \\
-Bot Empathy &  &  &  & \num{0.050}+ &  &  \\
-Turn Count &  &  &  &  & \num{-0.002} &  \\
-Log(Word Count) &  &  &  &  &  & \num{-0.050} \\
-Num.Obs. & \num{1000} & \num{1000} & \num{1000} & \num{500} & \num{500} & \num{500} \\
-R2 &  &  &  & \num{0.241} & \num{0.434} & \num{0.434} \\
-R2 Adj. &  &  &  & \num{0.236} & \num{0.430} & \num{0.431} \\
-\bottomrule
-\end{talltblr}
+}
 
 }
 
 \end{table}%
 
-\begin{table}
-
-\caption{\label{tbl-appendix-warmth-summary}Consolidated summary of all
-warmth models. Columns are grouped by research question: Pre-Post Change
-(main effect and interaction with learner party), Extremism (moderation
-by political extremism), and Mechanisms (bot perceptions and engagement
-dosage). Models 1-3 are mixed-effects with random intercepts by
-participant; Models 4-6 are OLS with baseline controls.}
-
-\centering{
-
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
-column{3,6,7}={}{halign=c,},
-column{1}={}{halign=l,},
-cell{2}{2}={}{halign=c,},
-cell{2}{4}={}{halign=c,},
-cell{2}{5}={}{halign=c,},
-cell{3}{2}={}{halign=c,},
-cell{3}{4}={}{halign=c,},
-cell{3}{5}={}{halign=c,},
-cell{4}{2}={}{halign=c,},
-cell{4}{4}={}{halign=c,},
-cell{4}{5}={}{halign=c,},
-cell{5}{2}={}{halign=c,},
-cell{5}{4}={}{halign=c,},
-cell{5}{5}={}{halign=c,},
-cell{6}{2}={}{halign=c,},
-cell{6}{4}={}{halign=c,},
-cell{6}{5}={}{halign=c,},
-cell{7}{2}={}{halign=c,},
-cell{7}{4}={}{halign=c,},
-cell{7}{5}={}{halign=c,},
-cell{8}{2}={}{halign=c,},
-cell{8}{4}={}{halign=c,},
-cell{8}{5}={}{halign=c,},
-cell{9}{2}={}{halign=c,},
-cell{9}{4}={}{halign=c,},
-cell{9}{5}={}{halign=c,},
-cell{10}{2}={}{halign=c,},
-cell{10}{4}={}{halign=c,},
-cell{10}{5}={}{halign=c,},
-cell{11}{2}={}{halign=c,},
-cell{11}{4}={}{halign=c,},
-cell{11}{5}={}{halign=c,},
-cell{12}{2}={}{halign=c,},
-cell{12}{4}={}{halign=c,},
-cell{12}{5}={}{halign=c,},
-cell{13}{2}={}{halign=c,},
-cell{13}{4}={}{halign=c,},
-cell{13}{5}={}{halign=c,},
-cell{14}{2}={}{halign=c,},
-cell{14}{4}={}{halign=c,},
-cell{14}{5}={}{halign=c,},
-cell{15}{2}={}{halign=c,},
-cell{15}{4}={}{halign=c,},
-cell{15}{5}={}{halign=c,},
-cell{16}{2}={}{halign=c,},
-cell{16}{4}={}{halign=c,},
-cell{16}{5}={}{halign=c,},
-cell{17}{2}={}{halign=c,},
-cell{17}{4}={}{halign=c,},
-cell{17}{5}={}{halign=c,},
-cell{1}{4}={}{halign=c, halign=c,},
-cell{1}{2}={c=2,}{halign=c, halign=c,},
-cell{1}{5}={c=3,}{halign=c, halign=c,},
-hline{15}={1,2,3,4,5,6,7}{solid, black, 0.05em},
-}                     %% tabularray inner close
-\toprule
-& Pre-Post Change &  & Extremism & Mechanisms &  &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-4}\cmidrule[lr]{5-7}
-& Main Effect & Interaction & Extremism & Information/Empathy & Turns & Words \\ \midrule %% TinyTableHeader
-Time (Post) & \num{4.342}*** & \num{5.149}*** & \num{5.039}* &  &  &  \\
-Learner Party (R→D) &  & \num{13.324}*** & \num{14.760}* &  & \num{-0.828} & \num{-0.778} \\
-Political Extremism &  &  & \num{-0.429}*** &  &  &  \\
-Time × Learner Party &  & \num{-1.602} & \num{-4.336} &  &  &  \\
-Time × Extremism &  &  & \num{0.003} &  &  &  \\
-Learner Party × Extremism &  &  & \num{-0.088} &  &  &  \\
-Time × Learner Party × Extremism &  &  & \num{0.076} &  &  &  \\
-Baseline Warmth &  &  &  & \num{0.910}*** & \num{-0.062}** & \num{-0.063}** \\
-Bot Informativeness &  &  &  & \num{1.927}*** &  &  \\
-Bot Empathy &  &  &  & \num{1.010}+ &  &  \\
-Turn Count &  &  &  &  & \num{-0.096} &  \\
-Log(Word Count) &  &  &  &  &  & \num{-0.869} \\
-Num.Obs. & \num{1000} & \num{1000} & \num{1000} & \num{500} & \num{500} & \num{500} \\
-R2 &  &  &  & \num{0.805} & \num{0.022} & \num{0.021} \\
-R2 Adj. &  &  &  & \num{0.804} & \num{0.016} & \num{0.015} \\
-\bottomrule
-\end{talltblr}
-
-\centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-note{ }={Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
-column{3,6,7}={}{halign=c,},
-column{1}={}{halign=l,},
-cell{2}{2}={}{halign=c,},
-cell{2}{4}={}{halign=c,},
-cell{2}{5}={}{halign=c,},
-cell{3}{2}={}{halign=c,},
-cell{3}{4}={}{halign=c,},
-cell{3}{5}={}{halign=c,},
-cell{4}{2}={}{halign=c,},
-cell{4}{4}={}{halign=c,},
-cell{4}{5}={}{halign=c,},
-cell{5}{2}={}{halign=c,},
-cell{5}{4}={}{halign=c,},
-cell{5}{5}={}{halign=c,},
-cell{6}{2}={}{halign=c,},
-cell{6}{4}={}{halign=c,},
-cell{6}{5}={}{halign=c,},
-cell{7}{2}={}{halign=c,},
-cell{7}{4}={}{halign=c,},
-cell{7}{5}={}{halign=c,},
-cell{8}{2}={}{halign=c,},
-cell{8}{4}={}{halign=c,},
-cell{8}{5}={}{halign=c,},
-cell{9}{2}={}{halign=c,},
-cell{9}{4}={}{halign=c,},
-cell{9}{5}={}{halign=c,},
-cell{10}{2}={}{halign=c,},
-cell{10}{4}={}{halign=c,},
-cell{10}{5}={}{halign=c,},
-cell{11}{2}={}{halign=c,},
-cell{11}{4}={}{halign=c,},
-cell{11}{5}={}{halign=c,},
-cell{12}{2}={}{halign=c,},
-cell{12}{4}={}{halign=c,},
-cell{12}{5}={}{halign=c,},
-cell{13}{2}={}{halign=c,},
-cell{13}{4}={}{halign=c,},
-cell{13}{5}={}{halign=c,},
-cell{14}{2}={}{halign=c,},
-cell{14}{4}={}{halign=c,},
-cell{14}{5}={}{halign=c,},
-cell{15}{2}={}{halign=c,},
-cell{15}{4}={}{halign=c,},
-cell{15}{5}={}{halign=c,},
-cell{16}{2}={}{halign=c,},
-cell{16}{4}={}{halign=c,},
-cell{16}{5}={}{halign=c,},
-cell{17}{2}={}{halign=c,},
-cell{17}{4}={}{halign=c,},
-cell{17}{5}={}{halign=c,},
-cell{1}{4}={}{halign=c, halign=c,},
-cell{1}{2}={c=2,}{halign=c, halign=c,},
-cell{1}{5}={c=3,}{halign=c, halign=c,},
-hline{15}={1,2,3,4,5,6,7}{solid, black, 0.05em},
-}                     %% tabularray inner close
-\toprule
-& Pre-Post Change &  & Extremism & Mechanisms &  &  \\ \cmidrule[lr]{2-3}\cmidrule[lr]{4-4}\cmidrule[lr]{5-7}
-& Main Effect & Interaction & Extremism & Information/Empathy & Turns & Words \\ \midrule %% TinyTableHeader
-Time (Post) & \num{4.342}*** & \num{5.149}*** & \num{5.039}* &  &  &  \\
-Learner Party (R→D) &  & \num{13.324}*** & \num{14.760}* &  & \num{-0.828} & \num{-0.778} \\
-Political Extremism &  &  & \num{-0.429}*** &  &  &  \\
-Time × Learner Party &  & \num{-1.602} & \num{-4.336} &  &  &  \\
-Time × Extremism &  &  & \num{0.003} &  &  &  \\
-Learner Party × Extremism &  &  & \num{-0.088} &  &  &  \\
-Time × Learner Party × Extremism &  &  & \num{0.076} &  &  &  \\
-Baseline Warmth &  &  &  & \num{0.910}*** & \num{-0.062}** & \num{-0.063}** \\
-Bot Informativeness &  &  &  & \num{1.927}*** &  &  \\
-Bot Empathy &  &  &  & \num{1.010}+ &  &  \\
-Turn Count &  &  &  &  & \num{-0.096} &  \\
-Log(Word Count) &  &  &  &  &  & \num{-0.869} \\
-Num.Obs. & \num{1000} & \num{1000} & \num{1000} & \num{500} & \num{500} & \num{500} \\
-R2 &  &  &  & \num{0.805} & \num{0.022} & \num{0.021} \\
-R2 Adj. &  &  &  & \num{0.804} & \num{0.016} & \num{0.015} \\
-\bottomrule
-\end{talltblr}
-
-}
-
-\end{table}%
+\end{landscape}
 
 \subsubsection{Descriptive Statistics}\label{descriptive-statistics}
 
@@ -3182,23 +2772,63 @@ loaded via a namespace (and not attached):
 [26] tables_0.9.31       stringi_1.8.7       RColorBrewer_1.1-3  car_3.1-3           boot_1.3-31        
 [31] lmtest_0.9-40       numDeriv_2016.8-1.1 estimability_1.5.1  Rcpp_1.0.14         assertthat_0.2.1   
 [36] knitr_1.50          zoo_1.8-14          parameters_0.28.0   splines_4.5.0       timechange_0.3.0   
-[41] tidyselect_1.2.1    abind_1.4-8         yaml_2.3.10         websocket_1.4.4     processx_3.8.6     
-[46] lattice_0.22-6      withr_3.0.2         bayestestR_0.16.1   coda_0.19-4.1       evaluate_1.0.4     
-[51] xml2_1.3.8          pillar_1.11.0       carData_3.0-5       checkmate_2.3.2     reformulas_0.4.1   
-[56] insight_1.4.0       generics_0.1.4      chromote_0.5.1      hms_1.1.3           scales_1.4.0       
-[61] minqa_1.2.8         xtable_1.8-4        glue_1.8.0          tools_4.5.0         webshot2_0.1.2     
-[66] data.table_1.17.8   egg_0.4.5           ggsignif_0.6.4      fs_1.6.6            mvtnorm_1.3-3      
-[71] grid_4.5.0          Ben_0.1.0           rbibutils_2.3       datawizard_1.2.0    nlme_3.1-168       
-[76] performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1   fansi_1.0.6        
-[81] gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37       pbkrtest_0.5.4     
-[86] farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4     bit64_4.6.0-1       MASS_7.3-65        
+[41] tidyselect_1.2.1    abind_1.4-8         yaml_2.3.10         websocket_1.4.4     codetools_0.2-20   
+[46] processx_3.8.6      lattice_0.22-6      withr_3.0.2         bayestestR_0.16.1   coda_0.19-4.1      
+[51] evaluate_1.0.4      xml2_1.3.8          pillar_1.11.0       carData_3.0-5       checkmate_2.3.2    
+[56] reformulas_0.4.1    insight_1.4.0       generics_0.1.4      chromote_0.5.1      hms_1.1.3          
+[61] scales_1.4.0        minqa_1.2.8         xtable_1.8-4        glue_1.8.0          tools_4.5.0        
+[66] webshot2_0.1.2      data.table_1.17.8   egg_0.4.5           ggsignif_0.6.4      fs_1.6.6           
+[71] mvtnorm_1.3-3       grid_4.5.0          Ben_0.1.0           rbibutils_2.3       datawizard_1.2.0   
+[76] nlme_3.1-168        performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1  
+[81] fansi_1.0.6         gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37      
+[86] pbkrtest_0.5.4      farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4     bit64_4.6.0-1      
+[91] MASS_7.3-65        
 \end{verbatim}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\bibitem[\citeproctext]{ref-example2024}
-Author, F., \& Author, S. (2024). Example article title. \emph{Journal
-Name}, \emph{1}(1), 1--10. \url{https://doi.org/10.1234/example}
+\bibitem[\citeproctext]{ref-allport1954nature}
+Allport, G. W. (1954). The nature of prejudice.
+\emph{Reading/Addison-Wesley}.
+
+\bibitem[\citeproctext]{ref-hermann_reducing_2025}
+Hermann, E., De Freitas, J., \& Puntoni, S. (2025). Reducing prejudice
+with counter‐stereotypical {AI}. \emph{Consumer Psychology Review},
+\emph{8}(1), 75--86. \url{https://doi.org/10.1002/arcp.1102}
+
+\bibitem[\citeproctext]{ref-hsieh_partisan_2024}
+Hsieh, C. H., Low, A., Sharma, V., \& Zhu, Q. (2024). \emph{Partisan
+{Consumers}}. SSRN. \url{https://doi.org/10.2139/ssrn.5046064}
+
+\bibitem[\citeproctext]{ref-iyengar_origins_2019}
+Iyengar, S., Lelkes, Y., Levendusky, M., Malhotra, N., \& Westwood, S.
+J. (2019). The {Origins} and {Consequences} of {Affective}
+{Polarization} in the {United} {States}. \emph{Annual Review of
+Political Science}, \emph{22}(1), 129--146.
+\url{https://doi.org/10.1146/annurev-polisci-051117-073034}
+
+\bibitem[\citeproctext]{ref-park_generative_nodate}
+Park, J. S., Zou, C. Q., Shaw, A., Hill, B. M., Cai, C., Morris, M. R.,
+Willer, R., Liang, P., \& Bernstein, M. S. (n.d.). \emph{Generative
+{Agent} {Simulations} of 1,000 {People}}.
+
+\bibitem[\citeproctext]{ref-pettigrew_meta-analytic_2006}
+Pettigrew, T. F., \& Tropp, L. R. (2006). A meta-analytic test of
+intergroup contact theory. \emph{Journal of Personality and Social
+Psychology}, \emph{90}(5), 751--783.
+\url{https://doi.org/10.1037/0022-3514.90.5.751}
+
+\bibitem[\citeproctext]{ref-toubia_database_2025}
+Toubia, O., Gui, G. Z., Peng, T., Merlau, D. J., Li, A., \& Chen, H.
+(2025). Database {Report}: {Twin}-{2K}-500: {A} {Data} {Set} for
+{Building} {Digital} {Twins} of over 2,000 {People} {Based} on {Their}
+{Answers} to over 500 {Questions}. \emph{Marketing Science},
+mksc.2025.0262. \url{https://doi.org/10.1287/mksc.2025.0262}
+
+\bibitem[\citeproctext]{ref-yudkin_perception_2019}
+Yudkin, D., Hawkins, S., \& Dixon, T. (2019). \emph{The {Perception}
+{Gap}: {How} {False} {Impressions} are {Pulling} {Americans} {Apart}}.
+PsyArXiv. \url{https://doi.org/10.31234/osf.io/r3h5q}
 
 \end{CSLReferences}
 

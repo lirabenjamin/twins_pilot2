@@ -1,7 +1,32 @@
 ---
 title: "Learning from AI Personas: Can marketers learn about consumers across the political divide by interacting with AI"
-author: "Benjamin Lira"
+author:
+  - name: Benjamin Lira
+    affiliations:
+      - Wharton School, University of Pennsylvania
+    email: blira@sas.upenn.edu
+  - name: Noah Castelo
+    affiliations:
+      - Alberta School of Business, University of Alberta
+    email: ncastelo@ualberta.ca
+  - name: Olivier Toubia
+    affiliations:
+      - Columbia Business School, Columbia University
+    email: ot2107@gsb.columbia.edu
+  - name: Stefano Puntoni
+    affiliations:
+      - Wharton School, University of Pennsylvania
+    email: puntoni@wharton.upenn.edu
 date: today
+abstract: |
+  Political polarization poses a fundamental challenge for marketers who must communicate effectively with ideologically diverse consumers. 
+  Misperceptions about political outgroups—where partisans hold exaggerated and inaccurate views of those across the political divide—can undermine marketing strategies targeting broad consumer bases. This study tests whether brief interactions with an AI chatbot representing a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization. 
+  Participants interacted with a chatbot prompted to represent their political outgroup and responded to questions about environmental attitudes before and after the interaction. 
+  Results demonstrate that chatbot interactions significantly improved both belief accuracy and warmth toward the outgroup. 
+  However, these effects were asymmetric: Democrats learning about Republicans showed substantially greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates. 
+  Political extremism predicted greater baseline bias and lower warmth but did not moderate the intervention's effectiveness, indicating that both moderate and extreme partisans benefited equally. 
+  Bot informativeness predicted better outcomes, while perceived empathy did not. 
+  These findings suggest AI-mediated interactions offer a scalable tool for reducing political misperceptions in consumer research, though important questions remain about domain specificity, temporal durability, and how insights from AI interactions transfer to understanding actual outgroup members.
 bibliography: ../lit/references.bib
 csl: https://www.zotero.org/styles/apa
 link-citations: true
@@ -11,9 +36,17 @@ format:
     fig-cap-location: bottom
     tbl-cap-location: top
   pdf:
+    documentclass: article
+    classoption: 
+      - 11pt
+      - oneside
     keep-tex: true
     fig-cap-location: bottom
     tbl-cap-location: top
+    include-in-header: preamble.tex
+    metadata:
+      author: ""          # prevents Pandoc author injection in some setups
+    toc: false
 execute:
   echo: false
   cache: true
@@ -21,16 +54,6 @@ execute:
   message: false
 ---
 
-## Abstract
-
-Political polarization poses a fundamental challenge for marketers who must communicate effectively with ideologically diverse consumers. 
-  Misperceptions about political outgroups—where partisans hold exaggerated and inaccurate views of those across the political divide—can undermine marketing strategies targeting broad consumer bases. This study tests whether brief interactions with an AI chatbot representing a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization. 
-  Participants interacted with a chatbot prompted to represent their political outgroup and responded to questions about environmental attitudes before and after the interaction. 
-  Results demonstrate that chatbot interactions significantly improved both belief accuracy and warmth toward the outgroup. 
-  However, these effects were asymmetric: Democrats learning about Republicans showed substantially greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates. 
-  Political extremism predicted greater baseline bias and lower warmth but did not moderate the intervention's effectiveness, indicating that both moderate and extreme partisans benefited equally. 
-  Bot informativeness predicted better outcomes, while perceived empathy did not. 
-  These findings suggest AI-mediated interactions offer a scalable tool for reducing political misperceptions in consumer research, though important questions remain about domain specificity, temporal durability, and how insights from AI interactions transfer to understanding actual outgroup members.
 
 ```{r setup}
 library(tidyverse)
@@ -123,6 +146,10 @@ coef_map_common <- c(
   "log_word_count" = "Log(Word Count)",
   "SD (Intercept ResponseID)" = "SD(Intercept)"
 )
+
+# Calculate sample composition
+n_dr <- dat %>% filter(learner_party == "D→R") %>% nrow()
+n_rd <- dat %>% filter(learner_party == "R→D") %>% nrow()
 ```
 
 ## Introduction
@@ -134,7 +161,13 @@ Intergroup contact reduces prejudice and corrects misperceptions [@allport1954na
 Recent advances in AI enable "synthetic contact"—conversations with AI chatbots representing outgroup members—that may replicate these benefits at scale [@hermann_reducing_2025].
 Digital twins built from survey data can accurately represent individuals' psychological characteristics [@park_generative_nodate; @toubia_database_2025], but whether marketers can extract this knowledge through conversation remains untested.
 
+Whether AI-mediated contact can genuinely reduce political misperceptions is unclear.
+On one hand, chatbot interactions might provide corrective information about outgroup attitudes while fostering empathic understanding through open dialogue.
+On the other hand, participants may dismiss AI-generated perspectives as inauthentic or may selectively attend to information that confirms existing biases.
+Even if participants update their beliefs, they may lack metacognitive awareness of this learning—becoming more accurate without becoming more confident, or vice versa.
+
 We test whether brief interactions with an AI chatbot representing a political outgroup improve belief accuracy and reduce affective polarization.
+We examine both informational mechanisms (does the chatbot provide useful information?) and empathic mechanisms (does the chatbot foster emotional connection?), and assess whether participants gain metacognitive insight into their improved understanding.
 We recruited `r nrow(dat)` partisan participants (prescreened to exclude moderates; `r n_dr` Democrats, `r n_rd` Republicans) who conversed with a chatbot prompted to represent their political outgroup and estimated outgroup attitudes toward environmental consumption before and after the interaction.
 We hypothesized that participants would report more accurate beliefs about outgroup environmental attitudes and warmer feelings toward the political outgroup after the interaction.
 
@@ -1121,12 +1154,6 @@ This study has several limitations that provide directions for future research.
 
 ### Data Collection
 
-```{r}
-# Calculate sample composition
-n_dr <- dat %>% filter(learner_party == "D→R") %>% nrow()
-n_rd <- dat %>% filter(learner_party == "R→D") %>% nrow()
-```
-
 We collected data via Qualtrics from `r nrow(dat)` participants.
 Of these, `r n_dr` were Democrats learning about Republicans (D→R) and `r n_rd` were Republicans learning about Democrats (R→D).
 Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
@@ -1264,7 +1291,6 @@ Upper triangle left blank for readability."
   )
 
 save_table(tbl_overall, "tab_correlation_matrix_overall")
-tbl_overall
 ```
 
 #### Correlations by Political Party
@@ -1393,7 +1419,7 @@ save_table(tbl, "tab_correlation_matrix")
 ```
 
 ### Summary table of regressions
-
+::: {.landscape}
 ```{r}
 #| label: tbl-appendix-consolidated
 #| tbl-cap: "Consolidated summary of all models examining belief accuracy and outgroup warmth. Upper panels show simple effects at different levels of partisanship (D→R vs. R→D) and extremism (±1 SD). Lower panel shows full regression results. Models test main effects of time, interactions with learner party (partisanship), and moderation by political extremism."
@@ -1470,6 +1496,9 @@ rows_extremism_append <- tibble(
 )
 attr(rows_extremism_append, "position") <- c(5, 6, 7, 8)
 
+rows_to_add = rbind(rows_party, rows_extremism_append)
+attr(rows_to_add, "position") <- c(1:8)
+
 tbl <- modelsummary(
   list(
     "Main Effect" = accuracy_model0,
@@ -1482,7 +1511,7 @@ tbl <- modelsummary(
     "Full Model" = warmth_extremism_model
   ),
   stars = TRUE,
-  add_rows = list(rows_party, rows_extremism_append),
+  add_rows = rows_to_add,
   gof_map = c("nobs", "r.squared"),
   coef_omit = "Intercept",
   statistic = NULL,
@@ -1497,12 +1526,16 @@ tbl <- modelsummary(
     "Simple Effects by Extremism Level" = 5,
     "Full Regression Results" = 9
   )) %>%
-  style_tt(i = c(1, 5, 9), bold = TRUE) %>%
-  style_tt(i = c(4, 8), line = "b", line_color = "lightgray")
-
+    strip_tt(line = TRUE) %>%
+  style_tt(i = c(1, 6, 11), bold = TRUE) %>%
+  style_tt(i = c(5, 10, 18), line = "b", line_color = "lightgray") %>% 
+    tinytable::style_tt(
+  tabularray_inner = "rowsep=-2pt, colsep=3pt"
+) %>% 
+theme_tt("resize", width = .9)
 save_table(tbl, "tab_appendix_consolidated")
 ```
-
+:::
 ### Descriptive Statistics
 
 ```{r descriptives-actual-attitudes}
