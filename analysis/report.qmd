@@ -1,5 +1,5 @@
 ---
-title: "Learning from Twins: Can marketers learn about consumers across the political divide by interacting with AI"
+title: "Learning from AI Personas: Can marketers learn about consumers across the political divide by interacting with AI"
 author: "Benjamin Lira"
 date: today
 bibliography: ../lit/references.bib
@@ -16,13 +16,16 @@ format:
     tbl-cap-location: top
 execute:
   echo: false
+  cache: true
   warning: false
   message: false
 ---
 
 ## Abstract
 
-Political polarization poses a fundamental challenge for marketers who must communicate effectively with ideologically diverse consumers. Misperceptions about political outgroups—where partisans hold exaggerated and inaccurate views of those across the political divide—can undermine marketing strategies targeting broad consumer bases. This study tests whether brief interactions with an AI chatbot representing a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization. Participants interacted with a chatbot prompted to represent their political outgroup and responded to questions about environmental attitudes before and after the interaction. Results demonstrate that chatbot interactions significantly improved both belief accuracy and warmth toward the outgroup. However, these effects were asymmetric: Democrats learning about Republicans showed substantially greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates. Political extremism predicted greater baseline bias and lower warmth but did not moderate the intervention's effectiveness, indicating that both moderate and extreme partisans benefited equally. Bot informativeness predicted better outcomes, while perceived empathy did not. These findings suggest AI-mediated interactions offer a scalable tool for reducing political misperceptions in consumer research, though important questions remain about domain specificity, temporal durability, and how insights from AI interactions transfer to understanding actual outgroup members.
+Political polarization poses a fundamental challenge for marketers who must communicate effectively with ideologically diverse consumers. 
+  Misperceptions about political outgroups—where partisans hold exaggerated and inaccurate views of those across the political divide—can undermine marketing strategies targeting broad consumer bases. This study tests whether brief interactions with an AI chatbot representing a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization. 
+  Participants interacted with a chatbot prompted to represent their political outgroup and responded to questions about environmental attitudes before and after the interaction. Results demonstrate that chatbot interactions significantly improved both belief accuracy and warmth toward the outgroup. However, these effects were asymmetric: Democrats learning about Republicans showed substantially greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates. Political extremism predicted greater baseline bias and lower warmth but did not moderate the intervention's effectiveness, indicating that both moderate and extreme partisans benefited equally. Bot informativeness predicted better outcomes, while perceived empathy did not. These findings suggest AI-mediated interactions offer a scalable tool for reducing political misperceptions in consumer research, though important questions remain about domain specificity, temporal durability, and how insights from AI interactions transfer to understanding actual outgroup members.
 
 ```{r setup}
 library(tidyverse)
@@ -109,7 +112,7 @@ coef_map_common <- c(
 
 ## Overview
 
-Political polarization  @example2024 creates challenges for marketers who must communicate effectively with ideologically [@example2024] diverse consumers. 
+Political polarization creates challenges for marketers who must communicate effectively with ideologically diverse consumers. 
 Misperceptions about political outgroups are widespread, with partisans often holding exaggerated and inaccurate views of those across the political divide.
 These misperceptions can lead to ineffective marketing strategies when firms attempt to appeal to broad consumer bases.
 This study tests whether interacting with an AI chatbot prompted to represent a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization.
@@ -131,6 +134,8 @@ Participants self-reported their political orientation on a 0-100 slider scale, 
 ```{r}
 #| label: tbl-sample-composition
 #| tbl-cap: "Sample composition by learning direction."
+
+# TODO: This shouldnt be a table, refer to it in text.
 tbl <- dat %>%
   count(learner_party) %>%
   mutate(
@@ -143,7 +148,6 @@ tbl <- dat %>%
   gt() %>%
   cols_label(learner_party = "Learning Direction", n = "N")
 save_table(tbl, "tab_sample_composition")
-tbl
 ```
 
 ### Measures
@@ -284,7 +288,7 @@ sd_rd <- bias_descriptives %>% filter(learner_party == "R→D") %>% pull(sd_bias
 ```
 
 What is the distribution of bias?
-At baseline, Democrats were more biased about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans were about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* = `r sprintf("%.3f", p)`.
+At baseline, Democrats were more biased about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans were about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* = `r sprintf("%.3f", p)`. [TODO, make a function to format p values and use it to address cases where p < .001]
 
 ```{r}
 #| label: fig-bias-distribution
@@ -355,7 +359,7 @@ ggsave(paste0(fig_path, "fig_baseline_accuracy_warmth.png"), p, width = 6, heigh
 p
 ```
 
-Does baseline accuracy predict baseline confidence?
+Does baseline accuracy predict baseline confidence? [TO-DO: Move this to the confidence section at the end of results.]
 We examine whether less accurate participants are overconfident in their judgments, consistent with Dunning-Kruger effects.
 
 ```{r baseline-accuracy-confidence-correlation}
@@ -480,7 +484,6 @@ tbl <- modelsummary(
   notes = "Note: Accuracy is negative absolute error (higher = more accurate). * p<0.05, ** p<0.01, *** p<0.001"
 )
 save_table(tbl, "tab_q1_main_effects")
-tbl
 ```
 
 Do changes in accuracy correlate with changes in warmth?
@@ -608,7 +611,6 @@ tbl <- modelsummary(
       style_tt(i = c(1, 6), bold = TRUE) |>
     style_tt(i = c(14, 16), line = "b", line_color = "lightgray")
 save_table(tbl, "tab_q2_interaction")
-tbl
 ```
 
 ### Q3. Does political extremity predict how much people update?
@@ -732,7 +734,6 @@ tbl <- modelsummary(
   style_tt(i = c(1, 6), bold = TRUE) %>%
   style_tt(i = c(20, 21), line = "b", line_color = "lightgray")
 save_table(tbl, "tab_q3_extremism")
-tbl
 ```
 
 ### Q4. Is belief updating associated with how the chatbot is perceived?
@@ -775,7 +776,6 @@ tbl <- modelsummary(
   notes = "Note: Regressions control for pre-interaction values. * p<0.05, ** p<0.01, *** p<0.001"
 )
 save_table(tbl, "tab_q4_process")
-tbl
 ```
 
 Do perceptions of informativeness and empathy correlate with each other?
@@ -862,7 +862,6 @@ tbl <- modelsummary(
 )  %>%
   group_tt(j = list("Accuracy" = 2:3, "Warmth" = 4:5))
 save_table(tbl, "tab_q5_engagement")
-tbl
 ```
 
 ```{r engagement-plots}
@@ -1044,7 +1043,6 @@ tbl <- modelsummary(
   style_tt(i = c(1, 6), bold = TRUE) %>%
   style_tt(i = c(14, 16), line = "b", line_color = "lightgray")
 save_table(tbl, "tab_q7_confidence")
-tbl
 ```
 
 #### Correlation: Does confidence change track accuracy improvement?
@@ -1244,7 +1242,6 @@ Upper triangle left blank for readability."
   )
 
 save_table(tbl, "tab_correlation_matrix")
-tbl
 ```
 
 ### Summary table of regressions
@@ -1277,7 +1274,6 @@ Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001"
     "Mechanisms" = 5:7
   ))
 save_table(tbl_acc, "tab_appendix_accuracy_summary")
-tbl_acc
 
 ```{r}
 #| label: tbl-appendix-warmth-summary
@@ -1305,7 +1301,6 @@ tbl_warmth <- modelsummary(
     "Mechanisms" = 5:7
   ))
 save_table(tbl_warmth, "tab_appendix_warmth_summary")
-tbl_warmth
 ```
 
 ### Descriptive Statistics
