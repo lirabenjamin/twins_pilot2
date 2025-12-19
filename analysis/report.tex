@@ -176,6 +176,16 @@ Can AI Digital Twins Bridge the Partisan Insight Gap?}
 \usepackage{array}
 \usepackage{anyfontsize}
 \usepackage{multirow}
+\usepackage{float}
+\usepackage{tabularray}
+\usepackage[normalem]{ulem}
+\usepackage{graphicx}
+\usepackage{rotating}
+\UseTblrLibrary{booktabs}
+\UseTblrLibrary{siunitx}
+\NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
+\newcommand{\tinytableTabularrayUnderline}[1]{\underline{#1}}
+\newcommand{\tinytableTabularrayStrikeout}[1]{\sout{#1}}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -210,9 +220,6 @@ Can AI Digital Twins Bridge the Partisan Insight Gap?}
 \@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
 \floatname{codelisting}{Listing}
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
-\makeatother
-\makeatletter
-\usepackage{pdflscape}
 \makeatother
 \makeatletter
 \makeatother
@@ -298,15 +305,29 @@ psychological characteristics
 marketers can extract this knowledge through conversation remains
 untested.
 
+Whether AI-mediated contact can genuinely reduce political
+misperceptions is unclear. On one hand, chatbot interactions might
+provide corrective information about outgroup attitudes while fostering
+empathic understanding through open dialogue. On the other hand,
+participants may dismiss AI-generated perspectives as inauthentic or may
+selectively attend to information that confirms existing biases. Even if
+participants update their beliefs, they may lack metacognitive awareness
+of this learning---becoming more accurate without becoming more
+confident, or vice versa.
+
 We test whether brief interactions with an AI chatbot representing a
 political outgroup improve belief accuracy and reduce affective
-polarization. We recruited 500 partisan participants (prescreened to
-exclude moderates; 248 Democrats, 252 Republicans) who conversed with a
-chatbot prompted to represent their political outgroup and estimated
-outgroup attitudes toward environmental consumption before and after the
-interaction. We hypothesized that participants would report more
-accurate beliefs about outgroup environmental attitudes and warmer
-feelings toward the political outgroup after the interaction.
+polarization. We examine both informational mechanisms (does the chatbot
+provide useful information?) and empathic mechanisms (does the chatbot
+foster emotional connection?), and assess whether participants gain
+metacognitive insight into their improved understanding. We recruited
+500 partisan participants (prescreened to exclude moderates; 248
+Democrats, 252 Republicans) who conversed with a chatbot prompted to
+represent their political outgroup and estimated outgroup attitudes
+toward environmental consumption before and after the interaction. We
+hypothesized that participants would report more accurate beliefs about
+outgroup environmental attitudes and warmer feelings toward the
+political outgroup after the interaction.
 
 \subsection{Results}\label{results}
 
@@ -1351,8 +1372,6 @@ confidence, bot perceptions, and engagement measures.}
 \subsubsection{Summary table of
 regressions}\label{summary-table-of-regressions}
 
-\begin{landscape}
-
 \begin{table}
 
 \caption{\label{tbl-appendix-consolidated}Consolidated summary of all
@@ -1365,7 +1384,7 @@ test main effects of time, interactions with learner party
 \centering{
 
 \centering
-\resizebox{\ifdim\width>\linewidth 0.9\linewidth\else\width\fi}{!}{
+\resizebox{\ifdim\width>\linewidth 1\linewidth\else\width\fi}{!}{
 \begin{talltblr}[         %% tabularray outer open
 entry=none,label=none,
 note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
@@ -1566,7 +1585,7 @@ cell{1}{6}={c=4,}{halign=c, halign=c,},
 hline{8}={1,2,3,4,5,6,7,8,9}{solid, lightgray, 0.1em},
 hline{13}={1,2,3,4,5,6,7,8,9}{solid, lightgray, 0.1em},
 hline{21}={1,2,3,4,5,6,7,8,9}{solid, lightgray, 0.1em},
-rowsep=-2pt, colsep=3pt,
+rowsep=2pt, colsep=3pt,
 }                     %% tabularray inner close
 \toprule
 & Accuracy &  &  &  & Warmth &  &  &  \\ \cmidrule[lr]{2-5}\cmidrule[lr]{6-9}
@@ -1597,8 +1616,6 @@ Num.Obs. & \num{1000} & \num{1000} & \num{1000} & \num{1000} & \num{1000} & \num
 }
 
 \end{table}%
-
-\end{landscape}
 
 \subsubsection{Descriptive Statistics}\label{descriptive-statistics}
 

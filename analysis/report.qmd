@@ -1419,7 +1419,7 @@ save_table(tbl, "tab_correlation_matrix")
 ```
 
 ### Summary table of regressions
-::: {.landscape}
+<!-- ::: {.landscape} -->
 ```{r}
 #| label: tbl-appendix-consolidated
 #| tbl-cap: "Consolidated summary of all models examining belief accuracy and outgroup warmth. Upper panels show simple effects at different levels of partisanship (D→R vs. R→D) and extremism (±1 SD). Lower panel shows full regression results. Models test main effects of time, interactions with learner party (partisanship), and moderation by political extremism."
@@ -1530,12 +1530,13 @@ tbl <- modelsummary(
   style_tt(i = c(1, 6, 11), bold = TRUE) %>%
   style_tt(i = c(5, 10, 18), line = "b", line_color = "lightgray") %>% 
     tinytable::style_tt(
-  tabularray_inner = "rowsep=-2pt, colsep=3pt"
+  tabularray_inner = "rowsep=2pt, colsep=3pt"
 ) %>% 
-theme_tt("resize", width = .9)
+theme_tt("resize", width = 1)
 save_table(tbl, "tab_appendix_consolidated")
 ```
-:::
+<!-- ::: -->
+
 ### Descriptive Statistics
 
 ```{r descriptives-actual-attitudes}
