@@ -36,6 +36,17 @@ I conducted a comprehensive review of the report.qmd file and fixed all critical
    - Replaced all conditional if-else p-value formatting with consistent `pformat()` function
    - Now all p-values use same format: "= 0.XXX" or "< .001"
 
+5. **Added demographics to data and report**
+   - Updated `src/r/clean_data.R` to preserve demographic variables (age, gender, race/ethnicity)
+   - Updated `src/r/create_analysis_data.R` to include demographics in analysis dataset
+   - Added demographics calculation chunk and reporting to Participants section
+   - Now reports: mean age, gender breakdown, racial/ethnic composition
+
+6. **Added example slogans to appendix** (lines 1468-1484)
+   - Added code to randomly sample 10 slogans from each group
+   - Displays Democrats marketing to Republicans and vice versa
+   - Uses set.seed(123) for reproducibility
+
 ### ⚠️ Remaining Issue
 
 **TODO comment on line 1074** - I left this for you to decide:

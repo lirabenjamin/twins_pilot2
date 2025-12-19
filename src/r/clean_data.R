@@ -170,6 +170,19 @@ clean_dat <- dat %>%
   # Create political extremism variable (distance from midpoint)
   mutate(
     political_extremism = abs(politicalorientation_1 - 50)
+  ) %>%
+
+  # Keep demographic variables
+  mutate(
+    age = as.numeric(age),
+    gender = gender,
+    race_white = race_1,
+    race_black = race_2,
+    race_latino = race_3,
+    race_asian = race_4,
+    race_native_american = race_6,
+    race_pacific_islander = race_7,
+    race_other = race_5
   )
 
 # Calculate actual outgroup attitudes for accuracy computation

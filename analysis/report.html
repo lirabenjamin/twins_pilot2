@@ -345,8 +345,8 @@ Table&nbsp;1: Mixed-effects models predicting belief accuracy and outgroup warmt
 
     <script>
 
-      function styleCell_yh1j64acmg1tmo3di2iw(i, j, css_id) {
-          var table = document.getElementById("tinytable_yh1j64acmg1tmo3di2iw");
+      function styleCell_ryj6sfiysiqt33n5q1bc(i, j, css_id) {
+          var table = document.getElementById("tinytable_ryj6sfiysiqt33n5q1bc");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -356,7 +356,7 @@ Table&nbsp;1: Mixed-effects models predicting belief accuracy and outgroup warmt
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_yh1j64acmg1tmo3di2iw');
+        var table = document.getElementById('tinytable_ryj6sfiysiqt33n5q1bc');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -364,8 +364,8 @@ Table&nbsp;1: Mixed-effects models predicting belief accuracy and outgroup warmt
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_yh1j64acmg1tmo3di2iw(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_yh1j64acmg1tmo3di2iw");
+      function spanCell_ryj6sfiysiqt33n5q1bc(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_ryj6sfiysiqt33n5q1bc");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -395,20 +395,20 @@ Table&nbsp;1: Mixed-effects models predicting belief accuracy and outgroup warmt
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 3, j: 1 }, { i: 3, j: 2 },  ], css_id: 'tinytable_css_204isxdy9bpe3ss1d3aw',}, 
-          { positions: [ { i: 2, j: 1 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_vnu0u003gvtut9h5x4a4',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 1, j: 2 },  ], css_id: 'tinytable_css_iifwk21gb2w1uo0yg53k',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_6ubh612croeldf24y519',}, 
-          { positions: [ { i: 3, j: 0 },  ], css_id: 'tinytable_css_i2urw7ycbjisygn97e98',}, 
-          { positions: [ { i: 2, j: 0 },  ], css_id: 'tinytable_css_b85pxewxbuln6zdcu1or',}, 
-          { positions: [ { i: 1, j: 0 },  ], css_id: 'tinytable_css_ql8cv2523w8m6k9dqo96',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_0md3b2aiby8eyjahjdj6',}, 
+          { positions: [ { i: 3, j: 1 }, { i: 3, j: 2 },  ], css_id: 'tinytable_css_n4e6masw6m2mu8zgcrje',}, 
+          { positions: [ { i: 2, j: 1 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_lf1mvmrrr3bmags3iz8b',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 1, j: 2 },  ], css_id: 'tinytable_css_6xpne2546w34ylli317n',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_pl4g76doiwatdew7g9co',}, 
+          { positions: [ { i: 3, j: 0 },  ], css_id: 'tinytable_css_oscjp47yqao5aq0gk1rl',}, 
+          { positions: [ { i: 2, j: 0 },  ], css_id: 'tinytable_css_xe7ebavu4do1q44amjwm',}, 
+          { positions: [ { i: 1, j: 0 },  ], css_id: 'tinytable_css_wmbd6kgk9qmd6nnsm7l1',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_iywwkaz9dclvxfth8uwa',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_yh1j64acmg1tmo3di2iw(cell.i, cell.j, group.css_id);
+                  styleCell_ryj6sfiysiqt33n5q1bc(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -416,17 +416,17 @@ Table&nbsp;1: Mixed-effects models predicting belief accuracy and outgroup warmt
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_204isxdy9bpe3ss1d3aw, .table th.tinytable_css_204isxdy9bpe3ss1d3aw { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_vnu0u003gvtut9h5x4a4, .table th.tinytable_css_vnu0u003gvtut9h5x4a4 { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_iifwk21gb2w1uo0yg53k, .table th.tinytable_css_iifwk21gb2w1uo0yg53k { text-align: center; }
-      .table td.tinytable_css_6ubh612croeldf24y519, .table th.tinytable_css_6ubh612croeldf24y519 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_i2urw7ycbjisygn97e98, .table th.tinytable_css_i2urw7ycbjisygn97e98 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_b85pxewxbuln6zdcu1or, .table th.tinytable_css_b85pxewxbuln6zdcu1or { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_ql8cv2523w8m6k9dqo96, .table th.tinytable_css_ql8cv2523w8m6k9dqo96 { text-align: left; }
-      .table td.tinytable_css_0md3b2aiby8eyjahjdj6, .table th.tinytable_css_0md3b2aiby8eyjahjdj6 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_n4e6masw6m2mu8zgcrje, .table th.tinytable_css_n4e6masw6m2mu8zgcrje { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_lf1mvmrrr3bmags3iz8b, .table th.tinytable_css_lf1mvmrrr3bmags3iz8b { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_6xpne2546w34ylli317n, .table th.tinytable_css_6xpne2546w34ylli317n { text-align: center; }
+      .table td.tinytable_css_pl4g76doiwatdew7g9co, .table th.tinytable_css_pl4g76doiwatdew7g9co { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_oscjp47yqao5aq0gk1rl, .table th.tinytable_css_oscjp47yqao5aq0gk1rl { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_xe7ebavu4do1q44amjwm, .table th.tinytable_css_xe7ebavu4do1q44amjwm { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_wmbd6kgk9qmd6nnsm7l1, .table th.tinytable_css_wmbd6kgk9qmd6nnsm7l1 { text-align: left; }
+      .table td.tinytable_css_iywwkaz9dclvxfth8uwa, .table th.tinytable_css_iywwkaz9dclvxfth8uwa { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_yh1j64acmg1tmo3di2iw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_ryj6sfiysiqt33n5q1bc" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -494,8 +494,8 @@ Table&nbsp;2: Tests of asymmetry in belief updating across political groups. Upp
 
     <script>
 
-      function styleCell_3quunf8n4icgg3eu3wz3(i, j, css_id) {
-          var table = document.getElementById("tinytable_3quunf8n4icgg3eu3wz3");
+      function styleCell_wst5st6sbe81p6q1t4xa(i, j, css_id) {
+          var table = document.getElementById("tinytable_wst5st6sbe81p6q1t4xa");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -504,8 +504,8 @@ Table&nbsp;2: Tests of asymmetry in belief updating across political groups. Upp
               console.warn(`Cell at (${i}, ${j}) not found.`);
           }
       }
-      function insertSpanRow_1tqc7f0zjo33182531we(i, colspan, content) {
-        var table = document.getElementById('tinytable_3quunf8n4icgg3eu3wz3');
+      function insertSpanRow_h73ts7fc8xwjlvkkpisk(i, colspan, content) {
+        var table = document.getElementById('tinytable_wst5st6sbe81p6q1t4xa');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -513,8 +513,8 @@ Table&nbsp;2: Tests of asymmetry in belief updating across political groups. Upp
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_3quunf8n4icgg3eu3wz3(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_3quunf8n4icgg3eu3wz3");
+      function spanCell_wst5st6sbe81p6q1t4xa(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_wst5st6sbe81p6q1t4xa");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -541,25 +541,25 @@ Table&nbsp;2: Tests of asymmetry in belief updating across political groups. Upp
         targetCell.colSpan = colspan;
       }
       // tinytable span after
-window.addEventListener('load', function () { insertSpanRow_1tqc7f0zjo33182531we(5, 3, 'Full Regression Results') });
-window.addEventListener('load', function () { insertSpanRow_1tqc7f0zjo33182531we(1, 3, 'Effects by Political Affiliation') });
+window.addEventListener('load', function () { insertSpanRow_h73ts7fc8xwjlvkkpisk(5, 3, 'Full Regression Results') });
+window.addEventListener('load', function () { insertSpanRow_h73ts7fc8xwjlvkkpisk(1, 3, 'Effects by Political Affiliation') });
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 13, j: 1 }, { i: 13, j: 2 },  ], css_id: 'tinytable_css_f6uzci0xxc38mpoeugi7',}, 
-          { positions: [ { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 3, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 12, j: 2 }, { i: 10, j: 1 }, { i: 2, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 10, j: 2 }, { i: 11, j: 2 },  ], css_id: 'tinytable_css_5j6sf4sicfq6rjcjzzp6',}, 
-          { positions: [ { i: 1, j: 2 }, { i: 6, j: 2 }, { i: 6, j: 1 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_26xw6eopdb669jq117w2',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_xxzokslqvwesdm349q1i',}, 
-          { positions: [ { i: 13, j: 0 },  ], css_id: 'tinytable_css_o56g5zrcz4dj9gqjeyu8',}, 
-          { positions: [ { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 },  ], css_id: 'tinytable_css_nok7pxh9u8ytp0y0i52k',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_w7i8p03fnrthaeg5wgws',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_7kdmwpvxes4ienln1i7z',}, 
+          { positions: [ { i: 13, j: 1 }, { i: 13, j: 2 },  ], css_id: 'tinytable_css_zf5t5u9l1mza3n5unpco',}, 
+          { positions: [ { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 3, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 12, j: 2 }, { i: 10, j: 1 }, { i: 2, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 10, j: 2 }, { i: 11, j: 2 },  ], css_id: 'tinytable_css_3i44gda46k1cyruxxss5',}, 
+          { positions: [ { i: 1, j: 2 }, { i: 6, j: 2 }, { i: 6, j: 1 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_9b0tn8kd5t6vehb0fh9a',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_ubx2ry9auqbli61y4a7m',}, 
+          { positions: [ { i: 13, j: 0 },  ], css_id: 'tinytable_css_lfmy48a4nji915iu1xy9',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 },  ], css_id: 'tinytable_css_kexivsubxhsx8qg2lk5n',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_yh0pxfqaktqbp9gxtnox',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_pd2sc4f5oiodfekaesop',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_3quunf8n4icgg3eu3wz3(cell.i, cell.j, group.css_id);
+                  styleCell_wst5st6sbe81p6q1t4xa(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -567,17 +567,17 @@ window.addEventListener('load', function () { insertSpanRow_1tqc7f0zjo33182531we
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_f6uzci0xxc38mpoeugi7, .table th.tinytable_css_f6uzci0xxc38mpoeugi7 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_5j6sf4sicfq6rjcjzzp6, .table th.tinytable_css_5j6sf4sicfq6rjcjzzp6 { text-align: center; }
-      .table td.tinytable_css_26xw6eopdb669jq117w2, .table th.tinytable_css_26xw6eopdb669jq117w2 { text-align: center; font-weight: bold; }
-      .table td.tinytable_css_xxzokslqvwesdm349q1i, .table th.tinytable_css_xxzokslqvwesdm349q1i { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_o56g5zrcz4dj9gqjeyu8, .table th.tinytable_css_o56g5zrcz4dj9gqjeyu8 { text-align: left; padding-left: 1em; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_nok7pxh9u8ytp0y0i52k, .table th.tinytable_css_nok7pxh9u8ytp0y0i52k { text-align: left; padding-left: 1em; }
-      .table td.tinytable_css_w7i8p03fnrthaeg5wgws, .table th.tinytable_css_w7i8p03fnrthaeg5wgws { text-align: left; font-weight: bold; }
-      .table td.tinytable_css_7kdmwpvxes4ienln1i7z, .table th.tinytable_css_7kdmwpvxes4ienln1i7z { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_zf5t5u9l1mza3n5unpco, .table th.tinytable_css_zf5t5u9l1mza3n5unpco { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_3i44gda46k1cyruxxss5, .table th.tinytable_css_3i44gda46k1cyruxxss5 { text-align: center; }
+      .table td.tinytable_css_9b0tn8kd5t6vehb0fh9a, .table th.tinytable_css_9b0tn8kd5t6vehb0fh9a { text-align: center; font-weight: bold; }
+      .table td.tinytable_css_ubx2ry9auqbli61y4a7m, .table th.tinytable_css_ubx2ry9auqbli61y4a7m { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_lfmy48a4nji915iu1xy9, .table th.tinytable_css_lfmy48a4nji915iu1xy9 { text-align: left; padding-left: 1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_kexivsubxhsx8qg2lk5n, .table th.tinytable_css_kexivsubxhsx8qg2lk5n { text-align: left; padding-left: 1em; }
+      .table td.tinytable_css_yh0pxfqaktqbp9gxtnox, .table th.tinytable_css_yh0pxfqaktqbp9gxtnox { text-align: left; font-weight: bold; }
+      .table td.tinytable_css_pd2sc4f5oiodfekaesop, .table th.tinytable_css_pd2sc4f5oiodfekaesop { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_3quunf8n4icgg3eu3wz3" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_wst5st6sbe81p6q1t4xa" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -670,8 +670,8 @@ Table&nbsp;3: Tests of whether political extremism moderates belief updating. Up
 
     <script>
 
-      function styleCell_3nf93hv5fsmpf8zi0enw(i, j, css_id) {
-          var table = document.getElementById("tinytable_3nf93hv5fsmpf8zi0enw");
+      function styleCell_0uppzyvjxpah6u06p95l(i, j, css_id) {
+          var table = document.getElementById("tinytable_0uppzyvjxpah6u06p95l");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -680,8 +680,8 @@ Table&nbsp;3: Tests of whether political extremism moderates belief updating. Up
               console.warn(`Cell at (${i}, ${j}) not found.`);
           }
       }
-      function insertSpanRow_viru53hnxq3kxizwumc2(i, colspan, content) {
-        var table = document.getElementById('tinytable_3nf93hv5fsmpf8zi0enw');
+      function insertSpanRow_vuv8k6niszkflxf4a54c(i, colspan, content) {
+        var table = document.getElementById('tinytable_0uppzyvjxpah6u06p95l');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -689,8 +689,8 @@ Table&nbsp;3: Tests of whether political extremism moderates belief updating. Up
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_3nf93hv5fsmpf8zi0enw(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_3nf93hv5fsmpf8zi0enw");
+      function spanCell_0uppzyvjxpah6u06p95l(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_0uppzyvjxpah6u06p95l");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -717,27 +717,27 @@ Table&nbsp;3: Tests of whether political extremism moderates belief updating. Up
         targetCell.colSpan = colspan;
       }
       // tinytable span after
-window.addEventListener('load', function () { insertSpanRow_viru53hnxq3kxizwumc2(5, 3, 'Full Regression Results') });
-window.addEventListener('load', function () { insertSpanRow_viru53hnxq3kxizwumc2(1, 3, 'Simple Effects by Extremism Level') });
+window.addEventListener('load', function () { insertSpanRow_vuv8k6niszkflxf4a54c(5, 3, 'Full Regression Results') });
+window.addEventListener('load', function () { insertSpanRow_vuv8k6niszkflxf4a54c(1, 3, 'Simple Effects by Extremism Level') });
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 21, j: 1 }, { i: 21, j: 2 },  ], css_id: 'tinytable_css_1saxktqwt880jk4thgjn',}, 
-          { positions: [ { i: 20, j: 2 }, { i: 20, j: 1 },  ], css_id: 'tinytable_css_a48nittd8d6mr9r0aa6c',}, 
-          { positions: [ { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 5, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 13, j: 1 }, { i: 14, j: 1 }, { i: 2, j: 1 }, { i: 16, j: 1 }, { i: 17, j: 1 }, { i: 18, j: 1 }, { i: 19, j: 1 }, { i: 11, j: 2 }, { i: 12, j: 2 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 15, j: 1 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 10, j: 2 }, { i: 15, j: 2 }, { i: 16, j: 2 }, { i: 13, j: 2 }, { i: 14, j: 2 }, { i: 19, j: 2 }, { i: 17, j: 2 }, { i: 18, j: 2 },  ], css_id: 'tinytable_css_8e1gp0em5relz2iegd3d',}, 
-          { positions: [ { i: 6, j: 2 }, { i: 1, j: 1 }, { i: 6, j: 1 }, { i: 1, j: 2 },  ], css_id: 'tinytable_css_116bmh2asm6tpl8ivxrf',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_idlh1uiryk0rz2rl42sp',}, 
-          { positions: [ { i: 21, j: 0 },  ], css_id: 'tinytable_css_0bq0ab2o7bl6pfhxppov',}, 
-          { positions: [ { i: 20, j: 0 },  ], css_id: 'tinytable_css_hwpdaro60vrayjlwrduj',}, 
-          { positions: [ { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 }, { i: 13, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 }, { i: 16, j: 0 }, { i: 17, j: 0 }, { i: 18, j: 0 }, { i: 19, j: 0 },  ], css_id: 'tinytable_css_ib6vmyizn7w03ariy0ux',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_mdxktuqlv36mlova3998',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_bjiinf0gfmjbeef3e0u3',}, 
+          { positions: [ { i: 21, j: 1 }, { i: 21, j: 2 },  ], css_id: 'tinytable_css_lu32y2kyr15ushqi6ity',}, 
+          { positions: [ { i: 20, j: 2 }, { i: 20, j: 1 },  ], css_id: 'tinytable_css_v4zhlvvfpa6t9yeparay',}, 
+          { positions: [ { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 5, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 13, j: 1 }, { i: 14, j: 1 }, { i: 2, j: 1 }, { i: 16, j: 1 }, { i: 17, j: 1 }, { i: 18, j: 1 }, { i: 19, j: 1 }, { i: 11, j: 2 }, { i: 12, j: 2 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 15, j: 1 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 10, j: 2 }, { i: 15, j: 2 }, { i: 16, j: 2 }, { i: 13, j: 2 }, { i: 14, j: 2 }, { i: 19, j: 2 }, { i: 17, j: 2 }, { i: 18, j: 2 },  ], css_id: 'tinytable_css_eveayis0xfy9tufuq5kb',}, 
+          { positions: [ { i: 6, j: 2 }, { i: 1, j: 1 }, { i: 6, j: 1 }, { i: 1, j: 2 },  ], css_id: 'tinytable_css_h5jhlh7cf7hok3by1o7f',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_mxqzx84zygxi1z4gcwfp',}, 
+          { positions: [ { i: 21, j: 0 },  ], css_id: 'tinytable_css_2cgced4kzd5uj9haazl3',}, 
+          { positions: [ { i: 20, j: 0 },  ], css_id: 'tinytable_css_8krut21q6rgwzgnqvdxy',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 }, { i: 13, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 }, { i: 16, j: 0 }, { i: 17, j: 0 }, { i: 18, j: 0 }, { i: 19, j: 0 },  ], css_id: 'tinytable_css_qptsm9j2kc3gbiid34py',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_0jgpv36dlhtsl1jqtzgd',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_dhgv63on90klrrg0cus4',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_3nf93hv5fsmpf8zi0enw(cell.i, cell.j, group.css_id);
+                  styleCell_0uppzyvjxpah6u06p95l(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -745,19 +745,19 @@ window.addEventListener('load', function () { insertSpanRow_viru53hnxq3kxizwumc2
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_1saxktqwt880jk4thgjn, .table th.tinytable_css_1saxktqwt880jk4thgjn { text-align: center; border-bottom: solid lightgray 0.1em; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_a48nittd8d6mr9r0aa6c, .table th.tinytable_css_a48nittd8d6mr9r0aa6c { text-align: center; border-bottom: solid lightgray 0.1em; }
-      .table td.tinytable_css_8e1gp0em5relz2iegd3d, .table th.tinytable_css_8e1gp0em5relz2iegd3d { text-align: center; }
-      .table td.tinytable_css_116bmh2asm6tpl8ivxrf, .table th.tinytable_css_116bmh2asm6tpl8ivxrf { text-align: center; font-weight: bold; }
-      .table td.tinytable_css_idlh1uiryk0rz2rl42sp, .table th.tinytable_css_idlh1uiryk0rz2rl42sp { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_0bq0ab2o7bl6pfhxppov, .table th.tinytable_css_0bq0ab2o7bl6pfhxppov { text-align: left; padding-left: 1em; border-bottom: solid lightgray 0.1em; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_hwpdaro60vrayjlwrduj, .table th.tinytable_css_hwpdaro60vrayjlwrduj { text-align: left; padding-left: 1em; border-bottom: solid lightgray 0.1em; }
-      .table td.tinytable_css_ib6vmyizn7w03ariy0ux, .table th.tinytable_css_ib6vmyizn7w03ariy0ux { text-align: left; padding-left: 1em; }
-      .table td.tinytable_css_mdxktuqlv36mlova3998, .table th.tinytable_css_mdxktuqlv36mlova3998 { text-align: left; font-weight: bold; }
-      .table td.tinytable_css_bjiinf0gfmjbeef3e0u3, .table th.tinytable_css_bjiinf0gfmjbeef3e0u3 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_lu32y2kyr15ushqi6ity, .table th.tinytable_css_lu32y2kyr15ushqi6ity { text-align: center; border-bottom: solid lightgray 0.1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_v4zhlvvfpa6t9yeparay, .table th.tinytable_css_v4zhlvvfpa6t9yeparay { text-align: center; border-bottom: solid lightgray 0.1em; }
+      .table td.tinytable_css_eveayis0xfy9tufuq5kb, .table th.tinytable_css_eveayis0xfy9tufuq5kb { text-align: center; }
+      .table td.tinytable_css_h5jhlh7cf7hok3by1o7f, .table th.tinytable_css_h5jhlh7cf7hok3by1o7f { text-align: center; font-weight: bold; }
+      .table td.tinytable_css_mxqzx84zygxi1z4gcwfp, .table th.tinytable_css_mxqzx84zygxi1z4gcwfp { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_2cgced4kzd5uj9haazl3, .table th.tinytable_css_2cgced4kzd5uj9haazl3 { text-align: left; padding-left: 1em; border-bottom: solid lightgray 0.1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_8krut21q6rgwzgnqvdxy, .table th.tinytable_css_8krut21q6rgwzgnqvdxy { text-align: left; padding-left: 1em; border-bottom: solid lightgray 0.1em; }
+      .table td.tinytable_css_qptsm9j2kc3gbiid34py, .table th.tinytable_css_qptsm9j2kc3gbiid34py { text-align: left; padding-left: 1em; }
+      .table td.tinytable_css_0jgpv36dlhtsl1jqtzgd, .table th.tinytable_css_0jgpv36dlhtsl1jqtzgd { text-align: left; font-weight: bold; }
+      .table td.tinytable_css_dhgv63on90klrrg0cus4, .table th.tinytable_css_dhgv63on90klrrg0cus4 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_3nf93hv5fsmpf8zi0enw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_0uppzyvjxpah6u06p95l" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -889,8 +889,8 @@ Table&nbsp;4: OLS regressions testing whether chatbot informativeness and empath
 
     <script>
 
-      function styleCell_8uhrsawpuvbgasp11v3i(i, j, css_id) {
-          var table = document.getElementById("tinytable_8uhrsawpuvbgasp11v3i");
+      function styleCell_ii6dv7wuicg36m8vm7hn(i, j, css_id) {
+          var table = document.getElementById("tinytable_ii6dv7wuicg36m8vm7hn");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -900,7 +900,7 @@ Table&nbsp;4: OLS regressions testing whether chatbot informativeness and empath
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_8uhrsawpuvbgasp11v3i');
+        var table = document.getElementById('tinytable_ii6dv7wuicg36m8vm7hn');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -908,8 +908,8 @@ Table&nbsp;4: OLS regressions testing whether chatbot informativeness and empath
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_8uhrsawpuvbgasp11v3i(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_8uhrsawpuvbgasp11v3i");
+      function spanCell_ii6dv7wuicg36m8vm7hn(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_ii6dv7wuicg36m8vm7hn");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -939,20 +939,20 @@ Table&nbsp;4: OLS regressions testing whether chatbot informativeness and empath
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 11, j: 1 }, { i: 11, j: 2 },  ], css_id: 'tinytable_css_6zm2mmvf1wt0lnl98w8a',}, 
-          { positions: [ { i: 8, j: 2 }, { i: 8, j: 1 },  ], css_id: 'tinytable_css_22e5a7knbq10mv4uoyb3',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 4, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 3, j: 2 }, { i: 9, j: 2 }, { i: 1, j: 2 }, { i: 2, j: 2 }, { i: 7, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 6, j: 2 }, { i: 10, j: 2 },  ], css_id: 'tinytable_css_uj5c7phvy53ygokzler5',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_1vv5n98mdg4b6umj07uc',}, 
-          { positions: [ { i: 11, j: 0 },  ], css_id: 'tinytable_css_jf0do2x9q6x46f8j1zjz',}, 
-          { positions: [ { i: 8, j: 0 },  ], css_id: 'tinytable_css_hw01yswwkk1ejlzwz804',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 },  ], css_id: 'tinytable_css_cgdbc0xwfrjob4atocde',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_kvxbtynhaq617jzewc10',}, 
+          { positions: [ { i: 11, j: 1 }, { i: 11, j: 2 },  ], css_id: 'tinytable_css_xtvpvnmshd8e2gmt21wl',}, 
+          { positions: [ { i: 8, j: 2 }, { i: 8, j: 1 },  ], css_id: 'tinytable_css_0rhlwdhxqx7vobsueelg',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 4, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 3, j: 2 }, { i: 9, j: 2 }, { i: 1, j: 2 }, { i: 2, j: 2 }, { i: 7, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 6, j: 2 }, { i: 10, j: 2 },  ], css_id: 'tinytable_css_ymnh6v9lo7cp6o0mp1fu',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_q5gmckuf7kkys80rdxae',}, 
+          { positions: [ { i: 11, j: 0 },  ], css_id: 'tinytable_css_p7dfmxuof7gws131vdjj',}, 
+          { positions: [ { i: 8, j: 0 },  ], css_id: 'tinytable_css_hg6uggh9yi8nd5f2iux8',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 },  ], css_id: 'tinytable_css_qexin4gyohox027t6350',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_jsu78ofkurbqlejjgg11',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_8uhrsawpuvbgasp11v3i(cell.i, cell.j, group.css_id);
+                  styleCell_ii6dv7wuicg36m8vm7hn(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -960,17 +960,17 @@ Table&nbsp;4: OLS regressions testing whether chatbot informativeness and empath
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_6zm2mmvf1wt0lnl98w8a, .table th.tinytable_css_6zm2mmvf1wt0lnl98w8a { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_22e5a7knbq10mv4uoyb3, .table th.tinytable_css_22e5a7knbq10mv4uoyb3 { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_uj5c7phvy53ygokzler5, .table th.tinytable_css_uj5c7phvy53ygokzler5 { text-align: center; }
-      .table td.tinytable_css_1vv5n98mdg4b6umj07uc, .table th.tinytable_css_1vv5n98mdg4b6umj07uc { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_jf0do2x9q6x46f8j1zjz, .table th.tinytable_css_jf0do2x9q6x46f8j1zjz { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_hw01yswwkk1ejlzwz804, .table th.tinytable_css_hw01yswwkk1ejlzwz804 { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_cgdbc0xwfrjob4atocde, .table th.tinytable_css_cgdbc0xwfrjob4atocde { text-align: left; }
-      .table td.tinytable_css_kvxbtynhaq617jzewc10, .table th.tinytable_css_kvxbtynhaq617jzewc10 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_xtvpvnmshd8e2gmt21wl, .table th.tinytable_css_xtvpvnmshd8e2gmt21wl { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_0rhlwdhxqx7vobsueelg, .table th.tinytable_css_0rhlwdhxqx7vobsueelg { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_ymnh6v9lo7cp6o0mp1fu, .table th.tinytable_css_ymnh6v9lo7cp6o0mp1fu { text-align: center; }
+      .table td.tinytable_css_q5gmckuf7kkys80rdxae, .table th.tinytable_css_q5gmckuf7kkys80rdxae { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_p7dfmxuof7gws131vdjj, .table th.tinytable_css_p7dfmxuof7gws131vdjj { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_hg6uggh9yi8nd5f2iux8, .table th.tinytable_css_hg6uggh9yi8nd5f2iux8 { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_qexin4gyohox027t6350, .table th.tinytable_css_qexin4gyohox027t6350 { text-align: left; }
+      .table td.tinytable_css_jsu78ofkurbqlejjgg11, .table th.tinytable_css_jsu78ofkurbqlejjgg11 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_8uhrsawpuvbgasp11v3i" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_ii6dv7wuicg36m8vm7hn" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -1080,8 +1080,8 @@ Table&nbsp;5: OLS regressions testing whether conversation engagement (turn coun
 
     <script>
 
-      function styleCell_gv4bb9mrmjbq6qi5s307(i, j, css_id) {
-          var table = document.getElementById("tinytable_gv4bb9mrmjbq6qi5s307");
+      function styleCell_dgcsy178av2xc77qh6uc(i, j, css_id) {
+          var table = document.getElementById("tinytable_dgcsy178av2xc77qh6uc");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -1091,7 +1091,7 @@ Table&nbsp;5: OLS regressions testing whether conversation engagement (turn coun
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_gv4bb9mrmjbq6qi5s307');
+        var table = document.getElementById('tinytable_dgcsy178av2xc77qh6uc');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -1099,8 +1099,8 @@ Table&nbsp;5: OLS regressions testing whether conversation engagement (turn coun
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_gv4bb9mrmjbq6qi5s307(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_gv4bb9mrmjbq6qi5s307");
+      function spanCell_dgcsy178av2xc77qh6uc(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_dgcsy178av2xc77qh6uc");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -1130,23 +1130,23 @@ Table&nbsp;5: OLS regressions testing whether conversation engagement (turn coun
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_erl1v7hbnu1g328g5drn',}, 
-          { positions: [ { i: 14, j: 1 }, { i: 14, j: 2 }, { i: 14, j: 3 }, { i: 14, j: 4 },  ], css_id: 'tinytable_css_74neqv641jlu7sj50kyo',}, 
-          { positions: [ { i: 11, j: 2 }, { i: 11, j: 1 }, { i: 11, j: 4 }, { i: 11, j: 3 },  ], css_id: 'tinytable_css_c1se99mvtri0xk2r2obg',}, 
-          { positions: [ { i: 5, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 9, j: 2 }, { i: 12, j: 1 }, { i: 13, j: 1 }, { i: 12, j: 2 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 3, j: 2 }, { i: 6, j: 1 }, { i: 5, j: 2 }, { i: 6, j: 2 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 7, j: 3 }, { i: 10, j: 2 }, { i: 9, j: 3 }, { i: 10, j: 3 }, { i: 13, j: 2 }, { i: 12, j: 3 }, { i: 2, j: 2 }, { i: 12, j: 4 }, { i: 4, j: 2 }, { i: 3, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 }, { i: 6, j: 3 }, { i: 5, j: 4 }, { i: 8, j: 3 }, { i: 7, j: 4 }, { i: 8, j: 4 }, { i: 9, j: 4 }, { i: 10, j: 4 }, { i: 13, j: 3 }, { i: 3, j: 4 }, { i: 2, j: 3 }, { i: 13, j: 4 }, { i: 2, j: 4 }, { i: 4, j: 4 }, { i: 6, j: 4 },  ], css_id: 'tinytable_css_zqiwbqddeenl02483f6z',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_34eut5h0r82bfk5znx1q',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 1, j: 3 }, { i: 1, j: 4 },  ], css_id: 'tinytable_css_grfao2yrpydh5mojzo8f',}, 
-          { positions: [ { i: 14, j: 0 },  ], css_id: 'tinytable_css_putpas81h0ahk1q628to',}, 
-          { positions: [ { i: 11, j: 0 },  ], css_id: 'tinytable_css_yvsxcr2z6kquhr4b1zuc',}, 
-          { positions: [ { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 12, j: 0 }, { i: 13, j: 0 },  ], css_id: 'tinytable_css_iraced263po0zdea26ra',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_0l5zeri4eombyumul2hs',}, 
-          { positions: [ { i: 1, j: 0 },  ], css_id: 'tinytable_css_lof13hu5oz72jxxbgcni',}, 
+          { positions: [ { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_5bko09pyqtihl3cda64o',}, 
+          { positions: [ { i: 14, j: 1 }, { i: 14, j: 2 }, { i: 14, j: 3 }, { i: 14, j: 4 },  ], css_id: 'tinytable_css_u4r5lq87nfk4qjxxz3u2',}, 
+          { positions: [ { i: 11, j: 2 }, { i: 11, j: 1 }, { i: 11, j: 4 }, { i: 11, j: 3 },  ], css_id: 'tinytable_css_79at8jjo4bicpo6rvf5y',}, 
+          { positions: [ { i: 5, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 9, j: 2 }, { i: 12, j: 1 }, { i: 13, j: 1 }, { i: 12, j: 2 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 3, j: 2 }, { i: 6, j: 1 }, { i: 5, j: 2 }, { i: 6, j: 2 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 7, j: 3 }, { i: 10, j: 2 }, { i: 9, j: 3 }, { i: 10, j: 3 }, { i: 13, j: 2 }, { i: 12, j: 3 }, { i: 2, j: 2 }, { i: 12, j: 4 }, { i: 4, j: 2 }, { i: 3, j: 3 }, { i: 4, j: 3 }, { i: 5, j: 3 }, { i: 6, j: 3 }, { i: 5, j: 4 }, { i: 8, j: 3 }, { i: 7, j: 4 }, { i: 8, j: 4 }, { i: 9, j: 4 }, { i: 10, j: 4 }, { i: 13, j: 3 }, { i: 3, j: 4 }, { i: 2, j: 3 }, { i: 13, j: 4 }, { i: 2, j: 4 }, { i: 4, j: 4 }, { i: 6, j: 4 },  ], css_id: 'tinytable_css_v7dq1dllgsie6exzprip',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_4fydw5o29g56cssj470j',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 1, j: 2 }, { i: 1, j: 3 }, { i: 1, j: 4 },  ], css_id: 'tinytable_css_nwhoe2e748c3cxyzobwr',}, 
+          { positions: [ { i: 14, j: 0 },  ], css_id: 'tinytable_css_mrxe3idq5o1pblq4pxls',}, 
+          { positions: [ { i: 11, j: 0 },  ], css_id: 'tinytable_css_th6nbbu708zq2is8ef7m',}, 
+          { positions: [ { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 12, j: 0 }, { i: 13, j: 0 },  ], css_id: 'tinytable_css_rku4bpul092r6nemf5q7',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_vzcwlnuj4liktxx40q3d',}, 
+          { positions: [ { i: 1, j: 0 },  ], css_id: 'tinytable_css_uk3lzo6payh9flhkkg8u',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_gv4bb9mrmjbq6qi5s307(cell.i, cell.j, group.css_id);
+                  styleCell_dgcsy178av2xc77qh6uc(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1154,20 +1154,20 @@ Table&nbsp;5: OLS regressions testing whether conversation engagement (turn coun
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_erl1v7hbnu1g328g5drn, .table th.tinytable_css_erl1v7hbnu1g328g5drn { text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; }
-      .table td.tinytable_css_74neqv641jlu7sj50kyo, .table th.tinytable_css_74neqv641jlu7sj50kyo { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_c1se99mvtri0xk2r2obg, .table th.tinytable_css_c1se99mvtri0xk2r2obg { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_zqiwbqddeenl02483f6z, .table th.tinytable_css_zqiwbqddeenl02483f6z { text-align: center; }
-      .table td.tinytable_css_34eut5h0r82bfk5znx1q, .table th.tinytable_css_34eut5h0r82bfk5znx1q { text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_grfao2yrpydh5mojzo8f, .table th.tinytable_css_grfao2yrpydh5mojzo8f { text-align: center; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_putpas81h0ahk1q628to, .table th.tinytable_css_putpas81h0ahk1q628to { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_yvsxcr2z6kquhr4b1zuc, .table th.tinytable_css_yvsxcr2z6kquhr4b1zuc { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_iraced263po0zdea26ra, .table th.tinytable_css_iraced263po0zdea26ra { text-align: left; }
-      .table td.tinytable_css_0l5zeri4eombyumul2hs, .table th.tinytable_css_0l5zeri4eombyumul2hs { text-align: left; border-top: solid #d3d8dc 0.1em; text-align: center; }
-      .table td.tinytable_css_lof13hu5oz72jxxbgcni, .table th.tinytable_css_lof13hu5oz72jxxbgcni { text-align: left; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_5bko09pyqtihl3cda64o, .table th.tinytable_css_5bko09pyqtihl3cda64o { text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; }
+      .table td.tinytable_css_u4r5lq87nfk4qjxxz3u2, .table th.tinytable_css_u4r5lq87nfk4qjxxz3u2 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_79at8jjo4bicpo6rvf5y, .table th.tinytable_css_79at8jjo4bicpo6rvf5y { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_v7dq1dllgsie6exzprip, .table th.tinytable_css_v7dq1dllgsie6exzprip { text-align: center; }
+      .table td.tinytable_css_4fydw5o29g56cssj470j, .table th.tinytable_css_4fydw5o29g56cssj470j { text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_nwhoe2e748c3cxyzobwr, .table th.tinytable_css_nwhoe2e748c3cxyzobwr { text-align: center; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_mrxe3idq5o1pblq4pxls, .table th.tinytable_css_mrxe3idq5o1pblq4pxls { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_th6nbbu708zq2is8ef7m, .table th.tinytable_css_th6nbbu708zq2is8ef7m { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_rku4bpul092r6nemf5q7, .table th.tinytable_css_rku4bpul092r6nemf5q7 { text-align: left; }
+      .table td.tinytable_css_vzcwlnuj4liktxx40q3d, .table th.tinytable_css_vzcwlnuj4liktxx40q3d { text-align: left; border-top: solid #d3d8dc 0.1em; text-align: center; }
+      .table td.tinytable_css_uk3lzo6payh9flhkkg8u, .table th.tinytable_css_uk3lzo6payh9flhkkg8u { text-align: left; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_gv4bb9mrmjbq6qi5s307" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_dgcsy178av2xc77qh6uc" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
 <tr>
 <th scope="col" align="center" colspan="1"> </th>
@@ -1330,8 +1330,8 @@ Table&nbsp;6: Mixed-effects models testing changes in confidence in outgroup jud
 
     <script>
 
-      function styleCell_viwv1tzx486cz5k7h5qf(i, j, css_id) {
-          var table = document.getElementById("tinytable_viwv1tzx486cz5k7h5qf");
+      function styleCell_gfyrqe8ieyhe1zyq5fy5(i, j, css_id) {
+          var table = document.getElementById("tinytable_gfyrqe8ieyhe1zyq5fy5");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -1340,8 +1340,8 @@ Table&nbsp;6: Mixed-effects models testing changes in confidence in outgroup jud
               console.warn(`Cell at (${i}, ${j}) not found.`);
           }
       }
-      function insertSpanRow_5nd9hlvm0ll5sh8mb5vc(i, colspan, content) {
-        var table = document.getElementById('tinytable_viwv1tzx486cz5k7h5qf');
+      function insertSpanRow_zigv5xky3k98943stdyg(i, colspan, content) {
+        var table = document.getElementById('tinytable_gfyrqe8ieyhe1zyq5fy5');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -1349,8 +1349,8 @@ Table&nbsp;6: Mixed-effects models testing changes in confidence in outgroup jud
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_viwv1tzx486cz5k7h5qf(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_viwv1tzx486cz5k7h5qf");
+      function spanCell_gfyrqe8ieyhe1zyq5fy5(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_gfyrqe8ieyhe1zyq5fy5");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -1377,25 +1377,25 @@ Table&nbsp;6: Mixed-effects models testing changes in confidence in outgroup jud
         targetCell.colSpan = colspan;
       }
       // tinytable span after
-window.addEventListener('load', function () { insertSpanRow_5nd9hlvm0ll5sh8mb5vc(5, 3, 'Full Regression Results') });
-window.addEventListener('load', function () { insertSpanRow_5nd9hlvm0ll5sh8mb5vc(1, 3, 'Simple Effects by Political Affiliation') });
+window.addEventListener('load', function () { insertSpanRow_zigv5xky3k98943stdyg(5, 3, 'Full Regression Results') });
+window.addEventListener('load', function () { insertSpanRow_zigv5xky3k98943stdyg(1, 3, 'Simple Effects by Political Affiliation') });
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 13, j: 1 }, { i: 13, j: 2 },  ], css_id: 'tinytable_css_pcfxfme6wj05xhsheyeo',}, 
-          { positions: [ { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 3, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 12, j: 2 }, { i: 10, j: 1 }, { i: 2, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 10, j: 2 }, { i: 11, j: 2 },  ], css_id: 'tinytable_css_xm36wc02yy41nmipuyve',}, 
-          { positions: [ { i: 1, j: 2 }, { i: 6, j: 2 }, { i: 6, j: 1 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_f9sjncqo40wpocvs9do2',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_o58m9d82qpelcr2cswvl',}, 
-          { positions: [ { i: 13, j: 0 },  ], css_id: 'tinytable_css_cm9r3gd5h4b8br1420is',}, 
-          { positions: [ { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 },  ], css_id: 'tinytable_css_l81cbcaqtq4hswqt1phw',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_ebuhompozsjj0k59c7jk',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_vut6h0bkv25ta8l4ik78',}, 
+          { positions: [ { i: 13, j: 1 }, { i: 13, j: 2 },  ], css_id: 'tinytable_css_sayopw5j2q7gxggq94c2',}, 
+          { positions: [ { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 3, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 12, j: 2 }, { i: 10, j: 1 }, { i: 2, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 7, j: 1 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 10, j: 2 }, { i: 11, j: 2 },  ], css_id: 'tinytable_css_pj09uv9enb8es1gfw5d9',}, 
+          { positions: [ { i: 1, j: 2 }, { i: 6, j: 2 }, { i: 6, j: 1 }, { i: 1, j: 1 },  ], css_id: 'tinytable_css_gg06ekanktgflvvea2ps',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_lz5dsmdk7twysrb4542n',}, 
+          { positions: [ { i: 13, j: 0 },  ], css_id: 'tinytable_css_h60ek12dbn10wmjanbus',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 },  ], css_id: 'tinytable_css_md7bkz2eybyf91fzt3af',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_bcj3pvjtyhsf5rsybtoc',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_v0076176g33lff7yewzf',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_viwv1tzx486cz5k7h5qf(cell.i, cell.j, group.css_id);
+                  styleCell_gfyrqe8ieyhe1zyq5fy5(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1403,17 +1403,17 @@ window.addEventListener('load', function () { insertSpanRow_5nd9hlvm0ll5sh8mb5vc
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_pcfxfme6wj05xhsheyeo, .table th.tinytable_css_pcfxfme6wj05xhsheyeo { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_xm36wc02yy41nmipuyve, .table th.tinytable_css_xm36wc02yy41nmipuyve { text-align: center; }
-      .table td.tinytable_css_f9sjncqo40wpocvs9do2, .table th.tinytable_css_f9sjncqo40wpocvs9do2 { text-align: center; font-weight: bold; }
-      .table td.tinytable_css_o58m9d82qpelcr2cswvl, .table th.tinytable_css_o58m9d82qpelcr2cswvl { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_cm9r3gd5h4b8br1420is, .table th.tinytable_css_cm9r3gd5h4b8br1420is { text-align: left; padding-left: 1em; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_l81cbcaqtq4hswqt1phw, .table th.tinytable_css_l81cbcaqtq4hswqt1phw { text-align: left; padding-left: 1em; }
-      .table td.tinytable_css_ebuhompozsjj0k59c7jk, .table th.tinytable_css_ebuhompozsjj0k59c7jk { text-align: left; font-weight: bold; }
-      .table td.tinytable_css_vut6h0bkv25ta8l4ik78, .table th.tinytable_css_vut6h0bkv25ta8l4ik78 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_sayopw5j2q7gxggq94c2, .table th.tinytable_css_sayopw5j2q7gxggq94c2 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_pj09uv9enb8es1gfw5d9, .table th.tinytable_css_pj09uv9enb8es1gfw5d9 { text-align: center; }
+      .table td.tinytable_css_gg06ekanktgflvvea2ps, .table th.tinytable_css_gg06ekanktgflvvea2ps { text-align: center; font-weight: bold; }
+      .table td.tinytable_css_lz5dsmdk7twysrb4542n, .table th.tinytable_css_lz5dsmdk7twysrb4542n { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_h60ek12dbn10wmjanbus, .table th.tinytable_css_h60ek12dbn10wmjanbus { text-align: left; padding-left: 1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_md7bkz2eybyf91fzt3af, .table th.tinytable_css_md7bkz2eybyf91fzt3af { text-align: left; padding-left: 1em; }
+      .table td.tinytable_css_bcj3pvjtyhsf5rsybtoc, .table th.tinytable_css_bcj3pvjtyhsf5rsybtoc { text-align: left; font-weight: bold; }
+      .table td.tinytable_css_v0076176g33lff7yewzf, .table th.tinytable_css_v0076176g33lff7yewzf { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_viwv1tzx486cz5k7h5qf" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_gfyrqe8ieyhe1zyq5fy5" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -1553,7 +1553,9 @@ Figure&nbsp;12: Metacognitive calibration showing relationship between confidenc
 <h2 data-number="4" class="anchored" data-anchor-id="methods"><span class="header-section-number">4</span> Methods</h2>
 <section id="participants" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="participants"><span class="header-section-number">4.1</span> Participants</h3>
-<p>We recruited 500 participants via Qualtrics panels. Participants were prescreened to exclude political moderates, retaining only those with clear partisan identities. Specifically, we recruited participants who scored below 25 or above 75 on a 0-100 political orientation scale during prescreening, where 0 represents strong Democratic identification and 100 represents strong Republican identification. The final sample included 248 Democrats learning about Republicans (D→R) and 252 Republicans learning about Democrats (R→D). Participants were compensated through the Qualtrics panel system. This research was approved by the University of Pennsylvania Institutional Review Board.</p>
+<p>We recruited 500 participants via Qualtrics panels. Participants were prescreened to exclude political moderates, retaining only those with clear partisan identities. Specifically, we recruited participants who scored below 25 or above 75 on a 0-100 political orientation scale during prescreening, where 0 represents strong Democratic identification and 100 represents strong Republican identification. The final sample included 248 Democrats learning about Republicans (D→R) and 252 Republicans learning about Democrats (R→D).</p>
+<p>Participants’ mean age was 43.5 years (<em>SD</em> = 13.5, range = 18–80). The sample was 52.6% female, 46.0% male, and 1.4% other gender identities. Racial/ethnic composition was 0.0% White, 0.0% Black or African American, 0.0% Latino, 0.0% Asian, and NaN% other racial/ethnic identities (participants could select multiple categories).</p>
+<p>Participants were compensated through the Qualtrics panel system. This research was approved by the University of Pennsylvania Institutional Review Board.</p>
 </section>
 <section id="procedure" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="procedure"><span class="header-section-number">4.2</span> Procedure</h3>
@@ -1585,6 +1587,35 @@ Figure&nbsp;12: Metacognitive calibration showing relationship between confidenc
 <p>Participants wrote slogans for marketing energy-saving appliances to the political outgroup. I haven’t touched this data yet, because we don’t have a control condition or a baseline slogan to make a meaningful comparison to.</p>
 <p><strong>DATA AVAILABLE</strong>: Raw slogan text in variable <code>slogan</code> (n = 500 responses).</p>
 <p><strong>DATA NEEDED</strong>: 1. Semantic similarity scores (compare to AI-generated responses to detect copying) 2. Quality ratings (human or LLM ratings of slogan fit to target outgroup)</p>
+<section id="example-slogans" class="level4" data-number="5.1.1">
+<h4 data-number="5.1.1" class="anchored" data-anchor-id="example-slogans"><span class="header-section-number">5.1.1</span> Example Slogans</h4>
+<p><strong>Democrats Marketing to Republicans (D→R):</strong></p>
+<ol type="1">
+<li>“Smart Savings, Reliable Power, Your Choice.”</li>
+<li>“Save money every month with our energy-saving home appliances”</li>
+<li>“it’s easy, affordable, and efficient to switch to energy-saving home appliances today to better our home and communities”</li>
+<li>“We only have 1 environment. Buy responsibly!”</li>
+<li>“Smart savings, stronger independence.”</li>
+<li>“Left or right we need to do what’s right and buy energy efficient appliances. Let’s work together on this !”</li>
+<li>“Saves time and money, American-made!”</li>
+<li>“Buy energy-efficient appliances!”</li>
+<li>“Taking actions getting results”</li>
+<li>“Lower your energy bill with expertly created appliances designed and made in the USA specifically to help fellow Americans amidst the affordability crisis.”</li>
+</ol>
+<p><strong>Republicans Marketing to Democrats (R→D):</strong></p>
+<ol type="1">
+<li>“Don’t waste”</li>
+<li>“It is important that everyone take advantage of these energy-saving appliance’s. They will not only save you money, but will ultimately help the planet, buy yours today!”</li>
+<li>“We save money and the environment”</li>
+<li>“Help save the planet, and make the land green.”</li>
+<li>“Save energy, protect the planet, and build a cleaner future at home.”</li>
+<li>“A small inconvenience for everyone is better than a large problem for the environment, which is actually a large problem for everyone.”</li>
+<li>“save energy, protect the planet”</li>
+<li>“We Are Different, But We ALL Equal.”</li>
+<li>“go out with the 2025 applicances, and step into 2026 more energy saving for you.”</li>
+<li>“Smart energy choices today for a cleaner tomorrow”</li>
+</ol>
+</section>
 </section>
 <section id="correlation-matrix" class="level3" data-number="5.2">
 <h3 data-number="5.2" class="anchored" data-anchor-id="correlation-matrix"><span class="header-section-number">5.2</span> Correlation Matrix</h3>
@@ -1598,23 +1629,23 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
 </figcaption>
 <div aria-describedby="tbl-correlation-matrix-overall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="iplvifzrbj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iplvifzrbj table {
+<div id="iijwugufyb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iijwugufyb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iplvifzrbj thead, #iplvifzrbj tbody, #iplvifzrbj tfoot, #iplvifzrbj tr, #iplvifzrbj td, #iplvifzrbj th {
+#iijwugufyb thead, #iijwugufyb tbody, #iijwugufyb tfoot, #iijwugufyb tr, #iijwugufyb td, #iijwugufyb th {
   border-style: none;
 }
 
-#iplvifzrbj p {
+#iijwugufyb p {
   margin: 0;
   padding: 0;
 }
 
-#iplvifzrbj .gt_table {
+#iijwugufyb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1640,12 +1671,12 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-left-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_caption {
+#iijwugufyb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iplvifzrbj .gt_title {
+#iijwugufyb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1657,7 +1688,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-bottom-width: 0;
 }
 
-#iplvifzrbj .gt_subtitle {
+#iijwugufyb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1669,7 +1700,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-top-width: 0;
 }
 
-#iplvifzrbj .gt_heading {
+#iijwugufyb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1681,13 +1712,13 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-right-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_bottom_border {
+#iijwugufyb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_col_headings {
+#iijwugufyb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1702,7 +1733,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-right-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_col_heading {
+#iijwugufyb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1722,7 +1753,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   overflow-x: hidden;
 }
 
-#iplvifzrbj .gt_column_spanner_outer {
+#iijwugufyb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1734,15 +1765,15 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   padding-right: 4px;
 }
 
-#iplvifzrbj .gt_column_spanner_outer:first-child {
+#iijwugufyb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iplvifzrbj .gt_column_spanner_outer:last-child {
+#iijwugufyb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iplvifzrbj .gt_column_spanner {
+#iijwugufyb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1754,11 +1785,11 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   width: 100%;
 }
 
-#iplvifzrbj .gt_spanner_row {
+#iijwugufyb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iplvifzrbj .gt_group_heading {
+#iijwugufyb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1784,7 +1815,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   text-align: left;
 }
 
-#iplvifzrbj .gt_empty_group_heading {
+#iijwugufyb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1799,15 +1830,15 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   vertical-align: middle;
 }
 
-#iplvifzrbj .gt_from_md > :first-child {
+#iijwugufyb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iplvifzrbj .gt_from_md > :last-child {
+#iijwugufyb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iplvifzrbj .gt_row {
+#iijwugufyb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1826,7 +1857,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   overflow-x: hidden;
 }
 
-#iplvifzrbj .gt_stub {
+#iijwugufyb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1839,7 +1870,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   padding-right: 5px;
 }
 
-#iplvifzrbj .gt_stub_row_group {
+#iijwugufyb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1853,15 +1884,15 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   vertical-align: top;
 }
 
-#iplvifzrbj .gt_row_group_first td {
+#iijwugufyb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iplvifzrbj .gt_row_group_first th {
+#iijwugufyb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iplvifzrbj .gt_summary_row {
+#iijwugufyb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1871,16 +1902,16 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   padding-right: 5px;
 }
 
-#iplvifzrbj .gt_first_summary_row {
+#iijwugufyb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_first_summary_row.thick {
+#iijwugufyb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iplvifzrbj .gt_last_summary_row {
+#iijwugufyb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1890,7 +1921,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-bottom-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_grand_summary_row {
+#iijwugufyb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1900,7 +1931,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   padding-right: 5px;
 }
 
-#iplvifzrbj .gt_first_grand_summary_row {
+#iijwugufyb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1910,7 +1941,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-top-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_last_grand_summary_row_top {
+#iijwugufyb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1920,11 +1951,11 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-bottom-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_striped {
+#iijwugufyb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iplvifzrbj .gt_table_body {
+#iijwugufyb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1933,7 +1964,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-bottom-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_footnotes {
+#iijwugufyb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1947,7 +1978,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-right-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_footnote {
+#iijwugufyb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1956,7 +1987,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   padding-right: 5px;
 }
 
-#iplvifzrbj .gt_sourcenotes {
+#iijwugufyb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1970,7 +2001,7 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   border-right-color: #D3D3D3;
 }
 
-#iplvifzrbj .gt_sourcenote {
+#iijwugufyb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1978,72 +2009,72 @@ Table&nbsp;7: Overall correlation matrix with significance stars for all key var
   padding-right: 5px;
 }
 
-#iplvifzrbj .gt_left {
+#iijwugufyb .gt_left {
   text-align: left;
 }
 
-#iplvifzrbj .gt_center {
+#iijwugufyb .gt_center {
   text-align: center;
 }
 
-#iplvifzrbj .gt_right {
+#iijwugufyb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iplvifzrbj .gt_font_normal {
+#iijwugufyb .gt_font_normal {
   font-weight: normal;
 }
 
-#iplvifzrbj .gt_font_bold {
+#iijwugufyb .gt_font_bold {
   font-weight: bold;
 }
 
-#iplvifzrbj .gt_font_italic {
+#iijwugufyb .gt_font_italic {
   font-style: italic;
 }
 
-#iplvifzrbj .gt_super {
+#iijwugufyb .gt_super {
   font-size: 65%;
 }
 
-#iplvifzrbj .gt_footnote_marks {
+#iijwugufyb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iplvifzrbj .gt_asterisk {
+#iijwugufyb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iplvifzrbj .gt_indent_1 {
+#iijwugufyb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iplvifzrbj .gt_indent_2 {
+#iijwugufyb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iplvifzrbj .gt_indent_3 {
+#iijwugufyb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iplvifzrbj .gt_indent_4 {
+#iijwugufyb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iplvifzrbj .gt_indent_5 {
+#iijwugufyb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#iplvifzrbj .katex-display {
+#iijwugufyb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#iplvifzrbj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iijwugufyb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2520,23 +2551,23 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
 </figcaption>
 <div aria-describedby="tbl-correlation-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="hdyzkxswuk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hdyzkxswuk table {
+<div id="vgpqvrqbdm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vgpqvrqbdm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hdyzkxswuk thead, #hdyzkxswuk tbody, #hdyzkxswuk tfoot, #hdyzkxswuk tr, #hdyzkxswuk td, #hdyzkxswuk th {
+#vgpqvrqbdm thead, #vgpqvrqbdm tbody, #vgpqvrqbdm tfoot, #vgpqvrqbdm tr, #vgpqvrqbdm td, #vgpqvrqbdm th {
   border-style: none;
 }
 
-#hdyzkxswuk p {
+#vgpqvrqbdm p {
   margin: 0;
   padding: 0;
 }
 
-#hdyzkxswuk .gt_table {
+#vgpqvrqbdm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2562,12 +2593,12 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-left-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_caption {
+#vgpqvrqbdm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hdyzkxswuk .gt_title {
+#vgpqvrqbdm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2579,7 +2610,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-bottom-width: 0;
 }
 
-#hdyzkxswuk .gt_subtitle {
+#vgpqvrqbdm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2591,7 +2622,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-top-width: 0;
 }
 
-#hdyzkxswuk .gt_heading {
+#vgpqvrqbdm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2603,13 +2634,13 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-right-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_bottom_border {
+#vgpqvrqbdm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_col_headings {
+#vgpqvrqbdm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2624,7 +2655,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-right-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_col_heading {
+#vgpqvrqbdm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2644,7 +2675,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   overflow-x: hidden;
 }
 
-#hdyzkxswuk .gt_column_spanner_outer {
+#vgpqvrqbdm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2656,15 +2687,15 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   padding-right: 4px;
 }
 
-#hdyzkxswuk .gt_column_spanner_outer:first-child {
+#vgpqvrqbdm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hdyzkxswuk .gt_column_spanner_outer:last-child {
+#vgpqvrqbdm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hdyzkxswuk .gt_column_spanner {
+#vgpqvrqbdm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2676,11 +2707,11 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   width: 100%;
 }
 
-#hdyzkxswuk .gt_spanner_row {
+#vgpqvrqbdm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hdyzkxswuk .gt_group_heading {
+#vgpqvrqbdm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2706,7 +2737,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   text-align: left;
 }
 
-#hdyzkxswuk .gt_empty_group_heading {
+#vgpqvrqbdm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2721,15 +2752,15 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   vertical-align: middle;
 }
 
-#hdyzkxswuk .gt_from_md > :first-child {
+#vgpqvrqbdm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hdyzkxswuk .gt_from_md > :last-child {
+#vgpqvrqbdm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hdyzkxswuk .gt_row {
+#vgpqvrqbdm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2748,7 +2779,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   overflow-x: hidden;
 }
 
-#hdyzkxswuk .gt_stub {
+#vgpqvrqbdm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2761,7 +2792,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   padding-right: 5px;
 }
 
-#hdyzkxswuk .gt_stub_row_group {
+#vgpqvrqbdm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2775,15 +2806,15 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   vertical-align: top;
 }
 
-#hdyzkxswuk .gt_row_group_first td {
+#vgpqvrqbdm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hdyzkxswuk .gt_row_group_first th {
+#vgpqvrqbdm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hdyzkxswuk .gt_summary_row {
+#vgpqvrqbdm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2793,16 +2824,16 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   padding-right: 5px;
 }
 
-#hdyzkxswuk .gt_first_summary_row {
+#vgpqvrqbdm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_first_summary_row.thick {
+#vgpqvrqbdm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hdyzkxswuk .gt_last_summary_row {
+#vgpqvrqbdm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2812,7 +2843,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-bottom-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_grand_summary_row {
+#vgpqvrqbdm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2822,7 +2853,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   padding-right: 5px;
 }
 
-#hdyzkxswuk .gt_first_grand_summary_row {
+#vgpqvrqbdm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2832,7 +2863,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-top-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_last_grand_summary_row_top {
+#vgpqvrqbdm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2842,11 +2873,11 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-bottom-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_striped {
+#vgpqvrqbdm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hdyzkxswuk .gt_table_body {
+#vgpqvrqbdm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2855,7 +2886,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-bottom-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_footnotes {
+#vgpqvrqbdm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2869,7 +2900,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-right-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_footnote {
+#vgpqvrqbdm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2878,7 +2909,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   padding-right: 5px;
 }
 
-#hdyzkxswuk .gt_sourcenotes {
+#vgpqvrqbdm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2892,7 +2923,7 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   border-right-color: #D3D3D3;
 }
 
-#hdyzkxswuk .gt_sourcenote {
+#vgpqvrqbdm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2900,72 +2931,72 @@ Table&nbsp;8: Correlation matrix with significance stars by political party. Upp
   padding-right: 5px;
 }
 
-#hdyzkxswuk .gt_left {
+#vgpqvrqbdm .gt_left {
   text-align: left;
 }
 
-#hdyzkxswuk .gt_center {
+#vgpqvrqbdm .gt_center {
   text-align: center;
 }
 
-#hdyzkxswuk .gt_right {
+#vgpqvrqbdm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hdyzkxswuk .gt_font_normal {
+#vgpqvrqbdm .gt_font_normal {
   font-weight: normal;
 }
 
-#hdyzkxswuk .gt_font_bold {
+#vgpqvrqbdm .gt_font_bold {
   font-weight: bold;
 }
 
-#hdyzkxswuk .gt_font_italic {
+#vgpqvrqbdm .gt_font_italic {
   font-style: italic;
 }
 
-#hdyzkxswuk .gt_super {
+#vgpqvrqbdm .gt_super {
   font-size: 65%;
 }
 
-#hdyzkxswuk .gt_footnote_marks {
+#vgpqvrqbdm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hdyzkxswuk .gt_asterisk {
+#vgpqvrqbdm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hdyzkxswuk .gt_indent_1 {
+#vgpqvrqbdm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hdyzkxswuk .gt_indent_2 {
+#vgpqvrqbdm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hdyzkxswuk .gt_indent_3 {
+#vgpqvrqbdm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hdyzkxswuk .gt_indent_4 {
+#vgpqvrqbdm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hdyzkxswuk .gt_indent_5 {
+#vgpqvrqbdm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hdyzkxswuk .katex-display {
+#vgpqvrqbdm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hdyzkxswuk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vgpqvrqbdm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3451,8 +3482,8 @@ Table&nbsp;9: Consolidated summary of all models examining belief accuracy and o
 
     <script>
 
-      function styleCell_bdqoqf1qqubx7wj5kw4n(i, j, css_id) {
-          var table = document.getElementById("tinytable_bdqoqf1qqubx7wj5kw4n");
+      function styleCell_b20wzcecthpzz2oatfav(i, j, css_id) {
+          var table = document.getElementById("tinytable_b20wzcecthpzz2oatfav");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -3461,8 +3492,8 @@ Table&nbsp;9: Consolidated summary of all models examining belief accuracy and o
               console.warn(`Cell at (${i}, ${j}) not found.`);
           }
       }
-      function insertSpanRow_k017yawp7955k91xjcdd(i, colspan, content) {
-        var table = document.getElementById('tinytable_bdqoqf1qqubx7wj5kw4n');
+      function insertSpanRow_u1lg4evyqloeytx4461f(i, colspan, content) {
+        var table = document.getElementById('tinytable_b20wzcecthpzz2oatfav');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -3470,8 +3501,8 @@ Table&nbsp;9: Consolidated summary of all models examining belief accuracy and o
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_bdqoqf1qqubx7wj5kw4n(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_bdqoqf1qqubx7wj5kw4n");
+      function spanCell_b20wzcecthpzz2oatfav(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_b20wzcecthpzz2oatfav");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -3498,31 +3529,31 @@ Table&nbsp;9: Consolidated summary of all models examining belief accuracy and o
         targetCell.colSpan = colspan;
       }
       // tinytable span after
-window.addEventListener('load', function () { insertSpanRow_k017yawp7955k91xjcdd(10, 9, 'Full Regression Results') });
-window.addEventListener('load', function () { insertSpanRow_k017yawp7955k91xjcdd(6, 9, 'Simple Effects by Extremism Level') });
-window.addEventListener('load', function () { insertSpanRow_k017yawp7955k91xjcdd(2, 9, 'Simple Effects by Learner Party') });
+window.addEventListener('load', function () { insertSpanRow_u1lg4evyqloeytx4461f(10, 9, 'Full Regression Results') });
+window.addEventListener('load', function () { insertSpanRow_u1lg4evyqloeytx4461f(6, 9, 'Simple Effects by Extremism Level') });
+window.addEventListener('load', function () { insertSpanRow_u1lg4evyqloeytx4461f(2, 9, 'Simple Effects by Learner Party') });
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 4 }, { i: 0, j: 6 }, { i: 0, j: 8 }, { i: 0, j: 3 }, { i: 0, j: 5 }, { i: 0, j: 7 },  ], css_id: 'tinytable_css_trfn85li65s6uijmulyw',}, 
-          { positions: [ { i: 20, j: 8 }, { i: 20, j: 3 }, { i: 20, j: 2 }, { i: 20, j: 7 }, { i: 20, j: 5 }, { i: 20, j: 4 }, { i: 20, j: 6 }, { i: 20, j: 1 },  ], css_id: 'tinytable_css_w31te5mv7bs75yjbczw7',}, 
-          { positions: [ { i: 6, j: 7 }, { i: 6, j: 3 }, { i: 6, j: 8 }, { i: 19, j: 7 }, { i: 6, j: 1 }, { i: 11, j: 5 }, { i: 6, j: 4 }, { i: 6, j: 5 }, { i: 19, j: 5 }, { i: 19, j: 1 }, { i: 19, j: 8 }, { i: 19, j: 3 }, { i: 6, j: 6 }, { i: 11, j: 6 }, { i: 11, j: 1 }, { i: 11, j: 8 }, { i: 11, j: 3 }, { i: 6, j: 2 }, { i: 11, j: 2 }, { i: 19, j: 4 }, { i: 11, j: 7 }, { i: 19, j: 6 }, { i: 19, j: 2 }, { i: 11, j: 4 },  ], css_id: 'tinytable_css_lkkj7t79obup1l5uptlt',}, 
-          { positions: [ { i: 17, j: 3 }, { i: 17, j: 1 }, { i: 10, j: 1 }, { i: 15, j: 2 }, { i: 17, j: 2 }, { i: 5, j: 1 }, { i: 17, j: 4 }, { i: 15, j: 1 }, { i: 3, j: 1 }, { i: 18, j: 6 }, { i: 10, j: 2 }, { i: 3, j: 3 }, { i: 18, j: 3 }, { i: 5, j: 3 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 3, j: 2 }, { i: 9, j: 3 }, { i: 5, j: 2 }, { i: 13, j: 1 }, { i: 18, j: 4 }, { i: 13, j: 3 }, { i: 16, j: 1 }, { i: 15, j: 3 }, { i: 18, j: 1 }, { i: 15, j: 5 }, { i: 16, j: 5 }, { i: 17, j: 5 }, { i: 18, j: 5 }, { i: 8, j: 3 }, { i: 18, j: 7 }, { i: 10, j: 3 }, { i: 3, j: 4 }, { i: 14, j: 1 }, { i: 5, j: 4 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 8, j: 4 }, { i: 9, j: 4 }, { i: 10, j: 4 }, { i: 13, j: 2 }, { i: 14, j: 2 }, { i: 13, j: 4 }, { i: 16, j: 2 }, { i: 15, j: 4 }, { i: 18, j: 2 }, { i: 15, j: 6 }, { i: 16, j: 6 }, { i: 17, j: 6 }, { i: 16, j: 8 }, { i: 4, j: 1 }, { i: 18, j: 8 }, { i: 4, j: 3 }, { i: 3, j: 5 }, { i: 4, j: 5 }, { i: 5, j: 5 }, { i: 4, j: 7 }, { i: 5, j: 7 }, { i: 8, j: 5 }, { i: 9, j: 5 }, { i: 10, j: 5 }, { i: 9, j: 7 }, { i: 14, j: 3 }, { i: 13, j: 5 }, { i: 16, j: 3 }, { i: 13, j: 7 }, { i: 14, j: 7 }, { i: 15, j: 7 }, { i: 16, j: 7 }, { i: 17, j: 7 }, { i: 14, j: 4 }, { i: 4, j: 2 }, { i: 16, j: 4 }, { i: 4, j: 4 }, { i: 3, j: 6 }, { i: 4, j: 6 }, { i: 5, j: 6 }, { i: 4, j: 8 }, { i: 5, j: 8 }, { i: 8, j: 6 }, { i: 9, j: 6 }, { i: 10, j: 6 }, { i: 9, j: 8 }, { i: 14, j: 8 }, { i: 13, j: 6 }, { i: 10, j: 7 }, { i: 13, j: 8 }, { i: 14, j: 5 }, { i: 15, j: 8 }, { i: 10, j: 8 }, { i: 17, j: 8 }, { i: 3, j: 7 }, { i: 8, j: 7 }, { i: 14, j: 6 }, { i: 8, j: 8 }, { i: 3, j: 8 },  ], css_id: 'tinytable_css_kkjuathgtmg43wvaplnm',}, 
-          { positions: [ { i: 12, j: 5 }, { i: 7, j: 1 }, { i: 12, j: 7 }, { i: 7, j: 5 }, { i: 7, j: 7 }, { i: 7, j: 2 }, { i: 2, j: 8 }, { i: 7, j: 4 }, { i: 2, j: 3 }, { i: 7, j: 6 }, { i: 12, j: 2 }, { i: 2, j: 7 }, { i: 7, j: 3 }, { i: 12, j: 3 }, { i: 12, j: 6 }, { i: 12, j: 1 }, { i: 12, j: 8 }, { i: 12, j: 4 }, { i: 2, j: 6 }, { i: 2, j: 1 }, { i: 7, j: 8 }, { i: 2, j: 4 }, { i: 2, j: 5 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_ejjfqs5qfgtrymo1habg',}, 
-          { positions: [ { i: 0, j: 2 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_jbsecasohfvqjlflmktg',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 1, j: 8 }, { i: 1, j: 3 }, { i: 1, j: 5 }, { i: 1, j: 7 }, { i: 1, j: 2 }, { i: 1, j: 4 }, { i: 1, j: 6 },  ], css_id: 'tinytable_css_dqddw06b6abg23tzw67q',}, 
-          { positions: [ { i: 20, j: 0 },  ], css_id: 'tinytable_css_l1tsu36vyr3m7xvcscnc',}, 
-          { positions: [ { i: 11, j: 0 }, { i: 6, j: 0 }, { i: 19, j: 0 },  ], css_id: 'tinytable_css_8b7liwzznthq7njuxeuk',}, 
-          { positions: [ { i: 5, j: 0 }, { i: 10, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 9, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 }, { i: 8, j: 0 }, { i: 13, j: 0 }, { i: 18, j: 0 }, { i: 16, j: 0 }, { i: 17, j: 0 },  ], css_id: 'tinytable_css_bwjiwxz9ue5przbn9tpa',}, 
-          { positions: [ { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 12, j: 0 },  ], css_id: 'tinytable_css_fxa1ii9bsede8lm710gz',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_y698bxhkd1zyhdc5urp5',}, 
-          { positions: [ { i: 1, j: 0 },  ], css_id: 'tinytable_css_gg5tulxzbl9mfcatjyl3',}, 
+          { positions: [ { i: 0, j: 4 }, { i: 0, j: 6 }, { i: 0, j: 8 }, { i: 0, j: 3 }, { i: 0, j: 5 }, { i: 0, j: 7 },  ], css_id: 'tinytable_css_k44it6gsxgadwx9xcbyw',}, 
+          { positions: [ { i: 20, j: 8 }, { i: 20, j: 3 }, { i: 20, j: 2 }, { i: 20, j: 7 }, { i: 20, j: 5 }, { i: 20, j: 4 }, { i: 20, j: 6 }, { i: 20, j: 1 },  ], css_id: 'tinytable_css_1uqywm9ifvi3yxsczj2o',}, 
+          { positions: [ { i: 6, j: 7 }, { i: 6, j: 3 }, { i: 6, j: 8 }, { i: 19, j: 7 }, { i: 6, j: 1 }, { i: 11, j: 5 }, { i: 6, j: 4 }, { i: 6, j: 5 }, { i: 19, j: 5 }, { i: 19, j: 1 }, { i: 19, j: 8 }, { i: 19, j: 3 }, { i: 6, j: 6 }, { i: 11, j: 6 }, { i: 11, j: 1 }, { i: 11, j: 8 }, { i: 11, j: 3 }, { i: 6, j: 2 }, { i: 11, j: 2 }, { i: 19, j: 4 }, { i: 11, j: 7 }, { i: 19, j: 6 }, { i: 19, j: 2 }, { i: 11, j: 4 },  ], css_id: 'tinytable_css_ykxrzp0pkkytbwcwn8uv',}, 
+          { positions: [ { i: 17, j: 3 }, { i: 17, j: 1 }, { i: 10, j: 1 }, { i: 15, j: 2 }, { i: 17, j: 2 }, { i: 5, j: 1 }, { i: 17, j: 4 }, { i: 15, j: 1 }, { i: 3, j: 1 }, { i: 18, j: 6 }, { i: 10, j: 2 }, { i: 3, j: 3 }, { i: 18, j: 3 }, { i: 5, j: 3 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 3, j: 2 }, { i: 9, j: 3 }, { i: 5, j: 2 }, { i: 13, j: 1 }, { i: 18, j: 4 }, { i: 13, j: 3 }, { i: 16, j: 1 }, { i: 15, j: 3 }, { i: 18, j: 1 }, { i: 15, j: 5 }, { i: 16, j: 5 }, { i: 17, j: 5 }, { i: 18, j: 5 }, { i: 8, j: 3 }, { i: 18, j: 7 }, { i: 10, j: 3 }, { i: 3, j: 4 }, { i: 14, j: 1 }, { i: 5, j: 4 }, { i: 8, j: 2 }, { i: 9, j: 2 }, { i: 8, j: 4 }, { i: 9, j: 4 }, { i: 10, j: 4 }, { i: 13, j: 2 }, { i: 14, j: 2 }, { i: 13, j: 4 }, { i: 16, j: 2 }, { i: 15, j: 4 }, { i: 18, j: 2 }, { i: 15, j: 6 }, { i: 16, j: 6 }, { i: 17, j: 6 }, { i: 16, j: 8 }, { i: 4, j: 1 }, { i: 18, j: 8 }, { i: 4, j: 3 }, { i: 3, j: 5 }, { i: 4, j: 5 }, { i: 5, j: 5 }, { i: 4, j: 7 }, { i: 5, j: 7 }, { i: 8, j: 5 }, { i: 9, j: 5 }, { i: 10, j: 5 }, { i: 9, j: 7 }, { i: 14, j: 3 }, { i: 13, j: 5 }, { i: 16, j: 3 }, { i: 13, j: 7 }, { i: 14, j: 7 }, { i: 15, j: 7 }, { i: 16, j: 7 }, { i: 17, j: 7 }, { i: 14, j: 4 }, { i: 4, j: 2 }, { i: 16, j: 4 }, { i: 4, j: 4 }, { i: 3, j: 6 }, { i: 4, j: 6 }, { i: 5, j: 6 }, { i: 4, j: 8 }, { i: 5, j: 8 }, { i: 8, j: 6 }, { i: 9, j: 6 }, { i: 10, j: 6 }, { i: 9, j: 8 }, { i: 14, j: 8 }, { i: 13, j: 6 }, { i: 10, j: 7 }, { i: 13, j: 8 }, { i: 14, j: 5 }, { i: 15, j: 8 }, { i: 10, j: 8 }, { i: 17, j: 8 }, { i: 3, j: 7 }, { i: 8, j: 7 }, { i: 14, j: 6 }, { i: 8, j: 8 }, { i: 3, j: 8 },  ], css_id: 'tinytable_css_ae8niaw8mg97hno6bf2u',}, 
+          { positions: [ { i: 12, j: 5 }, { i: 7, j: 1 }, { i: 12, j: 7 }, { i: 7, j: 5 }, { i: 7, j: 7 }, { i: 7, j: 2 }, { i: 2, j: 8 }, { i: 7, j: 4 }, { i: 2, j: 3 }, { i: 7, j: 6 }, { i: 12, j: 2 }, { i: 2, j: 7 }, { i: 7, j: 3 }, { i: 12, j: 3 }, { i: 12, j: 6 }, { i: 12, j: 1 }, { i: 12, j: 8 }, { i: 12, j: 4 }, { i: 2, j: 6 }, { i: 2, j: 1 }, { i: 7, j: 8 }, { i: 2, j: 4 }, { i: 2, j: 5 }, { i: 2, j: 2 },  ], css_id: 'tinytable_css_q15zrs34u8ireasgobi6',}, 
+          { positions: [ { i: 0, j: 2 }, { i: 0, j: 1 },  ], css_id: 'tinytable_css_jtdsajgnocb52raiazla',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 1, j: 8 }, { i: 1, j: 3 }, { i: 1, j: 5 }, { i: 1, j: 7 }, { i: 1, j: 2 }, { i: 1, j: 4 }, { i: 1, j: 6 },  ], css_id: 'tinytable_css_ihlh2h0e5w9xph4y5s8l',}, 
+          { positions: [ { i: 20, j: 0 },  ], css_id: 'tinytable_css_0t649z7u4lb9st0d6x9e',}, 
+          { positions: [ { i: 11, j: 0 }, { i: 6, j: 0 }, { i: 19, j: 0 },  ], css_id: 'tinytable_css_b2pb7g4iv1g7hpti4ssb',}, 
+          { positions: [ { i: 5, j: 0 }, { i: 10, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 9, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 }, { i: 8, j: 0 }, { i: 13, j: 0 }, { i: 18, j: 0 }, { i: 16, j: 0 }, { i: 17, j: 0 },  ], css_id: 'tinytable_css_iwf57oduo7n4dw0y3yh9',}, 
+          { positions: [ { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 12, j: 0 },  ], css_id: 'tinytable_css_mukg6bviiog8muwf749r',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_cycd3osf8llndtu7d0mp',}, 
+          { positions: [ { i: 1, j: 0 },  ], css_id: 'tinytable_css_mmnkhi8ii4fvepjyung6',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_bdqoqf1qqubx7wj5kw4n(cell.i, cell.j, group.css_id);
+                  styleCell_b20wzcecthpzz2oatfav(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -3530,22 +3561,22 @@ window.addEventListener('load', function () { insertSpanRow_k017yawp7955k91xjcdd
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_trfn85li65s6uijmulyw, .table th.tinytable_css_trfn85li65s6uijmulyw { text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; text-align: center; }
-      .table td.tinytable_css_w31te5mv7bs75yjbczw7, .table th.tinytable_css_w31te5mv7bs75yjbczw7 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_lkkj7t79obup1l5uptlt, .table th.tinytable_css_lkkj7t79obup1l5uptlt { text-align: center; border-bottom: solid lightgray 0.1em; }
-      .table td.tinytable_css_kkjuathgtmg43wvaplnm, .table th.tinytable_css_kkjuathgtmg43wvaplnm { text-align: center; }
-      .table td.tinytable_css_ejjfqs5qfgtrymo1habg, .table th.tinytable_css_ejjfqs5qfgtrymo1habg { text-align: center; font-weight: bold; }
-      .table td.tinytable_css_jbsecasohfvqjlflmktg, .table th.tinytable_css_jbsecasohfvqjlflmktg { text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; border-bottom: solid #d3d8dc 0.05em; text-align: center; }
-      .table td.tinytable_css_dqddw06b6abg23tzw67q, .table th.tinytable_css_dqddw06b6abg23tzw67q { text-align: center; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_l1tsu36vyr3m7xvcscnc, .table th.tinytable_css_l1tsu36vyr3m7xvcscnc { text-align: left; padding-left: 1em; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_8b7liwzznthq7njuxeuk, .table th.tinytable_css_8b7liwzznthq7njuxeuk { text-align: left; padding-left: 1em; border-bottom: solid lightgray 0.1em; }
-      .table td.tinytable_css_bwjiwxz9ue5przbn9tpa, .table th.tinytable_css_bwjiwxz9ue5przbn9tpa { text-align: left; padding-left: 1em; }
-      .table td.tinytable_css_fxa1ii9bsede8lm710gz, .table th.tinytable_css_fxa1ii9bsede8lm710gz { text-align: left; font-weight: bold; }
-      .table td.tinytable_css_y698bxhkd1zyhdc5urp5, .table th.tinytable_css_y698bxhkd1zyhdc5urp5 { text-align: left; border-top: solid #d3d8dc 0.1em; text-align: center; text-align: center; }
-      .table td.tinytable_css_gg5tulxzbl9mfcatjyl3, .table th.tinytable_css_gg5tulxzbl9mfcatjyl3 { text-align: left; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_k44it6gsxgadwx9xcbyw, .table th.tinytable_css_k44it6gsxgadwx9xcbyw { text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; text-align: center; }
+      .table td.tinytable_css_1uqywm9ifvi3yxsczj2o, .table th.tinytable_css_1uqywm9ifvi3yxsczj2o { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_ykxrzp0pkkytbwcwn8uv, .table th.tinytable_css_ykxrzp0pkkytbwcwn8uv { text-align: center; border-bottom: solid lightgray 0.1em; }
+      .table td.tinytable_css_ae8niaw8mg97hno6bf2u, .table th.tinytable_css_ae8niaw8mg97hno6bf2u { text-align: center; }
+      .table td.tinytable_css_q15zrs34u8ireasgobi6, .table th.tinytable_css_q15zrs34u8ireasgobi6 { text-align: center; font-weight: bold; }
+      .table td.tinytable_css_jtdsajgnocb52raiazla, .table th.tinytable_css_jtdsajgnocb52raiazla { text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; border-bottom: solid #d3d8dc 0.05em; text-align: center; }
+      .table td.tinytable_css_ihlh2h0e5w9xph4y5s8l, .table th.tinytable_css_ihlh2h0e5w9xph4y5s8l { text-align: center; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_0t649z7u4lb9st0d6x9e, .table th.tinytable_css_0t649z7u4lb9st0d6x9e { text-align: left; padding-left: 1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_b2pb7g4iv1g7hpti4ssb, .table th.tinytable_css_b2pb7g4iv1g7hpti4ssb { text-align: left; padding-left: 1em; border-bottom: solid lightgray 0.1em; }
+      .table td.tinytable_css_iwf57oduo7n4dw0y3yh9, .table th.tinytable_css_iwf57oduo7n4dw0y3yh9 { text-align: left; padding-left: 1em; }
+      .table td.tinytable_css_mukg6bviiog8muwf749r, .table th.tinytable_css_mukg6bviiog8muwf749r { text-align: left; font-weight: bold; }
+      .table td.tinytable_css_cycd3osf8llndtu7d0mp, .table th.tinytable_css_cycd3osf8llndtu7d0mp { text-align: left; border-top: solid #d3d8dc 0.1em; text-align: center; text-align: center; }
+      .table td.tinytable_css_mmnkhi8ii4fvepjyung6, .table th.tinytable_css_mmnkhi8ii4fvepjyung6 { text-align: left; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_bdqoqf1qqubx7wj5kw4n" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_b20wzcecthpzz2oatfav" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
 <tr>
 <th scope="col" align="center" colspan="1"> </th>
@@ -3765,23 +3796,23 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
 </figcaption>
 <div aria-describedby="tbl-descriptives-green-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="gjgvtucvmd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gjgvtucvmd table {
+<div id="nkvkhqdlox" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nkvkhqdlox table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gjgvtucvmd thead, #gjgvtucvmd tbody, #gjgvtucvmd tfoot, #gjgvtucvmd tr, #gjgvtucvmd td, #gjgvtucvmd th {
+#nkvkhqdlox thead, #nkvkhqdlox tbody, #nkvkhqdlox tfoot, #nkvkhqdlox tr, #nkvkhqdlox td, #nkvkhqdlox th {
   border-style: none;
 }
 
-#gjgvtucvmd p {
+#nkvkhqdlox p {
   margin: 0;
   padding: 0;
 }
 
-#gjgvtucvmd .gt_table {
+#nkvkhqdlox .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3807,12 +3838,12 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-left-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_caption {
+#nkvkhqdlox .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gjgvtucvmd .gt_title {
+#nkvkhqdlox .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3824,7 +3855,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-bottom-width: 0;
 }
 
-#gjgvtucvmd .gt_subtitle {
+#nkvkhqdlox .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3836,7 +3867,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-top-width: 0;
 }
 
-#gjgvtucvmd .gt_heading {
+#nkvkhqdlox .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3848,13 +3879,13 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-right-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_bottom_border {
+#nkvkhqdlox .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_col_headings {
+#nkvkhqdlox .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3869,7 +3900,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-right-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_col_heading {
+#nkvkhqdlox .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3889,7 +3920,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   overflow-x: hidden;
 }
 
-#gjgvtucvmd .gt_column_spanner_outer {
+#nkvkhqdlox .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3901,15 +3932,15 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   padding-right: 4px;
 }
 
-#gjgvtucvmd .gt_column_spanner_outer:first-child {
+#nkvkhqdlox .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gjgvtucvmd .gt_column_spanner_outer:last-child {
+#nkvkhqdlox .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gjgvtucvmd .gt_column_spanner {
+#nkvkhqdlox .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3921,11 +3952,11 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   width: 100%;
 }
 
-#gjgvtucvmd .gt_spanner_row {
+#nkvkhqdlox .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gjgvtucvmd .gt_group_heading {
+#nkvkhqdlox .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3951,7 +3982,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   text-align: left;
 }
 
-#gjgvtucvmd .gt_empty_group_heading {
+#nkvkhqdlox .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3966,15 +3997,15 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   vertical-align: middle;
 }
 
-#gjgvtucvmd .gt_from_md > :first-child {
+#nkvkhqdlox .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gjgvtucvmd .gt_from_md > :last-child {
+#nkvkhqdlox .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gjgvtucvmd .gt_row {
+#nkvkhqdlox .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3993,7 +4024,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   overflow-x: hidden;
 }
 
-#gjgvtucvmd .gt_stub {
+#nkvkhqdlox .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4006,7 +4037,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   padding-right: 5px;
 }
 
-#gjgvtucvmd .gt_stub_row_group {
+#nkvkhqdlox .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4020,15 +4051,15 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   vertical-align: top;
 }
 
-#gjgvtucvmd .gt_row_group_first td {
+#nkvkhqdlox .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gjgvtucvmd .gt_row_group_first th {
+#nkvkhqdlox .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gjgvtucvmd .gt_summary_row {
+#nkvkhqdlox .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4038,16 +4069,16 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   padding-right: 5px;
 }
 
-#gjgvtucvmd .gt_first_summary_row {
+#nkvkhqdlox .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_first_summary_row.thick {
+#nkvkhqdlox .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gjgvtucvmd .gt_last_summary_row {
+#nkvkhqdlox .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4057,7 +4088,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-bottom-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_grand_summary_row {
+#nkvkhqdlox .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4067,7 +4098,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   padding-right: 5px;
 }
 
-#gjgvtucvmd .gt_first_grand_summary_row {
+#nkvkhqdlox .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4077,7 +4108,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-top-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_last_grand_summary_row_top {
+#nkvkhqdlox .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4087,11 +4118,11 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-bottom-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_striped {
+#nkvkhqdlox .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gjgvtucvmd .gt_table_body {
+#nkvkhqdlox .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4100,7 +4131,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-bottom-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_footnotes {
+#nkvkhqdlox .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4114,7 +4145,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-right-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_footnote {
+#nkvkhqdlox .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4123,7 +4154,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   padding-right: 5px;
 }
 
-#gjgvtucvmd .gt_sourcenotes {
+#nkvkhqdlox .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4137,7 +4168,7 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   border-right-color: #D3D3D3;
 }
 
-#gjgvtucvmd .gt_sourcenote {
+#nkvkhqdlox .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4145,72 +4176,72 @@ Table&nbsp;10: Actual environmental attitudes by political party. Self-reported 
   padding-right: 5px;
 }
 
-#gjgvtucvmd .gt_left {
+#nkvkhqdlox .gt_left {
   text-align: left;
 }
 
-#gjgvtucvmd .gt_center {
+#nkvkhqdlox .gt_center {
   text-align: center;
 }
 
-#gjgvtucvmd .gt_right {
+#nkvkhqdlox .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gjgvtucvmd .gt_font_normal {
+#nkvkhqdlox .gt_font_normal {
   font-weight: normal;
 }
 
-#gjgvtucvmd .gt_font_bold {
+#nkvkhqdlox .gt_font_bold {
   font-weight: bold;
 }
 
-#gjgvtucvmd .gt_font_italic {
+#nkvkhqdlox .gt_font_italic {
   font-style: italic;
 }
 
-#gjgvtucvmd .gt_super {
+#nkvkhqdlox .gt_super {
   font-size: 65%;
 }
 
-#gjgvtucvmd .gt_footnote_marks {
+#nkvkhqdlox .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gjgvtucvmd .gt_asterisk {
+#nkvkhqdlox .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gjgvtucvmd .gt_indent_1 {
+#nkvkhqdlox .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gjgvtucvmd .gt_indent_2 {
+#nkvkhqdlox .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gjgvtucvmd .gt_indent_3 {
+#nkvkhqdlox .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gjgvtucvmd .gt_indent_4 {
+#nkvkhqdlox .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gjgvtucvmd .gt_indent_5 {
+#nkvkhqdlox .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gjgvtucvmd .katex-display {
+#nkvkhqdlox .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gjgvtucvmd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nkvkhqdlox div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4254,23 +4285,23 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
 </figcaption>
 <div aria-describedby="tbl-descriptives-accuracy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="myrqvexnez" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#myrqvexnez table {
+<div id="nskqflsuqf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nskqflsuqf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#myrqvexnez thead, #myrqvexnez tbody, #myrqvexnez tfoot, #myrqvexnez tr, #myrqvexnez td, #myrqvexnez th {
+#nskqflsuqf thead, #nskqflsuqf tbody, #nskqflsuqf tfoot, #nskqflsuqf tr, #nskqflsuqf td, #nskqflsuqf th {
   border-style: none;
 }
 
-#myrqvexnez p {
+#nskqflsuqf p {
   margin: 0;
   padding: 0;
 }
 
-#myrqvexnez .gt_table {
+#nskqflsuqf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4296,12 +4327,12 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-left-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_caption {
+#nskqflsuqf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#myrqvexnez .gt_title {
+#nskqflsuqf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4313,7 +4344,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-bottom-width: 0;
 }
 
-#myrqvexnez .gt_subtitle {
+#nskqflsuqf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4325,7 +4356,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-top-width: 0;
 }
 
-#myrqvexnez .gt_heading {
+#nskqflsuqf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4337,13 +4368,13 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-right-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_bottom_border {
+#nskqflsuqf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_col_headings {
+#nskqflsuqf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4358,7 +4389,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-right-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_col_heading {
+#nskqflsuqf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4378,7 +4409,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   overflow-x: hidden;
 }
 
-#myrqvexnez .gt_column_spanner_outer {
+#nskqflsuqf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4390,15 +4421,15 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   padding-right: 4px;
 }
 
-#myrqvexnez .gt_column_spanner_outer:first-child {
+#nskqflsuqf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#myrqvexnez .gt_column_spanner_outer:last-child {
+#nskqflsuqf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#myrqvexnez .gt_column_spanner {
+#nskqflsuqf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4410,11 +4441,11 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   width: 100%;
 }
 
-#myrqvexnez .gt_spanner_row {
+#nskqflsuqf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#myrqvexnez .gt_group_heading {
+#nskqflsuqf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4440,7 +4471,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   text-align: left;
 }
 
-#myrqvexnez .gt_empty_group_heading {
+#nskqflsuqf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4455,15 +4486,15 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   vertical-align: middle;
 }
 
-#myrqvexnez .gt_from_md > :first-child {
+#nskqflsuqf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#myrqvexnez .gt_from_md > :last-child {
+#nskqflsuqf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#myrqvexnez .gt_row {
+#nskqflsuqf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4482,7 +4513,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   overflow-x: hidden;
 }
 
-#myrqvexnez .gt_stub {
+#nskqflsuqf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4495,7 +4526,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   padding-right: 5px;
 }
 
-#myrqvexnez .gt_stub_row_group {
+#nskqflsuqf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4509,15 +4540,15 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   vertical-align: top;
 }
 
-#myrqvexnez .gt_row_group_first td {
+#nskqflsuqf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#myrqvexnez .gt_row_group_first th {
+#nskqflsuqf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#myrqvexnez .gt_summary_row {
+#nskqflsuqf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4527,16 +4558,16 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   padding-right: 5px;
 }
 
-#myrqvexnez .gt_first_summary_row {
+#nskqflsuqf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_first_summary_row.thick {
+#nskqflsuqf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#myrqvexnez .gt_last_summary_row {
+#nskqflsuqf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4546,7 +4577,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-bottom-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_grand_summary_row {
+#nskqflsuqf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4556,7 +4587,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   padding-right: 5px;
 }
 
-#myrqvexnez .gt_first_grand_summary_row {
+#nskqflsuqf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4566,7 +4597,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-top-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_last_grand_summary_row_top {
+#nskqflsuqf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4576,11 +4607,11 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-bottom-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_striped {
+#nskqflsuqf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#myrqvexnez .gt_table_body {
+#nskqflsuqf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4589,7 +4620,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-bottom-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_footnotes {
+#nskqflsuqf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4603,7 +4634,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-right-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_footnote {
+#nskqflsuqf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4612,7 +4643,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   padding-right: 5px;
 }
 
-#myrqvexnez .gt_sourcenotes {
+#nskqflsuqf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4626,7 +4657,7 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   border-right-color: #D3D3D3;
 }
 
-#myrqvexnez .gt_sourcenote {
+#nskqflsuqf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4634,72 +4665,72 @@ Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values 
   padding-right: 5px;
 }
 
-#myrqvexnez .gt_left {
+#nskqflsuqf .gt_left {
   text-align: left;
 }
 
-#myrqvexnez .gt_center {
+#nskqflsuqf .gt_center {
   text-align: center;
 }
 
-#myrqvexnez .gt_right {
+#nskqflsuqf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#myrqvexnez .gt_font_normal {
+#nskqflsuqf .gt_font_normal {
   font-weight: normal;
 }
 
-#myrqvexnez .gt_font_bold {
+#nskqflsuqf .gt_font_bold {
   font-weight: bold;
 }
 
-#myrqvexnez .gt_font_italic {
+#nskqflsuqf .gt_font_italic {
   font-style: italic;
 }
 
-#myrqvexnez .gt_super {
+#nskqflsuqf .gt_super {
   font-size: 65%;
 }
 
-#myrqvexnez .gt_footnote_marks {
+#nskqflsuqf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#myrqvexnez .gt_asterisk {
+#nskqflsuqf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#myrqvexnez .gt_indent_1 {
+#nskqflsuqf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#myrqvexnez .gt_indent_2 {
+#nskqflsuqf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#myrqvexnez .gt_indent_3 {
+#nskqflsuqf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#myrqvexnez .gt_indent_4 {
+#nskqflsuqf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#myrqvexnez .gt_indent_5 {
+#nskqflsuqf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#myrqvexnez .katex-display {
+#nskqflsuqf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#myrqvexnez div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nskqflsuqf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4760,23 +4791,23 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
 </figcaption>
 <div aria-describedby="tbl-descriptives-warmth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="zbnbcudsnv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zbnbcudsnv table {
+<div id="eqxpikenek" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eqxpikenek table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zbnbcudsnv thead, #zbnbcudsnv tbody, #zbnbcudsnv tfoot, #zbnbcudsnv tr, #zbnbcudsnv td, #zbnbcudsnv th {
+#eqxpikenek thead, #eqxpikenek tbody, #eqxpikenek tfoot, #eqxpikenek tr, #eqxpikenek td, #eqxpikenek th {
   border-style: none;
 }
 
-#zbnbcudsnv p {
+#eqxpikenek p {
   margin: 0;
   padding: 0;
 }
 
-#zbnbcudsnv .gt_table {
+#eqxpikenek .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4802,12 +4833,12 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-left-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_caption {
+#eqxpikenek .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zbnbcudsnv .gt_title {
+#eqxpikenek .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4819,7 +4850,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-bottom-width: 0;
 }
 
-#zbnbcudsnv .gt_subtitle {
+#eqxpikenek .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4831,7 +4862,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-top-width: 0;
 }
 
-#zbnbcudsnv .gt_heading {
+#eqxpikenek .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4843,13 +4874,13 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-right-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_bottom_border {
+#eqxpikenek .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_col_headings {
+#eqxpikenek .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4864,7 +4895,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-right-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_col_heading {
+#eqxpikenek .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4884,7 +4915,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   overflow-x: hidden;
 }
 
-#zbnbcudsnv .gt_column_spanner_outer {
+#eqxpikenek .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4896,15 +4927,15 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   padding-right: 4px;
 }
 
-#zbnbcudsnv .gt_column_spanner_outer:first-child {
+#eqxpikenek .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zbnbcudsnv .gt_column_spanner_outer:last-child {
+#eqxpikenek .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zbnbcudsnv .gt_column_spanner {
+#eqxpikenek .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4916,11 +4947,11 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   width: 100%;
 }
 
-#zbnbcudsnv .gt_spanner_row {
+#eqxpikenek .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zbnbcudsnv .gt_group_heading {
+#eqxpikenek .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4946,7 +4977,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   text-align: left;
 }
 
-#zbnbcudsnv .gt_empty_group_heading {
+#eqxpikenek .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4961,15 +4992,15 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   vertical-align: middle;
 }
 
-#zbnbcudsnv .gt_from_md > :first-child {
+#eqxpikenek .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zbnbcudsnv .gt_from_md > :last-child {
+#eqxpikenek .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zbnbcudsnv .gt_row {
+#eqxpikenek .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4988,7 +5019,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   overflow-x: hidden;
 }
 
-#zbnbcudsnv .gt_stub {
+#eqxpikenek .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5001,7 +5032,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   padding-right: 5px;
 }
 
-#zbnbcudsnv .gt_stub_row_group {
+#eqxpikenek .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5015,15 +5046,15 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   vertical-align: top;
 }
 
-#zbnbcudsnv .gt_row_group_first td {
+#eqxpikenek .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zbnbcudsnv .gt_row_group_first th {
+#eqxpikenek .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zbnbcudsnv .gt_summary_row {
+#eqxpikenek .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5033,16 +5064,16 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   padding-right: 5px;
 }
 
-#zbnbcudsnv .gt_first_summary_row {
+#eqxpikenek .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_first_summary_row.thick {
+#eqxpikenek .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zbnbcudsnv .gt_last_summary_row {
+#eqxpikenek .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5052,7 +5083,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-bottom-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_grand_summary_row {
+#eqxpikenek .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5062,7 +5093,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   padding-right: 5px;
 }
 
-#zbnbcudsnv .gt_first_grand_summary_row {
+#eqxpikenek .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5072,7 +5103,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-top-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_last_grand_summary_row_top {
+#eqxpikenek .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5082,11 +5113,11 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-bottom-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_striped {
+#eqxpikenek .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zbnbcudsnv .gt_table_body {
+#eqxpikenek .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5095,7 +5126,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-bottom-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_footnotes {
+#eqxpikenek .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5109,7 +5140,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-right-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_footnote {
+#eqxpikenek .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5118,7 +5149,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   padding-right: 5px;
 }
 
-#zbnbcudsnv .gt_sourcenotes {
+#eqxpikenek .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5132,7 +5163,7 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   border-right-color: #D3D3D3;
 }
 
-#zbnbcudsnv .gt_sourcenote {
+#eqxpikenek .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5140,72 +5171,72 @@ Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured 
   padding-right: 5px;
 }
 
-#zbnbcudsnv .gt_left {
+#eqxpikenek .gt_left {
   text-align: left;
 }
 
-#zbnbcudsnv .gt_center {
+#eqxpikenek .gt_center {
   text-align: center;
 }
 
-#zbnbcudsnv .gt_right {
+#eqxpikenek .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zbnbcudsnv .gt_font_normal {
+#eqxpikenek .gt_font_normal {
   font-weight: normal;
 }
 
-#zbnbcudsnv .gt_font_bold {
+#eqxpikenek .gt_font_bold {
   font-weight: bold;
 }
 
-#zbnbcudsnv .gt_font_italic {
+#eqxpikenek .gt_font_italic {
   font-style: italic;
 }
 
-#zbnbcudsnv .gt_super {
+#eqxpikenek .gt_super {
   font-size: 65%;
 }
 
-#zbnbcudsnv .gt_footnote_marks {
+#eqxpikenek .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zbnbcudsnv .gt_asterisk {
+#eqxpikenek .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zbnbcudsnv .gt_indent_1 {
+#eqxpikenek .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zbnbcudsnv .gt_indent_2 {
+#eqxpikenek .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zbnbcudsnv .gt_indent_3 {
+#eqxpikenek .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zbnbcudsnv .gt_indent_4 {
+#eqxpikenek .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zbnbcudsnv .gt_indent_5 {
+#eqxpikenek .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zbnbcudsnv .katex-display {
+#eqxpikenek .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zbnbcudsnv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eqxpikenek div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5266,23 +5297,23 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
 </figcaption>
 <div aria-describedby="tbl-descriptives-extremism-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="jyrhoskgah" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jyrhoskgah table {
+<div id="xmtddkutfj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xmtddkutfj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jyrhoskgah thead, #jyrhoskgah tbody, #jyrhoskgah tfoot, #jyrhoskgah tr, #jyrhoskgah td, #jyrhoskgah th {
+#xmtddkutfj thead, #xmtddkutfj tbody, #xmtddkutfj tfoot, #xmtddkutfj tr, #xmtddkutfj td, #xmtddkutfj th {
   border-style: none;
 }
 
-#jyrhoskgah p {
+#xmtddkutfj p {
   margin: 0;
   padding: 0;
 }
 
-#jyrhoskgah .gt_table {
+#xmtddkutfj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5308,12 +5339,12 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-left-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_caption {
+#xmtddkutfj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jyrhoskgah .gt_title {
+#xmtddkutfj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5325,7 +5356,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-bottom-width: 0;
 }
 
-#jyrhoskgah .gt_subtitle {
+#xmtddkutfj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5337,7 +5368,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-top-width: 0;
 }
 
-#jyrhoskgah .gt_heading {
+#xmtddkutfj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5349,13 +5380,13 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-right-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_bottom_border {
+#xmtddkutfj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_col_headings {
+#xmtddkutfj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5370,7 +5401,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-right-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_col_heading {
+#xmtddkutfj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5390,7 +5421,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   overflow-x: hidden;
 }
 
-#jyrhoskgah .gt_column_spanner_outer {
+#xmtddkutfj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5402,15 +5433,15 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   padding-right: 4px;
 }
 
-#jyrhoskgah .gt_column_spanner_outer:first-child {
+#xmtddkutfj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jyrhoskgah .gt_column_spanner_outer:last-child {
+#xmtddkutfj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jyrhoskgah .gt_column_spanner {
+#xmtddkutfj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5422,11 +5453,11 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   width: 100%;
 }
 
-#jyrhoskgah .gt_spanner_row {
+#xmtddkutfj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jyrhoskgah .gt_group_heading {
+#xmtddkutfj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5452,7 +5483,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   text-align: left;
 }
 
-#jyrhoskgah .gt_empty_group_heading {
+#xmtddkutfj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5467,15 +5498,15 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   vertical-align: middle;
 }
 
-#jyrhoskgah .gt_from_md > :first-child {
+#xmtddkutfj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jyrhoskgah .gt_from_md > :last-child {
+#xmtddkutfj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jyrhoskgah .gt_row {
+#xmtddkutfj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5494,7 +5525,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   overflow-x: hidden;
 }
 
-#jyrhoskgah .gt_stub {
+#xmtddkutfj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5507,7 +5538,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   padding-right: 5px;
 }
 
-#jyrhoskgah .gt_stub_row_group {
+#xmtddkutfj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5521,15 +5552,15 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   vertical-align: top;
 }
 
-#jyrhoskgah .gt_row_group_first td {
+#xmtddkutfj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jyrhoskgah .gt_row_group_first th {
+#xmtddkutfj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jyrhoskgah .gt_summary_row {
+#xmtddkutfj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5539,16 +5570,16 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   padding-right: 5px;
 }
 
-#jyrhoskgah .gt_first_summary_row {
+#xmtddkutfj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_first_summary_row.thick {
+#xmtddkutfj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jyrhoskgah .gt_last_summary_row {
+#xmtddkutfj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5558,7 +5589,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-bottom-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_grand_summary_row {
+#xmtddkutfj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5568,7 +5599,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   padding-right: 5px;
 }
 
-#jyrhoskgah .gt_first_grand_summary_row {
+#xmtddkutfj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5578,7 +5609,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-top-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_last_grand_summary_row_top {
+#xmtddkutfj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5588,11 +5619,11 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-bottom-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_striped {
+#xmtddkutfj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jyrhoskgah .gt_table_body {
+#xmtddkutfj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5601,7 +5632,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-bottom-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_footnotes {
+#xmtddkutfj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5615,7 +5646,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-right-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_footnote {
+#xmtddkutfj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5624,7 +5655,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   padding-right: 5px;
 }
 
-#jyrhoskgah .gt_sourcenotes {
+#xmtddkutfj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5638,7 +5669,7 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   border-right-color: #D3D3D3;
 }
 
-#jyrhoskgah .gt_sourcenote {
+#xmtddkutfj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5646,72 +5677,72 @@ Table&nbsp;13: Political extremism by learner party. Extremism operationalized a
   padding-right: 5px;
 }
 
-#jyrhoskgah .gt_left {
+#xmtddkutfj .gt_left {
   text-align: left;
 }
 
-#jyrhoskgah .gt_center {
+#xmtddkutfj .gt_center {
   text-align: center;
 }
 
-#jyrhoskgah .gt_right {
+#xmtddkutfj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jyrhoskgah .gt_font_normal {
+#xmtddkutfj .gt_font_normal {
   font-weight: normal;
 }
 
-#jyrhoskgah .gt_font_bold {
+#xmtddkutfj .gt_font_bold {
   font-weight: bold;
 }
 
-#jyrhoskgah .gt_font_italic {
+#xmtddkutfj .gt_font_italic {
   font-style: italic;
 }
 
-#jyrhoskgah .gt_super {
+#xmtddkutfj .gt_super {
   font-size: 65%;
 }
 
-#jyrhoskgah .gt_footnote_marks {
+#xmtddkutfj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jyrhoskgah .gt_asterisk {
+#xmtddkutfj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jyrhoskgah .gt_indent_1 {
+#xmtddkutfj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jyrhoskgah .gt_indent_2 {
+#xmtddkutfj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jyrhoskgah .gt_indent_3 {
+#xmtddkutfj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jyrhoskgah .gt_indent_4 {
+#xmtddkutfj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jyrhoskgah .gt_indent_5 {
+#xmtddkutfj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jyrhoskgah .katex-display {
+#xmtddkutfj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jyrhoskgah div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xmtddkutfj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5758,23 +5789,23 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
 </figcaption>
 <div aria-describedby="tbl-descriptives-bot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="ayvkektebm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ayvkektebm table {
+<div id="tqkhuezska" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tqkhuezska table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ayvkektebm thead, #ayvkektebm tbody, #ayvkektebm tfoot, #ayvkektebm tr, #ayvkektebm td, #ayvkektebm th {
+#tqkhuezska thead, #tqkhuezska tbody, #tqkhuezska tfoot, #tqkhuezska tr, #tqkhuezska td, #tqkhuezska th {
   border-style: none;
 }
 
-#ayvkektebm p {
+#tqkhuezska p {
   margin: 0;
   padding: 0;
 }
 
-#ayvkektebm .gt_table {
+#tqkhuezska .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5800,12 +5831,12 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-left-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_caption {
+#tqkhuezska .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ayvkektebm .gt_title {
+#tqkhuezska .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5817,7 +5848,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-bottom-width: 0;
 }
 
-#ayvkektebm .gt_subtitle {
+#tqkhuezska .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5829,7 +5860,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-top-width: 0;
 }
 
-#ayvkektebm .gt_heading {
+#tqkhuezska .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5841,13 +5872,13 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-right-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_bottom_border {
+#tqkhuezska .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_col_headings {
+#tqkhuezska .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5862,7 +5893,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-right-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_col_heading {
+#tqkhuezska .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5882,7 +5913,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   overflow-x: hidden;
 }
 
-#ayvkektebm .gt_column_spanner_outer {
+#tqkhuezska .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5894,15 +5925,15 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   padding-right: 4px;
 }
 
-#ayvkektebm .gt_column_spanner_outer:first-child {
+#tqkhuezska .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ayvkektebm .gt_column_spanner_outer:last-child {
+#tqkhuezska .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ayvkektebm .gt_column_spanner {
+#tqkhuezska .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5914,11 +5945,11 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   width: 100%;
 }
 
-#ayvkektebm .gt_spanner_row {
+#tqkhuezska .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ayvkektebm .gt_group_heading {
+#tqkhuezska .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5944,7 +5975,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   text-align: left;
 }
 
-#ayvkektebm .gt_empty_group_heading {
+#tqkhuezska .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5959,15 +5990,15 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   vertical-align: middle;
 }
 
-#ayvkektebm .gt_from_md > :first-child {
+#tqkhuezska .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ayvkektebm .gt_from_md > :last-child {
+#tqkhuezska .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ayvkektebm .gt_row {
+#tqkhuezska .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5986,7 +6017,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   overflow-x: hidden;
 }
 
-#ayvkektebm .gt_stub {
+#tqkhuezska .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5999,7 +6030,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   padding-right: 5px;
 }
 
-#ayvkektebm .gt_stub_row_group {
+#tqkhuezska .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6013,15 +6044,15 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   vertical-align: top;
 }
 
-#ayvkektebm .gt_row_group_first td {
+#tqkhuezska .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ayvkektebm .gt_row_group_first th {
+#tqkhuezska .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ayvkektebm .gt_summary_row {
+#tqkhuezska .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6031,16 +6062,16 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   padding-right: 5px;
 }
 
-#ayvkektebm .gt_first_summary_row {
+#tqkhuezska .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_first_summary_row.thick {
+#tqkhuezska .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ayvkektebm .gt_last_summary_row {
+#tqkhuezska .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6050,7 +6081,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-bottom-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_grand_summary_row {
+#tqkhuezska .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6060,7 +6091,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   padding-right: 5px;
 }
 
-#ayvkektebm .gt_first_grand_summary_row {
+#tqkhuezska .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6070,7 +6101,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-top-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_last_grand_summary_row_top {
+#tqkhuezska .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6080,11 +6111,11 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-bottom-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_striped {
+#tqkhuezska .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ayvkektebm .gt_table_body {
+#tqkhuezska .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6093,7 +6124,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-bottom-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_footnotes {
+#tqkhuezska .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6107,7 +6138,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-right-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_footnote {
+#tqkhuezska .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -6116,7 +6147,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   padding-right: 5px;
 }
 
-#ayvkektebm .gt_sourcenotes {
+#tqkhuezska .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6130,7 +6161,7 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   border-right-color: #D3D3D3;
 }
 
-#ayvkektebm .gt_sourcenote {
+#tqkhuezska .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6138,72 +6169,72 @@ Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated t
   padding-right: 5px;
 }
 
-#ayvkektebm .gt_left {
+#tqkhuezska .gt_left {
   text-align: left;
 }
 
-#ayvkektebm .gt_center {
+#tqkhuezska .gt_center {
   text-align: center;
 }
 
-#ayvkektebm .gt_right {
+#tqkhuezska .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ayvkektebm .gt_font_normal {
+#tqkhuezska .gt_font_normal {
   font-weight: normal;
 }
 
-#ayvkektebm .gt_font_bold {
+#tqkhuezska .gt_font_bold {
   font-weight: bold;
 }
 
-#ayvkektebm .gt_font_italic {
+#tqkhuezska .gt_font_italic {
   font-style: italic;
 }
 
-#ayvkektebm .gt_super {
+#tqkhuezska .gt_super {
   font-size: 65%;
 }
 
-#ayvkektebm .gt_footnote_marks {
+#tqkhuezska .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ayvkektebm .gt_asterisk {
+#tqkhuezska .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ayvkektebm .gt_indent_1 {
+#tqkhuezska .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ayvkektebm .gt_indent_2 {
+#tqkhuezska .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ayvkektebm .gt_indent_3 {
+#tqkhuezska .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ayvkektebm .gt_indent_4 {
+#tqkhuezska .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ayvkektebm .gt_indent_5 {
+#tqkhuezska .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ayvkektebm .katex-display {
+#tqkhuezska .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ayvkektebm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tqkhuezska div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -6264,23 +6295,23 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
 </figcaption>
 <div aria-describedby="tbl-descriptives-confidence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="sylcxalowv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sylcxalowv table {
+<div id="blncptzddz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#blncptzddz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sylcxalowv thead, #sylcxalowv tbody, #sylcxalowv tfoot, #sylcxalowv tr, #sylcxalowv td, #sylcxalowv th {
+#blncptzddz thead, #blncptzddz tbody, #blncptzddz tfoot, #blncptzddz tr, #blncptzddz td, #blncptzddz th {
   border-style: none;
 }
 
-#sylcxalowv p {
+#blncptzddz p {
   margin: 0;
   padding: 0;
 }
 
-#sylcxalowv .gt_table {
+#blncptzddz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6306,12 +6337,12 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-left-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_caption {
+#blncptzddz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sylcxalowv .gt_title {
+#blncptzddz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -6323,7 +6354,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-bottom-width: 0;
 }
 
-#sylcxalowv .gt_subtitle {
+#blncptzddz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -6335,7 +6366,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-top-width: 0;
 }
 
-#sylcxalowv .gt_heading {
+#blncptzddz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -6347,13 +6378,13 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-right-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_bottom_border {
+#blncptzddz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_col_headings {
+#blncptzddz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6368,7 +6399,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-right-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_col_heading {
+#blncptzddz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6388,7 +6419,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   overflow-x: hidden;
 }
 
-#sylcxalowv .gt_column_spanner_outer {
+#blncptzddz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6400,15 +6431,15 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   padding-right: 4px;
 }
 
-#sylcxalowv .gt_column_spanner_outer:first-child {
+#blncptzddz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sylcxalowv .gt_column_spanner_outer:last-child {
+#blncptzddz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sylcxalowv .gt_column_spanner {
+#blncptzddz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -6420,11 +6451,11 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   width: 100%;
 }
 
-#sylcxalowv .gt_spanner_row {
+#blncptzddz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sylcxalowv .gt_group_heading {
+#blncptzddz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6450,7 +6481,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   text-align: left;
 }
 
-#sylcxalowv .gt_empty_group_heading {
+#blncptzddz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -6465,15 +6496,15 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   vertical-align: middle;
 }
 
-#sylcxalowv .gt_from_md > :first-child {
+#blncptzddz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sylcxalowv .gt_from_md > :last-child {
+#blncptzddz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sylcxalowv .gt_row {
+#blncptzddz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6492,7 +6523,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   overflow-x: hidden;
 }
 
-#sylcxalowv .gt_stub {
+#blncptzddz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6505,7 +6536,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   padding-right: 5px;
 }
 
-#sylcxalowv .gt_stub_row_group {
+#blncptzddz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6519,15 +6550,15 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   vertical-align: top;
 }
 
-#sylcxalowv .gt_row_group_first td {
+#blncptzddz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sylcxalowv .gt_row_group_first th {
+#blncptzddz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sylcxalowv .gt_summary_row {
+#blncptzddz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6537,16 +6568,16 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   padding-right: 5px;
 }
 
-#sylcxalowv .gt_first_summary_row {
+#blncptzddz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_first_summary_row.thick {
+#blncptzddz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sylcxalowv .gt_last_summary_row {
+#blncptzddz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6556,7 +6587,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-bottom-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_grand_summary_row {
+#blncptzddz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6566,7 +6597,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   padding-right: 5px;
 }
 
-#sylcxalowv .gt_first_grand_summary_row {
+#blncptzddz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6576,7 +6607,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-top-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_last_grand_summary_row_top {
+#blncptzddz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6586,11 +6617,11 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-bottom-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_striped {
+#blncptzddz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sylcxalowv .gt_table_body {
+#blncptzddz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -6599,7 +6630,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-bottom-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_footnotes {
+#blncptzddz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6613,7 +6644,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-right-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_footnote {
+#blncptzddz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -6622,7 +6653,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   padding-right: 5px;
 }
 
-#sylcxalowv .gt_sourcenotes {
+#blncptzddz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6636,7 +6667,7 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   border-right-color: #D3D3D3;
 }
 
-#sylcxalowv .gt_sourcenote {
+#blncptzddz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6644,72 +6675,72 @@ Table&nbsp;15: Confidence in outgroup judgments by learner party and time point.
   padding-right: 5px;
 }
 
-#sylcxalowv .gt_left {
+#blncptzddz .gt_left {
   text-align: left;
 }
 
-#sylcxalowv .gt_center {
+#blncptzddz .gt_center {
   text-align: center;
 }
 
-#sylcxalowv .gt_right {
+#blncptzddz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sylcxalowv .gt_font_normal {
+#blncptzddz .gt_font_normal {
   font-weight: normal;
 }
 
-#sylcxalowv .gt_font_bold {
+#blncptzddz .gt_font_bold {
   font-weight: bold;
 }
 
-#sylcxalowv .gt_font_italic {
+#blncptzddz .gt_font_italic {
   font-style: italic;
 }
 
-#sylcxalowv .gt_super {
+#blncptzddz .gt_super {
   font-size: 65%;
 }
 
-#sylcxalowv .gt_footnote_marks {
+#blncptzddz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sylcxalowv .gt_asterisk {
+#blncptzddz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sylcxalowv .gt_indent_1 {
+#blncptzddz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sylcxalowv .gt_indent_2 {
+#blncptzddz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sylcxalowv .gt_indent_3 {
+#blncptzddz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sylcxalowv .gt_indent_4 {
+#blncptzddz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sylcxalowv .gt_indent_5 {
+#blncptzddz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sylcxalowv .katex-display {
+#blncptzddz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sylcxalowv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#blncptzddz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -6780,8 +6811,8 @@ Table&nbsp;16: Robustness check using warmth difference scores (outgroup minus i
 
     <script>
 
-      function styleCell_7c7gkhi7dwfti8zmnzcw(i, j, css_id) {
-          var table = document.getElementById("tinytable_7c7gkhi7dwfti8zmnzcw");
+      function styleCell_t3g5pvqakw7gtdn62wne(i, j, css_id) {
+          var table = document.getElementById("tinytable_t3g5pvqakw7gtdn62wne");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -6790,8 +6821,8 @@ Table&nbsp;16: Robustness check using warmth difference scores (outgroup minus i
               console.warn(`Cell at (${i}, ${j}) not found.`);
           }
       }
-      function insertSpanRow_wszeqhvzu54sd8oir59f(i, colspan, content) {
-        var table = document.getElementById('tinytable_7c7gkhi7dwfti8zmnzcw');
+      function insertSpanRow_qnmqb7wlx4ciupjs8fkw(i, colspan, content) {
+        var table = document.getElementById('tinytable_t3g5pvqakw7gtdn62wne');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -6799,8 +6830,8 @@ Table&nbsp;16: Robustness check using warmth difference scores (outgroup minus i
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_7c7gkhi7dwfti8zmnzcw(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_7c7gkhi7dwfti8zmnzcw");
+      function spanCell_t3g5pvqakw7gtdn62wne(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_t3g5pvqakw7gtdn62wne");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -6827,27 +6858,27 @@ Table&nbsp;16: Robustness check using warmth difference scores (outgroup minus i
         targetCell.colSpan = colspan;
       }
       // tinytable span after
-window.addEventListener('load', function () { insertSpanRow_wszeqhvzu54sd8oir59f(5, 2, 'Full Regression Results') });
-window.addEventListener('load', function () { insertSpanRow_wszeqhvzu54sd8oir59f(1, 2, 'Simple Effects by Political Affiliation') });
+window.addEventListener('load', function () { insertSpanRow_qnmqb7wlx4ciupjs8fkw(5, 2, 'Full Regression Results') });
+window.addEventListener('load', function () { insertSpanRow_qnmqb7wlx4ciupjs8fkw(1, 2, 'Simple Effects by Political Affiliation') });
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 13, j: 1 },  ], css_id: 'tinytable_css_atwl7acbpe8rktusiab1',}, 
-          { positions: [ { i: 12, j: 1 },  ], css_id: 'tinytable_css_8rkjhy01tec1p5p0jygx',}, 
-          { positions: [ { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 },  ], css_id: 'tinytable_css_r33abz10t3sz20si726x',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_wml6itemqfqtibe31ozq',}, 
-          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_vupv18pej6kasoiyqdvh',}, 
-          { positions: [ { i: 13, j: 0 },  ], css_id: 'tinytable_css_xt1a0why1bjwsn80xbnc',}, 
-          { positions: [ { i: 12, j: 0 },  ], css_id: 'tinytable_css_m9y3j7cjnrtywq37rc65',}, 
-          { positions: [ { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 },  ], css_id: 'tinytable_css_cy0y5yi7vro3nh4bdwl6',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_y6zfhgjxmai2beo1o4of',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_9i21cr4rx8wqi1ky3ga7',}, 
+          { positions: [ { i: 13, j: 1 },  ], css_id: 'tinytable_css_vzixbd9fx91k7wwenhyf',}, 
+          { positions: [ { i: 12, j: 1 },  ], css_id: 'tinytable_css_m25oiabw76ey6cj8bdr8',}, 
+          { positions: [ { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 },  ], css_id: 'tinytable_css_mx9359ir86nhn7fhsof4',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 6, j: 1 },  ], css_id: 'tinytable_css_pgvwz3rkmzhrubantang',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_t46fip99qstmk1miicw6',}, 
+          { positions: [ { i: 13, j: 0 },  ], css_id: 'tinytable_css_qorrceucalnbpjzrf1ic',}, 
+          { positions: [ { i: 12, j: 0 },  ], css_id: 'tinytable_css_uarwvmkvev6do2mau27q',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 2, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 },  ], css_id: 'tinytable_css_yctuxg88lv10h6q6z4aq',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_2h5t5zssv0xe944g1qag',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_8a0xaodudjns96lvahb6',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_7c7gkhi7dwfti8zmnzcw(cell.i, cell.j, group.css_id);
+                  styleCell_t3g5pvqakw7gtdn62wne(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -6855,19 +6886,19 @@ window.addEventListener('load', function () { insertSpanRow_wszeqhvzu54sd8oir59f
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_atwl7acbpe8rktusiab1, .table th.tinytable_css_atwl7acbpe8rktusiab1 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_8rkjhy01tec1p5p0jygx, .table th.tinytable_css_8rkjhy01tec1p5p0jygx { text-align: center; border-bottom: solid lightgray 0.1em; }
-      .table td.tinytable_css_r33abz10t3sz20si726x, .table th.tinytable_css_r33abz10t3sz20si726x { text-align: center; }
-      .table td.tinytable_css_wml6itemqfqtibe31ozq, .table th.tinytable_css_wml6itemqfqtibe31ozq { text-align: center; font-weight: bold; }
-      .table td.tinytable_css_vupv18pej6kasoiyqdvh, .table th.tinytable_css_vupv18pej6kasoiyqdvh { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_xt1a0why1bjwsn80xbnc, .table th.tinytable_css_xt1a0why1bjwsn80xbnc { text-align: left; padding-left: 1em; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_m9y3j7cjnrtywq37rc65, .table th.tinytable_css_m9y3j7cjnrtywq37rc65 { text-align: left; padding-left: 1em; border-bottom: solid lightgray 0.1em; }
-      .table td.tinytable_css_cy0y5yi7vro3nh4bdwl6, .table th.tinytable_css_cy0y5yi7vro3nh4bdwl6 { text-align: left; padding-left: 1em; }
-      .table td.tinytable_css_y6zfhgjxmai2beo1o4of, .table th.tinytable_css_y6zfhgjxmai2beo1o4of { text-align: left; font-weight: bold; }
-      .table td.tinytable_css_9i21cr4rx8wqi1ky3ga7, .table th.tinytable_css_9i21cr4rx8wqi1ky3ga7 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_vzixbd9fx91k7wwenhyf, .table th.tinytable_css_vzixbd9fx91k7wwenhyf { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_m25oiabw76ey6cj8bdr8, .table th.tinytable_css_m25oiabw76ey6cj8bdr8 { text-align: center; border-bottom: solid lightgray 0.1em; }
+      .table td.tinytable_css_mx9359ir86nhn7fhsof4, .table th.tinytable_css_mx9359ir86nhn7fhsof4 { text-align: center; }
+      .table td.tinytable_css_pgvwz3rkmzhrubantang, .table th.tinytable_css_pgvwz3rkmzhrubantang { text-align: center; font-weight: bold; }
+      .table td.tinytable_css_t46fip99qstmk1miicw6, .table th.tinytable_css_t46fip99qstmk1miicw6 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_qorrceucalnbpjzrf1ic, .table th.tinytable_css_qorrceucalnbpjzrf1ic { text-align: left; padding-left: 1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_uarwvmkvev6do2mau27q, .table th.tinytable_css_uarwvmkvev6do2mau27q { text-align: left; padding-left: 1em; border-bottom: solid lightgray 0.1em; }
+      .table td.tinytable_css_yctuxg88lv10h6q6z4aq, .table th.tinytable_css_yctuxg88lv10h6q6z4aq { text-align: left; padding-left: 1em; }
+      .table td.tinytable_css_2h5t5zssv0xe944g1qag, .table th.tinytable_css_2h5t5zssv0xe944g1qag { text-align: left; font-weight: bold; }
+      .table td.tinytable_css_8a0xaodudjns96lvahb6, .table th.tinytable_css_8a0xaodudjns96lvahb6 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_7c7gkhi7dwfti8zmnzcw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_t3g5pvqakw7gtdn62wne" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -6944,23 +6975,23 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
 </figcaption>
 <div aria-describedby="tbl-extreme-cases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="olwgbfxkau" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#olwgbfxkau table {
+<div id="dgbndqswhs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dgbndqswhs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#olwgbfxkau thead, #olwgbfxkau tbody, #olwgbfxkau tfoot, #olwgbfxkau tr, #olwgbfxkau td, #olwgbfxkau th {
+#dgbndqswhs thead, #dgbndqswhs tbody, #dgbndqswhs tfoot, #dgbndqswhs tr, #dgbndqswhs td, #dgbndqswhs th {
   border-style: none;
 }
 
-#olwgbfxkau p {
+#dgbndqswhs p {
   margin: 0;
   padding: 0;
 }
 
-#olwgbfxkau .gt_table {
+#dgbndqswhs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -6986,12 +7017,12 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-left-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_caption {
+#dgbndqswhs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#olwgbfxkau .gt_title {
+#dgbndqswhs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -7003,7 +7034,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-bottom-width: 0;
 }
 
-#olwgbfxkau .gt_subtitle {
+#dgbndqswhs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -7015,7 +7046,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-top-width: 0;
 }
 
-#olwgbfxkau .gt_heading {
+#dgbndqswhs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -7027,13 +7058,13 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-right-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_bottom_border {
+#dgbndqswhs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_col_headings {
+#dgbndqswhs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7048,7 +7079,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-right-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_col_heading {
+#dgbndqswhs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7068,7 +7099,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   overflow-x: hidden;
 }
 
-#olwgbfxkau .gt_column_spanner_outer {
+#dgbndqswhs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7080,15 +7111,15 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   padding-right: 4px;
 }
 
-#olwgbfxkau .gt_column_spanner_outer:first-child {
+#dgbndqswhs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#olwgbfxkau .gt_column_spanner_outer:last-child {
+#dgbndqswhs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#olwgbfxkau .gt_column_spanner {
+#dgbndqswhs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -7100,11 +7131,11 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   width: 100%;
 }
 
-#olwgbfxkau .gt_spanner_row {
+#dgbndqswhs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#olwgbfxkau .gt_group_heading {
+#dgbndqswhs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7130,7 +7161,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   text-align: left;
 }
 
-#olwgbfxkau .gt_empty_group_heading {
+#dgbndqswhs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -7145,15 +7176,15 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   vertical-align: middle;
 }
 
-#olwgbfxkau .gt_from_md > :first-child {
+#dgbndqswhs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#olwgbfxkau .gt_from_md > :last-child {
+#dgbndqswhs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#olwgbfxkau .gt_row {
+#dgbndqswhs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7172,7 +7203,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   overflow-x: hidden;
 }
 
-#olwgbfxkau .gt_stub {
+#dgbndqswhs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7185,7 +7216,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   padding-right: 5px;
 }
 
-#olwgbfxkau .gt_stub_row_group {
+#dgbndqswhs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7199,15 +7230,15 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   vertical-align: top;
 }
 
-#olwgbfxkau .gt_row_group_first td {
+#dgbndqswhs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#olwgbfxkau .gt_row_group_first th {
+#dgbndqswhs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#olwgbfxkau .gt_summary_row {
+#dgbndqswhs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7217,16 +7248,16 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   padding-right: 5px;
 }
 
-#olwgbfxkau .gt_first_summary_row {
+#dgbndqswhs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_first_summary_row.thick {
+#dgbndqswhs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#olwgbfxkau .gt_last_summary_row {
+#dgbndqswhs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7236,7 +7267,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-bottom-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_grand_summary_row {
+#dgbndqswhs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7246,7 +7277,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   padding-right: 5px;
 }
 
-#olwgbfxkau .gt_first_grand_summary_row {
+#dgbndqswhs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7256,7 +7287,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-top-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_last_grand_summary_row_top {
+#dgbndqswhs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7266,11 +7297,11 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-bottom-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_striped {
+#dgbndqswhs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#olwgbfxkau .gt_table_body {
+#dgbndqswhs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7279,7 +7310,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-bottom-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_footnotes {
+#dgbndqswhs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7293,7 +7324,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-right-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_footnote {
+#dgbndqswhs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -7302,7 +7333,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   padding-right: 5px;
 }
 
-#olwgbfxkau .gt_sourcenotes {
+#dgbndqswhs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7316,7 +7347,7 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   border-right-color: #D3D3D3;
 }
 
-#olwgbfxkau .gt_sourcenote {
+#dgbndqswhs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -7324,72 +7355,72 @@ Table&nbsp;17: Comparison of participants showing the most versus least improvem
   padding-right: 5px;
 }
 
-#olwgbfxkau .gt_left {
+#dgbndqswhs .gt_left {
   text-align: left;
 }
 
-#olwgbfxkau .gt_center {
+#dgbndqswhs .gt_center {
   text-align: center;
 }
 
-#olwgbfxkau .gt_right {
+#dgbndqswhs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#olwgbfxkau .gt_font_normal {
+#dgbndqswhs .gt_font_normal {
   font-weight: normal;
 }
 
-#olwgbfxkau .gt_font_bold {
+#dgbndqswhs .gt_font_bold {
   font-weight: bold;
 }
 
-#olwgbfxkau .gt_font_italic {
+#dgbndqswhs .gt_font_italic {
   font-style: italic;
 }
 
-#olwgbfxkau .gt_super {
+#dgbndqswhs .gt_super {
   font-size: 65%;
 }
 
-#olwgbfxkau .gt_footnote_marks {
+#dgbndqswhs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#olwgbfxkau .gt_asterisk {
+#dgbndqswhs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#olwgbfxkau .gt_indent_1 {
+#dgbndqswhs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#olwgbfxkau .gt_indent_2 {
+#dgbndqswhs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#olwgbfxkau .gt_indent_3 {
+#dgbndqswhs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#olwgbfxkau .gt_indent_4 {
+#dgbndqswhs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#olwgbfxkau .gt_indent_5 {
+#dgbndqswhs .gt_indent_5 {
   text-indent: 25px;
 }
 
-#olwgbfxkau .katex-display {
+#dgbndqswhs .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#olwgbfxkau div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dgbndqswhs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -7471,23 +7502,23 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
 </figcaption>
 <div aria-describedby="tbl-extreme-engagement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="htoegvgepw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#htoegvgepw table {
+<div id="glbrypzwqk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#glbrypzwqk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#htoegvgepw thead, #htoegvgepw tbody, #htoegvgepw tfoot, #htoegvgepw tr, #htoegvgepw td, #htoegvgepw th {
+#glbrypzwqk thead, #glbrypzwqk tbody, #glbrypzwqk tfoot, #glbrypzwqk tr, #glbrypzwqk td, #glbrypzwqk th {
   border-style: none;
 }
 
-#htoegvgepw p {
+#glbrypzwqk p {
   margin: 0;
   padding: 0;
 }
 
-#htoegvgepw .gt_table {
+#glbrypzwqk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -7513,12 +7544,12 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-left-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_caption {
+#glbrypzwqk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#htoegvgepw .gt_title {
+#glbrypzwqk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -7530,7 +7561,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-bottom-width: 0;
 }
 
-#htoegvgepw .gt_subtitle {
+#glbrypzwqk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -7542,7 +7573,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-top-width: 0;
 }
 
-#htoegvgepw .gt_heading {
+#glbrypzwqk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -7554,13 +7585,13 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-right-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_bottom_border {
+#glbrypzwqk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_col_headings {
+#glbrypzwqk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7575,7 +7606,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-right-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_col_heading {
+#glbrypzwqk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7595,7 +7626,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   overflow-x: hidden;
 }
 
-#htoegvgepw .gt_column_spanner_outer {
+#glbrypzwqk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7607,15 +7638,15 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   padding-right: 4px;
 }
 
-#htoegvgepw .gt_column_spanner_outer:first-child {
+#glbrypzwqk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#htoegvgepw .gt_column_spanner_outer:last-child {
+#glbrypzwqk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#htoegvgepw .gt_column_spanner {
+#glbrypzwqk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -7627,11 +7658,11 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   width: 100%;
 }
 
-#htoegvgepw .gt_spanner_row {
+#glbrypzwqk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#htoegvgepw .gt_group_heading {
+#glbrypzwqk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7657,7 +7688,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   text-align: left;
 }
 
-#htoegvgepw .gt_empty_group_heading {
+#glbrypzwqk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -7672,15 +7703,15 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   vertical-align: middle;
 }
 
-#htoegvgepw .gt_from_md > :first-child {
+#glbrypzwqk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#htoegvgepw .gt_from_md > :last-child {
+#glbrypzwqk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#htoegvgepw .gt_row {
+#glbrypzwqk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7699,7 +7730,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   overflow-x: hidden;
 }
 
-#htoegvgepw .gt_stub {
+#glbrypzwqk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7712,7 +7743,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   padding-right: 5px;
 }
 
-#htoegvgepw .gt_stub_row_group {
+#glbrypzwqk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -7726,15 +7757,15 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   vertical-align: top;
 }
 
-#htoegvgepw .gt_row_group_first td {
+#glbrypzwqk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#htoegvgepw .gt_row_group_first th {
+#glbrypzwqk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#htoegvgepw .gt_summary_row {
+#glbrypzwqk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7744,16 +7775,16 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   padding-right: 5px;
 }
 
-#htoegvgepw .gt_first_summary_row {
+#glbrypzwqk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_first_summary_row.thick {
+#glbrypzwqk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#htoegvgepw .gt_last_summary_row {
+#glbrypzwqk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7763,7 +7794,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-bottom-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_grand_summary_row {
+#glbrypzwqk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -7773,7 +7804,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   padding-right: 5px;
 }
 
-#htoegvgepw .gt_first_grand_summary_row {
+#glbrypzwqk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7783,7 +7814,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-top-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_last_grand_summary_row_top {
+#glbrypzwqk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -7793,11 +7824,11 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-bottom-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_striped {
+#glbrypzwqk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#htoegvgepw .gt_table_body {
+#glbrypzwqk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -7806,7 +7837,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-bottom-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_footnotes {
+#glbrypzwqk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7820,7 +7851,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-right-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_footnote {
+#glbrypzwqk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -7829,7 +7860,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   padding-right: 5px;
 }
 
-#htoegvgepw .gt_sourcenotes {
+#glbrypzwqk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -7843,7 +7874,7 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   border-right-color: #D3D3D3;
 }
 
-#htoegvgepw .gt_sourcenote {
+#glbrypzwqk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -7851,72 +7882,72 @@ Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learne
   padding-right: 5px;
 }
 
-#htoegvgepw .gt_left {
+#glbrypzwqk .gt_left {
   text-align: left;
 }
 
-#htoegvgepw .gt_center {
+#glbrypzwqk .gt_center {
   text-align: center;
 }
 
-#htoegvgepw .gt_right {
+#glbrypzwqk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#htoegvgepw .gt_font_normal {
+#glbrypzwqk .gt_font_normal {
   font-weight: normal;
 }
 
-#htoegvgepw .gt_font_bold {
+#glbrypzwqk .gt_font_bold {
   font-weight: bold;
 }
 
-#htoegvgepw .gt_font_italic {
+#glbrypzwqk .gt_font_italic {
   font-style: italic;
 }
 
-#htoegvgepw .gt_super {
+#glbrypzwqk .gt_super {
   font-size: 65%;
 }
 
-#htoegvgepw .gt_footnote_marks {
+#glbrypzwqk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#htoegvgepw .gt_asterisk {
+#glbrypzwqk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#htoegvgepw .gt_indent_1 {
+#glbrypzwqk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#htoegvgepw .gt_indent_2 {
+#glbrypzwqk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#htoegvgepw .gt_indent_3 {
+#glbrypzwqk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#htoegvgepw .gt_indent_4 {
+#glbrypzwqk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#htoegvgepw .gt_indent_5 {
+#glbrypzwqk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#htoegvgepw .katex-display {
+#glbrypzwqk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#htoegvgepw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#glbrypzwqk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -8243,17 +8274,17 @@ loaded via a namespace (and not attached):
 [26] tables_0.9.31       stringi_1.8.7       RColorBrewer_1.1-3  car_3.1-3           boot_1.3-31        
 [31] lmtest_0.9-40       numDeriv_2016.8-1.1 estimability_1.5.1  Rcpp_1.0.14         assertthat_0.2.1   
 [36] knitr_1.50          zoo_1.8-14          parameters_0.28.0   splines_4.5.0       timechange_0.3.0   
-[41] tidyselect_1.2.1    abind_1.4-8         yaml_2.3.10         codetools_0.2-20    websocket_1.4.4    
+[41] tidyselect_1.2.1    abind_1.4-8         yaml_2.3.10         websocket_1.4.4     codetools_0.2-20   
 [46] processx_3.8.6      lattice_0.22-6      withr_3.0.2         bayestestR_0.16.1   coda_0.19-4.1      
 [51] evaluate_1.0.4      xml2_1.3.8          pillar_1.11.0       carData_3.0-5       checkmate_2.3.2    
 [56] reformulas_0.4.1    insight_1.4.0       generics_0.1.4      chromote_0.5.1      hms_1.1.3          
 [61] scales_1.4.0        minqa_1.2.8         xtable_1.8-4        glue_1.8.0          tools_4.5.0        
 [66] webshot2_0.1.2      data.table_1.17.8   egg_0.4.5           ggsignif_0.6.4      fs_1.6.6           
-[71] mvtnorm_1.3-3       grid_4.5.0          Ben_0.1.0           rbibutils_2.3       datawizard_1.2.0   
-[76] nlme_3.1-168        performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1  
-[81] fansi_1.0.6         gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37      
-[86] pbkrtest_0.5.4      htmlwidgets_1.6.4   farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4    
-[91] bit64_4.6.0-1       MASS_7.3-65        </code></pre>
+[71] mvtnorm_1.3-3       grid_4.5.0          rbibutils_2.3       datawizard_1.2.0    nlme_3.1-168       
+[76] performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1   fansi_1.0.6        
+[81] gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37       pbkrtest_0.5.4     
+[86] htmlwidgets_1.6.4   farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4     bit64_4.6.0-1      
+[91] MASS_7.3-65        </code></pre>
 </div>
 </div>
 

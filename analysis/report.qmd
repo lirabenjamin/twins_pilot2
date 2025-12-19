@@ -183,7 +183,7 @@ Even if participants update their beliefs, they may lack metacognitive awareness
 
 We test whether brief interactions with an AI chatbot representing a political outgroup improve belief accuracy and reduce affective polarization.
 We examine both informational mechanisms (does the chatbot provide useful information?) and empathic mechanisms (does the chatbot foster emotional connection?), and assess whether participants gain metacognitive insight into their improved understanding.
-We recruited `r nrow(dat)` partisan participants (prescreened to exclude moderates; `r n_dr` Democrats, `r n_rd` Republicans).
+We recruited `r nrow(dat)` partisan participants (prescreened to include participants who identified as democrats or republicans; `r n_dr` Democrats, `r n_rd` Republicans).
 Participants reported their own environmental attitudes, estimated the environmental attitudes of the average Democrat and Republican, and rated their warmth toward each political group.
 They then conversed for 10 minutes with a chatbot prompted to represent their political outgroup before re-rating outgroup warmth and re-estimating outgroup environmental attitudes.
 We hypothesized that participants would report more accurate beliefs about outgroup environmental attitudes and warmer feelings toward the political outgroup after the interaction.
@@ -746,7 +746,7 @@ p
 
 ### Is belief updating symmetric across political groups?
 
-```{r}
+```{r simple-effects-party}
 # Get simple effects
 # Note: reverse = TRUE ensures contrasts are computed as "post - pre" to match model coefficients
 accuracy_contrasts <- emmeans(accuracy_model, ~ time | learner_party) %>%
@@ -1405,9 +1405,36 @@ This study has several limitations that provide directions for future research.
 
 ## Methods
 
+```{r demographics}
+# Calculate demographic statistics
+age_mean <- mean(dat$age, na.rm = TRUE)
+age_sd <- sd(dat$age, na.rm = TRUE)
+age_range <- range(dat$age, na.rm = TRUE)
+
+# Gender breakdown
+gender_counts <- dat %>%
+  count(gender) %>%
+  mutate(pct = n / sum(n) * 100)
+
+pct_female <- gender_counts %>% filter(gender == "Female") %>% pull(pct)
+pct_male <- gender_counts %>% filter(gender == "Male") %>% pull(pct)
+pct_other_gender <- 100 - pct_female - pct_male
+
+# Race/ethnicity (participants could select multiple)
+pct_white <- mean(dat$race_white == 1, na.rm = TRUE) * 100
+pct_black <- mean(dat$race_black == 1, na.rm = TRUE) * 100
+pct_latino <- mean(dat$race_latino == 1, na.rm = TRUE) * 100
+pct_asian <- mean(dat$race_asian == 1, na.rm = TRUE) * 100
+pct_other_race <- mean((dat$race_native_american == 1 | dat$race_pacific_islander == 1 | dat$race_other == 1), na.rm = TRUE) * 100
+```
+
 ### Participants
 
-We recruited `r nrow(dat)` participants via Qualtrics panels. Participants were prescreened to exclude political moderates, retaining only those with clear partisan identities. Specifically, we recruited participants who scored below 25 or above 75 on a 0-100 political orientation scale during prescreening, where 0 represents strong Democratic identification and 100 represents strong Republican identification. The final sample included `r n_dr` Democrats learning about Republicans (D→R) and `r n_rd` Republicans learning about Democrats (R→D). Participants were compensated through the Qualtrics panel system. This research was approved by the University of Pennsylvania Institutional Review Board.
+We recruited `r nrow(dat)` participants via Qualtrics panels. Participants were prescreened to exclude political moderates, retaining only those with clear partisan identities. Specifically, we recruited participants who scored below 25 or above 75 on a 0-100 political orientation scale during prescreening, where 0 represents strong Democratic identification and 100 represents strong Republican identification. The final sample included `r n_dr` Democrats learning about Republicans (D→R) and `r n_rd` Republicans learning about Democrats (R→D).
+
+Participants' mean age was `r sprintf("%.1f", age_mean)` years (*SD* = `r sprintf("%.1f", age_sd)`, range = `r age_range[1]`–`r age_range[2]`). The sample was `r sprintf("%.1f", pct_female)`% female, `r sprintf("%.1f", pct_male)`% male, and `r sprintf("%.1f", pct_other_gender)`% other gender identities. Racial/ethnic composition was `r sprintf("%.1f", pct_white)`% White, `r sprintf("%.1f", pct_black)`% Black or African American, `r sprintf("%.1f", pct_latino)`% Latino, `r sprintf("%.1f", pct_asian)`% Asian, and `r sprintf("%.1f", pct_other_race)`% other racial/ethnic identities (participants could select multiple categories).
+
+Participants were compensated through the Qualtrics panel system. This research was approved by the University of Pennsylvania Institutional Review Board.
 
 ### Procedure
 
@@ -1446,10 +1473,42 @@ I haven't touched this data yet, because we don't have a control condition or a 
 **DATA AVAILABLE**: Raw slogan text in variable `slogan` (n = `r sum(!is.na(dat$slogan))` responses).
 
 **DATA NEEDED**:
-1.
-Semantic similarity scores (compare to AI-generated responses to detect copying)
-2.
-Quality ratings (human or LLM ratings of slogan fit to target outgroup)
+1. Semantic similarity scores (compare to AI-generated responses to detect copying)
+2. Quality ratings (human or LLM ratings of slogan fit to target outgroup)
+
+```{r example-slogans}
+# Get example slogans by party
+set.seed(123)  # For reproducibility
+example_slogans_dr <- dat %>%
+  filter(learner_party == "D→R", !is.na(slogan)) %>%
+  sample_n(min(10, n())) %>%
+  select(slogan) %>%
+  pull()
+
+example_slogans_rd <- dat %>%
+  filter(learner_party == "R→D", !is.na(slogan)) %>%
+  sample_n(min(10, n())) %>%
+  select(slogan) %>%
+  pull()
+```
+
+#### Example Slogans
+
+**Democrats Marketing to Republicans (D→R):**
+
+```{r display-slogans-dr, results='asis'}
+for (i in 1:length(example_slogans_dr)) {
+  cat(paste0(i, ". \"", example_slogans_dr[i], "\"\n"))
+}
+```
+
+**Republicans Marketing to Democrats (R→D):**
+
+```{r display-slogans-rd, results='asis'}
+for (i in 1:length(example_slogans_rd)) {
+  cat(paste0(i, ". \"", example_slogans_rd[i], "\"\n"))
+}
+```
 
 ### Correlation Matrix
 

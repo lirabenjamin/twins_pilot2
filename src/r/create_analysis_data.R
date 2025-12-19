@@ -18,6 +18,17 @@ analysis_data <- dat %>%
     learner_party,
     political_extremism,
 
+    # Demographics
+    age,
+    gender,
+    race_white,
+    race_black,
+    race_latino,
+    race_asian,
+    race_native_american,
+    race_pacific_islander,
+    race_other,
+
     # Pre-post belief accuracy
     accuracy_pre,
     accuracy_post,
