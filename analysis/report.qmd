@@ -109,7 +109,10 @@ coef_map_common <- c(
 
 ## Overview
 
-Political polarization  @example2024 creates challenges for marketers who must communicate effectively with ideologically [@example2024] diverse consumers. Misperceptions about political outgroups are widespread, with partisans often holding exaggerated and inaccurate views of those across the political divide. These misperceptions can lead to ineffective marketing strategies when firms attempt to appeal to broad consumer bases. This study tests whether interacting with an AI chatbot prompted to represent a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization.
+Political polarization  @example2024 creates challenges for marketers who must communicate effectively with ideologically [@example2024] diverse consumers. 
+Misperceptions about political outgroups are widespread, with partisans often holding exaggerated and inaccurate views of those across the political divide.
+These misperceptions can lead to ineffective marketing strategies when firms attempt to appeal to broad consumer bases.
+This study tests whether interacting with an AI chatbot prompted to represent a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization.
 
 ### Hypotheses
 
@@ -122,7 +125,8 @@ We hypothesized that after interacting with an AI chatbot representing their pol
 
 ### Data Collection
 
-We collected data via Qualtrics from `r nrow(dat)` participants. Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
+We collected data via Qualtrics from `r nrow(dat)` participants.
+Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
 
 ```{r}
 #| label: tbl-sample-composition
@@ -199,7 +203,9 @@ ggsave(paste0(fig_path, "fig_political_orientation.png"), p, width = 4, height =
 p
 ```
 
-The figure below compares actual green values with perceived ingroup and outgroup attitudes for Democrats and Republicans. The actual gap at baseline was much smaller than participants perceived. Perceptions of the ingroup are much more accurate.
+The figure below compares actual green values with perceived ingroup and outgroup attitudes for Democrats and Republicans.
+The actual gap at baseline was much smaller than participants perceived.
+Perceptions of the ingroup are much more accurate.
 
 ```{r}
 #| label: fig-green-attitudes
@@ -277,7 +283,8 @@ mean_rd <- bias_descriptives %>% filter(learner_party == "R→D") %>% pull(mean_
 sd_rd <- bias_descriptives %>% filter(learner_party == "R→D") %>% pull(sd_bias)
 ```
 
-What is the distribution of bias? At baseline, Democrats were more biased about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans were about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* = `r sprintf("%.3f", p)`.
+What is the distribution of bias?
+At baseline, Democrats were more biased about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans were about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* = `r sprintf("%.3f", p)`.
 
 ```{r}
 #| label: fig-bias-distribution
@@ -322,7 +329,8 @@ p1
 p2
 ```
 
-Does baseline accuracy correlate with baseline warmth? We examine whether people who are more biased about the outgroup also feel colder toward them.
+Does baseline accuracy correlate with baseline warmth?
+We examine whether people who are more biased about the outgroup also feel colder toward them.
 
 ```{r}
 #| label: fig-accuracy-warmth-baseline
@@ -347,7 +355,8 @@ ggsave(paste0(fig_path, "fig_baseline_accuracy_warmth.png"), p, width = 6, heigh
 p
 ```
 
-Does baseline accuracy predict baseline confidence? We examine whether less accurate participants are overconfident in their judgments, consistent with Dunning-Kruger effects.
+Does baseline accuracy predict baseline confidence?
+We examine whether less accurate participants are overconfident in their judgments, consistent with Dunning-Kruger effects.
 
 ```{r baseline-accuracy-confidence-correlation}
 #| label: fig-dunning-kruger
@@ -424,7 +433,8 @@ warmth_d <- cohens_d(warmth ~ time, data = warmth_long, pooled_sd = FALSE)$Cohen
 
 ```
 
-We examined whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown in the table above, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale, *d* = `r sprintf("%.2f", accuracy_d)`) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer, *d* = `r sprintf("%.2f", warmth_d)`).
+We examined whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth.
+As shown in the table above, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale, *d* = `r sprintf("%.2f", accuracy_d)`) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer, *d* = `r sprintf("%.2f", warmth_d)`).
 
 ```{r q1-plots}
 #| label: fig-accuracy-warmth-change
@@ -473,7 +483,8 @@ save_table(tbl, "tab_q1_main_effects")
 tbl
 ```
 
-Do changes in accuracy correlate with changes in warmth? We examine whether people who became more accurate also became warmer toward the outgroup.
+Do changes in accuracy correlate with changes in warmth?
+We examine whether people who became more accurate also became warmer toward the outgroup.
 
 ```{r accuracy-warmth-change-correlation}
 #| label: fig-accuracy-warmth-correlation
@@ -572,9 +583,13 @@ attr(rows, "position") <- c(1, 2, 3, 4) # Inserts at rows 1 and 2
 
 ```
 
-While both groups became more accurate, it was Democrats learning about Republicans who showed greater improvement (*b* = `r sprintf("%.2f", acc_dr_est)`, *d* = `r sprintf("%.2f", acc_dr_d)`, *p* `r if(acc_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_dr_p))`). Republicans also became less biased about Democrats, though to a lesser extent (*b* = `r sprintf("%.2f", acc_rd_est)`, *d* = `r sprintf("%.2f", acc_rd_d)`, *p* `r if(acc_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_rd_p))`). The interaction term was `r if(acc_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", acc_interaction_coef)`, *p* `r if(acc_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_interaction_p))`).
+While both groups became more accurate, it was Democrats learning about Republicans who showed greater improvement (*b* = `r sprintf("%.2f", acc_dr_est)`, *d* = `r sprintf("%.2f", acc_dr_d)`, *p* `r if(acc_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_dr_p))`).
+Republicans also became less biased about Democrats, though to a lesser extent (*b* = `r sprintf("%.2f", acc_rd_est)`, *d* = `r sprintf("%.2f", acc_rd_d)`, *p* `r if(acc_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_rd_p))`).
+The interaction term was `r if(acc_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", acc_interaction_coef)`, *p* `r if(acc_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", acc_interaction_p))`).
 
-Both groups became warmer toward the outgroup at similar rates. Democrats learning about Republicans increased warmth by `r sprintf("%.1f", warmth_dr_est)` degrees (*d* = `r sprintf("%.2f", warmth_dr_d)`, *p* `r if(warmth_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_dr_p))`), while Republicans learning about Democrats increased by `r sprintf("%.1f", warmth_rd_est)` degrees (*d* = `r sprintf("%.2f", warmth_rd_d)`, *p* `r if(warmth_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_rd_p))`). The interaction was `r if(warmth_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", warmth_interaction_coef)`, *p* `r if(warmth_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_interaction_p))`).
+Both groups became warmer toward the outgroup at similar rates.
+Democrats learning about Republicans increased warmth by `r sprintf("%.1f", warmth_dr_est)` degrees (*d* = `r sprintf("%.2f", warmth_dr_d)`, *p* `r if(warmth_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_dr_p))`), while Republicans learning about Democrats increased by `r sprintf("%.1f", warmth_rd_est)` degrees (*d* = `r sprintf("%.2f", warmth_rd_d)`, *p* `r if(warmth_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_rd_p))`).
+The interaction was `r if(warmth_interaction_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", warmth_interaction_coef)`, *p* `r if(warmth_interaction_p < 0.001) "< .001" else paste("=", sprintf("%.3f", warmth_interaction_p))`).
 
 ```{r}
 #| label: tbl-symmetry
@@ -694,7 +709,10 @@ rows_extremism <- tibble(
 attr(rows_extremism, "position") <- c(1, 2, 3, 4)
 ```
 
-Politically extreme participants showed greater bias about the outgroup at baseline (*b* = `r sprintf("%.3f", extremism_acc_baseline_b)`, *r* = `r sprintf("%.2f", extremism_acc_baseline_r)`, *p* `r if(extremism_acc_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_acc_baseline_p))`) and felt less warm toward them (*b* = `r sprintf("%.2f", extremism_warmth_baseline_b)`, *r* = `r sprintf("%.2f", extremism_warmth_baseline_r)`, *p* `r if(extremism_warmth_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_warmth_baseline_p))`). However, political extremism did not moderate the effect of the chatbot interaction. The three-way interaction for accuracy was `r if(extremism_3way_acc_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.3f", extremism_3way_acc_coef)`, *p* `r if(extremism_3way_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_acc_p))`), and for warmth was `r if(extremism_3way_warmth_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", extremism_3way_warmth_coef)`, *p* `r if(extremism_3way_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_warmth_p))`). More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.
+Politically extreme participants showed greater bias about the outgroup at baseline (*b* = `r sprintf("%.3f", extremism_acc_baseline_b)`, *r* = `r sprintf("%.2f", extremism_acc_baseline_r)`, *p* `r if(extremism_acc_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_acc_baseline_p))`) and felt less warm toward them (*b* = `r sprintf("%.2f", extremism_warmth_baseline_b)`, *r* = `r sprintf("%.2f", extremism_warmth_baseline_r)`, *p* `r if(extremism_warmth_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_warmth_baseline_p))`).
+However, political extremism did not moderate the effect of the chatbot interaction.
+The three-way interaction for accuracy was `r if(extremism_3way_acc_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.3f", extremism_3way_acc_coef)`, *p* `r if(extremism_3way_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_acc_p))`), and for warmth was `r if(extremism_3way_warmth_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", extremism_3way_warmth_coef)`, *p* `r if(extremism_3way_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_warmth_p))`).
+More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.
 
 ```{r}
 #| label: tbl-extremism
@@ -742,7 +760,8 @@ empathy_warmth_b <- coef(warmth_process_model)["empathy"]
 empathy_warmth_p <- summary(warmth_process_model)$coefficients["empathy", "Pr(>|t|)"]
 ```
 
-Participants who found the chatbot more informative showed `r if(info_acc_p < 0.05) "significantly" else "marginally"` better accuracy improvement (*b* = `r sprintf("%.3f", info_acc_b)`, *p* `r if(info_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_acc_p))`) and `r if(info_warmth_p < 0.05) "significantly" else "marginally"` greater warmth increases (*b* = `r sprintf("%.2f", info_warmth_b)`, *p* `r if(info_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_warmth_p))`). Bot empathy did not significantly predict accuracy change (*b* = `r sprintf("%.3f", empathy_acc_b)`, *p* `r if(empathy_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_acc_p))`) or warmth change (*b* = `r sprintf("%.2f", empathy_warmth_b)`, *p* `r if(empathy_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_warmth_p))`).
+Participants who found the chatbot more informative showed `r if(info_acc_p < 0.05) "significantly" else "marginally"` better accuracy improvement (*b* = `r sprintf("%.3f", info_acc_b)`, *p* `r if(info_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_acc_p))`) and `r if(info_warmth_p < 0.05) "significantly" else "marginally"` greater warmth increases (*b* = `r sprintf("%.2f", info_warmth_b)`, *p* `r if(info_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_warmth_p))`).
+Bot empathy did not significantly predict accuracy change (*b* = `r sprintf("%.3f", empathy_acc_b)`, *p* `r if(empathy_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_acc_p))`) or warmth change (*b* = `r sprintf("%.2f", empathy_warmth_b)`, *p* `r if(empathy_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_warmth_p))`).
 
 ```{r}
 #| label: tbl-mechanisms
@@ -759,7 +778,8 @@ save_table(tbl, "tab_q4_process")
 tbl
 ```
 
-Do perceptions of informativeness and empathy correlate with each other? Yes, but not strongly (r ~ .30). 
+Do perceptions of informativeness and empathy correlate with each other?
+Yes, but not strongly (r ~ .30). 
 
 ```{r}
 #| label: fig-empathy-informativeness
@@ -822,7 +842,8 @@ m_warmth_log_words <- lm(warmth_change ~ log_word_count + warmth_outgroup_pre + 
                          data = dat)
 ```
 
-Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with accuracy change (*b* = `r sprintf("%.4f", coef(m_accuracy_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"])`), and `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`). Using log-transformed word count, the effect on accuracy was `r if(coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_accuracy_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"])`), and on warmth was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
+Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with accuracy change (*b* = `r sprintf("%.4f", coef(m_accuracy_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"])`), and `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`).
+Using log-transformed word count, the effect on accuracy was `r if(coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_accuracy_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"])`), and on warmth was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
 
 ```{r}
 #| label: tbl-engagement
@@ -909,13 +930,16 @@ p_combined
 
 ### Q6. Does interacting with the chatbot improve applied judgment?
 
-Participants wrote slogans for marketing energy-saving appliances to the political outgroup. I haven't touched this data yet, because we don't have a control condition or a baseline slogan to make a meaningful comparison to.
+Participants wrote slogans for marketing energy-saving appliances to the political outgroup.
+I haven't touched this data yet, because we don't have a control condition or a baseline slogan to make a meaningful comparison to.
 
 **DATA AVAILABLE**: Raw slogan text in variable `slogan` (n = `r sum(!is.na(dat$slogan))` responses).
 
 **DATA NEEDED**:
-1. Semantic similarity scores (compare to AI-generated responses to detect copying)
-2. Quality ratings (human or LLM ratings of slogan fit to target outgroup)
+1.
+Semantic similarity scores (compare to AI-generated responses to detect copying)
+2.
+Quality ratings (human or LLM ratings of slogan fit to target outgroup)
 
 ### Q7. Does confidence track accuracy—or diverge from it?
 
@@ -982,7 +1006,8 @@ rows_confidence <- tibble(
 attr(rows_confidence, "position") <- c(1, 2, 3, 4)
 ```
 
-Republicans learning about Democrats gained confidence after the interaction (*b* = `r sprintf("%.3f", conf_rd_est)`, *d* = `r sprintf("%.2f", conf_rd_d)`, *p* `r if(conf_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_rd_p))`), despite learning less than Democrats. Democrats' confidence did not significantly change (*b* = `r sprintf("%.3f", conf_dr_est)`, *d* = `r sprintf("%.2f", conf_dr_d)`, *p* `r if(conf_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_dr_p))`).
+Republicans learning about Democrats gained confidence after the interaction (*b* = `r sprintf("%.3f", conf_rd_est)`, *d* = `r sprintf("%.2f", conf_rd_d)`, *p* `r if(conf_rd_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_rd_p))`), despite learning less than Democrats.
+Democrats' confidence did not significantly change (*b* = `r sprintf("%.3f", conf_dr_est)`, *d* = `r sprintf("%.2f", conf_dr_d)`, *p* `r if(conf_dr_p < 0.001) "< .001" else paste("=", sprintf("%.3f", conf_dr_p))`).
 
 ```{r}
 #| label: fig-confidence-change
@@ -1201,7 +1226,9 @@ tbl <- cor_df %>%
     Variable = ""
   ) %>%
   tab_footnote(
-    footnote = "* p<0.05, ** p<0.01, *** p<0.001. Lower triangle shows correlations with significance stars. Upper triangle left blank for readability."
+    footnote = "* p<0.05, ** p<0.01, *** p<0.001.
+Lower triangle shows correlations with significance stars.
+Upper triangle left blank for readability."
   ) %>%
   tab_style(
     style = cell_text(size = px(10)),
@@ -1241,7 +1268,8 @@ tbl_acc <- modelsummary(
   coef_omit = "Intercept",
   statistic = NULL,
   coef_map = coef_map_common,
-  notes = "Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001"
+  notes = "Note: Models 1-3 are mixed effects with random intercepts.
+Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001"
 ) %>%
   group_tt(j = list(
     "Pre-Post Change" = 2:3,
@@ -1436,7 +1464,8 @@ dat %>%
 
 #### Warmth Difference Score
 
-Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup). Effects replicate what is reported on the main text.
+Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup).
+Effects replicate what is reported on the main text.
 
 ```{r warmth-difference}
 # Prepare warmth difference data
@@ -1535,31 +1564,36 @@ extreme_cases %>%
 
 #### Marketing Messages from Extreme Cases
 
-Participants wrote marketing slogans for energy-saving appliances targeted at their political outgroup. The messages reveal stark differences between successful and unsuccessful learners.
+Participants wrote marketing slogans for energy-saving appliances targeted at their political outgroup.
+The messages reveal stark differences between successful and unsuccessful learners.
 
 **Democrats Learning About Republicans (D→R)**
 
 *Most Improved* (accuracy improvement = 2.843):
 > "Energy-saving Appliances, Helps Make America Great!"
 
-This message uses patriotic language that bridges partisan values. The participant engaged deeply on economic issues and found genuine common ground.
+This message uses patriotic language that bridges partisan values.
+The participant engaged deeply on economic issues and found genuine common ground.
 
 *Least Improved* (accuracy worsened by 1.333):
 > "made for independence 'lower your costs, stay in control'."
 
-This message shows confused framing about independence and control. The participant's conversation remained surface-level and distracted.
+This message shows confused framing about independence and control.
+The participant's conversation remained surface-level and distracted.
 
 **Republicans Learning About Democrats (R→D)**
 
 *Most Improved* (accuracy improvement = 3.000):
 > "energy saving appliances . save energy and our planet"
 
-This message authentically reflects Democratic environmental values with simple, accessible language. The participant's conversation explored multiple policy areas comprehensively.
+This message authentically reflects Democratic environmental values with simple, accessible language.
+The participant's conversation explored multiple policy areas comprehensively.
 
 *Least Improved* (accuracy worsened by 2.167):
 > "Come spend 50% more on less practical appliances since that's what you claim to do and support the business. But I know you won't because just like every Republican said its not financially plausible and your actions only prove the Republicans point."
 
-This openly hostile message reinforces stereotypes rather than bridging divides. The participant challenged the chatbot's authenticity throughout and remained adversarial.
+This openly hostile message reinforces stereotypes rather than bridging divides.
+The participant challenged the chatbot's authenticity throughout and remained adversarial.
 
 #### Patterns in Successful vs. Unsuccessful Learning
 
@@ -1606,7 +1640,8 @@ The qualitative analysis of conversations (full transcripts available in data/pr
 - Stayed in adversarial mode
 - Created divisive or sarcastic marketing messages
 
-These patterns suggest that genuine engagement is crucial for learning across partisan lines. Participants who used the conversation to confirm existing biases actually became less accurate, while those who approached it with openness showed dramatic improvements.
+These patterns suggest that genuine engagement is crucial for learning across partisan lines.
+Participants who used the conversation to confirm existing biases actually became less accurate, while those who approached it with openness showed dramatic improvements.
 
 ### Full Conversation Transcripts
 
@@ -1716,7 +1751,8 @@ Extreme cases analysis: [src/r/analyze_extreme_cases.R](../src/r/analyze_extreme
 
 ### Pre-Registration
 
-This study was pre-registered prior to data collection. See [docs/pre-registration.md](../docs/pre-registration.md) for complete details including hypotheses, measures, sample size justification, and planned analyses.
+This study was pre-registered prior to data collection.
+See [docs/pre-registration.md](../docs/pre-registration.md) for complete details including hypotheses, measures, sample size justification, and planned analyses.
 
 ### Session Information
 

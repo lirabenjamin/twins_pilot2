@@ -205,7 +205,7 @@
 \title{Learning from Twins: Can marketers learn about consumers across
 the political divide by interacting with AI}
 \author{Benjamin Lira}
-\date{2025-12-18}
+\date{2025-12-19}
 
 \begin{document}
 \maketitle
@@ -446,8 +446,9 @@ We examined whether participants changed their beliefs about the
 outgroup's environmental attitudes from pre- to post-interaction,
 analyzing both accuracy and warmth. As shown in the table above,
 participants became significantly more accurate (improving by 0.39
-points on the 5-point scale) and warmer toward the outgroup (increasing
-by 4.3 degrees on the 100-point thermometer).
+points on the 5-point scale, \emph{d} = -0.49) and warmer toward the
+outgroup (increasing by 4.3 degrees on the 100-point thermometer,
+\emph{d} = -0.17).
 
 \begin{figure}
 
@@ -526,14 +527,6 @@ Do changes in accuracy correlate with changes in warmth? We examine
 whether people who became more accurate also became warmer toward the
 outgroup.
 
-\begin{verbatim}
-List of 1
- $ legend.position: chr "bottom"
- - attr(*, "class")= chr [1:2] "theme" "gg"
- - attr(*, "complete")= logi FALSE
- - attr(*, "validate")= logi TRUE
-\end{verbatim}
-
 \begin{figure}
 
 \centering{
@@ -556,17 +549,18 @@ party.}
 groups?}\label{q2.-is-belief-updating-symmetric-across-political-groups}
 
 While both groups became more accurate, it was Democrats learning about
-Republicans who showed greater improvement (\emph{b} = 0.63, \emph{p}
-\textless{} .001). Republicans also became less biased about Democrats,
-though to a lesser extent (\emph{b} = 0.16, \emph{p} = 0.002). The
-interaction term was significant (\emph{b} = -0.46, \emph{p} \textless{}
-.001).
+Republicans who showed greater improvement (\emph{b} = 0.63, \emph{d} =
+-0.75, \emph{p} \textless{} .001). Republicans also became less biased
+about Democrats, though to a lesser extent (\emph{b} = 0.16, \emph{d} =
+-0.29, \emph{p} = 0.002). The interaction term was significant (\emph{b}
+= -0.46, \emph{p} \textless{} .001).
 
 Both groups became warmer toward the outgroup at similar rates.
 Democrats learning about Republicans increased warmth by 5.1 degrees
-(\emph{p} \textless{} .001), while Republicans learning about Democrats
-increased by 3.5 degrees (\emph{p} \textless{} .001). The interaction
-was not significant (\emph{b} = -1.60, \emph{p} = 0.127).
+(\emph{d} = -0.21, \emph{p} \textless{} .001), while Republicans
+learning about Democrats increased by 3.5 degrees (\emph{d} = -0.14,
+\emph{p} \textless{} .001). The interaction was not significant
+(\emph{b} = -1.60, \emph{p} = 0.127).
 
 \begin{table}
 
@@ -729,14 +723,14 @@ Num.Obs. & \num{1000} & \num{1000} \\
 update?}\label{q3.-does-political-extremity-predict-how-much-people-update}
 
 Politically extreme participants showed greater bias about the outgroup
-at baseline (\emph{b} = -0.012, \emph{p} \textless{} .001) and felt less
-warm toward them (\emph{b} = -0.54, \emph{p} \textless{} .001). However,
-political extremism did not moderate the effect of the chatbot
-interaction. The three-way interaction for accuracy was not significant
-(\emph{b} = 0.007, \emph{p} = 0.185), and for warmth was not significant
-(\emph{b} = 0.08, \emph{p} = 0.315). More and less extreme participants
-were equally likely to update their beliefs and warmth toward the
-outgroup.
+at baseline (\emph{b} = -0.012, \emph{r} = -0.20, \emph{p} \textless{}
+.001) and felt less warm toward them (\emph{b} = -0.54, \emph{r} =
+-0.31, \emph{p} \textless{} .001). However, political extremism did not
+moderate the effect of the chatbot interaction. The three-way
+interaction for accuracy was not significant (\emph{b} = 0.007, \emph{p}
+= 0.185), and for warmth was not significant (\emph{b} = 0.08, \emph{p}
+= 0.315). More and less extreme participants were equally likely to
+update their beliefs and warmth toward the outgroup.
 
 \begin{table}
 
@@ -1261,9 +1255,10 @@ track with actual accuracy improvements.
 pre-to-post?}\label{does-confidence-change-pre-to-post}
 
 Republicans learning about Democrats gained confidence after the
-interaction (\emph{b} = 0.306, \emph{p} \textless{} .001), despite
-learning less than Democrats. Democrats' confidence did not
-significantly change (\emph{b} = -0.065, \emph{p} = 0.328).
+interaction (\emph{b} = 0.306, \emph{d} = -0.30, \emph{p} \textless{}
+.001), despite learning less than Democrats. Democrats' confidence did
+not significantly change (\emph{b} = -0.065, \emph{d} = 0.06, \emph{p} =
+0.328).
 
 \begin{figure}
 
@@ -1561,6 +1556,90 @@ the relative effectiveness and cost-efficiency of AI chatbots versus
 other scalable interventions for partisan debiasing.
 
 \subsection{Appendix}\label{appendix}
+
+\subsubsection{Correlation Matrix}\label{correlation-matrix}
+
+\begin{table}
+
+\caption{\label{tbl-correlation-matrix}Correlation matrix with
+significance stars for all key variables. Lower triangle shows Pearson
+correlation coefficients with significance indicators (* p\textless0.05,
+** p\textless0.01, *** p\textless0.001). Upper triangle intentionally
+left blank for readability. Variables include political orientation,
+belief accuracy, environmental attitudes, outgroup warmth, confidence,
+bot perceptions, and engagement measures.}
+
+\centering{
+
+\caption*{
+{\large Correlation Matrix of Key Variables}
+} 
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llllllllllllllllllll}
+\toprule
+ & {\bfseries Political Orientation} & {\bfseries Political Extremism} & {\bfseries Accuracy (Pre)} & {\bfseries Accuracy (Post)} & {\bfseries Green Own} & {\bfseries Green Ingroup} & {\bfseries Green Outgroup (Pre)} & {\bfseries Green Outgroup (Post)} & {\bfseries Warmth Outgroup (Pre)} & {\bfseries Warmth Outgroup (Post)} & {\bfseries Warmth Ingroup (Pre)} & {\bfseries Warmth Ingroup (Post)} & {\bfseries Confidence Ingroup} & {\bfseries Confidence Outgroup (Pre)} & {\bfseries Confidence Outgroup (Post)} & {\bfseries Bot Informativeness} & {\bfseries Bot Empathy} & {\bfseries Turn Count} & {\bfseries Word Count} \\ 
+\midrule\addlinespace[2.5pt]
+{\bfseries Political Orientation} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Political Extremism} & {-0.08} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Accuracy (Pre)} & {0.51***} & {-0.20***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Accuracy (Post)} & {0.35***} & {-0.16***} & {0.46***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Green Own} & {-0.22***} & {0.14**} & {-0.17***} & {-0.05} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Green Ingroup} & {-0.36***} & {0.30***} & {-0.32***} & {-0.18***} & {0.66***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Green Outgroup (Pre)} & {0.64***} & {-0.16***} & {0.88***} & {0.40***} & {-0.15***} & {-0.33***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Green Outgroup (Post)} & {0.49***} & {-0.09} & {0.55***} & {0.71***} & {0.07} & {-0.13**} & {0.64***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Warmth Outgroup (Pre)} & {0.23***} & {-0.31***} & {0.49***} & {0.32***} & {0.01} & {-0.09*} & {0.46***} & {0.37***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Warmth Outgroup (Post)} & {0.20***} & {-0.27***} & {0.45***} & {0.35***} & {0.07} & {-0.02} & {0.42***} & {0.41***} & {0.89***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Warmth Ingroup (Pre)} & {0.16***} & {0.49***} & {0.04} & {0.00} & {0.14**} & {0.28***} & {0.08} & {0.15**} & {0.04} & {0.07} & {—} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Warmth Ingroup (Post)} & {0.13**} & {0.45***} & {0.02} & {-0.00} & {0.12**} & {0.26***} & {0.05} & {0.13**} & {0.03} & {0.05} & {0.91***} & {—} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Confidence Ingroup} & {0.11*} & {0.25***} & {-0.09*} & {-0.06} & {0.25***} & {0.26***} & {0.01} & {0.12**} & {-0.01} & {0.02} & {0.33***} & {0.30***} & {—} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Confidence Outgroup (Pre)} & {0.07} & {0.13**} & {-0.17***} & {-0.15***} & {0.08} & {0.07} & {-0.02} & {0.04} & {-0.12**} & {-0.08} & {0.17***} & {0.15***} & {0.52***} & {—} & {} & {} & {} & {} & {} \\ 
+{\bfseries Confidence Outgroup (Post)} & {0.25***} & {0.07} & {0.12**} & {-0.12**} & {0.07} & {0.01} & {0.26***} & {0.14**} & {0.10*} & {0.15***} & {0.23***} & {0.21***} & {0.45***} & {0.47***} & {—} & {} & {} & {} & {} \\ 
+{\bfseries Bot Informativeness} & {0.20***} & {0.03} & {0.22***} & {0.25***} & {0.17***} & {0.06} & {0.25***} & {0.37***} & {0.22***} & {0.29***} & {0.20***} & {0.19***} & {0.23***} & {0.13**} & {0.24***} & {—} & {} & {} & {} \\ 
+{\bfseries Bot Empathy} & {0.17***} & {-0.01} & {0.04} & {0.13**} & {0.12**} & {0.06} & {0.08} & {0.21***} & {0.13**} & {0.18***} & {0.15***} & {0.14**} & {0.18***} & {0.16***} & {0.20***} & {0.35***} & {—} & {} & {} \\ 
+{\bfseries Turn Count} & {-0.04} & {-0.04} & {-0.05} & {-0.04} & {-0.09*} & {-0.11*} & {-0.00} & {-0.02} & {-0.03} & {-0.05} & {-0.04} & {-0.05} & {-0.04} & {-0.01} & {-0.06} & {-0.08} & {-0.05} & {—} & {} \\ 
+{\bfseries Word Count} & {0.05} & {0.02} & {-0.03} & {-0.02} & {-0.03} & {-0.10*} & {-0.01} & {0.02} & {-0.02} & {-0.04} & {-0.01} & {-0.00} & {-0.00} & {0.08} & {0.02} & {-0.03} & {0.06} & {0.18***} & {—} \\ 
+\bottomrule
+\end{tabular*}
+\begin{minipage}{\linewidth}
+* p<0.05, ** p<0.01, *** p<0.001. Lower triangle shows correlations with significance stars. Upper triangle left blank for readability.\\
+\end{minipage}
+
+\caption*{
+{\large Correlation Matrix of Key Variables}
+} 
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llllllllllllllllllll}
+\toprule
+ & {\bfseries Political Orientation} & {\bfseries Political Extremism} & {\bfseries Accuracy (Pre)} & {\bfseries Accuracy (Post)} & {\bfseries Green Own} & {\bfseries Green Ingroup} & {\bfseries Green Outgroup (Pre)} & {\bfseries Green Outgroup (Post)} & {\bfseries Warmth Outgroup (Pre)} & {\bfseries Warmth Outgroup (Post)} & {\bfseries Warmth Ingroup (Pre)} & {\bfseries Warmth Ingroup (Post)} & {\bfseries Confidence Ingroup} & {\bfseries Confidence Outgroup (Pre)} & {\bfseries Confidence Outgroup (Post)} & {\bfseries Bot Informativeness} & {\bfseries Bot Empathy} & {\bfseries Turn Count} & {\bfseries Word Count} \\ 
+\midrule\addlinespace[2.5pt]
+{\bfseries Political Orientation} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Political Extremism} & {-0.08} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Accuracy (Pre)} & {0.51***} & {-0.20***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Accuracy (Post)} & {0.35***} & {-0.16***} & {0.46***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Green Own} & {-0.22***} & {0.14**} & {-0.17***} & {-0.05} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Green Ingroup} & {-0.36***} & {0.30***} & {-0.32***} & {-0.18***} & {0.66***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Green Outgroup (Pre)} & {0.64***} & {-0.16***} & {0.88***} & {0.40***} & {-0.15***} & {-0.33***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Green Outgroup (Post)} & {0.49***} & {-0.09} & {0.55***} & {0.71***} & {0.07} & {-0.13**} & {0.64***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Warmth Outgroup (Pre)} & {0.23***} & {-0.31***} & {0.49***} & {0.32***} & {0.01} & {-0.09*} & {0.46***} & {0.37***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Warmth Outgroup (Post)} & {0.20***} & {-0.27***} & {0.45***} & {0.35***} & {0.07} & {-0.02} & {0.42***} & {0.41***} & {0.89***} & {—} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Warmth Ingroup (Pre)} & {0.16***} & {0.49***} & {0.04} & {0.00} & {0.14**} & {0.28***} & {0.08} & {0.15**} & {0.04} & {0.07} & {—} & {} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Warmth Ingroup (Post)} & {0.13**} & {0.45***} & {0.02} & {-0.00} & {0.12**} & {0.26***} & {0.05} & {0.13**} & {0.03} & {0.05} & {0.91***} & {—} & {} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Confidence Ingroup} & {0.11*} & {0.25***} & {-0.09*} & {-0.06} & {0.25***} & {0.26***} & {0.01} & {0.12**} & {-0.01} & {0.02} & {0.33***} & {0.30***} & {—} & {} & {} & {} & {} & {} & {} \\ 
+{\bfseries Confidence Outgroup (Pre)} & {0.07} & {0.13**} & {-0.17***} & {-0.15***} & {0.08} & {0.07} & {-0.02} & {0.04} & {-0.12**} & {-0.08} & {0.17***} & {0.15***} & {0.52***} & {—} & {} & {} & {} & {} & {} \\ 
+{\bfseries Confidence Outgroup (Post)} & {0.25***} & {0.07} & {0.12**} & {-0.12**} & {0.07} & {0.01} & {0.26***} & {0.14**} & {0.10*} & {0.15***} & {0.23***} & {0.21***} & {0.45***} & {0.47***} & {—} & {} & {} & {} & {} \\ 
+{\bfseries Bot Informativeness} & {0.20***} & {0.03} & {0.22***} & {0.25***} & {0.17***} & {0.06} & {0.25***} & {0.37***} & {0.22***} & {0.29***} & {0.20***} & {0.19***} & {0.23***} & {0.13**} & {0.24***} & {—} & {} & {} & {} \\ 
+{\bfseries Bot Empathy} & {0.17***} & {-0.01} & {0.04} & {0.13**} & {0.12**} & {0.06} & {0.08} & {0.21***} & {0.13**} & {0.18***} & {0.15***} & {0.14**} & {0.18***} & {0.16***} & {0.20***} & {0.35***} & {—} & {} & {} \\ 
+{\bfseries Turn Count} & {-0.04} & {-0.04} & {-0.05} & {-0.04} & {-0.09*} & {-0.11*} & {-0.00} & {-0.02} & {-0.03} & {-0.05} & {-0.04} & {-0.05} & {-0.04} & {-0.01} & {-0.06} & {-0.08} & {-0.05} & {—} & {} \\ 
+{\bfseries Word Count} & {0.05} & {0.02} & {-0.03} & {-0.02} & {-0.03} & {-0.10*} & {-0.01} & {0.02} & {-0.02} & {-0.04} & {-0.01} & {-0.00} & {-0.00} & {0.08} & {0.02} & {-0.03} & {0.06} & {0.18***} & {—} \\ 
+\bottomrule
+\end{tabular*}
+\begin{minipage}{\linewidth}
+* p<0.05, ** p<0.01, *** p<0.001. Lower triangle shows correlations with significance stars. Upper triangle left blank for readability.\\
+\end{minipage}
+
+}
+
+\end{table}%
 
 \subsubsection{Summary table of
 regressions}\label{summary-table-of-regressions}
@@ -3073,7 +3152,7 @@ justification, and planned analyses.
 \begin{verbatim}
 R version 4.5.0 (2025-04-11)
 Platform: aarch64-apple-darwin20
-Running under: macOS 26.1
+Running under: macOS 26.2
 
 Matrix products: default
 BLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib 
@@ -3089,31 +3168,30 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] jsonlite_2.0.0     tinytable_0.9.0    emmeans_1.11.1     patchwork_1.3.2    ggpubr_0.6.0       gt_1.0.0          
- [7] modelsummary_2.3.0 lmerTest_3.1-3     lme4_1.1-37        Matrix_1.7-3       arrow_19.0.1.1     lubridate_1.9.4   
-[13] forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4        purrr_1.1.0        readr_2.1.5        tidyr_1.3.1       
-[19] tibble_3.3.0       ggplot2_3.5.2      tidyverse_2.0.0   
+ [1] effectsize_1.0.1   jsonlite_2.0.0     tinytable_0.9.0    emmeans_1.11.1     patchwork_1.3.2    ggpubr_0.6.0      
+ [7] gt_1.0.0           modelsummary_2.3.0 lmerTest_3.1-3     lme4_1.1-37        Matrix_1.7-3       arrow_19.0.1.1    
+[13] lubridate_1.9.4    forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4        purrr_1.1.0        readr_2.1.5       
+[19] tidyr_1.3.1        tibble_3.3.0       ggplot2_3.5.2      tidyverse_2.0.0   
 
 loaded via a namespace (and not attached):
  [1] Rdpack_2.6.4        gridExtra_2.3       rlang_1.1.6         magrittr_2.0.3      compiler_4.5.0     
  [6] mgcv_1.9-1          systemfonts_1.2.3   vctrs_0.6.5         pkgconfig_2.0.3     fastmap_1.2.0      
-[11] backports_1.5.0     labeling_0.4.3      effectsize_1.0.1    promises_1.3.3      rmarkdown_2.29     
-[16] tzdb_0.5.0          ps_1.9.1            nloptr_2.2.1        ragg_1.4.0          bit_4.6.0          
-[21] xfun_0.52           litedown_0.7        later_1.4.2         parallel_4.5.0      broom_1.0.9        
-[26] R6_2.6.1            tables_0.9.31       stringi_1.8.7       RColorBrewer_1.1-3  car_3.1-3          
-[31] boot_1.3-31         lmtest_0.9-40       numDeriv_2016.8-1.1 estimability_1.5.1  Rcpp_1.0.14        
-[36] assertthat_0.2.1    knitr_1.50          zoo_1.8-14          parameters_0.28.0   splines_4.5.0      
-[41] timechange_0.3.0    tidyselect_1.2.1    abind_1.4-8         yaml_2.3.10         websocket_1.4.4    
-[46] processx_3.8.6      lattice_0.22-6      withr_3.0.2         bayestestR_0.16.1   coda_0.19-4.1      
-[51] evaluate_1.0.4      xml2_1.3.8          pillar_1.11.0       carData_3.0-5       checkmate_2.3.2    
-[56] reformulas_0.4.1    insight_1.4.0       generics_0.1.4      chromote_0.5.1      hms_1.1.3          
-[61] scales_1.4.0        minqa_1.2.8         xtable_1.8-4        glue_1.8.0          tools_4.5.0        
-[66] webshot2_0.1.2      data.table_1.17.8   egg_0.4.5           ggsignif_0.6.4      fs_1.6.6           
-[71] mvtnorm_1.3-3       grid_4.5.0          Ben_0.1.0           rbibutils_2.3       datawizard_1.2.0   
-[76] nlme_3.1-168        performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1  
-[81] fansi_1.0.6         gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37      
-[86] pbkrtest_0.5.4      farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4     bit64_4.6.0-1      
-[91] MASS_7.3-65        
+[11] backports_1.5.0     labeling_0.4.3      promises_1.3.3      rmarkdown_2.29      tzdb_0.5.0         
+[16] ps_1.9.1            nloptr_2.2.1        ragg_1.4.0          bit_4.6.0           xfun_0.52          
+[21] litedown_0.7        later_1.4.2         parallel_4.5.0      broom_1.0.9         R6_2.6.1           
+[26] tables_0.9.31       stringi_1.8.7       RColorBrewer_1.1-3  car_3.1-3           boot_1.3-31        
+[31] lmtest_0.9-40       numDeriv_2016.8-1.1 estimability_1.5.1  Rcpp_1.0.14         assertthat_0.2.1   
+[36] knitr_1.50          zoo_1.8-14          parameters_0.28.0   splines_4.5.0       timechange_0.3.0   
+[41] tidyselect_1.2.1    abind_1.4-8         yaml_2.3.10         websocket_1.4.4     processx_3.8.6     
+[46] lattice_0.22-6      withr_3.0.2         bayestestR_0.16.1   coda_0.19-4.1       evaluate_1.0.4     
+[51] xml2_1.3.8          pillar_1.11.0       carData_3.0-5       checkmate_2.3.2     reformulas_0.4.1   
+[56] insight_1.4.0       generics_0.1.4      chromote_0.5.1      hms_1.1.3           scales_1.4.0       
+[61] minqa_1.2.8         xtable_1.8-4        glue_1.8.0          tools_4.5.0         webshot2_0.1.2     
+[66] data.table_1.17.8   egg_0.4.5           ggsignif_0.6.4      fs_1.6.6            mvtnorm_1.3-3      
+[71] grid_4.5.0          Ben_0.1.0           rbibutils_2.3       datawizard_1.2.0    nlme_3.1-168       
+[76] performance_0.15.0  Formula_1.2-5       cli_3.6.5           textshaping_1.0.1   fansi_1.0.6        
+[81] gtable_0.3.6        rstatix_0.7.2       sass_0.4.10         digest_0.6.37       pbkrtest_0.5.4     
+[86] farver_2.1.2        htmltools_0.5.8.1   lifecycle_1.0.4     bit64_4.6.0-1       MASS_7.3-65        
 \end{verbatim}
 
 \phantomsection\label{refs}
