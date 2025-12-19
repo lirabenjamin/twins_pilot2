@@ -1073,6 +1073,121 @@ This study has several limitations that provide directions for future research.
 
 ### Correlation Matrix
 
+#### Overall Correlations
+
+```{r}
+#| label: tbl-correlation-matrix-overall
+#| tbl-cap: "Overall correlation matrix with significance stars for all key variables. Lower triangle shows Pearson correlation coefficients with significance indicators (* p<0.05, ** p<0.01, *** p<0.001). Upper triangle intentionally left blank for readability. Variables include political orientation, belief accuracy, environmental attitudes, outgroup warmth, confidence, bot perceptions, and engagement measures."
+
+# Function to compute correlation with significance stars
+cor_with_stars <- function(x, y) {
+  if (sum(!is.na(x) & !is.na(y)) < 3) return("")  # Need at least 3 observations
+  test <- cor.test(x, y, use = "pairwise.complete.obs")
+  r <- test$estimate
+  p <- test$p.value
+
+  stars <- case_when(
+    p < 0.001 ~ "***",
+    p < 0.01 ~ "**",
+    p < 0.05 ~ "*",
+    TRUE ~ ""
+  )
+
+  sprintf("%.2f%s", r, stars)
+}
+
+# Select key continuous variables for correlation matrix
+cor_vars <- dat %>%
+  select(
+    # Political orientation
+    `Political Orientation` = politicalorientation_1,
+    `Political Extremism` = political_extremism,
+
+    # Accuracy measures
+    `Accuracy (Pre)` = accuracy_pre,
+    `Accuracy (Post)` = accuracy_post,
+
+    # Green attitudes
+    `Green Own` = green_own,
+    `Green Ingroup` = green_ingroup,
+    `Green Outgroup (Pre)` = green_outgroup_pre,
+    `Green Outgroup (Post)` = green_outgroup_post,
+
+    # Warmth measures
+    `Warmth Outgroup (Pre)` = warmth_outgroup_pre,
+    `Warmth Outgroup (Post)` = warmth_outgroup_post,
+    `Warmth Ingroup (Pre)` = warmth_ingroup_pre,
+    `Warmth Ingroup (Post)` = warmth_ingroup_post,
+
+    # Confidence measures
+    `Confidence Ingroup` = confidence_ingroup,
+    `Confidence Outgroup (Pre)` = confidence_outgroup_pre,
+    `Confidence Outgroup (Post)` = confidence_outgroup_post,
+
+    # Bot perceptions
+    `Bot Informativeness` = info,
+    `Bot Empathy` = empathy,
+
+    # Engagement
+    `Turn Count` = user_turn_count,
+    `Word Count` = user_word_count
+  )
+
+# Create correlation matrix with stars
+n_vars <- ncol(cor_vars)
+var_names <- names(cor_vars)
+cor_matrix_overall <- matrix("", nrow = n_vars, ncol = n_vars)
+rownames(cor_matrix_overall) <- var_names
+colnames(cor_matrix_overall) <- var_names
+
+# Fill lower triangle with correlations and stars
+for (i in 1:n_vars) {
+  for (j in 1:n_vars) {
+    if (i == j) {
+      cor_matrix_overall[i, j] <- "—"  # Diagonal
+    } else if (i > j) {
+      cor_matrix_overall[i, j] <- cor_with_stars(cor_vars[[j]], cor_vars[[i]])
+    }
+    # Upper triangle stays empty
+  }
+}
+
+# Convert to data frame and create gt table
+cor_df_overall <- as.data.frame(cor_matrix_overall)
+cor_df_overall <- cbind(Variable = rownames(cor_df_overall), cor_df_overall)
+rownames(cor_df_overall) <- NULL
+
+# Create gt table
+tbl_overall <- cor_df_overall %>%
+  gt() %>%
+  tab_header(
+    title = "Overall Correlation Matrix"
+  ) %>%
+  cols_label(
+    Variable = ""
+  ) %>%
+  tab_footnote(
+    footnote = "* p<0.05, ** p<0.01, *** p<0.001. Lower triangle shows correlations with significance stars. Upper triangle left blank for readability."
+  ) %>%
+  tab_style(
+    style = cell_text(size = px(9)),
+    locations = cells_body()
+  ) %>%
+  tab_style(
+    style = cell_text(size = px(9), weight = "bold"),
+    locations = cells_column_labels()
+  ) %>%
+  tab_style(
+    style = cell_text(size = px(9), weight = "bold"),
+    locations = cells_body(columns = Variable)
+  )
+
+save_table(tbl_overall, "tab_correlation_matrix_overall")
+tbl_overall
+```
+
+#### Correlations by Political Party
+
 ```{r}
 #| label: tbl-correlation-matrix
 #| tbl-cap: "Correlation matrix with significance stars by political party. Upper triangle shows correlations for Republicans, lower triangle shows correlations for Democrats. Diagonal shows em-dashes. Significance indicators: * p<0.05, ** p<0.01, *** p<0.001. Variables include political orientation, belief accuracy, environmental attitudes, outgroup warmth, confidence, bot perceptions, and engagement measures."
