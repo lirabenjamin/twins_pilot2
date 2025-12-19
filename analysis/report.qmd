@@ -1075,7 +1075,7 @@ This study has several limitations that provide directions for future research.
 
 ```{r}
 #| label: tbl-correlation-matrix
-#| tbl-cap: "Correlation matrix with significance stars for all key variables. Lower triangle shows Pearson correlation coefficients with significance indicators (* p<0.05, ** p<0.01, *** p<0.001). Upper triangle intentionally left blank for readability. Variables include political orientation, belief accuracy, environmental attitudes, outgroup warmth, confidence, bot perceptions, and engagement measures."
+#| tbl-cap: "Correlation matrix with significance stars by political party. Upper triangle shows correlations for Republicans, lower triangle shows correlations for Democrats. Diagonal shows em-dashes. Significance indicators: * p<0.05, ** p<0.01, *** p<0.001. Variables include political orientation, belief accuracy, environmental attitudes, outgroup warmth, confidence, bot perceptions, and engagement measures."
 
 # Function to compute correlation with significance stars
 cor_with_stars <- function(x, y) {
@@ -1094,59 +1094,71 @@ cor_with_stars <- function(x, y) {
   sprintf("%.2f%s", r, stars)
 }
 
+# Prepare data for Democrats and Republicans separately
+dat_dem <- dat %>% filter(participant_party == "Democrat")
+dat_rep <- dat %>% filter(participant_party == "Republican")
+
 # Select key continuous variables for correlation matrix
-cor_vars <- dat %>%
-  select(
-    # Political orientation
-    `Political Orientation` = politicalorientation_1,
-    `Political Extremism` = political_extremism,
+select_cor_vars <- function(df) {
+  df %>%
+    select(
+      # Political orientation
+      `Political Orientation` = politicalorientation_1,
+      `Political Extremism` = political_extremism,
 
-    # Accuracy measures
-    `Accuracy (Pre)` = accuracy_pre,
-    `Accuracy (Post)` = accuracy_post,
+      # Accuracy measures
+      `Accuracy (Pre)` = accuracy_pre,
+      `Accuracy (Post)` = accuracy_post,
 
-    # Green attitudes
-    `Green Own` = green_own,
-    `Green Ingroup` = green_ingroup,
-    `Green Outgroup (Pre)` = green_outgroup_pre,
-    `Green Outgroup (Post)` = green_outgroup_post,
+      # Green attitudes
+      `Green Own` = green_own,
+      `Green Ingroup` = green_ingroup,
+      `Green Outgroup (Pre)` = green_outgroup_pre,
+      `Green Outgroup (Post)` = green_outgroup_post,
 
-    # Warmth measures
-    `Warmth Outgroup (Pre)` = warmth_outgroup_pre,
-    `Warmth Outgroup (Post)` = warmth_outgroup_post,
-    `Warmth Ingroup (Pre)` = warmth_ingroup_pre,
-    `Warmth Ingroup (Post)` = warmth_ingroup_post,
+      # Warmth measures
+      `Warmth Outgroup (Pre)` = warmth_outgroup_pre,
+      `Warmth Outgroup (Post)` = warmth_outgroup_post,
+      `Warmth Ingroup (Pre)` = warmth_ingroup_pre,
+      `Warmth Ingroup (Post)` = warmth_ingroup_post,
 
-    # Confidence measures
-    `Confidence Ingroup` = confidence_ingroup,
-    `Confidence Outgroup (Pre)` = confidence_outgroup_pre,
-    `Confidence Outgroup (Post)` = confidence_outgroup_post,
+      # Confidence measures
+      `Confidence Ingroup` = confidence_ingroup,
+      `Confidence Outgroup (Pre)` = confidence_outgroup_pre,
+      `Confidence Outgroup (Post)` = confidence_outgroup_post,
 
-    # Bot perceptions
-    `Bot Informativeness` = info,
-    `Bot Empathy` = empathy,
+      # Bot perceptions
+      `Bot Informativeness` = info,
+      `Bot Empathy` = empathy,
 
-    # Engagement
-    `Turn Count` = user_turn_count,
-    `Word Count` = user_word_count
-  )
+      # Engagement
+      `Turn Count` = user_turn_count,
+      `Word Count` = user_word_count
+    )
+}
+
+cor_vars_dem <- select_cor_vars(dat_dem)
+cor_vars_rep <- select_cor_vars(dat_rep)
 
 # Create correlation matrix with stars
-n_vars <- ncol(cor_vars)
-var_names <- names(cor_vars)
+n_vars <- ncol(cor_vars_dem)
+var_names <- names(cor_vars_dem)
 cor_matrix <- matrix("", nrow = n_vars, ncol = n_vars)
 rownames(cor_matrix) <- var_names
 colnames(cor_matrix) <- var_names
 
-# Fill lower triangle with correlations and stars
+# Fill matrix: Democrats in lower triangle, Republicans in upper triangle
 for (i in 1:n_vars) {
   for (j in 1:n_vars) {
     if (i == j) {
       cor_matrix[i, j] <- "—"  # Diagonal
     } else if (i > j) {
-      cor_matrix[i, j] <- cor_with_stars(cor_vars[[j]], cor_vars[[i]])
+      # Lower triangle: Democrats
+      cor_matrix[i, j] <- cor_with_stars(cor_vars_dem[[j]], cor_vars_dem[[i]])
+    } else {
+      # Upper triangle: Republicans
+      cor_matrix[i, j] <- cor_with_stars(cor_vars_rep[[j]], cor_vars_rep[[i]])
     }
-    # Upper triangle stays empty
   }
 }
 
@@ -1155,28 +1167,29 @@ cor_df <- as.data.frame(cor_matrix)
 cor_df <- cbind(Variable = rownames(cor_df), cor_df)
 rownames(cor_df) <- NULL
 
-# Create gt table
+# Create gt table with subtle shading to distinguish triangles
 tbl <- cor_df %>%
   gt() %>%
   tab_header(
-    title = "Correlation Matrix of Key Variables"
+    title = "Correlation Matrix by Political Party",
+    subtitle = "Upper Triangle: Republicans | Lower Triangle: Democrats"
   ) %>%
   cols_label(
     Variable = ""
   ) %>%
   tab_footnote(
-    footnote = "* p<0.05, ** p<0.01, *** p<0.001. Lower triangle shows correlations with significance stars. Upper triangle left blank for readability."
+    footnote = "* p<0.05, ** p<0.01, *** p<0.001"
   ) %>%
   tab_style(
-    style = cell_text(size = px(10)),
+    style = cell_text(size = px(9)),
     locations = cells_body()
   ) %>%
   tab_style(
-    style = cell_text(size = px(10), weight = "bold"),
+    style = cell_text(size = px(9), weight = "bold"),
     locations = cells_column_labels()
   ) %>%
   tab_style(
-    style = cell_text(size = px(10), weight = "bold"),
+    style = cell_text(size = px(9), weight = "bold"),
     locations = cells_body(columns = Variable)
   )
 
