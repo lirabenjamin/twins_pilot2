@@ -5,7 +5,11 @@
 .idea/
 
 # Data (choose what to track)
-data
+data/external
+data/interim
+data/raw/
+data/processed/*
+!data/processed/analysis_data.parquet
 
 # Outputs
 output/**

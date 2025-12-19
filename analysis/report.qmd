@@ -485,7 +485,6 @@ p <- dat_with_changes %>%
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 ggsave(paste0(fig_path, "fig_accuracy_warmth_change.png"), p, width = 6, height = 4, dpi = 300)
 p
-  theme(legend.position = "bottom")
 ```
 
 ### Q2. Is belief updating symmetric across political groups?
