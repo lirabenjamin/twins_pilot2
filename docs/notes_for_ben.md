@@ -1,5 +1,75 @@
 # Notes for Ben
 
+## 2025-12-19 18:30 - Pre-Submission Review and Fixes
+
+I conducted a comprehensive review of the report.qmd file and fixed all critical and most important issues before sending to coauthors.
+
+### ✅ Completed Fixes
+
+1. **Fixed broken figure reference** (line 1089)
+   - Changed `[REF]` → `@fig-engagement`
+   - Also capitalized "Democrat" for consistency
+
+2. **Fixed typos** (line 1279-1281)
+   - "Dunning Krugger" → "Dunning-Kruger"
+   - "confidence patters" → "confidence patterns"
+   - "confience" → "confidence" (in heading)
+   - Capitalized Democrats/Republicans throughout that section
+   - Fixed punctuation (period → semicolon)
+
+3. **Expanded Methods section significantly** (lines 1408-1421)
+   - Added **Participants** subsection with:
+     - Recruitment method (Qualtrics panels)
+     - Specific screening criteria (< 25 or > 75 on 0-100 scale)
+     - Sample breakdown by party
+     - Compensation mention
+     - IRB approval statement
+
+   - Added **Procedure** subsection with three phases:
+     - Phase 1: Baseline Assessment (environmental attitudes, warmth, confidence)
+     - Phase 2: AI Chatbot Interaction (10 minutes with Claude Sonnet 3.5)
+     - Phase 3: Post-Interaction Assessment (re-ratings, bot evaluations, slogan task)
+
+   - Existing **Measures** subsection remains
+
+4. **Standardized p-value formatting** (lines 1006-1007)
+   - Replaced all conditional if-else p-value formatting with consistent `pformat()` function
+   - Now all p-values use same format: "= 0.XXX" or "< .001"
+
+### ⚠️ Remaining Issue
+
+**TODO comment on line 1074** - I left this for you to decide:
+- Comment suggests adding interaction models between engagement (turn/word count) and participant party
+- Line 1089 already mentions Democrats showed different pattern with word count
+- Decision needed: Implement the interaction models OR remove the TODO if current analysis is sufficient
+
+### 📊 Review Summary
+
+**Strengths:**
+- Excellent reproducibility with all dynamic reporting
+- Comprehensive analyses with robust appendix
+- Well-organized results by research questions
+- Strong writing with good topic sentences
+- Thorough limitations section
+
+**What's Ready:**
+- All typos fixed ✓
+- Methods section substantially expanded ✓
+- All figure references working ✓
+- P-value formatting consistent ✓
+- Screening criteria specified ✓
+
+**Minor Polish Items (Optional):**
+- Consider adding demographics (age, gender, education) if available in raw data
+- Consider moving some very long figure captions to notes
+- Consider adding formal Conclusion subsection to Discussion
+- Decide on TODO comment (line 1074)
+- Complete or acknowledge slogan analysis (lines 1435-1444)
+
+**Overall Assessment:** The manuscript is now in very good shape for coauthor review. All critical issues are fixed. The Methods section is now publication-ready with proper detail on participants, procedure, and materials.
+
+---
+
 ## 2025-12-18 17:35 - Figure and Table Saving Implementation
 
 ### Summary

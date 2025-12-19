@@ -176,16 +176,6 @@ Can AI Digital Twins Bridge the Partisan Insight Gap?}
 \usepackage{array}
 \usepackage{anyfontsize}
 \usepackage{multirow}
-\usepackage{float}
-\usepackage{tabularray}
-\usepackage[normalem]{ulem}
-\usepackage{graphicx}
-\usepackage{rotating}
-\UseTblrLibrary{booktabs}
-\UseTblrLibrary{siunitx}
-\NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
-\newcommand{\tinytableTabularrayUnderline}[1]{\underline{#1}}
-\newcommand{\tinytableTabularrayStrikeout}[1]{\sout{#1}}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -297,13 +287,7 @@ but real-world contact is logistically costly, socially awkward, and
 increasingly rare across party lines. Recent advances in AI enable
 ``synthetic contact''---conversations with AI chatbots representing
 outgroup members---that may replicate these benefits at scale
-(\citeproc{ref-hermann_reducing_2025}{Hermann et al., 2025}). Digital
-twins built from survey data can accurately represent individuals'
-psychological characteristics
-(\citeproc{ref-park_generative_nodate}{Park et al., n.d.};
-\citeproc{ref-toubia_database_2025}{Toubia et al., 2025}), but whether
-marketers can extract this knowledge through conversation remains
-untested.
+(\citeproc{ref-hermann_reducing_2025}{Hermann et al., 2025}).
 
 Whether AI-mediated contact can genuinely reduce political
 misperceptions is unclear. On one hand, chatbot interactions might
@@ -322,19 +306,55 @@ provide useful information?) and empathic mechanisms (does the chatbot
 foster emotional connection?), and assess whether participants gain
 metacognitive insight into their improved understanding. We recruited
 500 partisan participants (prescreened to exclude moderates; 248
-Democrats, 252 Republicans) who conversed with a chatbot prompted to
-represent their political outgroup and estimated outgroup attitudes
-toward environmental consumption before and after the interaction. We
+Democrats, 252 Republicans). Participants reported their own
+environmental attitudes, estimated the environmental attitudes of the
+average Democrat and Republican, and rated their warmth toward each
+political group. They then conversed for 10 minutes with a chatbot
+prompted to represent their political outgroup before re-rating outgroup
+warmth and re-estimating outgroup environmental attitudes. We
 hypothesized that participants would report more accurate beliefs about
 outgroup environmental attitudes and warmer feelings toward the
 political outgroup after the interaction.
 
 \subsection{Results}\label{results}
 
-\subsubsection{Preliminaries}\label{preliminaries}
+\subsubsection{Partisans misperceive each
+other}\label{partisans-misperceive-each-other}
 
-Most participants held strong partisan identities, with the majority in
-the top and bottom quartiles of the political spectrum.
+Participants systematically misperceived the environmental attitudes of
+their political opponents. Most participants held strong partisan
+identities, with the majority in the top and bottom quartiles of the
+political spectrum (Figure~\ref{fig-political-orientation}). Democrats
+rated themselves higher in environmental concern (\emph{M} = 4.15)
+relative to Republicans (\emph{M} = 3.73), \emph{d} = 0.46, \emph{p}
+\textless{} .001. While participants accurately perceived their ingroups
+(Democrats: \emph{M}\textsubscript{actual} = 4.15,
+\emph{M}\textsubscript{perceived} = 4.17, \emph{p} = 0.558; Republicans:
+\emph{M}\textsubscript{actual} = 3.73, \emph{M}\textsubscript{perceived}
+= 3.39, \emph{p} \textless{} .001), they systematically underestimated
+how environmentally friendly their counterparts actually were. Democrats
+misperceived Republicans far more than Republicans misperceived
+Democrats.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-perception-wedge-1.pdf}}
+
+}
+
+\caption{\label{fig-perception-wedge}The perception wedge: Partisans
+overestimate differences in environmental attitudes. Left panel shows
+Republicans' own attitudes (solid) versus how Democrats perceive
+Republicans (dashed). Middle panel shows Democrats' own attitudes
+(solid) versus how Republicans perceive Democrats (dashed). Right panel
+shows the distribution of baseline bias (absolute error), with Democrats
+showing greater bias about Republicans than vice versa. The gap between
+perceived and actual attitudes demonstrates systematic misperception
+across the political divide.}
+
+\end{figure}%
 
 \begin{figure}
 
@@ -350,31 +370,30 @@ leaning, values 50 and above indicate Republican leaning.}
 
 \end{figure}%
 
-The figure below compares actual green values with perceived ingroup and
-outgroup attitudes for Democrats and Republicans. The actual gap at
-baseline was much smaller than participants perceived. Perceptions of
-the ingroup are much more accurate.
-
 \begin{figure}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-green-attitudes-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-green-attitudes-perception-1.pdf}}
 
 }
 
-\caption{\label{fig-green-attitudes}Actual and perceived environmental
-attitudes by political party. Panels show participants' own attitudes,
-their perceptions of ingroup members, and their perceptions of outgroup
-members before and after the chatbot interaction. Error bars represent
-standard errors.}
+\caption{\label{fig-green-attitudes-perception}Perceptions of
+environmental attitudes across the political divide. Four panels show
+each evaluator-target combination. Top row: Democrats evaluating
+themselves (ingroup) and Republicans (outgroup). Bottom row: Republicans
+evaluating themselves (ingroup) and Democrats (outgroup). Actual
+attitudes shown as reference; perceived attitudes shown before and after
+chatbot interaction.}
 
 \end{figure}%
 
-What is the distribution of bias? At baseline, Democrats were more
-biased about Republicans (\emph{M} = -1.68, \emph{SD} = 0.84) than
-Republicans were about Democrats (\emph{M} = -0.70, \emph{SD} = 0.63),
-\emph{d} = -1.32, \emph{p} \textless{} .001.
+We quantified this bias by calculating each participant's absolute error
+from the actual mean and reverse-scoring it so that higher values
+indicate greater accuracy. Democrats showed significantly greater bias
+about Republicans (\emph{M} = -1.68, \emph{SD} = 0.84) than Republicans
+showed about Democrats (\emph{M} = -0.70, \emph{SD} = 0.63), \emph{d} =
+-1.32, \emph{p} \textless{} .001 (Figure~\ref{fig-bias-distribution}).
 
 \begin{figure}
 
@@ -412,9 +431,10 @@ Democrats.}
 
 \end{figure}%
 
-Does baseline accuracy correlate with baseline warmth? We examine
-whether people who are more biased about the outgroup also feel colder
-toward them.
+Participants who at baseline felt warmer towards the outgroup were also
+more accurate in their perceptions. This relationship held for both
+Democrats (\emph{r} = 0.56, \emph{p} \textless{} .001) and Republicans
+(\emph{r} = 0.27, \emph{p} \textless{} .001).
 
 \begin{figure}
 
@@ -431,35 +451,12 @@ statistics displayed on plot.}
 
 \end{figure}%
 
-Does baseline accuracy predict baseline confidence? {[}TO-DO: Move this
-to the confidence section at the end of results.{]} We examine whether
-less accurate participants are overconfident in their judgments,
-consistent with Dunning-Kruger effects.
-
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-dunning-kruger-1.pdf}}
-
-}
-
-\caption{\label{fig-dunning-kruger}Relationship between skill and
-confidence in outgroup judgments before and after chatbot interaction.
-Solid lines show pre-interaction patterns, dashed lines show
-post-interaction patterns. Less skilled participants (those with lower
-accuracy) exhibited higher confidence at baseline, consistent with
-Dunning-Kruger effects. Lines represent LOESS smoothers with 95\%
-confidence bands.}
-
-\end{figure}%
-
 \subsubsection{Do people update their beliefs after interacting with the
 chatbot?}\label{do-people-update-their-beliefs-after-interacting-with-the-chatbot}
 
 We examined whether participants changed their beliefs about the
 outgroup's environmental attitudes from pre- to post-interaction,
-analyzing both accuracy and warmth. As shown in the table above,
+analyzing both accuracy and warmth. As shown in the table below,
 participants became significantly more accurate (improving by 0.39
 points on the 5-point scale, \emph{d} = 0.49) and warmer toward the
 outgroup (increasing by 4.3 degrees on the 100-point thermometer,
@@ -518,9 +515,10 @@ Num.Obs. & \num{1000} & \num{1000} \\
 
 \end{table}%
 
-Do changes in accuracy correlate with changes in warmth? We examine
-whether people who became more accurate also became warmer toward the
-outgroup.
+Democrats who became more accurate towards Republicans also became
+warmer towards them (\emph{r} = 0.22, \emph{p} \textless{} .001), but
+this relationship did not hold for Republicans learning about Democrats
+(\emph{r} = -0.01, \emph{p} = 0.888).
 
 \begin{figure}
 
@@ -650,12 +648,13 @@ update?}\label{does-political-extremity-predict-how-much-people-update}
 Politically extreme participants showed greater bias about the outgroup
 at baseline (\emph{b} = -0.012, \emph{r} = -0.20, \emph{p} \textless{}
 .001) and felt less warm toward them (\emph{b} = -0.54, \emph{r} =
--0.31, \emph{p} \textless{} .001). However, political extremism did not
-moderate the effect of the chatbot interaction. The three-way
+-0.31, \emph{p} \textless{} .001).
+
+The intervention was as successful in increasing accuracy and warmth in
+more extreme partisans as it was for more moderate ones. The three-way
 interaction for accuracy was not significant (\emph{b} = 0.007, \emph{p}
 = 0.185), and for warmth was not significant (\emph{b} = 0.08, \emph{p}
-= 0.315). More and less extreme participants were equally likely to
-update their beliefs and warmth toward the outgroup.
+= 0.315).
 
 \begin{table}
 
@@ -785,7 +784,11 @@ better accuracy improvement (\emph{b} = 0.086, \emph{p} = 0.004) and
 significantly greater warmth increases (\emph{b} = 1.93, \emph{p}
 \textless{} .001). Bot empathy did not significantly predict accuracy
 change (\emph{b} = 0.050, \emph{p} = 0.091) or warmth change (\emph{b} =
-1.01, \emph{p} = 0.056).
+1.01, \emph{p} = 0.056). Perceptions of bot empathy and informativeness
+correlated positively but modestly (\emph{r} = 0.35, \emph{p}
+\textless{} .001), suggesting they captured partially distinct aspects
+of chatbot interaction quality
+(Figure~\ref{fig-empathy-informativeness}).
 
 \begin{table}
 
@@ -830,9 +833,6 @@ R2 Adj. & \num{0.236} & \num{0.804} \\
 
 \end{table}%
 
-Do perceptions of informativeness and empathy correlate with each other?
-Yes, but not strongly (r \textasciitilde{} .30).
-
 \begin{figure}
 
 \centering{
@@ -853,21 +853,27 @@ displayed separately by learner party.}
 \subsubsection{Does engagement (``dose'') matter for belief
 updating?}\label{does-engagement-dose-matter-for-belief-updating}
 
-We measured engagement as the number of words participants typed during
-the chat and tested whether greater engagement predicted larger changes
-in beliefs and warmth. Participants engaged in an average of 11.11
-conversation turns (\emph{SD} = 6.00) and typed an average of 199.86
-words (\emph{SD} = 123.31).
+For the most part, the \emph{dose} of the intervention that participants
+chose to take was unrelated to how much they updated their beliefs, or
+to whether they became more warm.
 
-\paragraph{Does engagement predict belief accuracy
-improvement?}\label{does-engagement-predict-belief-accuracy-improvement}
+Participants engaged in an average of 11.11 conversation turns
+(\emph{SD} = 6.00) and typed an average of 199.86 words (\emph{SD} =
+123.31).
 
 Greater engagement---measured by turn count---was not significantly
 associated with accuracy change (\emph{b} = -0.0020, \emph{p} = 0.672),
 and not significantly associated with warmth change (\emph{b} = -0.0956,
-\emph{p} = 0.272). Using log-transformed word count, the effect on
-accuracy was not significant (\emph{b} = -0.0496, \emph{p} = 0.442), and
-on warmth was not significant (\emph{b} = -0.8687, \emph{p} = 0.461).
+\emph{p} = 0.272).
+
+Using log-transformed word count, the effect on accuracy was not
+significant (\emph{b} = -0.0496, \emph{p} = 0.442), and on warmth was
+not significant (\emph{b} = -0.8687, \emph{p} = 0.461).
+
+The only exception to the pattern, shown in Figure~\ref{fig-engagement},
+was that Democrat partisans who wrote more words to the chatbot were
+more likely to increase in accuracy, but this was not true for turn
+count.
 
 \begin{table}
 
@@ -962,30 +968,14 @@ on accuracy change indicate improvement.}
 
 \end{figure}%
 
-\subsubsection{Does interacting with the chatbot improve applied
-judgment?}\label{does-interacting-with-the-chatbot-improve-applied-judgment}
-
-Participants wrote slogans for marketing energy-saving appliances to the
-political outgroup. I haven't touched this data yet, because we don't
-have a control condition or a baseline slogan to make a meaningful
-comparison to.
-
-\textbf{DATA AVAILABLE}: Raw slogan text in variable \texttt{slogan} (n
-= 500 responses).
-
-\textbf{DATA NEEDED}: 1. Semantic similarity scores (compare to
-AI-generated responses to detect copying) 2. Quality ratings (human or
-LLM ratings of slogan fit to target outgroup)
-
 \subsubsection{Does confidence track accuracy---or diverge from
 it?}\label{does-confidence-track-accuracyor-diverge-from-it}
 
 We examine participants' metacognitive awareness by testing (1) whether
-confidence changes from pre to post, and (2) whether confidence changes
-track with actual accuracy improvements.
-
-\paragraph{Does confidence change
-pre-to-post?}\label{does-confidence-change-pre-to-post}
+confidence changes from pre to post, (2) The relationship between
+accuracy and confidence, and (3) whether confidence changes track with
+actual accuracy improvements. \#\#\#\# Does confidence change
+pre-to-post?
 
 Republicans learning about Democrats gained confidence after the
 interaction (\emph{b} = 0.306, \emph{d} = -0.30, \emph{p} \textless{}
@@ -1094,8 +1084,37 @@ Num.Obs. & \num{1000} & \num{1000} \\
 
 \end{table}%
 
-\paragraph{Correlation: Does confidence change track accuracy
-improvement?}\label{correlation-does-confidence-change-track-accuracy-improvement}
+\paragraph{Relationship between confidence and
+accuracy}\label{relationship-between-confidence-and-accuracy}
+
+As shown in the figure below, Democrats show confidence patterns
+consistent with the Dunning-Kruger effect at baseline (i.e., less
+accurate participants are \emph{more} confident, even when they are
+wrong; more accurate participants are less confident). After the
+intervention (dashed line), more accurate participants gain confidence.
+Higher skilled Republican participants are more correctly calibrated on
+their confidence about Democrats.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/fig-dunning-kruger-1.pdf}}
+
+}
+
+\caption{\label{fig-dunning-kruger}Relationship between skill and
+confidence in outgroup judgments before and after chatbot interaction.
+Solid lines show pre-interaction patterns, dashed lines show
+post-interaction patterns. Less skilled participants (those with lower
+accuracy) exhibited higher confidence at baseline, consistent with
+Dunning-Kruger effects. Lines represent LOESS smoothers with 95\%
+confidence bands.}
+
+\end{figure}%
+
+\paragraph{Does confidence change track accuracy
+improvement?}\label{does-confidence-change-track-accuracy-improvement}
 
 Overall, confidence change did not track with accuracy improvement
 (\emph{r} = -0.269, \emph{p} \textless{} .001). For Democrats learning
@@ -1220,16 +1239,51 @@ other scalable interventions for partisan debiasing.
 
 \subsection{Methods}\label{methods}
 
-\subsection{Data}\label{data}
+\subsubsection{Participants}\label{participants}
 
-\subsubsection{Data Collection}\label{data-collection}
+We recruited 500 participants via Qualtrics panels. Participants were
+prescreened to exclude political moderates, retaining only those with
+clear partisan identities. Specifically, we recruited participants who
+scored below 25 or above 75 on a 0-100 political orientation scale
+during prescreening, where 0 represents strong Democratic identification
+and 100 represents strong Republican identification. The final sample
+included 248 Democrats learning about Republicans (D→R) and 252
+Republicans learning about Democrats (R→D). Participants were
+compensated through the Qualtrics panel system. This research was
+approved by the University of Pennsylvania Institutional Review Board.
 
-We collected data via Qualtrics from 500 participants. Of these, 248
-were Democrats learning about Republicans (D→R) and 252 were Republicans
-learning about Democrats (R→D). Participants self-reported their
-political orientation on a 0-100 slider scale, where values below 50
-indicate Democratic leaning and values 50 and above indicate Republican
-leaning.
+\subsubsection{Procedure}\label{procedure}
+
+Participants completed a three-phase online study: baseline assessment,
+AI chatbot interaction, and post-interaction assessment.
+
+\textbf{Phase 1: Baseline Assessment.} Participants first reported their
+own environmental attitudes by rating their agreement with six
+statements about environmental issues on a 5-point scale (1 = Disagree
+strongly, 5 = Agree strongly). They then estimated the average
+environmental attitudes of both Democrats and Republicans using the same
+six items. Next, participants rated their warmth toward Democrats and
+Republicans on a 0-100 feeling thermometer and indicated their
+confidence in their outgroup judgments on a 5-point scale (1 = Not at
+all confident, 5 = Extremely confident).
+
+\textbf{Phase 2: AI Chatbot Interaction.} Participants engaged in a
+10-minute conversation with an AI chatbot (Claude Sonnet 3.5) that was
+prompted to represent the political views of their outgroup. The chatbot
+was instructed to respond as a typical member of the opposing political
+party and to discuss environmental attitudes authentically. Participants
+could ask any questions they wished about the outgroup's environmental
+beliefs and values. The chatbot interaction was not a real person but an
+AI system designed to simulate realistic political perspectives.
+
+\textbf{Phase 3: Post-Interaction Assessment.} After the conversation,
+participants re-estimated the outgroup's environmental attitudes using
+the same six items and re-rated their warmth toward the outgroup. They
+also indicated their confidence in these post-interaction judgments and
+rated the chatbot on two dimensions: informativeness and empathy (both
+on 5-point scales: 1 = Not at all, 5 = Extremely). Finally, participants
+wrote a marketing slogan for energy-saving appliances targeted at the
+political outgroup.
 
 \subsubsection{Measures}\label{measures}
 
@@ -1260,6 +1314,21 @@ where \texttt{time} indexes pre- versus post-interaction measurement and
 \texttt{learner\_party} indicates D→R versus R→D learning direction.
 
 \subsection{Appendix}\label{appendix}
+
+\subsubsection{Does interacting with the chatbot improve applied
+judgment?}\label{does-interacting-with-the-chatbot-improve-applied-judgment}
+
+Participants wrote slogans for marketing energy-saving appliances to the
+political outgroup. I haven't touched this data yet, because we don't
+have a control condition or a baseline slogan to make a meaningful
+comparison to.
+
+\textbf{DATA AVAILABLE}: Raw slogan text in variable \texttt{slogan} (n
+= 500 responses).
+
+\textbf{DATA NEEDED}: 1. Semantic similarity scores (compare to
+AI-generated responses to detect copying) 2. Quality ratings (human or
+LLM ratings of slogan fit to target outgroup)
 
 \subsubsection{Correlation Matrix}\label{correlation-matrix}
 
@@ -2824,23 +2893,11 @@ J. (2019). The {Origins} and {Consequences} of {Affective}
 Political Science}, \emph{22}(1), 129--146.
 \url{https://doi.org/10.1146/annurev-polisci-051117-073034}
 
-\bibitem[\citeproctext]{ref-park_generative_nodate}
-Park, J. S., Zou, C. Q., Shaw, A., Hill, B. M., Cai, C., Morris, M. R.,
-Willer, R., Liang, P., \& Bernstein, M. S. (n.d.). \emph{Generative
-{Agent} {Simulations} of 1,000 {People}}.
-
 \bibitem[\citeproctext]{ref-pettigrew_meta-analytic_2006}
 Pettigrew, T. F., \& Tropp, L. R. (2006). A meta-analytic test of
 intergroup contact theory. \emph{Journal of Personality and Social
 Psychology}, \emph{90}(5), 751--783.
 \url{https://doi.org/10.1037/0022-3514.90.5.751}
-
-\bibitem[\citeproctext]{ref-toubia_database_2025}
-Toubia, O., Gui, G. Z., Peng, T., Merlau, D. J., Li, A., \& Chen, H.
-(2025). Database {Report}: {Twin}-{2K}-500: {A} {Data} {Set} for
-{Building} {Digital} {Twins} of over 2,000 {People} {Based} on {Their}
-{Answers} to over 500 {Questions}. \emph{Marketing Science},
-mksc.2025.0262. \url{https://doi.org/10.1287/mksc.2025.0262}
 
 \bibitem[\citeproctext]{ref-yudkin_perception_2019}
 Yudkin, D., Hawkins, S., \& Dixon, T. (2019). \emph{The {Perception}

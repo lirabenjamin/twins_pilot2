@@ -54,6 +54,7 @@ execute:
   message: false
 ---
 
+## Introduction
 
 ```{r setup}
 library(tidyverse)
@@ -119,11 +120,27 @@ format_pval <- function(p, digits = 3) {
   }
 }
 
+# Helper function to format p-values for inline text (with equals sign)
+pformat <- function(p, digits = 3) {
+  threshold <- 10^(-digits)
+  if (p < threshold) {
+    return(paste0("< .", paste(rep("0", digits - 1), collapse = ""), "1"))
+  } else {
+    return(paste0("= ", sprintf(paste0("%.", digits, "f"), p)))
+  }
+}
+
+# Helper function to format numbers with specified decimal places
+numformat <- function(x, digits = 2) {
+  sprintf(paste0("%.", digits, "f"), x)
+}
+
 # Load cleaned data
 
 
 # Define consistent color scheme: Democrats = blue, Republicans = red
 party_colors <- c("Democrat" = "#0015BC", "Republican" = "#E81B23")
+party_colors_dark <- c("Democrat" = "#000a5e", "Republican" = "#750b0f")
 
 # Define learner party colors (D→R = Democrat learning about Republicans, R→D = Republican learning about Democrats)
 learner_party_colors <- c("D→R" = "#0015BC", "R→D" = "#E81B23")
@@ -152,14 +169,12 @@ n_dr <- dat %>% filter(learner_party == "D→R") %>% nrow()
 n_rd <- dat %>% filter(learner_party == "R→D") %>% nrow()
 ```
 
-## Introduction
 
 Political polarization undermines marketers' ability to understand and serve ideologically diverse consumers [@hsieh_partisan_2024].
 Partisans hold exaggerated views of political outgroups [@iyengar_origins_2019; @yudkin_perception_2019], misperceptions that can lead to ineffective marketing strategies when firms target broad consumer bases.
 
 Intergroup contact reduces prejudice and corrects misperceptions [@allport1954nature; @pettigrew_meta-analytic_2006], but real-world contact is logistically costly, socially awkward, and increasingly rare across party lines.
 Recent advances in AI enable "synthetic contact"—conversations with AI chatbots representing outgroup members—that may replicate these benefits at scale [@hermann_reducing_2025].
-Digital twins built from survey data can accurately represent individuals' psychological characteristics [@park_generative_nodate; @toubia_database_2025], but whether marketers can extract this knowledge through conversation remains untested.
 
 Whether AI-mediated contact can genuinely reduce political misperceptions is unclear.
 On one hand, chatbot interactions might provide corrective information about outgroup attitudes while fostering empathic understanding through open dialogue.
@@ -168,12 +183,57 @@ Even if participants update their beliefs, they may lack metacognitive awareness
 
 We test whether brief interactions with an AI chatbot representing a political outgroup improve belief accuracy and reduce affective polarization.
 We examine both informational mechanisms (does the chatbot provide useful information?) and empathic mechanisms (does the chatbot foster emotional connection?), and assess whether participants gain metacognitive insight into their improved understanding.
-We recruited `r nrow(dat)` partisan participants (prescreened to exclude moderates; `r n_dr` Democrats, `r n_rd` Republicans) who conversed with a chatbot prompted to represent their political outgroup and estimated outgroup attitudes toward environmental consumption before and after the interaction.
+We recruited `r nrow(dat)` partisan participants (prescreened to exclude moderates; `r n_dr` Democrats, `r n_rd` Republicans).
+Participants reported their own environmental attitudes, estimated the environmental attitudes of the average Democrat and Republican, and rated their warmth toward each political group.
+They then conversed for 10 minutes with a chatbot prompted to represent their political outgroup before re-rating outgroup warmth and re-estimating outgroup environmental attitudes.
 We hypothesized that participants would report more accurate beliefs about outgroup environmental attitudes and warmer feelings toward the political outgroup after the interaction.
 
 
 
 ## Results
+
+### Partisans misperceive each other
+
+```{r baseline-perception-stats}
+# Compare Democrats' own attitudes vs Republicans' own attitudes
+own_attitudes_test <- dat %>%
+  rstatix::t_test(green_own ~ participant_party)
+own_attitudes_d <- dat %>%
+  rstatix::cohens_d(green_own ~ participant_party) %>%
+  pull(effsize) %>%
+  numformat()
+own_attitudes_p <- own_attitudes_test$p
+
+# Calculate means for own attitudes by party
+dem_own_mean <- dat %>% filter(participant_party == "Democrat") %>% pull(green_own) %>% mean()
+rep_own_mean <- dat %>% filter(participant_party == "Republican") %>% pull(green_own) %>% mean()
+
+# Ingroup perception accuracy - Democrats evaluating Democrats
+dem_ingroup_actual <- dat %>% filter(participant_party == "Democrat") %>% pull(green_own) %>% mean()
+dem_ingroup_perceived <- dat %>% filter(participant_party == "Democrat") %>% pull(green_ingroup) %>% mean()
+dem_ingroup_test <- t.test(
+  dat %>% filter(participant_party == "Democrat") %>% pull(green_ingroup),
+  mu = dem_ingroup_actual
+)
+dem_ingroup_d <- (dem_ingroup_perceived - dem_ingroup_actual) / sd(dat %>% filter(participant_party == "Democrat") %>% pull(green_ingroup))
+dem_ingroup_p <- dem_ingroup_test$p.value
+
+# Ingroup perception accuracy - Republicans evaluating Republicans
+rep_ingroup_actual <- dat %>% filter(participant_party == "Republican") %>% pull(green_own) %>% mean()
+rep_ingroup_perceived <- dat %>% filter(participant_party == "Republican") %>% pull(green_ingroup) %>% mean()
+rep_ingroup_test <- t.test(
+  dat %>% filter(participant_party == "Republican") %>% pull(green_ingroup),
+  mu = rep_ingroup_actual
+)
+rep_ingroup_d <- (rep_ingroup_perceived - rep_ingroup_actual) / sd(dat %>% filter(participant_party == "Republican") %>% pull(green_ingroup))
+rep_ingroup_p <- rep_ingroup_test$p.value
+```
+
+Participants systematically misperceived the environmental attitudes of their political opponents.
+Most participants held strong partisan identities, with the majority in the top and bottom quartiles of the political spectrum (@fig-political-orientation).
+Democrats rated themselves higher in environmental concern (*M* = `r sprintf("%.2f", dem_own_mean)`) relative to Republicans (*M* = `r sprintf("%.2f", rep_own_mean)`), *d* = `r own_attitudes_d`, *p* `r pformat(own_attitudes_p)`.
+While participants accurately perceived their ingroups (Democrats: *M*~actual~ = `r sprintf("%.2f", dem_ingroup_actual)`, *M*~perceived~ = `r sprintf("%.2f", dem_ingroup_perceived)`, *p* `r pformat(dem_ingroup_p)`; Republicans: *M*~actual~ = `r sprintf("%.2f", rep_ingroup_actual)`, *M*~perceived~ = `r sprintf("%.2f", rep_ingroup_perceived)`, *p* `r pformat(rep_ingroup_p)`), they systematically underestimated how environmentally friendly their counterparts actually were.
+Democrats misperceived Republicans far more than Republicans misperceived Democrats.
 
 ```{r prepare-long-data}
 # Prepare long format datasets
@@ -190,9 +250,107 @@ warmth_long <- dat %>%
   mutate(time = factor(time, levels = c("pre", "post")))
 ```
 
-### Preliminaries
+```{r}
+#| label: fig-perception-wedge
+#| fig-cap: "The perception wedge: Partisans overestimate differences in environmental attitudes. Left panel shows Republicans' own attitudes (solid) versus how Democrats perceive Republicans (dashed). Middle panel shows Democrats' own attitudes (solid) versus how Republicans perceive Democrats (dashed). Right panel shows the distribution of baseline bias (absolute error), with Democrats showing greater bias about Republicans than vice versa. The gap between perceived and actual attitudes demonstrates systematic misperception across the political divide."
+#| fig-width: 12
+#| fig-height: 3.5
 
-Most participants held strong partisan identities, with the majority in the top and bottom quartiles of the political spectrum.
+
+# Panel 1: Republicans - actual vs. perceived by Democrats
+# Republicans' own attitudes
+rep_actual <- dat %>%
+  filter(participant_party == "Republican") %>%
+  pull(green_own)
+
+# How Democrats perceive Republicans (Democrats' outgroup estimates)
+rep_perceived <- dat %>%
+  filter(participant_party == "Democrat") %>%
+  pull(green_outgroup_pre)
+
+rep_data <- tibble(
+  value = c(rep_actual, rep_perceived),
+  measure = rep(c("Actual",
+                  "Perceived by Outgroup"),
+                c(length(rep_actual), length(rep_perceived)))
+)
+
+p1 <- ggplot(rep_data, aes(x = value, linetype = measure)) +
+  geom_density(color = party_colors["Republican"], fill = party_colors["Republican"],
+               alpha = 0.2, linewidth = 1) +
+  scale_linetype_manual(values = c("solid", "dashed"), name = NULL) +
+  labs(x = "Green Attitudes (1-5)", y = "Density",
+       title = "Republicans (real vs. perceived)") +
+  theme_minimal() +
+  annotate(geom = 'text', x = c(4, 2), y = .4, label = c("Actual", "Outgroup Perceptions"))+
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face = "bold"))
+
+
+# Panel 2: Democrats - actual vs. perceived by Republicans
+# Democrats' own attitudes
+dem_actual <- dat %>%
+  filter(participant_party == "Democrat") %>%
+  pull(green_own)
+
+# How Republicans perceive Democrats (Republicans' outgroup estimates)
+dem_perceived <- dat %>%
+  filter(participant_party == "Republican") %>%
+  pull(green_outgroup_pre)
+
+dem_data <- tibble(
+  value = c(dem_actual, dem_perceived),
+  measure = rep(c("Actual",
+                  "Perceived by outgroup"),
+                c(length(dem_actual), length(dem_perceived)))
+)
+
+p2 <- ggplot(dem_data, aes(x = value, linetype = measure)) +
+  geom_density(color = party_colors["Democrat"], fill = party_colors["Democrat"],
+               alpha = 0.2, linewidth = 1) +
+                 annotate(geom = 'text', x = c(4, 4), y = c(.5, .4), label = c("Actual", "Outgroup Perceptions"))+
+
+  scale_linetype_manual(values = c("solid", "dashed"), name = NULL) +
+  labs(x = "Green Attitudes (1-5)", y = "Density",
+       title = "Democrats (real vs. perceived)") +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face = "bold"))
+
+# Panel 3: Distribution of bias by party
+p3 <- dat %>%
+  ggplot(aes(x = accuracy_pre, fill = participant_party)) +
+  geom_density(color = NA, alpha = 0.6) +
+  scale_fill_manual(
+    values = party_colors,
+    name = NULL
+  ) +
+  labs(
+    x = "Baseline Accuracy",
+    y = "Density",
+    title = "Magnitude of Bias",
+    subtitle = "Democrats are less accurate"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.text = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, face = "bold", color = 'gray40')
+  )
+
+# Combine panels
+p_combined <- p1 + p2 + p3 + plot_layout(guides = "collect") &
+  theme(legend.position = "bottom")
+
+ggsave(paste0(fig_path, "fig_perception_wedge.png"), p_combined,
+       width = 12, height = 3.5, dpi = 300)
+p_combined
+```
+
+
 
 ```{r}
 #| label: fig-political-orientation
@@ -213,57 +371,127 @@ ggsave(paste0(fig_path, "fig_political_orientation.png"), p, width = 4, height =
 p
 ```
 
-The figure below compares actual green values with perceived ingroup and outgroup attitudes for Democrats and Republicans.
-The actual gap at baseline was much smaller than participants perceived.
-Perceptions of the ingroup are much more accurate.
 
 ```{r}
-#| label: fig-green-attitudes
-#| fig-cap: "Actual and perceived environmental attitudes by political party. Panels show participants' own attitudes, their perceptions of ingroup members, and their perceptions of outgroup members before and after the chatbot interaction. Error bars represent standard errors."
-#| fig-width: 6
-#| fig-height: 4
-# Prepare data for faceted plot
-actual_means = dat %>% 
-  group_by(participant_party) %>% 
-  summarise(mean_se(green_own)) %>% 
-  mutate(outgroup_party = participant_party, participant_party = case_match(participant_party, "Democrat" ~ "Republican", "Republican" ~ "Democrat")) %>% expand_grid(measure_type = c(.5, 4.5))
+#| label: fig-green-attitudes-perception
+#| fig-cap: "Perceptions of environmental attitudes across the political divide. Four panels show each evaluator-target combination. Top row: Democrats evaluating themselves (ingroup) and Republicans (outgroup). Bottom row: Republicans evaluating themselves (ingroup) and Democrats (outgroup). Actual attitudes shown as reference; perceived attitudes shown before and after chatbot interaction."
+#| fig-width: 10
+#| fig-height: 6
 
-annotation_df = actual_means %>%  
-  slice(1,3) %>% 
-  mutate(label = c("Actual Democrats", "Actual Republicans")) %>% 
-  mutate(x = c(1.5, 3.5), y = y+.2)
+# Panel 1: Democrats evaluating Democrats (themselves - ingroup)
+dem_eval_dem_actual <- dat %>% filter(participant_party == "Democrat") %>% pull(green_own)
+dem_eval_dem_perceived <- dat %>% filter(participant_party == "Democrat") %>% pull(green_ingroup)
 
+dem_eval_dem <- tibble(
+  value = c(dem_eval_dem_actual, dem_eval_dem_perceived),
+  measure_type = rep(c("Actual", "Perceived"),
+                     c(length(dem_eval_dem_actual), length(dem_eval_dem_perceived))),
+  panel = "Democrats → Democrats"
+)
 
-prelim_data <- dat %>%
-  select(learner_party, participant_party, green_own, green_ingroup, green_outgroup_pre, green_outgroup_post) %>%
-  pivot_longer(cols = c(green_own, green_ingroup, green_outgroup_pre, green_outgroup_post),
-               names_to = "measure_type", values_to = "value") %>%
+# Panel 2: Democrats evaluating Republicans (outgroup) - no actual bar
+dem_eval_rep_pre <- dat %>% filter(participant_party == "Democrat") %>% pull(green_outgroup_pre)
+dem_eval_rep_post <- dat %>% filter(participant_party == "Democrat") %>% pull(green_outgroup_post)
+
+dem_eval_rep <- tibble(
+  value = c(dem_eval_rep_pre, dem_eval_rep_post),
+  measure_type = rep(c("Perceived (Pre)", "Perceived (Post)"),
+                     c(length(dem_eval_rep_pre), length(dem_eval_rep_post))),
+  panel = "Democrats → Republicans"
+)
+
+# Panel 3: Republicans evaluating Republicans (themselves - ingroup)
+rep_eval_rep_actual <- dat %>% filter(participant_party == "Republican") %>% pull(green_own)
+rep_eval_rep_perceived <- dat %>% filter(participant_party == "Republican") %>% pull(green_ingroup)
+
+rep_eval_rep <- tibble(
+  value = c(rep_eval_rep_actual, rep_eval_rep_perceived),
+  measure_type = rep(c("Actual", "Perceived"),
+                     c(length(rep_eval_rep_actual), length(rep_eval_rep_perceived))),
+  panel = "Republicans → Republicans"
+)
+
+# Panel 4: Republicans evaluating Democrats (outgroup) - no actual bar
+rep_eval_dem_pre <- dat %>% filter(participant_party == "Republican") %>% pull(green_outgroup_pre)
+rep_eval_dem_post <- dat %>% filter(participant_party == "Republican") %>% pull(green_outgroup_post)
+
+rep_eval_dem <- tibble(
+  value = c(rep_eval_dem_pre, rep_eval_dem_post),
+  measure_type = rep(c("Perceived (Pre)", "Perceived (Post)"),
+                     c(length(rep_eval_dem_pre), length(rep_eval_dem_post))),
+  panel = "Republicans → Democrats"
+)
+
+# Create reference lines for actual values in outgroup panels
+rep_actual_mean <- dat %>%
+  filter(participant_party == "Republican") %>%
+  summarise(mean_se(green_own))
+
+dem_actual_mean <- dat %>%
+  filter(participant_party == "Democrat") %>%
+  summarise(mean_se(green_own))
+
+actual_refs <- tibble(
+  panel = factor(c("Democrats → Republicans", "Republicans → Democrats"),
+                 levels = c("Democrats → Democrats", "Democrats → Republicans",
+                            "Republicans → Republicans", "Republicans → Democrats")),
+  y = c(rep_actual_mean$y, dem_actual_mean$y),
+  ymin = c(rep_actual_mean$ymin, dem_actual_mean$ymin),
+  ymax = c(rep_actual_mean$ymax, dem_actual_mean$ymax),
+  label_x = 1.5,
+  label_y = c(rep_actual_mean$y + 0.15, dem_actual_mean$y + 0.15),
+  label = "Actual",
+  color = c(party_colors["Republican"], party_colors["Democrat"])
+)
+
+# Combine all panels
+all_perception_data <- bind_rows(dem_eval_dem, dem_eval_rep, rep_eval_rep, rep_eval_dem) %>%
   mutate(
-    measure_type = factor(measure_type,
-                          levels = c("green_own", "green_ingroup", "green_outgroup_pre", "green_outgroup_post"),
-                          labels = c("Own", "Ingroup", "Outgroup\n(Pre)", "Outgroup\n(Post)")),
-    participant_party = factor(participant_party, levels = c("Democrat", "Republican")
-  ))
+    panel = factor(panel, levels = c("Democrats → Democrats", "Democrats → Republicans",
+                                      "Republicans → Republicans", "Republicans → Democrats")),
+    measure_type = factor(measure_type, levels = c("Actual", "Perceived", "Perceived (Pre)", "Perceived (Post)")),
+    evaluator = case_when(
+      grepl("^Democrats", panel) ~ "Democrat",
+      grepl("^Republicans", panel) ~ "Republican"
+    ),
+    is_post = measure_type == "Perceived (Post)"
+  )
 
-# Create faceted plot
-p <- ggplot(prelim_data, aes(x = measure_type, y = value, fill = participant_party)) +
-  stat_summary(fun = mean, geom = "bar", alpha = 0.8) +
+# Create color scheme
+all_perception_data <- all_perception_data %>%
+  mutate(
+    fill_color = case_when(
+      is_post & evaluator == "Democrat" ~ party_colors_dark["Democrat"],
+      is_post & evaluator == "Republican" ~ party_colors_dark["Republican"],
+      evaluator == "Democrat" ~ party_colors["Democrat"],
+      evaluator == "Republican" ~ party_colors["Republican"]
+    )
+  )
+
+p <- ggplot(all_perception_data, aes(x = measure_type, y = value, fill = fill_color)) +
+  facet_wrap(~panel, ncol = 4, scales = 'free_x') +
+  stat_summary(fun = mean, geom = "bar") +
   stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
-  geom_ribbon(data = actual_means, aes(ymin = ymin, ymax = ymax, y = NULL, fill = outgroup_party), alpha = .3)+
-geom_line(data = actual_means, aes( y = y, color = outgroup_party), linewidth = 1)+
-  facet_wrap(~participant_party, ncol = 4) +
-  scale_fill_manual(values = party_colors, name = "Political Party") +
-  scale_color_manual(values = party_colors, name = "Political Party") +
-  geom_text(data = annotation_df, aes(x=x,y = y, label = label, color = outgroup_party), size = 3)+
+  geom_rect(data = actual_refs, aes(xmin = -Inf, xmax = Inf, ymin = ymin, ymax = ymax),
+            alpha = 0.3, fill = "gray40", inherit.aes = FALSE) +
+  geom_hline(data = actual_refs, aes(yintercept = y, color = color),
+             linewidth = 1, linetype = "solid") +
+  geom_text(data = actual_refs, aes(x = label_x, y = label_y, label = label, color = color),
+            size = 3, fontface = "bold", inherit.aes = FALSE) +
+  scale_fill_identity() +
+  scale_color_identity() +
   labs(
     x = NULL,
     y = "Green Attitude (1-5 scale)"
   ) +
+  theme_minimal() +
   theme(
-    strip.text = element_text(face = "bold"),
-    legend.position = "none"
+    strip.text = element_text(face = "bold", size = 10),
+    legend.position = "none",
+    axis.text.x = element_text(angle = 45, hjust = 1)
   )
-ggsave(paste0(fig_path, "fig_green_attitudes.png"), p, width = 6, height = 3, dpi = 300)
+
+ggsave(paste0(fig_path, "fig_green_attitudes_perception.png"), p, width = 10, height = 6, dpi = 300)
 p
 ```
 
@@ -277,7 +505,7 @@ p <- bias_test %>% pull(p)
 
 d <- dat %>%
   select(learner_party, accuracy_pre) %>%
-  rstatix::cohens_d(accuracy_pre~learner_party) %>% pull(effsize) %>% Ben::numformat()
+  rstatix::cohens_d(accuracy_pre~learner_party) %>% pull(effsize) %>% numformat()
 
 # Calculate means and SDs by group
 bias_descriptives <- dat %>%
@@ -293,8 +521,10 @@ mean_rd <- bias_descriptives %>% filter(learner_party == "R→D") %>% pull(mean_
 sd_rd <- bias_descriptives %>% filter(learner_party == "R→D") %>% pull(sd_bias)
 ```
 
-What is the distribution of bias?
-At baseline, Democrats were more biased about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans were about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* `r format_pval(p)`.
+
+We quantified this bias by calculating each participant's absolute error from the actual mean and reverse-scoring it so that higher values indicate greater accuracy. Democrats showed significantly greater bias about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans showed about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* `r pformat(p)` (@fig-bias-distribution).
+
+
 
 ```{r}
 #| label: fig-bias-distribution
@@ -339,8 +569,23 @@ p1
 p2
 ```
 
-Does baseline accuracy correlate with baseline warmth?
-We examine whether people who are more biased about the outgroup also feel colder toward them.
+```{r baseline-accuracy-warmth-correlation}
+# Calculate correlations between baseline accuracy and warmth by party
+cor_dem <- dat %>%
+  filter(participant_party == "Democrat") %>%
+  with(cor.test(accuracy_pre, warmth_outgroup_pre))
+
+cor_rep <- dat %>%
+  filter(participant_party == "Republican") %>%
+  with(cor.test(accuracy_pre, warmth_outgroup_pre))
+
+cor_dem_r <- cor_dem$estimate
+cor_dem_p <- cor_dem$p.value
+cor_rep_r <- cor_rep$estimate
+cor_rep_p <- cor_rep$p.value
+```
+
+Participants who at baseline felt warmer towards the outgroup were also more accurate in their perceptions. This relationship held for both Democrats (*r* = `r sprintf("%.2f", cor_dem_r)`, *p* `r pformat(cor_dem_p)`) and Republicans (*r* = `r sprintf("%.2f", cor_rep_r)`, *p* `r pformat(cor_rep_p)`).
 
 ```{r}
 #| label: fig-accuracy-warmth-baseline
@@ -362,47 +607,6 @@ p <- dat %>%
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
 ggsave(paste0(fig_path, "fig_baseline_accuracy_warmth.png"), p, width = 6, height = 4, dpi = 300)
-p
-```
-
-Does baseline accuracy predict baseline confidence? [TO-DO: Move this to the confidence section at the end of results.]
-We examine whether less accurate participants are overconfident in their judgments, consistent with Dunning-Kruger effects.
-
-```{r baseline-accuracy-confidence-correlation}
-#| label: fig-dunning-kruger
-#| fig-cap: "Relationship between skill and confidence in outgroup judgments before and after chatbot interaction. Solid lines show pre-interaction patterns, dashed lines show post-interaction patterns. Less skilled participants (those with lower accuracy) exhibited higher confidence at baseline, consistent with Dunning-Kruger effects. Lines represent LOESS smoothers with 95% confidence bands."
-#| fig-width: 8
-#| fig-height: 4
-
-# Create inverted accuracy for plotting (higher = better skill)
-dat_dk <- dat %>%
-  mutate(
-    skill_pre = -accuracy_pre,  # Flip so higher = more accurate
-    skill_post = -accuracy_post
-  ) %>%
-  select(ResponseId, participant_party, skill_pre, skill_post,
-         confidence_outgroup_pre, confidence_outgroup_post) %>%
-  pivot_longer(cols = c(skill_pre, skill_post, confidence_outgroup_pre, confidence_outgroup_post),
-               names_to = c(".value", "time"),
-               names_pattern = "(.+)_(pre|post)") %>%
-  mutate(time = factor(time, levels = c("pre", "post")))
-
-p <- ggplot(dat_dk, aes(x = skill, y = confidence_outgroup, linetype = time, color = participant_party, fill = participant_party)) +
-  geom_smooth(method = "loess", se = TRUE, linewidth = 1, alpha = .1) +
-  facet_wrap(~participant_party) +
-  scale_linetype_manual(values = c("pre" = "solid", "post" = "dashed"),
-                        labels = c("pre" = "Pre-interaction", "post" = "Post-interaction"),
-                        name = "Time") +
-  labs(
-    x = "Skill (Higher = More Accurate)",
-    y = "Confidence (1-5 scale)"
-  ) +
-  theme_minimal() +
-  scale_color_manual(values = party_colors)+
-  scale_fill_manual(values = party_colors)+
-  theme(legend.position = "none",
-        strip.text = element_text(face = "bold"))
-ggsave(paste0(fig_path, "fig_dunning_kruger.png"), p, width = 8, height = 4, dpi = 300)
 p
 ```
 
@@ -444,7 +648,7 @@ warmth_d <- cohens_d(warmth ~ time, data = warmth_long, pooled_sd = FALSE)$Cohen
 ```
 
 We examined whether participants changed their beliefs about the outgroup's environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth.
-As shown in the table above, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale, *d* = `r sprintf("%.2f", accuracy_d)`) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer, *d* = `r sprintf("%.2f", warmth_d)`).
+As shown in the table below, participants became significantly more accurate (improving by `r sprintf("%.2f", accuracy_time_coef)` points on the 5-point scale, *d* = `r sprintf("%.2f", accuracy_d)`) and warmer toward the outgroup (increasing by `r sprintf("%.1f", warmth_time_coef)` degrees on the 100-point thermometer, *d* = `r sprintf("%.2f", warmth_d)`).
 
 ```{r q1-plots}
 #| label: fig-accuracy-warmth-change
@@ -492,21 +696,36 @@ tbl <- modelsummary(
 save_table(tbl, "tab_q1_main_effects")
 ```
 
-Do changes in accuracy correlate with changes in warmth?
-We examine whether people who became more accurate also became warmer toward the outgroup.
+```{r accuracy-warmth-change-stats}
+# Create change scores for correlation analysis
+dat_with_changes <- dat %>%
+  mutate(
+    accuracy_change = accuracy_post - accuracy_pre,  # Negative = improvement
+    warmth_change = warmth_outgroup_post - warmth_outgroup_pre
+  )
+
+# Calculate correlations between accuracy change and warmth change by party
+cor_change_dr <- dat_with_changes %>%
+  filter(learner_party == "D→R") %>%
+  with(cor.test(accuracy_change, warmth_change))
+
+cor_change_rd <- dat_with_changes %>%
+  filter(learner_party == "R→D") %>%
+  with(cor.test(accuracy_change, warmth_change))
+
+cor_change_dr_r <- cor_change_dr$estimate
+cor_change_dr_p <- cor_change_dr$p.value
+cor_change_rd_r <- cor_change_rd$estimate
+cor_change_rd_p <- cor_change_rd$p.value
+```
+
+Democrats who became more accurate towards Republicans also became warmer towards them (*r* = `r sprintf("%.2f", cor_change_dr_r)`, *p* `r pformat(cor_change_dr_p)`), but this relationship did not hold for Republicans learning about Democrats (*r* = `r sprintf("%.2f", cor_change_rd_r)`, *p* `r pformat(cor_change_rd_p)`).
 
 ```{r accuracy-warmth-change-correlation}
 #| label: fig-accuracy-warmth-correlation
 #| fig-cap: "Correlation between changes in belief accuracy and changes in outgroup warmth. Points represent individual participants, with separate regression lines for Democrats learning about Republicans (D→R) and Republicans learning about Democrats (R→D). Negative values on x-axis indicate improved accuracy. Correlation statistics are displayed separately by learner party."
 #| fig-width: 6
 #| fig-height: 4
-
-# Create change scores for this analysis (reusing from later section)
-dat_with_changes <- dat %>%
-  mutate(
-    accuracy_change = accuracy_post - accuracy_pre,  # Negative = improvement
-    warmth_change = warmth_outgroup_post - warmth_outgroup_pre
-  )
 
 p <- dat_with_changes %>%
   ggplot(aes(x = accuracy_change, y = warmth_change, color = learner_party)) +
@@ -730,9 +949,9 @@ attr(rows_extremism, "position") <- c(1, 2, 3, 4)
 ```
 
 Politically extreme participants showed greater bias about the outgroup at baseline (*b* = `r sprintf("%.3f", extremism_acc_baseline_b)`, *r* = `r sprintf("%.2f", extremism_acc_baseline_r)`, *p* `r if(extremism_acc_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_acc_baseline_p))`) and felt less warm toward them (*b* = `r sprintf("%.2f", extremism_warmth_baseline_b)`, *r* = `r sprintf("%.2f", extremism_warmth_baseline_r)`, *p* `r if(extremism_warmth_baseline_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_warmth_baseline_p))`).
-However, political extremism did not moderate the effect of the chatbot interaction.
+
+The intervention was as successful in increasing accuracy and warmth in more extreme partisans as it was for more moderate ones.
 The three-way interaction for accuracy was `r if(extremism_3way_acc_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.3f", extremism_3way_acc_coef)`, *p* `r if(extremism_3way_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_acc_p))`), and for warmth was `r if(extremism_3way_warmth_p < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.2f", extremism_3way_warmth_coef)`, *p* `r if(extremism_3way_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", extremism_3way_warmth_p))`).
-More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.
 
 ```{r}
 #| label: tbl-extremism
@@ -777,10 +996,15 @@ info_warmth_b <- coef(warmth_process_model)["info"]
 info_warmth_p <- summary(warmth_process_model)$coefficients["info", "Pr(>|t|)"]
 empathy_warmth_b <- coef(warmth_process_model)["empathy"]
 empathy_warmth_p <- summary(warmth_process_model)$coefficients["empathy", "Pr(>|t|)"]
+
+# Calculate correlation between empathy and informativeness
+empathy_info_cor <- cor.test(dat_for_reg$empathy, dat_for_reg$info)
+empathy_info_r <- empathy_info_cor$estimate
+empathy_info_p <- empathy_info_cor$p.value
 ```
 
-Participants who found the chatbot more informative showed `r if(info_acc_p < 0.05) "significantly" else "marginally"` better accuracy improvement (*b* = `r sprintf("%.3f", info_acc_b)`, *p* `r if(info_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_acc_p))`) and `r if(info_warmth_p < 0.05) "significantly" else "marginally"` greater warmth increases (*b* = `r sprintf("%.2f", info_warmth_b)`, *p* `r if(info_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", info_warmth_p))`).
-Bot empathy did not significantly predict accuracy change (*b* = `r sprintf("%.3f", empathy_acc_b)`, *p* `r if(empathy_acc_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_acc_p))`) or warmth change (*b* = `r sprintf("%.2f", empathy_warmth_b)`, *p* `r if(empathy_warmth_p < 0.001) "< .001" else paste("=", sprintf("%.3f", empathy_warmth_p))`).
+Participants who found the chatbot more informative showed `r if(info_acc_p < 0.05) "significantly" else "marginally"` better accuracy improvement (*b* = `r sprintf("%.3f", info_acc_b)`, *p* `r pformat(info_acc_p)`) and `r if(info_warmth_p < 0.05) "significantly" else "marginally"` greater warmth increases (*b* = `r sprintf("%.2f", info_warmth_b)`, *p* `r pformat(info_warmth_p)`).
+Bot empathy did not significantly predict accuracy change (*b* = `r sprintf("%.3f", empathy_acc_b)`, *p* `r pformat(empathy_acc_p)`) or warmth change (*b* = `r sprintf("%.2f", empathy_warmth_b)`, *p* `r pformat(empathy_warmth_p)`). Perceptions of bot empathy and informativeness correlated positively but modestly (*r* = `r sprintf("%.2f", empathy_info_r)`, *p* `r pformat(empathy_info_p)`), suggesting they captured partially distinct aspects of chatbot interaction quality (@fig-empathy-informativeness). 
 
 ```{r}
 #| label: tbl-mechanisms
@@ -795,9 +1019,6 @@ tbl <- modelsummary(
 )
 save_table(tbl, "tab_q4_process")
 ```
-
-Do perceptions of informativeness and empathy correlate with each other?
-Yes, but not strongly (r ~ .30). 
 
 ```{r}
 #| label: fig-empathy-informativeness
@@ -843,13 +1064,14 @@ dat <- dat %>%
   )
 ```
 
-We measured engagement as the number of words participants typed during the chat and tested whether greater engagement predicted larger changes in beliefs and warmth. 
-Participants engaged in an average of `r sprintf("%.2f", engagement_summary$mean_turns)` conversation turns (*SD* = `r sprintf("%.2f", engagement_summary$sd_turns)`) and typed an average of `r sprintf("%.2f", engagement_summary$mean_words)` words (*SD* = `r sprintf("%.2f", engagement_summary$sd_words)`).
+For the most part, the *dose* of the intervention that participants chose to take was unrelated to how much they updated their beliefs, or to whether they became more warm.
 
-#### Does engagement predict belief accuracy improvement?
+Participants engaged in an average of `r sprintf("%.2f", engagement_summary$mean_turns)` conversation turns (*SD* = `r sprintf("%.2f", engagement_summary$sd_turns)`) and typed an average of `r sprintf("%.2f", engagement_summary$mean_words)` words (*SD* = `r sprintf("%.2f", engagement_summary$sd_words)`).
 
 ```{r engagement-models}
 # Model: Engagement predicting accuracy and warmth change
+
+# TO-DO add models with the interaction term between engagemnt (turn or word count) with participant party. add simple effects at the top of the table.
 m_accuracy_turns <- lm(accuracy_change ~ user_turn_count + accuracy_pre + learner_party,
                        data = dat)
 m_accuracy_log_words <- lm(accuracy_change ~ log_word_count + accuracy_pre + learner_party,
@@ -861,7 +1083,10 @@ m_warmth_log_words <- lm(warmth_change ~ log_word_count + warmth_outgroup_pre + 
 ```
 
 Greater engagement—measured by turn count—was `r if(coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with accuracy change (*b* = `r sprintf("%.4f", coef(m_accuracy_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_turns))["user_turn_count", "Pr(>|t|)"])`), and `r if(coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"] < 0.05) "significantly" else "not significantly"` associated with warmth change (*b* = `r sprintf("%.4f", coef(m_warmth_turns)["user_turn_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_turns))["user_turn_count", "Pr(>|t|)"])`).
+
 Using log-transformed word count, the effect on accuracy was `r if(coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_accuracy_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_accuracy_log_words))["log_word_count", "Pr(>|t|)"])`), and on warmth was `r if(coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"] < 0.05) "significant" else "not significant"` (*b* = `r sprintf("%.4f", coef(m_warmth_log_words)["log_word_count"])`, *p* = `r sprintf("%.3f", coef(summary(m_warmth_log_words))["log_word_count", "Pr(>|t|)"])`).
+
+The only exception to the pattern, shown in @fig-engagement, was that Democrat partisans who wrote more words to the chatbot were more likely to increase in accuracy, but this was not true for turn count.
 
 ```{r}
 #| label: tbl-engagement
@@ -945,23 +1170,9 @@ ggsave(paste0(fig_path, "fig_engagement.png"), p_combined, width = 10, height = 
 p_combined
 ```
 
-### Does interacting with the chatbot improve applied judgment?
-
-Participants wrote slogans for marketing energy-saving appliances to the political outgroup.
-I haven't touched this data yet, because we don't have a control condition or a baseline slogan to make a meaningful comparison to.
-
-**DATA AVAILABLE**: Raw slogan text in variable `slogan` (n = `r sum(!is.na(dat$slogan))` responses).
-
-**DATA NEEDED**:
-1.
-Semantic similarity scores (compare to AI-generated responses to detect copying)
-2.
-Quality ratings (human or LLM ratings of slogan fit to target outgroup)
-
 ### Does confidence track accuracy—or diverge from it?
 
-We examine participants' metacognitive awareness by testing (1) whether confidence changes from pre to post, and (2) whether confidence changes track with actual accuracy improvements.
-
+We examine participants' metacognitive awareness by testing (1) whether confidence changes from pre to post, (2) The relationship between accuracy and confidence,  and (3) whether confidence changes track with actual accuracy improvements.
 #### Does confidence change pre-to-post?
 
 ```{r confidence-model}
@@ -1063,7 +1274,51 @@ tbl <- modelsummary(
 save_table(tbl, "tab_q7_confidence")
 ```
 
-#### Correlation: Does confidence change track accuracy improvement?
+
+
+#### Relationship between confidence and accuracy
+
+As shown in the figure below, Democrats show confidence patterns consistent with the Dunning-Kruger effect at baseline (i.e., less accurate participants are *more* confident, even when they are wrong; more accurate participants are less confident). After the intervention (dashed line), more accurate participants gain confidence. Higher skilled Republican participants are more correctly calibrated on their confidence about Democrats.
+
+```{r baseline-accuracy-confidence-correlation}
+#| label: fig-dunning-kruger
+#| fig-cap: "Relationship between skill and confidence in outgroup judgments before and after chatbot interaction. Solid lines show pre-interaction patterns, dashed lines show post-interaction patterns. Less skilled participants (those with lower accuracy) exhibited higher confidence at baseline, consistent with Dunning-Kruger effects. Lines represent LOESS smoothers with 95% confidence bands."
+#| fig-width: 8
+#| fig-height: 4
+
+# Create inverted accuracy for plotting (higher = better skill)
+dat_dk <- dat %>%
+  mutate(
+    skill_pre = accuracy_pre, 
+    skill_post = accuracy_post
+  ) %>%
+  select(ResponseId, participant_party, skill_pre, skill_post,
+         confidence_outgroup_pre, confidence_outgroup_post) %>%
+  pivot_longer(cols = c(skill_pre, skill_post, confidence_outgroup_pre, confidence_outgroup_post),
+               names_to = c(".value", "time"),
+               names_pattern = "(.+)_(pre|post)") %>%
+  mutate(time = factor(time, levels = c("pre", "post")))
+
+p <- ggplot(dat_dk, aes(x = skill, y = confidence_outgroup, linetype = time, color = participant_party, fill = participant_party)) +
+  geom_smooth(method = "loess", se = TRUE, linewidth = 1, alpha = .1) +
+  facet_wrap(~participant_party) +
+  scale_linetype_manual(values = c("pre" = "solid", "post" = "dashed"),
+                        labels = c("pre" = "Pre-interaction", "post" = "Post-interaction"),
+                        name = "Time") +
+  labs(
+    x = "Skill (Higher = More Accurate)",
+    y = "Confidence (1-5 scale)"
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = party_colors)+
+  scale_fill_manual(values = party_colors)+
+  theme(legend.position = "none",
+        strip.text = element_text(face = "bold"))
+ggsave(paste0(fig_path, "fig_dunning_kruger.png"), p, width = 8, height = 4, dpi = 300)
+p
+```
+
+#### Does confidence change track accuracy improvement?
 
 ```{r confidence-calibration, fig.width=8, fig.height=6}
 # Compute change scores
@@ -1148,15 +1403,21 @@ This study has several limitations that provide directions for future research.
 
 
 
-## Methods 
+## Methods
 
-## Data
+### Participants
 
-### Data Collection
+We recruited `r nrow(dat)` participants via Qualtrics panels. Participants were prescreened to exclude political moderates, retaining only those with clear partisan identities. Specifically, we recruited participants who scored below 25 or above 75 on a 0-100 political orientation scale during prescreening, where 0 represents strong Democratic identification and 100 represents strong Republican identification. The final sample included `r n_dr` Democrats learning about Republicans (D→R) and `r n_rd` Republicans learning about Democrats (R→D). Participants were compensated through the Qualtrics panel system. This research was approved by the University of Pennsylvania Institutional Review Board.
 
-We collected data via Qualtrics from `r nrow(dat)` participants.
-Of these, `r n_dr` were Democrats learning about Republicans (D→R) and `r n_rd` were Republicans learning about Democrats (R→D).
-Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
+### Procedure
+
+Participants completed a three-phase online study: baseline assessment, AI chatbot interaction, and post-interaction assessment.
+
+**Phase 1: Baseline Assessment.** Participants first reported their own environmental attitudes by rating their agreement with six statements about environmental issues on a 5-point scale (1 = Disagree strongly, 5 = Agree strongly). They then estimated the average environmental attitudes of both Democrats and Republicans using the same six items. Next, participants rated their warmth toward Democrats and Republicans on a 0-100 feeling thermometer and indicated their confidence in their outgroup judgments on a 5-point scale (1 = Not at all confident, 5 = Extremely confident).
+
+**Phase 2: AI Chatbot Interaction.** Participants engaged in a 10-minute conversation with an AI chatbot (Claude Sonnet 3.5) that was prompted to represent the political views of their outgroup. The chatbot was instructed to respond as a typical member of the opposing political party and to discuss environmental attitudes authentically. Participants could ask any questions they wished about the outgroup's environmental beliefs and values. The chatbot interaction was not a real person but an AI system designed to simulate realistic political perspectives.
+
+**Phase 3: Post-Interaction Assessment.** After the conversation, participants re-estimated the outgroup's environmental attitudes using the same six items and re-rated their warmth toward the outgroup. They also indicated their confidence in these post-interaction judgments and rated the chatbot on two dimensions: informativeness and empathy (both on 5-point scales: 1 = Not at all, 5 = Extremely). Finally, participants wrote a marketing slogan for energy-saving appliances targeted at the political outgroup.
 
 ### Measures
 
@@ -1176,6 +1437,19 @@ $$y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})$$
 where `time` indexes pre- versus post-interaction measurement and `learner_party` indicates D→R versus R→D learning direction.
 
 ## Appendix
+
+### Does interacting with the chatbot improve applied judgment?
+
+Participants wrote slogans for marketing energy-saving appliances to the political outgroup.
+I haven't touched this data yet, because we don't have a control condition or a baseline slogan to make a meaningful comparison to.
+
+**DATA AVAILABLE**: Raw slogan text in variable `slogan` (n = `r sum(!is.na(dat$slogan))` responses).
+
+**DATA NEEDED**:
+1.
+Semantic similarity scores (compare to AI-generated responses to detect copying)
+2.
+Quality ratings (human or LLM ratings of slogan fit to target outgroup)
 
 ### Correlation Matrix
 
