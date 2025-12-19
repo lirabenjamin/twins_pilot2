@@ -25,7 +25,12 @@ execute:
 
 Political polarization poses a fundamental challenge for marketers who must communicate effectively with ideologically diverse consumers. 
   Misperceptions about political outgroups—where partisans hold exaggerated and inaccurate views of those across the political divide—can undermine marketing strategies targeting broad consumer bases. This study tests whether brief interactions with an AI chatbot representing a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization. 
-  Participants interacted with a chatbot prompted to represent their political outgroup and responded to questions about environmental attitudes before and after the interaction. Results demonstrate that chatbot interactions significantly improved both belief accuracy and warmth toward the outgroup. However, these effects were asymmetric: Democrats learning about Republicans showed substantially greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates. Political extremism predicted greater baseline bias and lower warmth but did not moderate the intervention's effectiveness, indicating that both moderate and extreme partisans benefited equally. Bot informativeness predicted better outcomes, while perceived empathy did not. These findings suggest AI-mediated interactions offer a scalable tool for reducing political misperceptions in consumer research, though important questions remain about domain specificity, temporal durability, and how insights from AI interactions transfer to understanding actual outgroup members.
+  Participants interacted with a chatbot prompted to represent their political outgroup and responded to questions about environmental attitudes before and after the interaction. 
+  Results demonstrate that chatbot interactions significantly improved both belief accuracy and warmth toward the outgroup. 
+  However, these effects were asymmetric: Democrats learning about Republicans showed substantially greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates. 
+  Political extremism predicted greater baseline bias and lower warmth but did not moderate the intervention's effectiveness, indicating that both moderate and extreme partisans benefited equally. 
+  Bot informativeness predicted better outcomes, while perceived empathy did not. 
+  These findings suggest AI-mediated interactions offer a scalable tool for reducing political misperceptions in consumer research, though important questions remain about domain specificity, temporal durability, and how insights from AI interactions transfer to understanding actual outgroup members.
 
 ```{r setup}
 library(tidyverse)
@@ -81,6 +86,16 @@ save_table <- function(table_obj, filename, path = tab_path) {
   return(table_obj)
 }
 
+# Helper function to format p-values
+format_pval <- function(p, digits = 3) {
+  threshold <- 10^(-digits)
+  if (p < threshold) {
+    return(paste0("< .", paste(rep("0", digits - 1), collapse = ""), "1"))
+  } else {
+    return(sprintf(paste0("%.", digits, "f"), p))
+  }
+}
+
 # Load cleaned data
 
 
@@ -110,62 +125,20 @@ coef_map_common <- c(
 )
 ```
 
-## Overview
+## Introduction
 
-Political polarization creates challenges for marketers who must communicate effectively with ideologically diverse consumers. 
-Misperceptions about political outgroups are widespread, with partisans often holding exaggerated and inaccurate views of those across the political divide.
-These misperceptions can lead to ineffective marketing strategies when firms attempt to appeal to broad consumer bases.
-This study tests whether interacting with an AI chatbot prompted to represent a political outgroup can improve marketers' understanding of that outgroup and reduce affective polarization.
+Political polarization undermines marketers' ability to understand and serve ideologically diverse consumers [@hsieh_partisan_2024].
+Partisans hold exaggerated views of political outgroups [@iyengar_origins_2019; @yudkin_perception_2019], misperceptions that can lead to ineffective marketing strategies when firms target broad consumer bases.
 
-### Hypotheses
+Intergroup contact reduces prejudice and corrects misperceptions [@allport1954nature; @pettigrew_meta-analytic_2006], but real-world contact is logistically costly, socially awkward, and increasingly rare across party lines.
+Recent advances in AI enable "synthetic contact"—conversations with AI chatbots representing outgroup members—that may replicate these benefits at scale [@hermann_reducing_2025].
+Digital twins built from survey data can accurately represent individuals' psychological characteristics [@park_generative_nodate; @toubia_database_2025], but whether marketers can extract this knowledge through conversation remains untested.
 
-We hypothesized that after interacting with an AI chatbot representing their political outgroup, participants would:
+We test whether brief interactions with an AI chatbot representing a political outgroup improve belief accuracy and reduce affective polarization.
+We recruited `r nrow(dat)` partisan participants (prescreened to exclude moderates; `r n_dr` Democrats, `r n_rd` Republicans) who conversed with a chatbot prompted to represent their political outgroup and estimated outgroup attitudes toward environmental consumption before and after the interaction.
+We hypothesized that participants would report more accurate beliefs about outgroup environmental attitudes and warmer feelings toward the political outgroup after the interaction.
 
-1. "**Report more accurate beliefs** about the outgroup's attitudes toward environmentally responsible consumption."
-2. "**Report warmer feelings** toward the political outgroup."
 
-## Data
-
-### Data Collection
-
-We collected data via Qualtrics from `r nrow(dat)` participants.
-Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
-
-```{r}
-#| label: tbl-sample-composition
-#| tbl-cap: "Sample composition by learning direction."
-
-# TODO: This shouldnt be a table, refer to it in text.
-tbl <- dat %>%
-  count(learner_party) %>%
-  mutate(
-    learner_party = case_when(
-      learner_party == "D→R" ~ "Democrats learning about Republicans (D→R)",
-      learner_party == "R→D" ~ "Republicans learning about Democrats (R→D)",
-      TRUE ~ learner_party
-    )
-  ) %>%
-  gt() %>%
-  cols_label(learner_party = "Learning Direction", n = "N")
-save_table(tbl, "tab_sample_composition")
-```
-
-### Measures
-
-We measured two primary outcomes to assess belief updating and affective change.
-
-- **Belief accuracy**: Absolute difference between participants' estimates of outgroup green attitudes and actual outgroup means (lower = more accurate)
-- **Outgroup warmth**: Feeling thermometer (0-100 scale) toward the political outgroup
-
-Additionally, we collected confidence in outgroup judgments (5-point scale) and bot informativeness and empathy ratings (5-point scale)
-
-### Pre-Registered Analyses
-
-For each primary outcome, we estimated mixed-effects models of the form:
-
-$$y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})$$
-
-where `time` indexes pre- versus post-interaction measurement and `learner_party` indicates D→R versus R→D learning direction.
 
 ## Results
 
@@ -288,7 +261,7 @@ sd_rd <- bias_descriptives %>% filter(learner_party == "R→D") %>% pull(sd_bias
 ```
 
 What is the distribution of bias?
-At baseline, Democrats were more biased about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans were about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* = `r sprintf("%.3f", p)`. [TODO, make a function to format p values and use it to address cases where p < .001]
+At baseline, Democrats were more biased about Republicans (*M* = `r sprintf("%.2f", mean_dr)`, *SD* = `r sprintf("%.2f", sd_dr)`) than Republicans were about Democrats (*M* = `r sprintf("%.2f", mean_rd)`, *SD* = `r sprintf("%.2f", sd_rd)`), *d* = `r d`, *p* `r format_pval(p)`.
 
 ```{r}
 #| label: fig-bias-distribution
@@ -400,7 +373,7 @@ ggsave(paste0(fig_path, "fig_dunning_kruger.png"), p, width = 8, height = 4, dpi
 p
 ```
 
-### Q1. Do people update their beliefs after interacting with the chatbot?
+### Do people update their beliefs after interacting with the chatbot?
 
 ```{r q1-data-prep}
 # Calculate summary statistics for plots
@@ -519,7 +492,7 @@ ggsave(paste0(fig_path, "fig_accuracy_warmth_change.png"), p, width = 6, height 
 p
 ```
 
-### Q2. Is belief updating symmetric across political groups?
+### Is belief updating symmetric across political groups?
 
 ```{r}
 # Get simple effects
@@ -613,7 +586,7 @@ tbl <- modelsummary(
 save_table(tbl, "tab_q2_interaction")
 ```
 
-### Q3. Does political extremity predict how much people update?
+### Does political extremity predict how much people update?
 
 ```{r extremism-models}
 # Add extremism to long data
@@ -637,6 +610,18 @@ extremism_warmth_baseline_p <- summary(baseline_warmth_extremism)$coefficients["
 # Calculate correlation-based effect sizes for baseline extremism effects
 extremism_acc_baseline_r <- cor(dat$political_extremism, dat$accuracy_pre, use = "complete.obs")
 extremism_warmth_baseline_r <- cor(dat$political_extremism, dat$warmth_outgroup_pre, use = "complete.obs")
+
+# Models with extremism interaction
+accuracy_extremism_model0 <- lmer(
+  error ~ time * political_extremism + learner_party + (1 | ResponseId),
+  data = accuracy_long_ext
+)
+
+warmth_extremism_model0 <- lmer(
+  warmth ~ time * political_extremism + learner_party + (1 | ResponseId),
+  data = warmth_long_ext
+)
+
 
 # Models with extremism interaction
 accuracy_extremism_model <- lmer(
@@ -736,7 +721,7 @@ tbl <- modelsummary(
 save_table(tbl, "tab_q3_extremism")
 ```
 
-### Q4. Is belief updating associated with how the chatbot is perceived?
+### Is belief updating associated with how the chatbot is perceived?
 
 ```{r process-models}
 # Prepare data for regressions
@@ -803,7 +788,7 @@ ggsave(paste0(fig_path, "fig_empathy_info.png"), p, width = 6, height = 4, dpi =
 p
 ```
 
-### Q5. Does engagement ("dose") matter for belief updating?
+### Does engagement ("dose") matter for belief updating?
 
 ```{r engagement-descriptives}
 # Descriptive statistics for engagement
@@ -927,7 +912,7 @@ ggsave(paste0(fig_path, "fig_engagement.png"), p_combined, width = 10, height = 
 p_combined
 ```
 
-### Q6. Does interacting with the chatbot improve applied judgment?
+### Does interacting with the chatbot improve applied judgment?
 
 Participants wrote slogans for marketing energy-saving appliances to the political outgroup.
 I haven't touched this data yet, because we don't have a control condition or a baseline slogan to make a meaningful comparison to.
@@ -940,7 +925,7 @@ Semantic similarity scores (compare to AI-generated responses to detect copying)
 2.
 Quality ratings (human or LLM ratings of slogan fit to target outgroup)
 
-### Q7. Does confidence track accuracy—or diverge from it?
+### Does confidence track accuracy—or diverge from it?
 
 We examine participants' metacognitive awareness by testing (1) whether confidence changes from pre to post, and (2) whether confidence changes track with actual accuracy improvements.
 
@@ -1127,6 +1112,41 @@ This study has several limitations that provide directions for future research.
 **AI representation versus human reality.** Participants interacted with an AI chatbot prompted to represent a political outgroup rather than actual outgroup members. While this approach offers scalability advantages, it raises questions about whether insights gained from AI interactions transfer to understanding real outgroup members. The chatbot was prompted to represent the outgroup but may not fully capture the diversity of views within each political group. Individual variation within partisan groups is substantial, and the AI's responses may reinforce stereotypes about group homogeneity even as they correct specific attitude misperceptions. Future research should examine whether learning from AI translates to more accurate perceptions of actual individuals and whether AI-mediated learning produces different outcomes than human-mediated contact.
 
 **Comparison to alternative interventions.** This study does not compare the chatbot intervention to other approaches for reducing partisan misperceptions. Standard perspective-taking interventions have shown some effectiveness in reducing intergroup bias in the psychological literature. Information provision through simple fact sheets or Google searches might achieve similar accuracy improvements at lower cost. Interactions with digital twins based on actual individuals' response patterns could combine scalability with greater authenticity. Future research should directly compare these alternatives to determine the relative effectiveness and cost-efficiency of AI chatbots versus other scalable interventions for partisan debiasing.
+
+
+
+## Methods 
+
+## Data
+
+### Data Collection
+
+```{r}
+# Calculate sample composition
+n_dr <- dat %>% filter(learner_party == "D→R") %>% nrow()
+n_rd <- dat %>% filter(learner_party == "R→D") %>% nrow()
+```
+
+We collected data via Qualtrics from `r nrow(dat)` participants.
+Of these, `r n_dr` were Democrats learning about Republicans (D→R) and `r n_rd` were Republicans learning about Democrats (R→D).
+Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.
+
+### Measures
+
+We measured two primary outcomes to assess belief updating and affective change.
+
+- **Belief accuracy**: Absolute difference between participants' estimates of outgroup green attitudes and actual outgroup means (lower = more accurate)
+- **Outgroup warmth**: Feeling thermometer (0-100 scale) toward the political outgroup
+
+Additionally, we collected confidence in outgroup judgments (5-point scale) and bot informativeness and empathy ratings (5-point scale)
+
+### Pre-Registered Analyses
+
+For each primary outcome, we estimated mixed-effects models of the form:
+
+$$y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})$$
+
+where `time` indexes pre- versus post-interaction measurement and `learner_party` indicates D→R versus R→D learning direction.
 
 ## Appendix
 
@@ -1375,60 +1395,112 @@ save_table(tbl, "tab_correlation_matrix")
 ### Summary table of regressions
 
 ```{r}
-#| label: tbl-appendix-accuracy-summary
-#| tbl-cap: "Consolidated summary of all accuracy models. Columns are grouped by research question: Pre-Post Change (main effect and interaction with learner party), Extremism (moderation by political extremism), and Mechanisms (bot perceptions and engagement dosage). Models 1-3 are mixed-effects with random intercepts by participant; Models 4-6 are OLS with baseline controls."
-# Accuracy models panel
-tbl_acc <- modelsummary(
+#| label: tbl-appendix-consolidated
+#| tbl-cap: "Consolidated summary of all models examining belief accuracy and outgroup warmth. Upper panels show simple effects at different levels of partisanship (D→R vs. R→D) and extremism (±1 SD). Lower panel shows full regression results. Models test main effects of time, interactions with learner party (partisanship), and moderation by political extremism."
+
+# Calculate simple effects for partisanship
+accuracy_party_contrasts <- emmeans(accuracy_model, ~ time | learner_party) %>%
+  pairs(reverse = TRUE) %>%
+  tidy()
+
+warmth_party_contrasts <- emmeans(warmth_model, ~ time | learner_party) %>%
+  pairs(reverse = TRUE) %>%
+  tidy()
+
+# Format simple effects for partisanship
+acc_party_formatted <- accuracy_party_contrasts %>%
+  mutate(
+    stars = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01 ~ "**",
+      p.value < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    formatted = sprintf("%.3f%s", estimate, stars),
+    se_formatted = sprintf("(%.3f)", std.error)
+  )
+
+warmth_party_formatted <- warmth_party_contrasts %>%
+  mutate(
+    stars = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01 ~ "**",
+      p.value < 0.05 ~ "*",
+      TRUE ~ ""
+    ),
+    formatted = sprintf("%.3f%s", estimate, stars),
+    se_formatted = sprintf("(%.3f)", std.error)
+  )
+
+# Calculate simple effects for extremism (already calculated above, reuse)
+# These were calculated in the extremism section
+
+# Create rows for simple effects
+rows_party <- tibble(
+  term = c("Time effect (D→R)", "", "Time effect (R→D)", ""),
+  `2` = c(acc_party_formatted$formatted[1], acc_party_formatted$se_formatted[1],
+          acc_party_formatted$formatted[2], acc_party_formatted$se_formatted[2]),
+  `3` = c(acc_party_formatted$formatted[1], acc_party_formatted$se_formatted[1],
+          acc_party_formatted$formatted[2], acc_party_formatted$se_formatted[2]),
+  `4` = c("", "", "", ""),
+  `5` = c("", "", "", ""),
+  `6` = c(warmth_party_formatted$formatted[1], warmth_party_formatted$se_formatted[1],
+          warmth_party_formatted$formatted[2], warmth_party_formatted$se_formatted[2]),
+  `7` = c(warmth_party_formatted$formatted[1], warmth_party_formatted$se_formatted[1],
+          warmth_party_formatted$formatted[2], warmth_party_formatted$se_formatted[2]),
+  `8` = c("", "", "", ""),
+  `9` = c("", "", "", "")
+)
+attr(rows_party, "position") <- c(1, 2, 3, 4)
+
+rows_extremism_append <- tibble(
+  term = c("Time effect (Low Extremism)", "", "Time effect (High Extremism)", ""),
+  `2` = c("", "", "", ""),
+  `3` = c("", "", "", ""),
+  `4` = c(acc_ext_formatted$formatted[1], acc_ext_formatted$se_formatted[1],
+          acc_ext_formatted$formatted[2], acc_ext_formatted$se_formatted[2]),
+  `5` = c(acc_ext_formatted$formatted[1], acc_ext_formatted$se_formatted[1],
+          acc_ext_formatted$formatted[2], acc_ext_formatted$se_formatted[2]),
+  `6` = c("", "", "", ""),
+  `7` = c("", "", "", ""),
+  `8` = c(warmth_ext_formatted$formatted[1], warmth_ext_formatted$se_formatted[1],
+          warmth_ext_formatted$formatted[2], warmth_ext_formatted$se_formatted[2]),
+  `9` = c(warmth_ext_formatted$formatted[1], warmth_ext_formatted$se_formatted[1],
+          warmth_ext_formatted$formatted[2], warmth_ext_formatted$se_formatted[2])
+)
+attr(rows_extremism_append, "position") <- c(5, 6, 7, 8)
+
+tbl <- modelsummary(
   list(
     "Main Effect" = accuracy_model0,
-    "Interaction" = accuracy_model,
-    "Extremism" = accuracy_extremism_model,
-    # "Baseline" = baseline_accuracy_extremism,
-    "Information/Empathy" = accuracy_process_model,
-    "Turns" = m_accuracy_turns,
-    "Words" = m_accuracy_log_words
-  ),
-  stars = TRUE,
-  gof_map = c("nobs", "r.squared", "adj.r.squared"),
-  coef_omit = "Intercept",
-  statistic = NULL,
-  coef_map = coef_map_common,
-  notes = "Note: Models 1-3 are mixed effects with random intercepts.
-Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001"
-) %>%
-  group_tt(j = list(
-    "Pre-Post Change" = 2:3,
-    "Extremism" = 4,
-    "Mechanisms" = 5:7
-  ))
-save_table(tbl_acc, "tab_appendix_accuracy_summary")
-
-```{r}
-#| label: tbl-appendix-warmth-summary
-#| tbl-cap: "Consolidated summary of all warmth models. Columns are grouped by research question: Pre-Post Change (main effect and interaction with learner party), Extremism (moderation by political extremism), and Mechanisms (bot perceptions and engagement dosage). Models 1-3 are mixed-effects with random intercepts by participant; Models 4-6 are OLS with baseline controls."
-# Warmth models panel
-tbl_warmth <- modelsummary(
-  list(
+    "Partisanship" = accuracy_model,
+    "Extremism" = accuracy_extremism_model0,
+    "Full Model" = accuracy_extremism_model,
     "Main Effect" = warmth_model0,
-    "Interaction" = warmth_model,
-    "Extremism" = warmth_extremism_model,
-    "Information/Empathy" = warmth_process_model,
-    "Turns" = m_warmth_turns,
-    "Words" = m_warmth_log_words
+    "Partisanship" = warmth_model,
+    "Extremism" = warmth_extremism_model0,
+    "Full Model" = warmth_extremism_model
   ),
   stars = TRUE,
-  statistic = NULL,
-  gof_map = c("nobs", "r.squared", "adj.r.squared"),
+  add_rows = list(rows_party, rows_extremism_append),
+  gof_map = c("nobs", "r.squared"),
   coef_omit = "Intercept",
+  statistic = NULL,
   coef_map = coef_map_common,
-  notes = "Note: Models 1-3 are mixed effects with random intercepts. Models 4-6 are OLS. * p<0.05, ** p<0.01, *** p<0.001"
-) %>%
+  notes = "Note: Simple effects show pre-to-post change by learner party (D→R vs. R→D) and extremism level (±1 SD). Full regression results below. * p<0.05, ** p<0.01, *** p<0.001") %>%
   group_tt(j = list(
-    "Pre-Post Change" = 2:3,
-    "Extremism" = 4,
-    "Mechanisms" = 5:7
-  ))
-save_table(tbl_warmth, "tab_appendix_warmth_summary")
+    "Accuracy" = 2:5,
+    "Warmth" = 6:9
+  )) %>%
+  group_tt(i = list(
+    "Simple Effects by Learner Party" = 1,
+    "Simple Effects by Extremism Level" = 5,
+    "Full Regression Results" = 9
+  )) %>%
+  style_tt(i = c(1, 5, 9), bold = TRUE) %>%
+  style_tt(i = c(4, 8), line = "b", line_color = "lightgray")
+
+save_table(tbl, "tab_appendix_consolidated")
 ```
 
 ### Descriptive Statistics

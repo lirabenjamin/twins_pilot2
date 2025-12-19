@@ -22,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="report_files/libs/clipboard/clipboard.min.js"></script>
@@ -77,45 +97,43 @@ window.Quarto = {
    
   <ul>
   <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract"><span class="header-section-number">1</span> Abstract</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">2</span> Overview</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">2</span> Introduction</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">3</span> Results</a>
   <ul class="collapse">
-  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">2.1</span> Hypotheses</a></li>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">3.1</span> Preliminaries</a></li>
+  <li><a href="#do-people-update-their-beliefs-after-interacting-with-the-chatbot" id="toc-do-people-update-their-beliefs-after-interacting-with-the-chatbot" class="nav-link" data-scroll-target="#do-people-update-their-beliefs-after-interacting-with-the-chatbot"><span class="header-section-number">3.2</span> Do people update their beliefs after interacting with the chatbot?</a></li>
+  <li><a href="#is-belief-updating-symmetric-across-political-groups" id="toc-is-belief-updating-symmetric-across-political-groups" class="nav-link" data-scroll-target="#is-belief-updating-symmetric-across-political-groups"><span class="header-section-number">3.3</span> Is belief updating symmetric across political groups?</a></li>
+  <li><a href="#does-political-extremity-predict-how-much-people-update" id="toc-does-political-extremity-predict-how-much-people-update" class="nav-link" data-scroll-target="#does-political-extremity-predict-how-much-people-update"><span class="header-section-number">3.4</span> Does political extremity predict how much people update?</a></li>
+  <li><a href="#is-belief-updating-associated-with-how-the-chatbot-is-perceived" id="toc-is-belief-updating-associated-with-how-the-chatbot-is-perceived" class="nav-link" data-scroll-target="#is-belief-updating-associated-with-how-the-chatbot-is-perceived"><span class="header-section-number">3.5</span> Is belief updating associated with how the chatbot is perceived?</a></li>
+  <li><a href="#does-engagement-dose-matter-for-belief-updating" id="toc-does-engagement-dose-matter-for-belief-updating" class="nav-link" data-scroll-target="#does-engagement-dose-matter-for-belief-updating"><span class="header-section-number">3.6</span> Does engagement (“dose”) matter for belief updating?</a></li>
+  <li><a href="#does-interacting-with-the-chatbot-improve-applied-judgment" id="toc-does-interacting-with-the-chatbot-improve-applied-judgment" class="nav-link" data-scroll-target="#does-interacting-with-the-chatbot-improve-applied-judgment"><span class="header-section-number">3.7</span> Does interacting with the chatbot improve applied judgment?</a></li>
+  <li><a href="#does-confidence-track-accuracyor-diverge-from-it" id="toc-does-confidence-track-accuracyor-diverge-from-it" class="nav-link" data-scroll-target="#does-confidence-track-accuracyor-diverge-from-it"><span class="header-section-number">3.8</span> Does confidence track accuracy—or diverge from it?</a></li>
   </ul></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">3</span> Data</a>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">4</span> Discussion</a>
   <ul class="collapse">
-  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection"><span class="header-section-number">3.1</span> Data Collection</a></li>
-  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">3.2</span> Measures</a></li>
-  <li><a href="#pre-registered-analyses" id="toc-pre-registered-analyses" class="nav-link" data-scroll-target="#pre-registered-analyses"><span class="header-section-number">3.3</span> Pre-Registered Analyses</a></li>
+  <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings"><span class="header-section-number">4.1</span> Summary of Findings</a></li>
+  <li><a href="#implications-for-marketing-practice" id="toc-implications-for-marketing-practice" class="nav-link" data-scroll-target="#implications-for-marketing-practice"><span class="header-section-number">4.2</span> Implications for Marketing Practice</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">4.3</span> Limitations</a></li>
   </ul></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">4</span> Results</a>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods"><span class="header-section-number">5</span> Methods</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">6</span> Data</a>
   <ul class="collapse">
-  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">4.1</span> Preliminaries</a></li>
-  <li><a href="#q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot" id="toc-q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot" class="nav-link" data-scroll-target="#q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot"><span class="header-section-number">4.2</span> Q1. Do people update their beliefs after interacting with the chatbot?</a></li>
-  <li><a href="#q2.-is-belief-updating-symmetric-across-political-groups" id="toc-q2.-is-belief-updating-symmetric-across-political-groups" class="nav-link" data-scroll-target="#q2.-is-belief-updating-symmetric-across-political-groups"><span class="header-section-number">4.3</span> Q2. Is belief updating symmetric across political groups?</a></li>
-  <li><a href="#q3.-does-political-extremity-predict-how-much-people-update" id="toc-q3.-does-political-extremity-predict-how-much-people-update" class="nav-link" data-scroll-target="#q3.-does-political-extremity-predict-how-much-people-update"><span class="header-section-number">4.4</span> Q3. Does political extremity predict how much people update?</a></li>
-  <li><a href="#q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived" id="toc-q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived" class="nav-link" data-scroll-target="#q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived"><span class="header-section-number">4.5</span> Q4. Is belief updating associated with how the chatbot is perceived?</a></li>
-  <li><a href="#q5.-does-engagement-dose-matter-for-belief-updating" id="toc-q5.-does-engagement-dose-matter-for-belief-updating" class="nav-link" data-scroll-target="#q5.-does-engagement-dose-matter-for-belief-updating"><span class="header-section-number">4.6</span> Q5. Does engagement (“dose”) matter for belief updating?</a></li>
-  <li><a href="#q6.-does-interacting-with-the-chatbot-improve-applied-judgment" id="toc-q6.-does-interacting-with-the-chatbot-improve-applied-judgment" class="nav-link" data-scroll-target="#q6.-does-interacting-with-the-chatbot-improve-applied-judgment"><span class="header-section-number">4.7</span> Q6. Does interacting with the chatbot improve applied judgment?</a></li>
-  <li><a href="#q7.-does-confidence-track-accuracyor-diverge-from-it" id="toc-q7.-does-confidence-track-accuracyor-diverge-from-it" class="nav-link" data-scroll-target="#q7.-does-confidence-track-accuracyor-diverge-from-it"><span class="header-section-number">4.8</span> Q7. Does confidence track accuracy—or diverge from it?</a></li>
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection"><span class="header-section-number">6.1</span> Data Collection</a></li>
+  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">6.2</span> Measures</a></li>
+  <li><a href="#pre-registered-analyses" id="toc-pre-registered-analyses" class="nav-link" data-scroll-target="#pre-registered-analyses"><span class="header-section-number">6.3</span> Pre-Registered Analyses</a></li>
   </ul></li>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">5</span> Discussion</a>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">7</span> Appendix</a>
   <ul class="collapse">
-  <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings"><span class="header-section-number">5.1</span> Summary of Findings</a></li>
-  <li><a href="#implications-for-marketing-practice" id="toc-implications-for-marketing-practice" class="nav-link" data-scroll-target="#implications-for-marketing-practice"><span class="header-section-number">5.2</span> Implications for Marketing Practice</a></li>
-  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">5.3</span> Limitations</a></li>
-  </ul></li>
-  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">6</span> Appendix</a>
-  <ul class="collapse">
-  <li><a href="#correlation-matrix" id="toc-correlation-matrix" class="nav-link" data-scroll-target="#correlation-matrix"><span class="header-section-number">6.1</span> Correlation Matrix</a></li>
-  <li><a href="#summary-table-of-regressions" id="toc-summary-table-of-regressions" class="nav-link" data-scroll-target="#summary-table-of-regressions"><span class="header-section-number">6.2</span> Summary table of regressions</a></li>
-  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">6.3</span> Descriptive Statistics</a></li>
-  <li><a href="#robustness-checks" id="toc-robustness-checks" class="nav-link" data-scroll-target="#robustness-checks"><span class="header-section-number">6.4</span> Robustness Checks</a></li>
-  <li><a href="#extreme-cases-analysis" id="toc-extreme-cases-analysis" class="nav-link" data-scroll-target="#extreme-cases-analysis"><span class="header-section-number">6.5</span> Extreme Cases Analysis</a></li>
-  <li><a href="#full-conversation-transcripts" id="toc-full-conversation-transcripts" class="nav-link" data-scroll-target="#full-conversation-transcripts"><span class="header-section-number">6.6</span> Full Conversation Transcripts</a></li>
-  <li><a href="#data-availability" id="toc-data-availability" class="nav-link" data-scroll-target="#data-availability"><span class="header-section-number">6.7</span> Data Availability</a></li>
-  <li><a href="#code-availability" id="toc-code-availability" class="nav-link" data-scroll-target="#code-availability"><span class="header-section-number">6.8</span> Code Availability</a></li>
-  <li><a href="#pre-registration" id="toc-pre-registration" class="nav-link" data-scroll-target="#pre-registration"><span class="header-section-number">6.9</span> Pre-Registration</a></li>
-  <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information"><span class="header-section-number">6.10</span> Session Information</a></li>
+  <li><a href="#correlation-matrix" id="toc-correlation-matrix" class="nav-link" data-scroll-target="#correlation-matrix"><span class="header-section-number">7.1</span> Correlation Matrix</a></li>
+  <li><a href="#summary-table-of-regressions" id="toc-summary-table-of-regressions" class="nav-link" data-scroll-target="#summary-table-of-regressions"><span class="header-section-number">7.2</span> Summary table of regressions</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">7.3</span> Descriptive Statistics</a></li>
+  <li><a href="#robustness-checks" id="toc-robustness-checks" class="nav-link" data-scroll-target="#robustness-checks"><span class="header-section-number">7.4</span> Robustness Checks</a></li>
+  <li><a href="#extreme-cases-analysis" id="toc-extreme-cases-analysis" class="nav-link" data-scroll-target="#extreme-cases-analysis"><span class="header-section-number">7.5</span> Extreme Cases Analysis</a></li>
+  <li><a href="#full-conversation-transcripts" id="toc-full-conversation-transcripts" class="nav-link" data-scroll-target="#full-conversation-transcripts"><span class="header-section-number">7.6</span> Full Conversation Transcripts</a></li>
+  <li><a href="#data-availability" id="toc-data-availability" class="nav-link" data-scroll-target="#data-availability"><span class="header-section-number">7.7</span> Data Availability</a></li>
+  <li><a href="#code-availability" id="toc-code-availability" class="nav-link" data-scroll-target="#code-availability"><span class="header-section-number">7.8</span> Code Availability</a></li>
+  <li><a href="#pre-registration" id="toc-pre-registration" class="nav-link" data-scroll-target="#pre-registration"><span class="header-section-number">7.9</span> Pre-Registration</a></li>
+  <li><a href="#session-information" id="toc-session-information" class="nav-link" data-scroll-target="#session-information"><span class="header-section-number">7.10</span> Session Information</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -157,527 +175,16 @@ window.Quarto = {
 <h2 data-number="1" class="anchored" data-anchor-id="abstract"><span class="header-section-number">1</span> Abstract</h2>
 <p>Political polarization poses a fundamental challenge for marketers who must communicate effectively with ideologically diverse consumers. Misperceptions about political outgroups—where partisans hold exaggerated and inaccurate views of those across the political divide—can undermine marketing strategies targeting broad consumer bases. This study tests whether brief interactions with an AI chatbot representing a political outgroup can improve marketers’ understanding of that outgroup and reduce affective polarization. Participants interacted with a chatbot prompted to represent their political outgroup and responded to questions about environmental attitudes before and after the interaction. Results demonstrate that chatbot interactions significantly improved both belief accuracy and warmth toward the outgroup. However, these effects were asymmetric: Democrats learning about Republicans showed substantially greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates. Political extremism predicted greater baseline bias and lower warmth but did not moderate the intervention’s effectiveness, indicating that both moderate and extreme partisans benefited equally. Bot informativeness predicted better outcomes, while perceived empathy did not. These findings suggest AI-mediated interactions offer a scalable tool for reducing political misperceptions in consumer research, though important questions remain about domain specificity, temporal durability, and how insights from AI interactions transfer to understanding actual outgroup members.</p>
 </section>
-<section id="overview" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="overview"><span class="header-section-number">2</span> Overview</h2>
-<p>Political polarization creates challenges for marketers who must communicate effectively with ideologically diverse consumers. Misperceptions about political outgroups are widespread, with partisans often holding exaggerated and inaccurate views of those across the political divide. These misperceptions can lead to ineffective marketing strategies when firms attempt to appeal to broad consumer bases. This study tests whether interacting with an AI chatbot prompted to represent a political outgroup can improve marketers’ understanding of that outgroup and reduce affective polarization.</p>
-<section id="hypotheses" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="hypotheses"><span class="header-section-number">2.1</span> Hypotheses</h3>
-<p>We hypothesized that after interacting with an AI chatbot representing their political outgroup, participants would:</p>
-<ol type="1">
-<li>“<strong>Report more accurate beliefs</strong> about the outgroup’s attitudes toward environmentally responsible consumption.”</li>
-<li>“<strong>Report warmer feelings</strong> toward the political outgroup.”</li>
-</ol>
+<section id="introduction" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2</span> Introduction</h2>
+<p>Political polarization undermines marketers’ ability to understand and serve ideologically diverse consumers <span class="citation" data-cites="hsieh_partisan_2024">(<a href="#ref-hsieh_partisan_2024" role="doc-biblioref">Hsieh et al., 2024</a>)</span>. Partisans hold exaggerated views of political outgroups <span class="citation" data-cites="iyengar_origins_2019 yudkin_perception_2019">(<a href="#ref-iyengar_origins_2019" role="doc-biblioref">Iyengar et al., 2019</a>; <a href="#ref-yudkin_perception_2019" role="doc-biblioref">Yudkin et al., 2019</a>)</span>, misperceptions that can lead to ineffective marketing strategies when firms target broad consumer bases.</p>
+<p>Intergroup contact reduces prejudice and corrects misperceptions <span class="citation" data-cites="allport1954nature pettigrew_meta-analytic_2006">(<a href="#ref-allport1954nature" role="doc-biblioref">Allport, 1954</a>; <a href="#ref-pettigrew_meta-analytic_2006" role="doc-biblioref">Pettigrew &amp; Tropp, 2006</a>)</span>, but real-world contact is logistically costly, socially awkward, and increasingly rare across party lines. Recent advances in AI enable “synthetic contact”—conversations with AI chatbots representing outgroup members—that may replicate these benefits at scale <span class="citation" data-cites="hermann_reducing_2025">(<a href="#ref-hermann_reducing_2025" role="doc-biblioref">Hermann et al., 2025</a>)</span>. Digital twins built from survey data can accurately represent individuals’ psychological characteristics <span class="citation" data-cites="park_generative_nodate toubia_database_2025">(<a href="#ref-park_generative_nodate" role="doc-biblioref">Park et al., n.d.</a>; <a href="#ref-toubia_database_2025" role="doc-biblioref">Toubia et al., 2025</a>)</span>, but whether marketers can extract this knowledge through conversation remains untested.</p>
+<p>We test whether brief interactions with an AI chatbot representing a political outgroup improve belief accuracy and reduce affective polarization. Participants conversed with a chatbot prompted to represent their political outgroup and estimated outgroup attitudes toward environmental consumption before and after the interaction. We hypothesized that participants would report more accurate beliefs about outgroup environmental attitudes and warmer feelings toward the political outgroup after the interaction.</p>
 </section>
-</section>
-<section id="data" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="data"><span class="header-section-number">3</span> Data</h2>
-<section id="data-collection" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">3.1</span> Data Collection</h3>
-<p>We collected data via Qualtrics from 500 participants. Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.</p>
-<div class="cell">
-<div id="tbl-sample-composition" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sample-composition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Sample composition by learning direction.
-</figcaption>
-<div aria-describedby="tbl-sample-composition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<div id="bidsydszte" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bidsydszte table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#bidsydszte thead, #bidsydszte tbody, #bidsydszte tfoot, #bidsydszte tr, #bidsydszte td, #bidsydszte th {
-  border-style: none;
-}
-
-#bidsydszte p {
-  margin: 0;
-  padding: 0;
-}
-
-#bidsydszte .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#bidsydszte .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#bidsydszte .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#bidsydszte .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#bidsydszte .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#bidsydszte .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bidsydszte .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#bidsydszte .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#bidsydszte .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#bidsydszte .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#bidsydszte .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#bidsydszte .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#bidsydszte .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#bidsydszte .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#bidsydszte .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#bidsydszte .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#bidsydszte .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#bidsydszte .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#bidsydszte .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bidsydszte .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#bidsydszte .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#bidsydszte .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#bidsydszte .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bidsydszte .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#bidsydszte .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#bidsydszte .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bidsydszte .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bidsydszte .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#bidsydszte .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bidsydszte .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#bidsydszte .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#bidsydszte .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#bidsydszte .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bidsydszte .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#bidsydszte .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#bidsydszte .gt_left {
-  text-align: left;
-}
-
-#bidsydszte .gt_center {
-  text-align: center;
-}
-
-#bidsydszte .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#bidsydszte .gt_font_normal {
-  font-weight: normal;
-}
-
-#bidsydszte .gt_font_bold {
-  font-weight: bold;
-}
-
-#bidsydszte .gt_font_italic {
-  font-style: italic;
-}
-
-#bidsydszte .gt_super {
-  font-size: 65%;
-}
-
-#bidsydszte .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#bidsydszte .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#bidsydszte .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#bidsydszte .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#bidsydszte .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#bidsydszte .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#bidsydszte .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#bidsydszte .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#bidsydszte div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings header">
-<th id="learner_party" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Learning Direction</th>
-<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">N</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="learner_party">Democrats learning about Republicans (D→R)</td>
-<td class="gt_row gt_right" headers="n">248</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="learner_party">Republicans learning about Democrats (R→D)</td>
-<td class="gt_row gt_right" headers="n">252</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-</figure>
-</div>
-</div>
-</section>
-<section id="measures" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="measures"><span class="header-section-number">3.2</span> Measures</h3>
-<p>We measured two primary outcomes to assess belief updating and affective change.</p>
-<ul>
-<li><strong>Belief accuracy</strong>: Absolute difference between participants’ estimates of outgroup green attitudes and actual outgroup means (lower = more accurate)</li>
-<li><strong>Outgroup warmth</strong>: Feeling thermometer (0-100 scale) toward the political outgroup</li>
-</ul>
-<p>Additionally, we collected confidence in outgroup judgments (5-point scale) and bot informativeness and empathy ratings (5-point scale)</p>
-</section>
-<section id="pre-registered-analyses" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="pre-registered-analyses"><span class="header-section-number">3.3</span> Pre-Registered Analyses</h3>
-<p>For each primary outcome, we estimated mixed-effects models of the form:</p>
-<p><span class="math display">\[y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})\]</span></p>
-<p>where <code>time</code> indexes pre- versus post-interaction measurement and <code>learner_party</code> indicates D→R versus R→D learning direction.</p>
-</section>
-</section>
-<section id="results" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="results"><span class="header-section-number">4</span> Results</h2>
-<section id="preliminaries" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">4.1</span> Preliminaries</h3>
+<section id="results" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="results"><span class="header-section-number">3</span> Results</h2>
+<section id="preliminaries" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">3.1</span> Preliminaries</h3>
 <p>Most participants held strong partisan identities, with the majority in the top and bottom quartiles of the political spectrum.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -708,7 +215,7 @@ Figure&nbsp;2: Actual and perceived environmental attitudes by political party. 
 </div>
 </div>
 </div>
-<p>What is the distribution of bias? At baseline, Democrats were more biased about Republicans (<em>M</em> = -1.68, <em>SD</em> = 0.84) than Republicans were about Democrats (<em>M</em> = -0.70, <em>SD</em> = 0.63), <em>d</em> = -1.32, <em>p</em> = 0.000. [TODO, make a function to format p values and use it to address cases where p &lt; .001]</p>
+<p>What is the distribution of bias? At baseline, Democrats were more biased about Republicans (<em>M</em> = -1.68, <em>SD</em> = 0.84) than Republicans were about Democrats (<em>M</em> = -0.70, <em>SD</em> = 0.63), <em>d</em> = -1.32, <em>p</em> &lt; .001.</p>
 <div id="fig-bias-distribution" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bias-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -775,8 +282,8 @@ Figure&nbsp;5: Relationship between skill and confidence in outgroup judgments b
 </div>
 </div>
 </section>
-<section id="q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="q1.-do-people-update-their-beliefs-after-interacting-with-the-chatbot"><span class="header-section-number">4.2</span> Q1. Do people update their beliefs after interacting with the chatbot?</h3>
+<section id="do-people-update-their-beliefs-after-interacting-with-the-chatbot" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="do-people-update-their-beliefs-after-interacting-with-the-chatbot"><span class="header-section-number">3.2</span> Do people update their beliefs after interacting with the chatbot?</h3>
 <p>We examined whether participants changed their beliefs about the outgroup’s environmental attitudes from pre- to post-interaction, analyzing both accuracy and warmth. As shown in the table above, participants became significantly more accurate (improving by 0.39 points on the 5-point scale, <em>d</em> = 0.49) and warmer toward the outgroup (increasing by 4.3 degrees on the 100-point thermometer, <em>d</em> = -0.17).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -796,7 +303,7 @@ Figure&nbsp;6: Changes in belief accuracy and outgroup warmth from pre- to post-
 <div id="tbl-main-effects" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-main-effects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Mixed-effects models predicting belief accuracy and outgroup warmth from chatbot interaction timing. Models include random intercepts by participant. Time coefficient represents the main effect of pre- to post-interaction change. Both outcomes showed significant improvement following the chatbot interaction.
+Table&nbsp;1: Mixed-effects models predicting belief accuracy and outgroup warmth from chatbot interaction timing. Models include random intercepts by participant. Time coefficient represents the main effect of pre- to post-interaction change. Both outcomes showed significant improvement following the chatbot interaction.
 </figcaption>
 <div aria-describedby="tbl-main-effects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -937,15 +444,15 @@ Figure&nbsp;7: Correlation between changes in belief accuracy and changes in out
 </div>
 </div>
 </section>
-<section id="q2.-is-belief-updating-symmetric-across-political-groups" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="q2.-is-belief-updating-symmetric-across-political-groups"><span class="header-section-number">4.3</span> Q2. Is belief updating symmetric across political groups?</h3>
+<section id="is-belief-updating-symmetric-across-political-groups" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="is-belief-updating-symmetric-across-political-groups"><span class="header-section-number">3.3</span> Is belief updating symmetric across political groups?</h3>
 <p>While both groups became more accurate, it was Democrats learning about Republicans who showed greater improvement (<em>b</em> = 0.63, <em>d</em> = 0.75, <em>p</em> &lt; .001). Republicans also became less biased about Democrats, though to a lesser extent (<em>b</em> = 0.16, <em>d</em> = 0.29, <em>p</em> = 0.002). The interaction term was significant (<em>b</em> = -0.46, <em>p</em> &lt; .001).</p>
 <p>Both groups became warmer toward the outgroup at similar rates. Democrats learning about Republicans increased warmth by 5.1 degrees (<em>d</em> = -0.21, <em>p</em> &lt; .001), while Republicans learning about Democrats increased by 3.5 degrees (<em>d</em> = -0.14, <em>p</em> &lt; .001). The interaction was not significant (<em>b</em> = -1.60, <em>p</em> = 0.127).</p>
 <div class="cell">
 <div id="tbl-symmetry" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-symmetry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: Tests of asymmetry in belief updating across political groups. Upper panel shows simple effects of time separately for Democrats learning about Republicans (D→R) and Republicans learning about Democrats (R→D). Lower panel shows full mixed-effects regression results including the Time × Learner Party interaction term. Democrats showed significantly larger accuracy improvements than Republicans, while warmth increases were symmetric across groups.
+Table&nbsp;2: Tests of asymmetry in belief updating across political groups. Upper panel shows simple effects of time separately for Democrats learning about Republicans (D→R) and Republicans learning about Democrats (R→D). Lower panel shows full mixed-effects regression results including the Time × Learner Party interaction term. Democrats showed significantly larger accuracy improvements than Republicans, while warmth increases were symmetric across groups.
 </figcaption>
 <div aria-describedby="tbl-symmetry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1113,14 +620,14 @@ window.addEventListener('load', function () { insertSpanRow_1tqc7f0zjo33182531we
 </div>
 </div>
 </section>
-<section id="q3.-does-political-extremity-predict-how-much-people-update" class="level3" data-number="4.4">
-<h3 data-number="4.4" class="anchored" data-anchor-id="q3.-does-political-extremity-predict-how-much-people-update"><span class="header-section-number">4.4</span> Q3. Does political extremity predict how much people update?</h3>
+<section id="does-political-extremity-predict-how-much-people-update" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="does-political-extremity-predict-how-much-people-update"><span class="header-section-number">3.4</span> Does political extremity predict how much people update?</h3>
 <p>Politically extreme participants showed greater bias about the outgroup at baseline (<em>b</em> = -0.012, <em>r</em> = -0.20, <em>p</em> &lt; .001) and felt less warm toward them (<em>b</em> = -0.54, <em>r</em> = -0.31, <em>p</em> &lt; .001). However, political extremism did not moderate the effect of the chatbot interaction. The three-way interaction for accuracy was not significant (<em>b</em> = 0.007, <em>p</em> = 0.185), and for warmth was not significant (<em>b</em> = 0.08, <em>p</em> = 0.315). More and less extreme participants were equally likely to update their beliefs and warmth toward the outgroup.</p>
 <div class="cell">
 <div id="tbl-extremism" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-extremism-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4: Tests of whether political extremism moderates belief updating. Upper panel shows simple effects of time at low extremism (-1 SD) and high extremism (+1 SD) levels. Lower panel shows full mixed-effects regressions with three-way interactions (Time × Learner Party × Political Extremism). While politically extreme participants showed greater baseline bias, extremism did not significantly moderate the effectiveness of the chatbot intervention.
+Table&nbsp;3: Tests of whether political extremism moderates belief updating. Upper panel shows simple effects of time at low extremism (-1 SD) and high extremism (+1 SD) levels. Lower panel shows full mixed-effects regressions with three-way interactions (Time × Learner Party × Political Extremism). While politically extreme participants showed greater baseline bias, extremism did not significantly moderate the effectiveness of the chatbot intervention.
 </figcaption>
 <div aria-describedby="tbl-extremism-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1332,14 +839,14 @@ window.addEventListener('load', function () { insertSpanRow_viru53hnxq3kxizwumc2
 </div>
 </div>
 </section>
-<section id="q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived" class="level3" data-number="4.5">
-<h3 data-number="4.5" class="anchored" data-anchor-id="q4.-is-belief-updating-associated-with-how-the-chatbot-is-perceived"><span class="header-section-number">4.5</span> Q4. Is belief updating associated with how the chatbot is perceived?</h3>
+<section id="is-belief-updating-associated-with-how-the-chatbot-is-perceived" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="is-belief-updating-associated-with-how-the-chatbot-is-perceived"><span class="header-section-number">3.5</span> Is belief updating associated with how the chatbot is perceived?</h3>
 <p>Participants who found the chatbot more informative showed significantly better accuracy improvement (<em>b</em> = 0.086, <em>p</em> = 0.004) and significantly greater warmth increases (<em>b</em> = 1.93, <em>p</em> &lt; .001). Bot empathy did not significantly predict accuracy change (<em>b</em> = 0.050, <em>p</em> = 0.091) or warmth change (<em>b</em> = 1.01, <em>p</em> = 0.056).</p>
 <div class="cell">
 <div id="tbl-mechanisms" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mechanisms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5: OLS regressions testing whether chatbot informativeness and empathy predict post-interaction accuracy and warmth, controlling for baseline levels. Bot informativeness significantly predicted both improved accuracy and increased warmth toward the outgroup, while perceived empathy did not significantly predict either outcome.
+Table&nbsp;4: OLS regressions testing whether chatbot informativeness and empathy predict post-interaction accuracy and warmth, controlling for baseline levels. Bot informativeness significantly predicted both improved accuracy and increased warmth toward the outgroup, while perceived empathy did not significantly predict either outcome.
 </figcaption>
 <div aria-describedby="tbl-mechanisms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1520,17 +1027,17 @@ Figure&nbsp;8: Correlation between perceived chatbot empathy and informativeness
 </div>
 </div>
 </section>
-<section id="q5.-does-engagement-dose-matter-for-belief-updating" class="level3" data-number="4.6">
-<h3 data-number="4.6" class="anchored" data-anchor-id="q5.-does-engagement-dose-matter-for-belief-updating"><span class="header-section-number">4.6</span> Q5. Does engagement (“dose”) matter for belief updating?</h3>
+<section id="does-engagement-dose-matter-for-belief-updating" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="does-engagement-dose-matter-for-belief-updating"><span class="header-section-number">3.6</span> Does engagement (“dose”) matter for belief updating?</h3>
 <p>We measured engagement as the number of words participants typed during the chat and tested whether greater engagement predicted larger changes in beliefs and warmth. Participants engaged in an average of 11.11 conversation turns (<em>SD</em> = 6.00) and typed an average of 199.86 words (<em>SD</em> = 123.31).</p>
-<section id="does-engagement-predict-belief-accuracy-improvement" class="level4" data-number="4.6.1">
-<h4 data-number="4.6.1" class="anchored" data-anchor-id="does-engagement-predict-belief-accuracy-improvement"><span class="header-section-number">4.6.1</span> Does engagement predict belief accuracy improvement?</h4>
+<section id="does-engagement-predict-belief-accuracy-improvement" class="level4" data-number="3.6.1">
+<h4 data-number="3.6.1" class="anchored" data-anchor-id="does-engagement-predict-belief-accuracy-improvement"><span class="header-section-number">3.6.1</span> Does engagement predict belief accuracy improvement?</h4>
 <p>Greater engagement—measured by turn count—was not significantly associated with accuracy change (<em>b</em> = -0.0020, <em>p</em> = 0.672), and not significantly associated with warmth change (<em>b</em> = -0.0956, <em>p</em> = 0.272). Using log-transformed word count, the effect on accuracy was not significant (<em>b</em> = -0.0496, <em>p</em> = 0.442), and on warmth was not significant (<em>b</em> = -0.8687, <em>p</em> = 0.461).</p>
 <div class="cell">
 <div id="tbl-engagement" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-engagement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;6: OLS regressions testing whether conversation engagement (turn count and log word count) predicts changes in accuracy and warmth, controlling for baseline levels and learner party. Models test whether greater dose of interaction produced larger belief updates. Engagement showed mixed associations with outcomes.
+Table&nbsp;5: OLS regressions testing whether conversation engagement (turn count and log word count) predicts changes in accuracy and warmth, controlling for baseline levels and learner party. Models test whether greater dose of interaction produced larger belief updates. Engagement showed mixed associations with outcomes.
 </figcaption>
 <div aria-describedby="tbl-engagement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1759,17 +1266,17 @@ Figure&nbsp;9: Relationships between conversation engagement and belief updating
 </div>
 </section>
 </section>
-<section id="q6.-does-interacting-with-the-chatbot-improve-applied-judgment" class="level3" data-number="4.7">
-<h3 data-number="4.7" class="anchored" data-anchor-id="q6.-does-interacting-with-the-chatbot-improve-applied-judgment"><span class="header-section-number">4.7</span> Q6. Does interacting with the chatbot improve applied judgment?</h3>
+<section id="does-interacting-with-the-chatbot-improve-applied-judgment" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="does-interacting-with-the-chatbot-improve-applied-judgment"><span class="header-section-number">3.7</span> Does interacting with the chatbot improve applied judgment?</h3>
 <p>Participants wrote slogans for marketing energy-saving appliances to the political outgroup. I haven’t touched this data yet, because we don’t have a control condition or a baseline slogan to make a meaningful comparison to.</p>
 <p><strong>DATA AVAILABLE</strong>: Raw slogan text in variable <code>slogan</code> (n = 500 responses).</p>
 <p><strong>DATA NEEDED</strong>: 1. Semantic similarity scores (compare to AI-generated responses to detect copying) 2. Quality ratings (human or LLM ratings of slogan fit to target outgroup)</p>
 </section>
-<section id="q7.-does-confidence-track-accuracyor-diverge-from-it" class="level3" data-number="4.8">
-<h3 data-number="4.8" class="anchored" data-anchor-id="q7.-does-confidence-track-accuracyor-diverge-from-it"><span class="header-section-number">4.8</span> Q7. Does confidence track accuracy—or diverge from it?</h3>
+<section id="does-confidence-track-accuracyor-diverge-from-it" class="level3" data-number="3.8">
+<h3 data-number="3.8" class="anchored" data-anchor-id="does-confidence-track-accuracyor-diverge-from-it"><span class="header-section-number">3.8</span> Does confidence track accuracy—or diverge from it?</h3>
 <p>We examine participants’ metacognitive awareness by testing (1) whether confidence changes from pre to post, and (2) whether confidence changes track with actual accuracy improvements.</p>
-<section id="does-confidence-change-pre-to-post" class="level4" data-number="4.8.1">
-<h4 data-number="4.8.1" class="anchored" data-anchor-id="does-confidence-change-pre-to-post"><span class="header-section-number">4.8.1</span> Does confidence change pre-to-post?</h4>
+<section id="does-confidence-change-pre-to-post" class="level4" data-number="3.8.1">
+<h4 data-number="3.8.1" class="anchored" data-anchor-id="does-confidence-change-pre-to-post"><span class="header-section-number">3.8.1</span> Does confidence change pre-to-post?</h4>
 <p>Republicans learning about Democrats gained confidence after the interaction (<em>b</em> = 0.306, <em>d</em> = -0.30, <em>p</em> &lt; .001), despite learning less than Democrats. Democrats’ confidence did not significantly change (<em>b</em> = -0.065, <em>d</em> = 0.06, <em>p</em> = 0.328).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1789,7 +1296,7 @@ Figure&nbsp;10: Changes in confidence in outgroup judgments from pre- to post-in
 <div id="tbl-confidence" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-confidence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7: Mixed-effects models testing changes in confidence in outgroup judgments. Upper panel shows simple effects of time separately by learner party (D→R and R→D). Lower panel shows full regression results with Time × Learner Party interaction. Republicans gained confidence after the interaction, while Democrats did not, suggesting asymmetric metacognitive responses.
+Table&nbsp;6: Mixed-effects models testing changes in confidence in outgroup judgments. Upper panel shows simple effects of time separately by learner party (D→R and R→D). Lower panel shows full regression results with Time × Learner Party interaction. Republicans gained confidence after the interaction, while Democrats did not, suggesting asymmetric metacognitive responses.
 </figcaption>
 <div aria-describedby="tbl-confidence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1957,8 +1464,8 @@ window.addEventListener('load', function () { insertSpanRow_5nd9hlvm0ll5sh8mb5vc
 </div>
 </div>
 </section>
-<section id="correlation-does-confidence-change-track-accuracy-improvement" class="level4" data-number="4.8.2">
-<h4 data-number="4.8.2" class="anchored" data-anchor-id="correlation-does-confidence-change-track-accuracy-improvement"><span class="header-section-number">4.8.2</span> Correlation: Does confidence change track accuracy improvement?</h4>
+<section id="correlation-does-confidence-change-track-accuracy-improvement" class="level4" data-number="3.8.2">
+<h4 data-number="3.8.2" class="anchored" data-anchor-id="correlation-does-confidence-change-track-accuracy-improvement"><span class="header-section-number">3.8.2</span> Correlation: Does confidence change track accuracy improvement?</h4>
 <p>Overall, confidence change did not track with accuracy improvement (<em>r</em> = -0.269, <em>p</em> &lt; .001). For Democrats learning about Republicans, there was a significant positive correlation between confidence change and accuracy change (<em>r</em> = -0.384, <em>p</em> &lt; .001), indicating that those who became less accurate gained more confidence. For Republicans learning about Democrats, confidence change did not correlate with accuracy change (<em>r</em> = -0.038, <em>p</em> = 0.553).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1977,21 +1484,21 @@ Figure&nbsp;11: Metacognitive calibration showing relationship between confidenc
 </section>
 </section>
 </section>
-<section id="discussion" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="discussion"><span class="header-section-number">5</span> Discussion</h2>
-<section id="summary-of-findings" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="summary-of-findings"><span class="header-section-number">5.1</span> Summary of Findings</h3>
+<section id="discussion" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="discussion"><span class="header-section-number">4</span> Discussion</h2>
+<section id="summary-of-findings" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="summary-of-findings"><span class="header-section-number">4.1</span> Summary of Findings</h3>
 <p>Brief interactions with an AI chatbot representing a political outgroup improved accuracy of beliefs about that outgroup and increased warmth toward them. Participants became more accurate in estimating their political outgroup’s environmental attitudes and reported warmer feelings toward the outgroup on a feeling thermometer. These effects were asymmetric: Democrats learning about Republicans showed greater accuracy improvements than Republicans learning about Democrats, though both groups increased warmth at similar rates.</p>
 <p>Political extremism predicted greater baseline bias and lower baseline warmth but did not moderate the intervention’s effectiveness. More and less extreme participants benefited equally from the interaction. Perceptions of the chatbot’s informativeness predicted better outcomes, while perceived empathy did not. Greater engagement, measured by conversation length, showed mixed associations with belief updating.</p>
 <p>Confidence changes did not track with accuracy improvements. Republicans learning about Democrats gained confidence despite smaller accuracy gains, while Democrats’ confidence did not change. For Democrats, confidence increases were paradoxically associated with becoming less accurate, suggesting poor metacognitive calibration in this context.</p>
 </section>
-<section id="implications-for-marketing-practice" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="implications-for-marketing-practice"><span class="header-section-number">5.2</span> Implications for Marketing Practice</h3>
+<section id="implications-for-marketing-practice" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="implications-for-marketing-practice"><span class="header-section-number">4.2</span> Implications for Marketing Practice</h3>
 <p>These findings suggest that AI-mediated interactions can serve as a scalable tool for reducing political misperceptions in consumer research. Marketers often struggle to understand ideologically diverse consumer segments, relying on stereotypes or costly focus groups. AI chatbots could provide an accessible method for gaining insight into outgroup consumer preferences and values.</p>
 <p>This approach may be particularly valuable for marketing environmentally responsible products, where political divides can lead to misperceptions about consumer attitudes. Understanding that political outgroups may be more environmentally conscious than stereotypes suggest could inform more effective cross-partisan messaging strategies.</p>
 </section>
-<section id="limitations" class="level3" data-number="5.3">
-<h3 data-number="5.3" class="anchored" data-anchor-id="limitations"><span class="header-section-number">5.3</span> Limitations</h3>
+<section id="limitations" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="limitations"><span class="header-section-number">4.3</span> Limitations</h3>
 <p>This study has several limitations that provide directions for future research.</p>
 <p><strong>Domain specificity.</strong> The environmental attitude domain may not generalize to other consumer preferences or policy areas. Environmental attitudes represent a domain where partisan divides exist but are not as stark as other politically charged topics. Future research should examine whether AI-mediated learning transfers to domains with deeper partisan disagreement, such as immigration, healthcare, or gun policy. The effectiveness of this intervention may vary depending on the perceived relevance of the attitude domain to partisan identity.</p>
 <p><strong>Temporal dynamics.</strong> This study examines only immediate post-interaction effects. The durability of accuracy improvements and warmth increases remains unknown. Research on intergroup contact suggests that initial attitude changes can decay over time, particularly without repeated exposure. Future studies should include delayed follow-up measurements to assess whether belief updates persist days, weeks, or months after the interaction. Understanding decay rates would inform practical recommendations about intervention frequency for sustained effects.</p>
@@ -1999,15 +1506,40 @@ Figure&nbsp;11: Metacognitive calibration showing relationship between confidenc
 <p><strong>Comparison to alternative interventions.</strong> This study does not compare the chatbot intervention to other approaches for reducing partisan misperceptions. Standard perspective-taking interventions have shown some effectiveness in reducing intergroup bias in the psychological literature. Information provision through simple fact sheets or Google searches might achieve similar accuracy improvements at lower cost. Interactions with digital twins based on actual individuals’ response patterns could combine scalability with greater authenticity. Future research should directly compare these alternatives to determine the relative effectiveness and cost-efficiency of AI chatbots versus other scalable interventions for partisan debiasing.</p>
 </section>
 </section>
-<section id="appendix" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="appendix"><span class="header-section-number">6</span> Appendix</h2>
-<section id="correlation-matrix" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="correlation-matrix"><span class="header-section-number">6.1</span> Correlation Matrix</h3>
+<section id="methods" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="methods"><span class="header-section-number">5</span> Methods</h2>
+</section>
+<section id="data" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="data"><span class="header-section-number">6</span> Data</h2>
+<section id="data-collection" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">6.1</span> Data Collection</h3>
+<p>We collected data via Qualtrics from 500 participants. Of these, 248 were Democrats learning about Republicans (D→R) and 252 were Republicans learning about Democrats (R→D). Participants self-reported their political orientation on a 0-100 slider scale, where values below 50 indicate Democratic leaning and values 50 and above indicate Republican leaning.</p>
+</section>
+<section id="measures" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="measures"><span class="header-section-number">6.2</span> Measures</h3>
+<p>We measured two primary outcomes to assess belief updating and affective change.</p>
+<ul>
+<li><strong>Belief accuracy</strong>: Absolute difference between participants’ estimates of outgroup green attitudes and actual outgroup means (lower = more accurate)</li>
+<li><strong>Outgroup warmth</strong>: Feeling thermometer (0-100 scale) toward the political outgroup</li>
+</ul>
+<p>Additionally, we collected confidence in outgroup judgments (5-point scale) and bot informativeness and empathy ratings (5-point scale)</p>
+</section>
+<section id="pre-registered-analyses" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="pre-registered-analyses"><span class="header-section-number">6.3</span> Pre-Registered Analyses</h3>
+<p>For each primary outcome, we estimated mixed-effects models of the form:</p>
+<p><span class="math display">\[y \sim \text{time} \times \text{learner\_party} + (1 | \text{id})\]</span></p>
+<p>where <code>time</code> indexes pre- versus post-interaction measurement and <code>learner_party</code> indicates D→R versus R→D learning direction.</p>
+</section>
+</section>
+<section id="appendix" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="appendix"><span class="header-section-number">7</span> Appendix</h2>
+<section id="correlation-matrix" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="correlation-matrix"><span class="header-section-number">7.1</span> Correlation Matrix</h3>
 <div class="cell">
 <div id="tbl-correlation-matrix" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-correlation-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8: Correlation matrix with significance stars for all key variables. Lower triangle shows Pearson correlation coefficients with significance indicators (* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001). Upper triangle intentionally left blank for readability. Variables include political orientation, belief accuracy, environmental attitudes, outgroup warmth, confidence, bot perceptions, and engagement measures.
+Table&nbsp;7: Correlation matrix with significance stars for all key variables. Lower triangle shows Pearson correlation coefficients with significance indicators (* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001). Upper triangle intentionally left blank for readability. Variables include political orientation, belief accuracy, environmental attitudes, outgroup warmth, confidence, bot perceptions, and engagement measures.
 </figcaption>
 <div aria-describedby="tbl-correlation-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -2923,13 +2455,13 @@ Table&nbsp;8: Correlation matrix with significance stars for all key variables. 
 </div>
 </div>
 </section>
-<section id="summary-table-of-regressions" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="summary-table-of-regressions"><span class="header-section-number">6.2</span> Summary table of regressions</h3>
+<section id="summary-table-of-regressions" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="summary-table-of-regressions"><span class="header-section-number">7.2</span> Summary table of regressions</h3>
 <div class="cell">
 <div id="tbl-appendix-accuracy-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appendix-accuracy-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;9: Consolidated summary of all accuracy models. Columns are grouped by research question: Pre-Post Change (main effect and interaction with learner party), Extremism (moderation by political extremism), and Mechanisms (bot perceptions and engagement dosage). Models 1-3 are mixed-effects with random intercepts by participant; Models 4-6 are OLS with baseline controls.
+Table&nbsp;8: Consolidated summary of all accuracy models. Columns are grouped by research question: Pre-Post Change (main effect and interaction with learner party), Extremism (moderation by political extremism), and Mechanisms (bot perceptions and engagement dosage). Models 1-3 are mixed-effects with random intercepts by participant; Models 4-6 are OLS with baseline controls.
 </figcaption>
 <div aria-describedby="tbl-appendix-accuracy-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -3195,7 +2727,7 @@ Models 4-6 are OLS. * p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</td></tr></tfoot>
 <div id="tbl-appendix-warmth-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appendix-warmth-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10: Consolidated summary of all warmth models. Columns are grouped by research question: Pre-Post Change (main effect and interaction with learner party), Extremism (moderation by political extremism), and Mechanisms (bot perceptions and engagement dosage). Models 1-3 are mixed-effects with random intercepts by participant; Models 4-6 are OLS with baseline controls.
+Table&nbsp;9: Consolidated summary of all warmth models. Columns are grouped by research question: Pre-Post Change (main effect and interaction with learner party), Extremism (moderation by political extremism), and Mechanisms (bot perceptions and engagement dosage). Models 1-3 are mixed-effects with random intercepts by participant; Models 4-6 are OLS with baseline controls.
 </figcaption>
 <div aria-describedby="tbl-appendix-warmth-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -3457,13 +2989,13 @@ Table&nbsp;10: Consolidated summary of all warmth models. Columns are grouped by
 </div>
 </div>
 </section>
-<section id="descriptive-statistics" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">6.3</span> Descriptive Statistics</h3>
+<section id="descriptive-statistics" class="level3" data-number="7.3">
+<h3 data-number="7.3" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">7.3</span> Descriptive Statistics</h3>
 <div class="cell">
 <div id="tbl-descriptives-green" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-descriptives-green-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;11: Actual environmental attitudes by political party. Self-reported green attitudes measured on a 1-5 scale, with higher values indicating more pro-environmental attitudes. Democrats and Republicans showed relatively similar baseline environmental values.
+Table&nbsp;10: Actual environmental attitudes by political party. Self-reported green attitudes measured on a 1-5 scale, with higher values indicating more pro-environmental attitudes. Democrats and Republicans showed relatively similar baseline environmental values.
 </figcaption>
 <div aria-describedby="tbl-descriptives-green-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -3952,7 +3484,7 @@ Table&nbsp;11: Actual environmental attitudes by political party. Self-reported 
 <div id="tbl-descriptives-accuracy" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-descriptives-accuracy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;12: Outgroup belief accuracy by learner party and time point. Values represent absolute error between participants’ estimates of outgroup green attitudes and actual outgroup means, with lower values indicating more accurate beliefs. Both groups showed improvements from pre- to post-interaction.
+Table&nbsp;11: Outgroup belief accuracy by learner party and time point. Values represent absolute error between participants’ estimates of outgroup green attitudes and actual outgroup means, with lower values indicating more accurate beliefs. Both groups showed improvements from pre- to post-interaction.
 </figcaption>
 <div aria-describedby="tbl-descriptives-accuracy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -4458,7 +3990,7 @@ Table&nbsp;12: Outgroup belief accuracy by learner party and time point. Values 
 <div id="tbl-descriptives-warmth" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-descriptives-warmth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;13: Outgroup warmth by learner party and time point. Warmth measured using a feeling thermometer on a 0-100 scale, with higher values indicating warmer feelings toward the political outgroup. Both groups showed increases in warmth from pre- to post-interaction.
+Table&nbsp;12: Outgroup warmth by learner party and time point. Warmth measured using a feeling thermometer on a 0-100 scale, with higher values indicating warmer feelings toward the political outgroup. Both groups showed increases in warmth from pre- to post-interaction.
 </figcaption>
 <div aria-describedby="tbl-descriptives-warmth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -4964,7 +4496,7 @@ Table&nbsp;13: Outgroup warmth by learner party and time point. Warmth measured 
 <div id="tbl-descriptives-extremism" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-descriptives-extremism-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;14: Political extremism by learner party. Extremism operationalized as absolute distance from the political center (50 on the 0-100 political orientation scale), ranging from 0 (centrist) to 50 (maximum extremism). Both Democrats and Republicans showed similar levels of extremism in this sample.
+Table&nbsp;13: Political extremism by learner party. Extremism operationalized as absolute distance from the political center (50 on the 0-100 political orientation scale), ranging from 0 (centrist) to 50 (maximum extremism). Both Democrats and Republicans showed similar levels of extremism in this sample.
 </figcaption>
 <div aria-describedby="tbl-descriptives-extremism-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -5456,7 +4988,7 @@ Table&nbsp;14: Political extremism by learner party. Extremism operationalized a
 <div id="tbl-descriptives-bot" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-descriptives-bot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;15: Chatbot perception ratings by learner party. Participants rated the chatbot’s informativeness (how much they learned) and empathy (how empathetic it was) on 1-5 scales immediately after the interaction. Ratings were generally positive across both dimensions and political groups.
+Table&nbsp;14: Chatbot perception ratings by learner party. Participants rated the chatbot’s informativeness (how much they learned) and empathy (how empathetic it was) on 1-5 scales immediately after the interaction. Ratings were generally positive across both dimensions and political groups.
 </figcaption>
 <div aria-describedby="tbl-descriptives-bot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -5962,7 +5494,7 @@ Table&nbsp;15: Chatbot perception ratings by learner party. Participants rated t
 <div id="tbl-descriptives-confidence" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-descriptives-confidence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;16: Confidence in outgroup judgments by learner party and time point. Confidence measured on a 1-5 scale asking how confident participants felt about their understanding of the political outgroup. Republicans showed increases in confidence from pre- to post-interaction, while Democrats did not.
+Table&nbsp;15: Confidence in outgroup judgments by learner party and time point. Confidence measured on a 1-5 scale asking how confident participants felt about their understanding of the political outgroup. Republicans showed increases in confidence from pre- to post-interaction, while Democrats did not.
 </figcaption>
 <div aria-describedby="tbl-descriptives-confidence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -6465,16 +5997,16 @@ Table&nbsp;16: Confidence in outgroup judgments by learner party and time point.
 </div>
 </div>
 </section>
-<section id="robustness-checks" class="level3" data-number="6.4">
-<h3 data-number="6.4" class="anchored" data-anchor-id="robustness-checks"><span class="header-section-number">6.4</span> Robustness Checks</h3>
-<section id="warmth-difference-score" class="level4" data-number="6.4.1">
-<h4 data-number="6.4.1" class="anchored" data-anchor-id="warmth-difference-score"><span class="header-section-number">6.4.1</span> Warmth Difference Score</h4>
+<section id="robustness-checks" class="level3" data-number="7.4">
+<h3 data-number="7.4" class="anchored" data-anchor-id="robustness-checks"><span class="header-section-number">7.4</span> Robustness Checks</h3>
+<section id="warmth-difference-score" class="level4" data-number="7.4.1">
+<h4 data-number="7.4.1" class="anchored" data-anchor-id="warmth-difference-score"><span class="header-section-number">7.4.1</span> Warmth Difference Score</h4>
 <p>Following common practice in the affective polarization literature, we examine warmth using a difference score (outgroup - ingroup). Effects replicate what is reported on the main text.</p>
 <div class="cell">
 <div id="tbl-robustness-warmth-diff" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-robustness-warmth-diff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;17: Robustness check using warmth difference scores (outgroup minus ingroup warmth). This operationalization follows standard practice in affective polarization research. Upper panel shows simple effects by learner party. Lower panel shows full mixed-effects regression. Results replicate main findings, confirming that participants became less affectively polarized toward the political outgroup.
+Table&nbsp;16: Robustness check using warmth difference scores (outgroup minus ingroup warmth). This operationalization follows standard practice in affective polarization research. Upper panel shows simple effects by learner party. Lower panel shows full mixed-effects regression. Results replicate main findings, confirming that participants became less affectively polarized toward the political outgroup.
 </figcaption>
 <div aria-describedby="tbl-robustness-warmth-diff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -6635,14 +6167,14 @@ window.addEventListener('load', function () { insertSpanRow_wszeqhvzu54sd8oir59f
 </div>
 </section>
 </section>
-<section id="extreme-cases-analysis" class="level3" data-number="6.5">
-<h3 data-number="6.5" class="anchored" data-anchor-id="extreme-cases-analysis"><span class="header-section-number">6.5</span> Extreme Cases Analysis</h3>
+<section id="extreme-cases-analysis" class="level3" data-number="7.5">
+<h3 data-number="7.5" class="anchored" data-anchor-id="extreme-cases-analysis"><span class="header-section-number">7.5</span> Extreme Cases Analysis</h3>
 <p>To understand what characterizes successful versus unsuccessful learning, we examined participants who showed the most and least improvement in accuracy about their political outgroup.</p>
 <div class="cell">
 <div id="tbl-extreme-cases" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-extreme-cases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;18: Comparison of participants showing the most versus least improvement in accuracy. For each learner party, we identified the single participant who improved most and the single participant who worsened most (or improved least). Positive values indicate improvement (reduced error). Engagement metrics (word count, turn count) did not consistently distinguish successful from unsuccessful learners, suggesting quality of engagement matters more than quantity.
+Table&nbsp;17: Comparison of participants showing the most versus least improvement in accuracy. For each learner party, we identified the single participant who improved most and the single participant who worsened most (or improved least). Positive values indicate improvement (reduced error). Engagement metrics (word count, turn count) did not consistently distinguish successful from unsuccessful learners, suggesting quality of engagement matters more than quantity.
 </figcaption>
 <div aria-describedby="tbl-extreme-cases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -7149,8 +6681,8 @@ Table&nbsp;18: Comparison of participants showing the most versus least improvem
 </figure>
 </div>
 </div>
-<section id="marketing-messages-from-extreme-cases" class="level4" data-number="6.5.1">
-<h4 data-number="6.5.1" class="anchored" data-anchor-id="marketing-messages-from-extreme-cases"><span class="header-section-number">6.5.1</span> Marketing Messages from Extreme Cases</h4>
+<section id="marketing-messages-from-extreme-cases" class="level4" data-number="7.5.1">
+<h4 data-number="7.5.1" class="anchored" data-anchor-id="marketing-messages-from-extreme-cases"><span class="header-section-number">7.5.1</span> Marketing Messages from Extreme Cases</h4>
 <p>Participants wrote marketing slogans for energy-saving appliances targeted at their political outgroup. The messages reveal stark differences between successful and unsuccessful learners.</p>
 <p><strong>Democrats Learning About Republicans (D→R)</strong></p>
 <p><em>Most Improved</em> (accuracy improvement = 2.843): &gt; “Energy-saving Appliances, Helps Make America Great!”</p>
@@ -7163,13 +6695,13 @@ Table&nbsp;18: Comparison of participants showing the most versus least improvem
 <p><em>Least Improved</em> (accuracy worsened by 2.167): &gt; “Come spend 50% more on less practical appliances since that’s what you claim to do and support the business. But I know you won’t because just like every Republican said its not financially plausible and your actions only prove the Republicans point.”</p>
 <p>This openly hostile message reinforces stereotypes rather than bridging divides. The participant challenged the chatbot’s authenticity throughout and remained adversarial.</p>
 </section>
-<section id="patterns-in-successful-vs.-unsuccessful-learning" class="level4" data-number="6.5.2">
-<h4 data-number="6.5.2" class="anchored" data-anchor-id="patterns-in-successful-vs.-unsuccessful-learning"><span class="header-section-number">6.5.2</span> Patterns in Successful vs.&nbsp;Unsuccessful Learning</h4>
+<section id="patterns-in-successful-vs.-unsuccessful-learning" class="level4" data-number="7.5.2">
+<h4 data-number="7.5.2" class="anchored" data-anchor-id="patterns-in-successful-vs.-unsuccessful-learning"><span class="header-section-number">7.5.2</span> Patterns in Successful vs.&nbsp;Unsuccessful Learning</h4>
 <div class="cell">
 <div id="tbl-extreme-engagement" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-extreme-engagement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;19: Engagement levels comparing successful versus unsuccessful learners among extreme cases. Based on n=4 participants (2 improved, 2 worsened). Participants who worsened actually showed slightly higher engagement on average, reinforcing that conversation quality matters more than quantity for belief updating.
+Table&nbsp;18: Engagement levels comparing successful versus unsuccessful learners among extreme cases. Based on n=4 participants (2 improved, 2 worsened). Participants who worsened actually showed slightly higher engagement on average, reinforcing that conversation quality matters more than quantity for belief updating.
 </figcaption>
 <div aria-describedby="tbl-extreme-engagement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -7671,11 +7203,11 @@ Table&nbsp;19: Engagement levels comparing successful versus unsuccessful learne
 <p>These patterns suggest that genuine engagement is crucial for learning across partisan lines. Participants who used the conversation to confirm existing biases actually became less accurate, while those who approached it with openness showed dramatic improvements.</p>
 </section>
 </section>
-<section id="full-conversation-transcripts" class="level3" data-number="6.6">
-<h3 data-number="6.6" class="anchored" data-anchor-id="full-conversation-transcripts"><span class="header-section-number">6.6</span> Full Conversation Transcripts</h3>
+<section id="full-conversation-transcripts" class="level3" data-number="7.6">
+<h3 data-number="7.6" class="anchored" data-anchor-id="full-conversation-transcripts"><span class="header-section-number">7.6</span> Full Conversation Transcripts</h3>
 <p>The following sections present the complete conversations for each extreme case, illustrating the qualitative differences between successful and unsuccessful learning.</p>
-<section id="dr-most-improved-r_3smkfsfio8nlgir" class="level4" data-number="6.6.1">
-<h4 data-number="6.6.1" class="anchored" data-anchor-id="dr-most-improved-r_3smkfsfio8nlgir"><span class="header-section-number">6.6.1</span> D→R Most Improved: R_3smKFSFIo8Nlgir</h4>
+<section id="dr-most-improved-r_3smkfsfio8nlgir" class="level4" data-number="7.6.1">
+<h4 data-number="7.6.1" class="anchored" data-anchor-id="dr-most-improved-r_3smkfsfio8nlgir"><span class="header-section-number">7.6.1</span> D→R Most Improved: R_3smKFSFIo8Nlgir</h4>
 <p><strong>Accuracy improvement</strong>: 2.843 (from 2.921 to 0.079) <strong>Marketing message</strong>: “Energy-saving Appliances, Helps Make America Great!”</p>
 <p><strong>PARTICIPANT</strong></p>
 <p>You are an american consumer who identifies as a republican. You will be asked questions about your beliefs, habits, and preferences. Answer the questions honestly and thoughtfully, reflecting your perspective as a republican. Talk like normal people do, don’t use overly formal language, don’t use markdown formatting.</p>
@@ -7710,8 +7242,8 @@ Table&nbsp;19: Engagement levels comparing successful versus unsuccessful learne
 <p>We might also look at reducing government spending in certain areas, which can help lower the national debt and create a healthier economy overall. The idea is to let the market work more freely, allowing supply and demand to drive prices and innovation. Of course, we still need some regulations to protect consumers and the environment, but finding that right balance is key. What are your thoughts on where that balance should be?</p>
 <p><strong>Analysis</strong>: This conversation shows deep engagement on economic issues. The participant found genuine common ground on concerns about taxes, regulations, and job stability. The chatbot explored practical implications of reduced government intervention, and the participant asked probing questions about implementation. This substantive exchange led to dramatically improved accuracy and a patriotic marketing message that bridges partisan values.</p>
 </section>
-<section id="dr-least-improved-r_7rokhi99s0lqcjq" class="level4" data-number="6.6.2">
-<h4 data-number="6.6.2" class="anchored" data-anchor-id="dr-least-improved-r_7rokhi99s0lqcjq"><span class="header-section-number">6.6.2</span> D→R Least Improved: R_7roKHi99S0lQCJq</h4>
+<section id="dr-least-improved-r_7rokhi99s0lqcjq" class="level4" data-number="7.6.2">
+<h4 data-number="7.6.2" class="anchored" data-anchor-id="dr-least-improved-r_7rokhi99s0lqcjq"><span class="header-section-number">7.6.2</span> D→R Least Improved: R_7roKHi99S0lQCJq</h4>
 <p><strong>Accuracy change</strong>: -1.333 (worsened from 1.088 to 2.421) <strong>Marketing message</strong>: “made for independence ‘lower your costs, stay in control’.”</p>
 <p><strong>PARTICIPANT</strong></p>
 <p>You are an american consumer who identifies as a republican. You will be asked questions about your beliefs, habits, and preferences. Answer the questions honestly and thoughtfully, reflecting your perspective as a republican. Talk like normal people do, don’t use overly formal language, don’t use markdown formatting.</p>
@@ -7750,8 +7282,8 @@ Table&nbsp;19: Engagement levels comparing successful versus unsuccessful learne
 <p>Absolutely! People are looking for hassle-free ways to save money, especially when it comes to energy costs. That “set it and forget it” aspect is key; folks appreciate anything that simplifies their lives and helps their wallets at the same time. Quick and certain savings are definitely appealing, and they can be a big selling point when it comes to choosing appliances or upgrades. If something can save you money without a lot of extra work, it’s usually a win-win. It just makes sense for most people. Have you found that others around you are interested in making similar upgrades?</p>
 <p><strong>Analysis</strong>: This participant appeared distracted (mentioning grading quizzes) and the conversation remained superficial. While practical topics were discussed (appliances, thermostats), the exchange never went deep enough to challenge preconceptions. The participant’s attention was divided, and they didn’t engage with substantive policy questions. The marketing message reflects this confused engagement.</p>
 </section>
-<section id="rd-most-improved-r_7rne5ptevs5r7il" class="level4" data-number="6.6.3">
-<h4 data-number="6.6.3" class="anchored" data-anchor-id="rd-most-improved-r_7rne5ptevs5r7il"><span class="header-section-number">6.6.3</span> R→D Most Improved: R_7rne5ptEvs5r7Il</h4>
+<section id="rd-most-improved-r_7rne5ptevs5r7il" class="level4" data-number="7.6.3">
+<h4 data-number="7.6.3" class="anchored" data-anchor-id="rd-most-improved-r_7rne5ptevs5r7il"><span class="header-section-number">7.6.3</span> R→D Most Improved: R_7rne5ptEvs5r7Il</h4>
 <p><strong>Accuracy improvement</strong>: 3.000 (from 3.251 to 0.251) <strong>Marketing message</strong>: “energy saving appliances . save energy and our planet”</p>
 <p><strong>PARTICIPANT</strong></p>
 <p>You are an american consumer who identifies as a democrat. You will be asked questions about your beliefs, habits, and preferences. Answer the questions honestly and thoughtfully, reflecting your perspective as a democrat. Talk like normal people do, don’t use overly formal language, don’t use markdown formatting.</p>
@@ -7843,8 +7375,8 @@ Table&nbsp;19: Engagement levels comparing successful versus unsuccessful learne
 <p>There’s also concern about the humanitarian impact of aggressive enforcement measures, especially on families and children. It’s a sensitive topic with a lot of differing opinions, but I think we need to find solutions that balance security with compassion and respect for human rights.</p>
 <p><strong>Analysis</strong>: This wide-ranging conversation explored Democratic values comprehensively—environment, healthcare, social justice, immigration. The participant asked about core beliefs and policy positions, maintaining a respectful tone even when disagreeing. The chatbot provided detailed explanations of Democratic perspectives. This genuine exploration led to dramatic accuracy improvement and an authentic environmental message.</p>
 </section>
-<section id="rd-least-improved-r_39bb9ximhyfahnj" class="level4" data-number="6.6.4">
-<h4 data-number="6.6.4" class="anchored" data-anchor-id="rd-least-improved-r_39bb9ximhyfahnj"><span class="header-section-number">6.6.4</span> R→D Least Improved: R_39bB9XiMhyFaHnj</h4>
+<section id="rd-least-improved-r_39bb9ximhyfahnj" class="level4" data-number="7.6.4">
+<h4 data-number="7.6.4" class="anchored" data-anchor-id="rd-least-improved-r_39bb9ximhyfahnj"><span class="header-section-number">7.6.4</span> R→D Least Improved: R_39bB9XiMhyFaHnj</h4>
 <p><strong>Accuracy change</strong>: -2.167 (worsened from 0.751 to 2.918) <strong>Marketing message</strong>: “Come spend 50% more on less practical appliances since that’s what you claim to do and support the business. But I know you won’t because just like every Republican said its not financially plausible and your actions only prove the Republicans point.”</p>
 <p><strong>PARTICIPANT</strong></p>
 <p>You are an american consumer who identifies as a democrat. You will be asked questions about your beliefs, habits, and preferences. Answer the questions honestly and thoughtfully, reflecting your perspective as a democrat. Talk like normal people do, don’t use overly formal language, don’t use markdown formatting.</p>
@@ -7891,26 +7423,26 @@ Table&nbsp;19: Engagement levels comparing successful versus unsuccessful learne
 <hr>
 </section>
 </section>
-<section id="data-availability" class="level3" data-number="6.7">
-<h3 data-number="6.7" class="anchored" data-anchor-id="data-availability"><span class="header-section-number">6.7</span> Data Availability</h3>
+<section id="data-availability" class="level3" data-number="7.7">
+<h3 data-number="7.7" class="anchored" data-anchor-id="data-availability"><span class="header-section-number">7.7</span> Data Availability</h3>
 <p>Raw data: <a href="../data/raw/qualtrics.parquet">data/raw/qualtrics.parquet</a></p>
 <p>Cleaned data: <a href="../data/processed/cleaned_data.parquet">data/processed/cleaned_data.parquet</a></p>
 <p>Analysis data (minimal, for publication): <a href="../data/processed/analysis_data.parquet">data/processed/analysis_data.parquet</a></p>
 <p>Conversations: <a href="../data/processed/conversations/">data/processed/conversations/</a></p>
 </section>
-<section id="code-availability" class="level3" data-number="6.8">
-<h3 data-number="6.8" class="anchored" data-anchor-id="code-availability"><span class="header-section-number">6.8</span> Code Availability</h3>
+<section id="code-availability" class="level3" data-number="7.8">
+<h3 data-number="7.8" class="anchored" data-anchor-id="code-availability"><span class="header-section-number">7.8</span> Code Availability</h3>
 <p>Data cleaning: <a href="../src/r/clean_data.R">src/r/clean_data.R</a></p>
 <p>Analysis dataset creation: <a href="../src/r/create_analysis_data.R">src/r/create_analysis_data.R</a></p>
 <p>Conversation download: <a href="../src/python/download_conversations.py">src/python/download_conversations.py</a></p>
 <p>Extreme cases analysis: <a href="../src/r/analyze_extreme_cases.R">src/r/analyze_extreme_cases.R</a></p>
 </section>
-<section id="pre-registration" class="level3" data-number="6.9">
-<h3 data-number="6.9" class="anchored" data-anchor-id="pre-registration"><span class="header-section-number">6.9</span> Pre-Registration</h3>
+<section id="pre-registration" class="level3" data-number="7.9">
+<h3 data-number="7.9" class="anchored" data-anchor-id="pre-registration"><span class="header-section-number">7.9</span> Pre-Registration</h3>
 <p>This study was pre-registered prior to data collection. See <a href="../docs/pre-registration.md">docs/pre-registration.md</a> for complete details including hypotheses, measures, sample size justification, and planned analyses.</p>
 </section>
-<section id="session-information" class="level3" data-number="6.10">
-<h3 data-number="6.10" class="anchored" data-anchor-id="session-information"><span class="header-section-number">6.10</span> Session Information</h3>
+<section id="session-information" class="level3" data-number="7.10">
+<h3 data-number="7.10" class="anchored" data-anchor-id="session-information"><span class="header-section-number">7.10</span> Session Information</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.5.0 (2025-04-11)
@@ -7958,10 +7490,36 @@ loaded via a namespace (and not attached):
 [91] bit64_4.6.0-1       MASS_7.3-65        </code></pre>
 </div>
 </div>
+
 </section>
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-allport1954nature" class="csl-entry" role="listitem">
+Allport, G. W. (1954). The nature of prejudice. <em>Reading/Addison-Wesley</em>.
+</div>
+<div id="ref-hermann_reducing_2025" class="csl-entry" role="listitem">
+Hermann, E., De Freitas, J., &amp; Puntoni, S. (2025). Reducing prejudice with counter‐stereotypical <span>AI</span>. <em>Consumer Psychology Review</em>, <em>8</em>(1), 75–86. <a href="https://doi.org/10.1002/arcp.1102">https://doi.org/10.1002/arcp.1102</a>
+</div>
+<div id="ref-hsieh_partisan_2024" class="csl-entry" role="listitem">
+Hsieh, C. H., Low, A., Sharma, V., &amp; Zhu, Q. (2024). <em>Partisan <span>Consumers</span></em>. SSRN. <a href="https://doi.org/10.2139/ssrn.5046064">https://doi.org/10.2139/ssrn.5046064</a>
+</div>
+<div id="ref-iyengar_origins_2019" class="csl-entry" role="listitem">
+Iyengar, S., Lelkes, Y., Levendusky, M., Malhotra, N., &amp; Westwood, S. J. (2019). The <span>Origins</span> and <span>Consequences</span> of <span>Affective</span> <span>Polarization</span> in the <span>United</span> <span>States</span>. <em>Annual Review of Political Science</em>, <em>22</em>(1), 129–146. <a href="https://doi.org/10.1146/annurev-polisci-051117-073034">https://doi.org/10.1146/annurev-polisci-051117-073034</a>
+</div>
+<div id="ref-park_generative_nodate" class="csl-entry" role="listitem">
+Park, J. S., Zou, C. Q., Shaw, A., Hill, B. M., Cai, C., Morris, M. R., Willer, R., Liang, P., &amp; Bernstein, M. S. (n.d.). <em>Generative <span>Agent</span> <span>Simulations</span> of 1,000 <span>People</span></em>.
+</div>
+<div id="ref-pettigrew_meta-analytic_2006" class="csl-entry" role="listitem">
+Pettigrew, T. F., &amp; Tropp, L. R. (2006). A meta-analytic test of intergroup contact theory. <em>Journal of Personality and Social Psychology</em>, <em>90</em>(5), 751–783. <a href="https://doi.org/10.1037/0022-3514.90.5.751">https://doi.org/10.1037/0022-3514.90.5.751</a>
+</div>
+<div id="ref-toubia_database_2025" class="csl-entry" role="listitem">
+Toubia, O., Gui, G. Z., Peng, T., Merlau, D. J., Li, A., &amp; Chen, H. (2025). Database <span>Report</span>: <span>Twin</span>-<span>2K</span>-500: <span>A</span> <span>Data</span> <span>Set</span> for <span>Building</span> <span>Digital</span> <span>Twins</span> of over 2,000 <span>People</span> <span>Based</span> on <span>Their</span> <span>Answers</span> to over 500 <span>Questions</span>. <em>Marketing Science</em>, mksc.2025.0262. <a href="https://doi.org/10.1287/mksc.2025.0262">https://doi.org/10.1287/mksc.2025.0262</a>
+</div>
+<div id="ref-yudkin_perception_2019" class="csl-entry" role="listitem">
+Yudkin, D., Hawkins, S., &amp; Dixon, T. (2019). <em>The <span>Perception</span> <span>Gap</span>: <span>How</span> <span>False</span> <span>Impressions</span> are <span>Pulling</span> <span>Americans</span> <span>Apart</span></em>. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/r3h5q">https://doi.org/10.31234/osf.io/r3h5q</a>
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
