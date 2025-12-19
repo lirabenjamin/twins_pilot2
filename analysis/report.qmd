@@ -203,6 +203,17 @@ The figure below compares actual green values with perceived ingroup and outgrou
 #| fig-width: 6
 #| fig-height: 4
 # Prepare data for faceted plot
+actual_means = dat %>% 
+  group_by(participant_party) %>% 
+  summarise(mean_se(green_own)) %>% 
+  mutate(outgroup_party = participant_party, participant_party = case_match(participant_party, "Democrat" ~ "Republican", "Republican" ~ "Democrat")) %>% expand_grid(measure_type = c(.5, 4.5))
+
+annotation_df = actual_means %>%  
+  slice(1,3) %>% 
+  mutate(label = c("Actual Democrats", "Actual Republicans")) %>% 
+  mutate(x = c(1.5, 3.5), y = y+.2)
+
+
 prelim_data <- dat %>%
   select(learner_party, participant_party, green_own, green_ingroup, green_outgroup_pre, green_outgroup_post) %>%
   pivot_longer(cols = c(green_own, green_ingroup, green_outgroup_pre, green_outgroup_post),
@@ -210,26 +221,29 @@ prelim_data <- dat %>%
   mutate(
     measure_type = factor(measure_type,
                           levels = c("green_own", "green_ingroup", "green_outgroup_pre", "green_outgroup_post"),
-                          labels = c("Own Attitudes", "Ingroup Perception", "Outgroup Perception\n(Pre)", "Outgroup Perception\n(Post)")),
-    participant_party = factor(participant_party, levels = c("Democrat", "Republican"))
-  )
+                          labels = c("Own", "Ingroup", "Outgroup\n(Pre)", "Outgroup\n(Post)")),
+    participant_party = factor(participant_party, levels = c("Democrat", "Republican")
+  ))
 
 # Create faceted plot
-p <- ggplot(prelim_data, aes(x = participant_party, y = value, fill = participant_party)) +
+p <- ggplot(prelim_data, aes(x = measure_type, y = value, fill = participant_party)) +
   stat_summary(fun = mean, geom = "bar", alpha = 0.8) +
   stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
-  facet_wrap(~measure_type, ncol = 4) +
+  geom_ribbon(data = actual_means, aes(ymin = ymin, ymax = ymax, y = NULL, fill = outgroup_party), alpha = .3)+
+geom_line(data = actual_means, aes( y = y, color = outgroup_party), linewidth = 1)+
+  facet_wrap(~participant_party, ncol = 4) +
   scale_fill_manual(values = party_colors, name = "Political Party") +
+  scale_color_manual(values = party_colors, name = "Political Party") +
+  geom_text(data = annotation_df, aes(x=x,y = y, label = label, color = outgroup_party), size = 3)+
   labs(
-    x = "Political Party",
+    x = NULL,
     y = "Green Attitude (1-5 scale)"
   ) +
-  theme_minimal() +
   theme(
     strip.text = element_text(face = "bold"),
     legend.position = "none"
   )
-ggsave(paste0(fig_path, "fig_green_attitudes.png"), p, width = 6, height = 4, dpi = 300)
+ggsave(paste0(fig_path, "fig_green_attitudes.png"), p, width = 6, height = 3, dpi = 300)
 p
 ```
 
