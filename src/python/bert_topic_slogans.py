@@ -27,16 +27,32 @@ def run_bertopic(slogans, min_topic_size=3):
     """Run BERTopic on the slogans."""
     print(f"\nRunning BERTopic with min_topic_size={min_topic_size}...")
 
-    # Initialize BERTopic model
-    # Use smaller embeddings model for faster processing
+    # Use sklearn's TF-IDF instead of downloading sentence transformers
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.decomposition import TruncatedSVD
+    from bertopic.vectorizers import ClassTfidfTransformer
+
+    # Create TF-IDF vectorizer for initial embeddings
+    vectorizer = TfidfVectorizer(max_features=1000, ngram_range=(1, 2), min_df=2)
+
+    # Initialize BERTopic model with sklearn-based embeddings
     topic_model = BERTopic(
         min_topic_size=min_topic_size,
         verbose=True,
-        calculate_probabilities=False  # Faster without probabilities
+        calculate_probabilities=False,  # Faster without probabilities
+        embedding_model=None  # We'll provide pre-computed embeddings
     )
 
-    # Fit the model
-    topics, probabilities = topic_model.fit_transform(slogans)
+    # Create embeddings using TF-IDF
+    print("Creating TF-IDF embeddings...")
+    tfidf_matrix = vectorizer.fit_transform(slogans)
+
+    # Reduce dimensionality for visualization
+    svd = TruncatedSVD(n_components=min(50, tfidf_matrix.shape[1]-1))
+    embeddings = svd.fit_transform(tfidf_matrix)
+
+    # Fit the model with pre-computed embeddings
+    topics, probabilities = topic_model.fit_transform(slogans, embeddings=embeddings)
 
     print(f"\nIdentified {len(set(topics))} topics (including outliers)")
     print(f"Topic distribution:")
@@ -45,14 +61,16 @@ def run_bertopic(slogans, min_topic_size=3):
         topic_label = "Outliers" if topic_id == -1 else f"Topic {topic_id}"
         print(f"  {topic_label}: {count} slogans")
 
-    return topic_model, topics
+    return topic_model, topics, embeddings
 
-def create_visualization(topic_model, df_slogans, topics, output_path):
+def create_visualization(topic_model, df_slogans, topics, embeddings, output_path):
     """Create scatter plot visualization of documents in 2D topic space."""
     print("\nCreating visualization...")
 
-    # Get document embeddings reduced to 2D
-    reduced_embeddings = topic_model._reduce_dimensionality(topic_model.embedding_model.encode(df_slogans['slogan'].tolist()))
+    # Use UMAP to reduce embeddings to 2D for visualization
+    from umap import UMAP
+    umap_model = UMAP(n_components=2, random_state=42)
+    reduced_embeddings = umap_model.fit_transform(embeddings)
 
     # Create figure
     fig, ax = plt.subplots(figsize=(12, 8))
@@ -104,14 +122,14 @@ def main():
     df_slogans = load_data(data_path)
 
     # Run BERTopic
-    topic_model, topics = run_bertopic(df_slogans['slogan'].tolist())
+    topic_model, topics, embeddings = run_bertopic(df_slogans['slogan'].tolist())
 
     # Add topics to dataframe
     df_slogans['topic'] = topics
 
     # Create visualization
     viz_path = output_dir / "bert_topic_slogans.png"
-    create_visualization(topic_model, df_slogans, topics, viz_path)
+    create_visualization(topic_model, df_slogans, topics, embeddings, viz_path)
 
     # Save topic information
     topic_info_path = output_dir / "bert_topic_info.csv"
