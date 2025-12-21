@@ -1511,6 +1511,26 @@ for (i in 1:length(example_slogans_rd)) {
 }
 ```
 
+#### BERTopic Analysis of Slogans
+
+BERTopic modeling was applied to the slogans to identify thematic clusters.
+The analysis identified 51 distinct topics from 500 slogans (248 D→R, 252 R→D), with 59 slogans classified as outliers.
+Figure shows the distribution of slogans in a 2D topic space, with each point representing one slogan.
+Points are colored by learner party (blue for Democrats learning about Republicans, red for Republicans learning about Democrats).
+
+The topic modeling reveals common themes in how participants approached marketing to their political outgroup:
+- Energy and money saving (Topics 0, 5, 13, 18)
+- Environmental protection (Topics 2, 12, 19, 23)
+- American manufacturing and independence (Topics 3, 28)
+- Smart/sustainable living (Topics 27, 36)
+
+```{r bertopic-visualization}
+#| label: fig-bertopic-slogans
+#| fig-cap: "BERTopic visualization of marketing slogans. Each point represents one slogan, positioned in 2D topic space using UMAP dimensionality reduction. Points are colored by learner party: blue indicates Democrats marketing to Republicans (D→R), red indicates Republicans marketing to Democrats (R→D). The model identified 51 topics from 500 slogans, with clustering revealing common themes around energy savings, environmental protection, and American manufacturing."
+
+knitr::include_graphics("../output/figures/bert_topic_slogans.png")
+```
+
 ### Correlation Matrix
 
 #### Overall Correlations

@@ -31,3 +31,4 @@ __pycache__/
 
 # Quarto
 .quarto/
+venv/
